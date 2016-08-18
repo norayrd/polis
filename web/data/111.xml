@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml-stylesheet type="text/xsl" href="data/commoncard5.xsl"?>
+<Root>
+<Settings currency="руб" isCountryRussia="0" withDesc="0" withPrivel="1" expanded="0" headingExpand="0" lang="ru" isWeb="0" />
+<CommonCard>
+<ClientInfo abcode="49-381" fio="Евдокимова Лидия Андреевна" address="Красноармейское, ул. Донецкий д.7" people="2" commonsquare="0" phone="">
+<Counters>
+<Counter serviceName="электроснабжениеkjkjkj" topologyName="Точка №1 (дом)" number="1763683" model="НИК 2102" dateMount="10.12.2009" dateNextGosp="01.12.2017" />
+</Counters>
+<ClientParams>
+<Param name="проживающие" value="2" dateBegin="01.01.1991" />
+</ClientParams>
+<CurrentSaldo sumSaldo="668.02" />
+</ClientInfo>
+<CommonCardData>
+<CommonCardYears>
+<Year number="2016" feeValue="487.1" feeSum="277.66" saldoSum="668.02">
+<Month name="" number="8" saldoSum="668.02">
+<Service name="эл/эн" unit="кВт*ч" feeSum="0.00" feeValue="0">
+<Typeuse name="" feeValue="0" />
+</Service>
+</Month>
+<Month name="" number="7" saldoSum="668.02">
+<Service name="эл/эн" unit="кВт*ч" feeSum="40.10" feeValue="70.35">
+<Typeuse name="по счетчику" feeValue="70.35">
+<Top name="Точка №1 (дом)">
+<Period name="" begin="01.07" end="01.08">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:30" feeValue="70.35">
+<ReadingBeg type="5" value="005732" perekrut="1" />
+<ReadingEnd type="5" value="005802" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="70.35" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+</Top>
+</Typeuse>
+</Service>
+</Month>
+<Month name="" number="6" saldoSum="627.92">
+<Service name="эл/эн" unit="кВт*ч" feeSum="38.81" feeValue="68.08">
+<Typeuse name="по счетчику" feeValue="68.08">
+<Top name="Точка №1 (дом)">
+<Period name="" begin="01.06" end="01.07">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:29" feeValue="68.08">
+<ReadingBeg type="5" value="005664" perekrut="1" />
+<ReadingEnd type="5" value="005732" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="68.08" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+</Top>
+</Typeuse>
+</Service>
+</Month>
+<Month name="" number="5" saldoSum="589.11">
+<Service name="эл/эн" unit="кВт*ч" feeSum="40.10" feeValue="70.35">
+<Typeuse name="по счетчику" feeValue="70.35">
+<Top name="Точка №1 (дом)">
+<Period name="" begin="01.05" end="01.06">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:28" feeValue="70.35">
+<ReadingBeg type="5" value="005594" perekrut="1" />
+<ReadingEnd type="5" value="005664" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="70.35" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+</Top>
+</Typeuse>
+</Service>
+</Month>
+<Month name="" number="4" saldoSum="549.01">
+<Service name="эл/эн" unit="кВт*ч" feeSum="39.39" feeValue="69.11">
+<Typeuse name="по счетчику" feeValue="69.11">
+<Top name="Точка №1 (дом)">
+<Period name="" begin="10.04" end="01.05">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:27" feeValue="47.65">
+<ReadingBeg type="1" value="005546" perekrut="1" />
+<ReadingEnd type="5" value="005594" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="47.65" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+<Period name="" begin="01.04" end="10.04">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:26" feeValue="21.46">
+<ReadingBeg type="4" value="005525" perekrut="1" />
+<ReadingEnd type="1" value="005546" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="21.46" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+</Top>
+</Typeuse>
+</Service>
+</Month>
+<Month name="" number="3" saldoSum="509.62">
+<Service name="эл/эн" unit="кВт*ч" feeSum="41.81" feeValue="73.35">
+<Typeuse name="по счетчику" feeValue="73.35">
+<Top name="Точка №1 (дом)">
+<Period name="" begin="15.03" end="01.04">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:25" feeValue="40.54">
+<ReadingBeg type="1" value="005484" perekrut="1" />
+<ReadingEnd type="4" value="005525" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="40.54" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+<Period name="" begin="01.03" end="15.03">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:24" feeValue="32.81">
+<ReadingBeg type="4" value="005451" perekrut="1" />
+<ReadingEnd type="1" value="005484" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="32.81" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+</Top>
+</Typeuse>
+</Service>
+</Month>
+<Month name="" number="2" saldoSum="467.81">
+<Service name="эл/эн" unit="кВт*ч" feeSum="38.59" feeValue="67.71">
+<Typeuse name="по счетчику" feeValue="67.71">
+<Top name="Точка №1 (дом)">
+<Period name="" begin="12.02" end="01.03">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:23" feeValue="42.19">
+<ReadingBeg type="1" value="005409" perekrut="1" />
+<ReadingEnd type="4" value="005451" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="42.19" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+<Period name="" begin="01.02" end="12.02">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:22" feeValue="25.52">
+<ReadingBeg type="4" value="005383" perekrut="1" />
+<ReadingEnd type="1" value="005409" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="25.52" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+</Top>
+</Typeuse>
+</Service>
+</Month>
+<Month name="" number="1" saldoSum="429.22">
+<Service name="эл/эн" unit="кВт*ч" feeSum="38.86" feeValue="68.18">
+<Typeuse name="по счетчику" feeValue="68.18">
+<Top name="Точка №1 (дом)">
+<Period name="" begin="18.01" end="01.02">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:21" feeValue="32.48">
+<ReadingBeg type="1" value="005351" perekrut="1" />
+<ReadingEnd type="4" value="005383" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="32.48" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+<Period name="" begin="01.01" end="18.01">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:20" feeValue="35.7">
+<ReadingBeg type="4" value="005315" perekrut="1" />
+<ReadingEnd type="1" value="005351" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="35.7" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+</Top>
+</Typeuse>
+</Service>
+</Month>
+</Year>
+<Year number="2015" feeValue="795.3" feeSum="453.32" paySum="62.96" payCnt="3" saldoSum="390.36">
+<Month name="" number="12" saldoSum="390.36">
+<Service name="эл/эн" unit="кВт*ч" feeSum="37.75" feeValue="66.23">
+<Typeuse name="по счетчику" feeValue="66.23">
+<Top name="Точка №1 (дом)">
+<Period name="" begin="09.12" end="01.01">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:19" feeValue="48.3">
+<ReadingBeg type="1" value="005267" perekrut="1" />
+<ReadingEnd type="4" value="005315" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="48.3" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+<Period name="" begin="01.12" end="09.12">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:18" feeValue="17.93">
+<ReadingBeg type="4" value="005249" perekrut="1" />
+<ReadingEnd type="1" value="005267" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="17.93" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+</Top>
+</Typeuse>
+</Service>
+</Month>
+<Month name="" number="11" saldoSum="352.61">
+<Service name="эл/эн" unit="кВт*ч" feeSum="35.65" feeValue="62.55">
+<Typeuse name="по счетчику" feeValue="62.55">
+<Top name="Точка №1 (дом)">
+<Period name="" begin="10.11" end="01.12">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:17" feeValue="47.07">
+<ReadingBeg type="1" value="005202" perekrut="1" />
+<ReadingEnd type="4" value="005249" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="47.07" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+<Period name="" begin="01.11" end="10.11">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:16" feeValue="15.48">
+<ReadingBeg type="4" value="005187" perekrut="1" />
+<ReadingEnd type="1" value="005202" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="15.48" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+</Top>
+</Typeuse>
+</Service>
+</Month>
+<Month name="" number="10" paySum="62.96" payCnt="3" saldoSum="316.96">
+<Service name="эл/эн" unit="кВт*ч" feeSum="28.94" feeValue="50.77">
+<Typeuse name="по счетчику" feeValue="50.77">
+<Top name="Точка №1 (дом)">
+
+<Period name="" begin="16.10" end="01.11">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:15" feeValue="27.52">
+<ReadingBeg type="1" value="005159" perekrut="1" />
+<ReadingEnd type="4" value="005187" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="27.52" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+<Period name="" begin="01.10" end="16.10">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:14" feeValue="23.25">
+<ReadingBeg type="4" value="005136" perekrut="1" />
+<ReadingEnd type="1" value="005159" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="23.25" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+</Top>
+</Typeuse>
+</Service>
+</Month>
+<Month name="" number="9" saldoSum="350.98">
+<Service name="эл/эн" unit="кВт*ч" feeSum="32.78" feeValue="57.5">
+<Typeuse name="по счетчику" feeValue="57.5">
+<Top name="Точка №1 (дом)">
+<Period name="" begin="06.09" end="01.10">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:13" feeValue="38.75">
+<ReadingBeg type="1" value="005097" perekrut="1" />
+<ReadingEnd type="4" value="005136" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="38.75" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+<Period name="" begin="01.09" end="06.09">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:12" feeValue="18.75">
+<ReadingBeg type="4" value="005078" perekrut="1" />
+<ReadingEnd type="1" value="005097" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="18.75" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+</Top>
+</Typeuse>
+
+</Service>
+</Month>
+<Month name="" number="8" saldoSum="318.20">
+<Service name="эл/эн" unit="кВт*ч" feeSum="55.68" feeValue="97.69">
+<Typeuse name="по счетчику" feeValue="97.69">
+<Top name="Точка №1 (дом)">
+<Period name="" begin="17.08" end="01.09">
+
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:11" feeValue="56.25">
+<ReadingBeg type="1" value="005022" perekrut="1" />
+<ReadingEnd type="4" value="005078" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="56.25" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+<Period name="" begin="01.08" end="17.08">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:10" feeValue="41.44">
+<ReadingBeg type="4" value="004981" perekrut="1" />
+<ReadingEnd type="1" value="005022" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="41.44" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+</Top>
+</Typeuse>
+</Service>
+</Month>
+<Month name="" number="7" saldoSum="262.52">
+<Service name="эл/эн" unit="кВт*ч" feeSum="48.22" feeValue="84.6">
+<Typeuse name="по счетчику" feeValue="84.6">
+<Top name="Точка №1 (дом)">
+<Period name="" begin="09.07" end="01.08">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:9" feeValue="59.56">
+<ReadingBeg type="1" value="004921" perekrut="1" />
+<ReadingEnd type="4" value="004981" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="59.56" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+<Period name="" begin="01.07" end="09.07">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:8" feeValue="25.04">
+<ReadingBeg type="4" value="004896" perekrut="1" />
+<ReadingEnd type="1" value="004921" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="25.04" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+</Top>
+</Typeuse>
+</Service>
+</Month>
+<Month name="" number="6" saldoSum="214.30">
+<Service name="эл/эн" unit="кВт*ч" feeSum="26.77" feeValue="46.96">
+<Typeuse name="по счетчику" feeValue="46.96">
+<Top name="Точка №1 (дом)">
+<Period name="" begin="16.06" end="01.07">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:7" feeValue="46.96">
+<ReadingBeg type="1" value="004849" perekrut="1" />
+<ReadingEnd type="4" value="004896" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="46.96" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+</Top>
+</Typeuse>
+</Service>
+</Month>
+<Month name="" number="5" saldoSum="187.53">
+<Service name="эл/эн" unit="кВт*ч" feeSum="67.37" feeValue="118.2">
+<Typeuse name="по счетчику" feeValue="118.2">
+<Top name="Точка №1 (дом)">
+<Period name="" begin="15.05" end="31.05">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:6" feeValue="86">
+<ReadingBeg type="1" value="004763" perekrut="1" />
+<ReadingEnd type="1" value="004849" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="86" tariff="0.57" />
+</Tariffs>
+</Scale>
+
+</Period>
+<Period name="" begin="01.05" end="15.05">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:5" feeValue="32.2">
+<ReadingBeg type="4" value="004731" perekrut="1" />
+<ReadingEnd type="1" value="004763" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="32.2" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+</Top>
+</Typeuse>
+</Service>
+</Month>
+<Month name="" number="4" saldoSum="120.16">
+<Service name="эл/эн" unit="кВт*ч" feeSum="20.98" feeValue="36.8">
+<Typeuse name="по счетчику" feeValue="36.8">
+<Top name="Точка №1 (дом)">
+<Period name="" begin="15.04" end="01.05">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:4" feeValue="36.8">
+<ReadingBeg type="1" value="004694" perekrut="1" />
+<ReadingEnd type="4" value="004731" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="36.8" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+</Top>
+</Typeuse>
+</Service>
+</Month>
+<Month name="" number="3" saldoSum="99.18">
+<Service name="эл/эн" unit="кВт*ч" feeSum="33.43" feeValue="58.65">
+<Typeuse name="по счетчику" feeValue="58.65">
+<Top name="Точка №1 (дом)">
+<Period name="" begin="01.03" end="31.03">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:3" feeValue="58.65">
+<ReadingBeg type="4" value="004635" perekrut="1" />
+
+<ReadingEnd type="1" value="004694" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="58.65" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+</Top>
+</Typeuse>
+</Service>
+</Month>
+<Month name="" number="2" saldoSum="65.75">
+<Service name="эл/эн" unit="кВт*ч" feeSum="31.20" feeValue="54.74">
+<Typeuse name="по счетчику" feeValue="54.74">
+<Top name="Точка №1 (дом)">
+<Period name="" begin="01.02" end="01.03">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:2" feeValue="54.74">
+<ReadingBeg type="4" value="004581" perekrut="1" />
+<ReadingEnd type="4" value="004635" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="54.74" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+</Top>
+</Typeuse>
+</Service>
+</Month>
+<Month name="" number="1" saldoSum="34.55">
+<Service name="эл/эн" unit="кВт*ч" feeSum="34.55" feeValue="60.61">
+<Typeuse name="по счетчику" feeValue="60.61">
+<Top name="Точка №1 (дом)">
+<Period name="" begin="01.01" end="01.02">
+<Scale name="" zoneHeadId="0" scaleIndex="1" si="si:1" feeValue="60.61">
+<ReadingBeg type="1" value="004520" perekrut="1" />
+<ReadingEnd type="4" value="004581" perekrut="1" />
+<Tariffs isStep="true">
+<Item feeValue="60.61" tariff="0.57" />
+</Tariffs>
+</Scale>
+</Period>
+</Top>
+</Typeuse>
+</Service>
+
+</Month>
+</Year>
+</CommonCardYears>
+<BeginingSaldo sum="0.00" date="01.01.2015" />
+</CommonCardData>
+</CommonCard>
+</Root>
+

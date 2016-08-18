@@ -1,0 +1,7 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+get-card:
+    pattern:   /get-card
+    defaults:  { _controller: AppBundle:MegasoftApi:getCard }
