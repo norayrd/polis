@@ -2,6 +2,25 @@ app:
     resource: "@AppBundle/Controller/"
     type:     annotation
 
-get-card:
-    pattern:   /get-card
-    defaults:  { _controller: AppBundle:MegasoftApi:getCard }
+login:
+    pattern:   /login
+    defaults:  { _controller: AppBundle:Security:login }
+
+login_check:
+    pattern:   /login_check
+
+sign_up:
+    pattern:   /sign-up
+    defaults:  { _controller: AppBundle:Security:sign_up }
+
+forgot_password:
+    pattern:   /forgot-password
+    defaults:  { _controller: AppBundle:Security:forgotPassword }
+
+change_password:
+    pattern:   /change-password
+    defaults:  { _controller: AppBundle:Security:changePassword }
+
+check_email:
+    pattern:   /sign-up/check-email
+    defaults:  { _controller: AppBundle:Security:checkEmail }

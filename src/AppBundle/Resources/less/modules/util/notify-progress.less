@@ -1,0 +1,37 @@
+.notity-progress-bar {
+    float: right;
+    margin-top: 8px;
+    position: relative;
+    max-width: 300px;
+    width: 100%;
+    
+    .api-title {
+        position: absolute;
+        left: 0;
+        top: 3px;
+    }
+    .progress-bar-content {
+        padding-left: 30px;
+    }
+    .progress {
+        margin: 0;
+        position: relative;
+        
+        
+        .progress-count-remaining {
+            position: absolute;
+            font-size: 14px;
+            color: @black-color;
+            top: 3px;
+            left: 50%;
+            .translate(-50%, 0);
+        }
+    }
+}
+/*                  768px                   */
+@media screen and (max-width: @tabletWidthSmall){
+    .notity-progress-bar {
+        float: none;
+        margin-left: 10px;
+    }
+}

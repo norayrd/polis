@@ -1,0 +1,200 @@
+.act-register,
+.act-login,
+.act-forgot-password {
+    .project-main-header {
+        background: @white-color;
+        position: absolute;
+
+        .header-inner {
+            border-bottom: none;
+            background: @white-color;
+
+            .logo-box {
+                pointer-events: none;
+            }
+        }
+
+    }
+    .content-main {
+        min-height: 0;
+    }
+}
+.act-instagram-login {
+    .header-inner {
+
+        .logo-box {
+            pointer-events: none;
+        }
+    }
+    .instagram-login-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        text-align: center;
+        width: 100%;
+        padding: 10px;
+        .translate(-50%, -50%);
+    }
+    .instagram-login{
+        a{
+            padding: 15px;
+        }
+    }
+    .registration-block {
+        margin: 10px auto;
+        max-width: 158px;
+        text-align: left;
+        
+        a {
+            text-decoration: underline;
+        }
+    }
+    .instagram-login-error {
+        display: inline-block;
+        
+        .alert {
+            line-height: 16px;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+.login-wrapper{
+    width: 100%;
+    position: fixed;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    .transform(translate(-50%, -50%));
+    background-color: @white-color;
+
+    .login-inner {
+        display: table;
+        height: 100%;
+        margin: auto;
+        text-align: center;
+        color: @text-color1;
+
+        .login-success-message {
+            margin-left: 5px;
+            margin-right: 5px;
+
+            p {
+                line-height: 20px;
+            }
+        }
+        .error_message {
+            border-bottom: 0 none;
+            display: block;
+            line-height: 28px;
+            margin: 0;
+            padding: 0;
+        }
+        .forgot-password-title {
+            color: @text-color1;
+            line-height: 2;
+            font-size: 30px;
+        }
+        .form-actions {
+            display: table;
+            width: 100%;
+
+
+            li {
+                display: table-cell;
+                vertical-align: top;
+
+                &:first-child {
+                    padding-right: 5px;
+                }
+                &:last-child {
+                    padding-left: 5px;
+                }
+            }
+
+        }
+        form {
+            display: table-cell;
+            vertical-align: middle;
+            padding: 0 10px;
+
+            .login-form-inner {
+                width: 310px;
+                margin: auto;
+
+                h2{
+                    font-size: 33px;
+                    margin-bottom: 11px;
+                    text-align: left;
+                    color: @text-color1;
+                }
+
+                .form-group{
+                    position: relative;
+                    margin-bottom: 10px;
+
+                    .login-star{
+                        background: url('../../img/login-star.png') no-repeat center center;
+                        background-size: contain;
+                        width: 13px;
+                        height: 13px;
+                        display: inline-block;
+                        position: absolute;
+                        right: 10px;
+                        top: 16px;
+                    }
+                }
+                .remember-block{
+                    text-align: left;
+                    margin-top: 10px;
+                }
+            }
+            .registration-block {
+                margin: 10px 0;
+                text-align: left;
+
+                a {
+                    text-decoration: underline;
+                    color: @text-color1;
+                }
+            }
+            .signup-btn,
+            .cancel-btn {
+                width: 100%;
+                font-size: 16px;
+                border-radius: 4px;
+                margin-top: 10px;
+                padding: 10px;
+            }
+        }
+    }
+    .remember-block {
+        label {
+            font-weight: 400;
+            cursor: pointer;
+
+            input{
+                vertical-align: middle;
+                margin-top: 0;
+            }
+            span {
+                vertical-align: middle;
+                line-height: normal;
+            }
+        }  
+    } 
+}
+
+@media screen and (max-height: @phoneWidth) {
+    .login-wrapper {
+        position: static;
+        transform: none;
+        padding-bottom: 20px;
+    }
+}

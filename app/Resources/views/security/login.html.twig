@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/login/login.js') }}"></script>
+{% endblock %}
+{% block notifyjs %} {% endblock %}
+
+{% block body_class %}act-login{% endblock %}
+
+{% block header %}
+    <header class="project-main-header">
+        <div class="header-inner  f_header-inner table">
+            <div class="logo-box table-cell">
+                {# <a href="{{ path('dashboard') }}"><span class="logo-icon"></span>clusoo</a> #}
+            </div>
+        </div>
+    </header>
+{% endblock %}
+{% block bodyHeadline %}{% endblock %}
+{% block body %}
+
+    <div class="login-wrapper">
+
+        <div class="login-inner">
+            <form action="{{ path('security_login_check') }}" method="post" id="login_form">
+                {% if message_text is not empty %}
+                    <div class="alert alert-success login-success-message">
+                        <p>{{ message_text }}</p>
+                    </div>
+                {% endif %}
+                <div class="login-form-inner">
+                    <h2>Login</h2>
+                    <div class="form-group">
+                        <input type="text" placeholder="Email address" id="username" name="_username" value="{% if registered_email  is defined  %}{{ registered_email }}{% else %}{{ last_username }}{% endif %}" class="form-control required {% if error.message is defined  %}is_fill{% endif %}"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Password" id="password" name="_password" class="form-control required {% if error.message is defined  %}is_fill{% endif %}" />
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                    <input type="hidden" name="_target_path" value="/" />
+                    <div class="remember-block">
+                        <label for='remember_me'>
+                            <input type="checkbox" id="remember_me" name="_remember_me" /> <span> Remember Me </span>
+                        </label>
+                    </div>
+                    <div class="registration-block">
+                        <a href="{{ path('forgot_password') }}">Forgot Password</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary signup-btn" id="submit_form">
+                        Login
+                    </button>
+                    <div class="registration-block">
+                        <a href="{{ path('security_sign_up_form') }}">Sign Up</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

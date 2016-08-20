@@ -1,0 +1,54 @@
+@import "components/fonts";
+@import "components/nano_scroll";
+
+@import "mixins/mixins";
+@import "mixins/functions";
+
+@import "variables/color";
+@import "variables/structure";
+
+@import "modules/util/header";
+@import "modules/util/footer";
+@import "modules/util/notify-progress";
+@import "modules/global";
+@import "modules/campaign";
+@import "modules/breadcrumb";
+@import "modules/influencers";
+@import "modules/progress-bar";
+@import "modules/influencers-recommended";
+@import "modules/influencers-batch";
+@import "modules/single-analysis";
+@import "modules/influencer-profile";
+@import "modules/login";
+
+
+.content-main {
+    padding-top: 60px;
+    min-height: 100vh;
+}
+
+.content-wrapper,
+.content-main-headline {
+    max-width: 1230px;
+    margin: 0 auto;
+    padding: 20px 15px;
+    width: 100%;
+    /*overflow: hidden;*/
+}
+.content-main-headline { padding-bottom: 0;}
+
+
+
+/*                  animation                   */
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}

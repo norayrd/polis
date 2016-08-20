@@ -1,0 +1,1370 @@
+.content-wrapper {
+
+    &.influencer-list-wrapper {
+        margin-top: 10px;
+    }
+
+    .list-title {
+        margin: 0 auto 20px;
+        font-size: 0;
+
+        h2{
+            font-size: 22px;
+            display: inline-block;
+            vertical-align: middle;
+            width: 50%;
+        }
+
+        .page-info {
+            color: @text-color1;
+            display: inline-block;
+            text-align: right;
+            vertical-align: middle;
+            width: 50%;
+            font-size: 16px;
+
+        }
+    }
+    .btn-file {
+        display: block;
+        width: 100%;
+
+        input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            cursor: inherit;
+            display: block;
+        }
+    }
+
+    .stats-graf {
+
+        margin-top: 50px;
+        .settings-block{
+            box-sizing: border-box;
+            display: table;
+            margin: 0 auto 15px;
+            /*max-width: 910px;*/
+            /*padding:10px 20px;*/
+            width: 100%;
+            position: relative;
+            text-align: right;
+            font-size: 26px;
+
+            a{
+                display: inline-block;
+                margin-left: 10px;
+                color: @themes-color1;
+            }
+
+            .compact-btn {
+                .fa-expand{
+                    display: none;
+                }
+
+            }
+            &.compact-view {
+                max-width: 900px;
+                .compact-btn {
+                    .fa-expand{
+                        display: inline-block;
+                    }
+                    .fa-compress{
+                        display: none;
+                    }
+                }
+            }
+
+
+
+            .import-influencer-pop-up,
+            .upload-influencer-pop-up {
+                background-color: @background-color3;
+                border: 2px solid @border-color1;
+                border-radius: 10px;
+                position: absolute;
+                top: -42px;
+                width: 240px;
+                z-index: 100;
+                padding: 25px 10px 20px;
+
+
+                &:before {
+                    border-left: 20px solid @border-color1;
+                    border-top: 20px solid transparent;
+                    border-bottom: 20px solid transparent;
+                    left: 100%;
+                    content: "";
+                    position: absolute;
+                    top: 35px;
+                    z-index: 10;
+                }
+
+                &:after{
+                    border-left: 18px solid @background-color3;
+                    border-top: 18px solid transparent;
+                    border-bottom: 18px solid transparent;
+                    left: 100%;
+                    content: "";
+                    position: absolute;
+                    top: 37px;
+                    z-index: 11;
+                }
+
+                > input {
+                    border: 1px solid @text-color1;
+                    border-radius: 6px;
+                    float: left;
+                    font-size: 14px;
+                    font-weight: bold;
+                    line-height: 17px;
+                    padding: 10px;
+                    width: 100%;
+                    margin-top: 10px;
+                }
+            }
+
+            .upload-influencer-pop-up{
+                right: 135px;
+            }
+
+            .import-influencer-pop-up{
+                right: 100px;
+
+                label{
+                    margin-top: 10px;
+                    width: 100%;
+
+                    input{
+                        display: none;
+                    }
+                }
+            }
+        }
+
+
+        .sorting-options {
+            display: none;
+            float: left;
+            text-align: left;
+            font-size: 14px;
+
+            .form-control {
+                display: inline-block;
+                width: auto;
+                padding-right: 30px;
+                .appearance(none);
+            }
+            span {
+                display: inline-block;
+                padding-right: 10px;
+            }
+            .select-option {
+                position: relative;
+                display: inline-block;
+
+                .fa{
+                    position: absolute;
+                    right: 5px;
+                    top: 5px;
+                    font-size: 17px;
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+
+
+    .influencer-list-table{
+        background: transparent none repeat scroll 0 0;
+        box-sizing: border-box;
+        display: table;
+        margin: 0 auto 1px;
+        width: 100%;
+        font-family: 'LatoRegular';
+
+        li{
+            position: relative;
+        }
+        .table-row {
+            .table {
+                > .user-data {
+                    width: 40%;
+                    min-width:  385px;
+                }
+                > .user-favorits {
+                    width: 180px;
+                    min-width: 170px;
+                    padding-right: 30px;
+
+                }
+                > .user-likes {
+                    width: 120px;
+                    min-width: 110px;
+                }
+                > .user-content {
+                    width: 105px;
+                    min-width: 95px;
+                }
+            }
+        }
+        &.has_fixed-content {
+            padding-top: 46px;
+
+            .fixed-header {
+                position:fixed;
+                background-color: @white-color;
+                width: 100%;
+                padding: 0 15px;
+                left: 0;
+                top: 0;
+                z-index: 2000;
+
+                .table_header{
+                    max-width: 1183px;
+                    padding: 17px 0px;
+                    background-color: @white-color;
+
+                    border-bottom: 1px solid @text-color1;
+                }
+            }
+            &.compact-view {
+                .fixed-header {
+                    .table_header{
+                        max-width: 890px;
+                    }
+                }
+            }
+        }
+        &.compact-view {
+            max-width: 900px;
+            .table_header {
+                .fa {
+                    &.fa-user{
+                        margin-left: 29px;
+                    }
+                }
+            }
+
+            .influencer-status,
+            .influencer-avatar {
+                height: 40px;
+                width: 40px;
+            }
+            .influencer-status {
+                padding-top: 9px;
+            }
+            .user-main-info {
+                h2 {
+                    font-size: 18px;
+                }
+            }
+
+            .content-wrapper .influencer-list-table .influencer-status {
+                color: #ffffff;
+                line-height: 1;
+                margin-right: 19px;
+                padding-top: 23px;
+                position: relative;
+                text-align: center;
+            }
+
+
+            .table-row {
+                .table {
+                    .user-data {
+                        width: 270px;
+                    }
+                    .user-favorits {
+                        width: 60px;
+                        padding-right: 10px;
+                        .no-keywords{
+                            display: none;
+                        }
+                    }
+                    .user-likes {
+                        width: 110px;
+                    }
+                    .user-content {
+                        width: 85px;
+                    }
+                    > .language-block,
+                    > .country-block {
+                        width: 40px;
+                    }
+                }
+            }
+
+            .avatar-image-box {
+                width: 115px;
+                min-width: 115px;
+            }
+
+            .compact-view-hide{
+                display: none;
+            }
+            .flag-icon {
+                display: block;
+            }
+            .average-age {
+                display: block;
+            }
+        }
+        .table {
+            & > .table-cell {
+                vertical-align: middle;
+                color: @text-color1;
+            }
+            .fa {
+                color: @text-color2;
+                &.fa-user{
+                    margin-left: 70px;
+                }
+            }
+        }
+        .left-block {
+            display: none;
+        }
+        .fa {
+            .fa-signal{
+                margin-left: 10px;
+            }
+        }
+
+        .influencer-status,
+        .influencer-avatar{
+            .border-radius-circle();
+            display: inline-block;
+            float: left;
+            margin-bottom: 10px;
+            cursor: default;
+            height: 80px;
+            width: 80px;
+            margin-right: 0;
+        }
+        .influencer-status{
+            text-align: center;
+            margin-right: 19px;
+            color: @white-color;
+            position: relative;
+
+            span {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                width: 100%;
+                display: block;
+                .translate(0, -50%);
+                font-size: 12px;
+                line-height: 14px;
+            }
+        }
+
+        .influencer-avatar {
+            img{
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                -moz-border-radius: 50%;
+                -webkit-border-radius: 50%;
+                -khtml-border-radius: 50%;
+                -o-border-radius: 50%;
+                -ms-border-radius: 50%;
+                -icab-border-radius: 50%;
+            }
+        }
+        .avatar-image-box {
+            width: 190px;
+            min-width: 190px;
+            padding-right: 10px;
+        }
+        .no-keywords {
+            font-size: 13px;
+            color: @text-color1;
+            padding: 7px 10px;
+            position: relative;
+
+            span {
+                vertical-align: middle;
+                font-size: 16px;
+                line-height: 25px;
+                .fa {
+                    cursor: pointer;
+                }
+            }
+
+            .no-keywords-popup {
+                position: absolute;
+                left: 170px;
+                top: -18px;
+                width: 280px;
+                line-height: 16px;
+                z-index: 100;
+                .border-radius(5px);
+                padding: 10px 15px;
+                background: @white-color;
+                border: 1px solid @border-color1;
+
+                &:before {
+                    position: absolute;
+                    right: 100%;
+                    top: 21px;
+                    content: "";
+                    z-index: 10;
+                    border-right: 16px solid @border-color1;
+                    border-top: 16px solid transparent;
+                    border-bottom: 16px solid transparent;
+                }
+
+                &:after {
+                    position: absolute;
+                    right: 100%;
+                    top: 22px;
+                    content: "";
+                    z-index: 10;
+                    border-right: 15px solid @white-color;
+                    border-top: 15px solid transparent;
+                    border-bottom: 15px solid transparent;
+                }
+            }
+        }
+        .user-remove{
+            width: 55px;
+            position: relative;
+            text-align: center;
+
+            .infuencer-archive-btn {
+                vertical-align: middle;
+                .fa{
+                    color: @themes-color7;
+                }
+            }
+            label {
+                vertical-align: middle;
+            }
+
+            .check-box {
+                cursor: pointer;
+                display: block;
+
+                input {
+                    margin: 4px;
+                    cursor: pointer;
+                }
+            }
+        }
+        .user-remove-option {
+            display: none;
+
+            .infuencer-archive-btn {
+                .fa{
+                    color: @themes-color7;
+                }
+            }
+        }
+        .archive-container {
+            display: inline-block;
+            position: relative;
+            text-align: center;
+        }
+        .average-age {
+            display: none;
+        }
+        .user-main-info {
+            padding-right: 20px;
+
+            .username {
+
+                position: relative;
+                line-height: 24px;
+                padding-left: 30px;
+                margin-bottom: 5px;
+            }
+            h2 {
+                color: @text-color1;
+                font-size: 18px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                line-height: 22px;
+                max-width: 200px;
+
+                a {
+                    display: block;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+            }
+            .instagram-account {
+                vertical-align: middle;
+                position: absolute;
+                left: 0;
+                top: 1px;
+                cursor: pointer;
+
+            }
+            a {
+                opacity: 0.7;
+                color: @text-color2;
+                &:hover {
+                    text-decoration: none;
+                    opacity: 1;
+                }
+            }
+            li {
+                font-size: 12px;
+                word-break: break-all;
+            }
+        }
+        .user-options {
+            clear: both;
+            /*display: table;*/
+            width: 90%;
+            display: none;
+
+            li {
+                a{
+                    color: @text-color2;
+
+                    &.red-icon{
+                        color: @themes-color3;
+                    }
+                }
+            }
+        }
+        .alert{
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        .table_header{
+            padding-bottom: 10px;
+            padding-top: 10px;
+            border-bottom: 1px solid @border-color1;
+
+            .fa {
+                font-size: 26px;
+                &:hover{
+                    color:@text-color1;
+                }
+            }
+        }
+        .body-row {
+            padding: 15px 0;
+
+            .table {
+                background-color: transparent;
+
+                .table-cell {
+                    li {
+                        margin-bottom: 5px;
+                        line-height: normal;
+                    }
+                }
+            }
+            .right-side {
+                padding-left: 20px;
+            }
+            .table-cell {
+
+                .right-block {
+                    span {
+                        font-size: 16px;
+                        line-height: 25px;
+                    }   
+                }
+            }
+            .flag-icon {
+                display: none;
+                height: 13px;
+                margin-left: 10px;
+                width: 20px;
+
+                .flag{
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+        .influencer-name {
+            cursor: pointer;
+            background-color: @white-color;
+            border-bottom: 1px solid @border-color1;
+            display: none;
+            padding: 5px 40px 5px 10px;
+            position: relative;
+
+            .fa{
+                display: none;
+                position: absolute;
+                pointer-events: none;
+                color: @text-color1;
+                top: 10px;
+                right: 10px;
+                font-size: 20px;
+            }
+            h2{
+                font-size: 24px;
+                line-height: normal;
+            }
+        }
+
+        .load-more-btn {
+            padding: 30px 0;
+            text-align: center;
+
+            > a{
+                border: 1px solid @text-color1;
+                border-radius: 50%;
+                color: @themes-color1;
+                display: inline-block;
+                line-height: 100px;
+                height: 100px;
+                width: 100px;
+
+                &:hover {
+                    text-decoration: none;
+                }
+                &:active {
+                    text-decoration: none;
+                }
+            }
+        }
+        .fa-sort-desc,
+        .fa-sort-asc,
+        .fa-sort {
+            margin: 0 2px;
+            opacity: 0.7;
+            cursor: pointer;
+            font-size: 26px;
+        }
+        .fa-sort-desc:hover,
+            .fa-sort-desc.active{
+            opacity: 1;
+        }
+
+        .tooltip-pop-up{
+            /*height: 120px;*/
+            background-color: @background-color3;
+            border: 2px solid @border-color1;
+            border-radius: 10px;
+            display: none;
+            height: 70px;
+            position: absolute;
+            right: 50px;
+            top: -28px;
+            width: 170px;
+            z-index: 100;
+            display: none;
+
+            .tooltip-pop-up-inner{
+                bottom: 0;
+                /*height: 85px;*/
+                height: 35px;
+                font-size: 14px;
+                left: 0;
+                margin: auto;
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 80%;
+
+                &.message-box{
+                    width: 90%;
+                }
+            }
+
+            a{
+                border-radius: 6px;
+                color: @text-color2;
+                margin-bottom: 5px;
+                font-weight: bold;
+                padding: 10px 25px;
+                text-align: center;
+                width: 100%;
+
+                &:hover{
+                    text-decoration: none;
+                    opacity: 0.8;
+                }
+            }
+            .delete-user{
+                background-color: @themes-color3;
+                color: @white-color;
+            }
+            .user-email-address,
+            .send-message {
+                padding: 10px 8px;
+                white-space: nowrap;
+                background-color: @themes-color5;
+            }
+
+
+            .add-influencer {
+                background-color: @themes-color1;
+            }
+            .delete-influencer-desc {
+                margin-bottom: 10px;
+
+                .fa{
+                    color: @themes-color3;
+                    vertical-align: middle;
+                }
+            }
+
+            .delete-influencer {
+                background-color: @border-color1;
+            }
+            .archive-user{
+                background-color: @background-color3;
+            }
+
+        }
+
+        .user-remove,
+        .message-block,
+        .archive-block,
+        .add-influencer-block,
+        .delete-influencer-block {
+            &.is_active {
+                .tooltip-pop-up{
+                    display: block;
+                }
+            }
+        }
+
+
+        .triangle {
+            &:before {
+                border-bottom: 20px solid transparent;
+                border-left: 20px solid @border-color1;
+                border-top: 20px solid transparent;
+                content: "";
+                left: 100%;
+                position: absolute;
+                top: 15px;
+                z-index: 10;
+            }
+
+            &:after {
+                border-bottom: 18px solid transparent;
+                border-left: 18px solid @background-color3;
+                border-top: 18px solid transparent;
+                content: "";
+                left: 100%;
+                position: absolute;
+                top: 17px;
+                z-index: 11;
+            }
+        }
+
+    }
+    .influencer-status {
+        position: relative;
+        canvas {
+            left: 6px;
+            height: 100% !important;
+            width: 100% !important;
+        }
+        strong {
+            color: #424242;
+            font-size: 20px;
+            left: 0;
+            position: absolute;
+            top: 50%;
+            display: block;
+            .translate(0, -50%);
+            text-align: center;
+            vertical-align: middle;
+            width: 100%;
+        }
+    }
+}
+
+
+
+
+/*                  1260px                  */
+@media screen and (max-width: @desktopWidth){
+    .content-wrapper {
+
+        .influencer-list-table {
+            .body-row {
+                .table-cell {
+                    .right-block {
+                        .right-side {
+                            padding-left: 10px;
+                        }
+                    }
+                }
+            }
+            .user-main-info {
+                h2 {
+                    font-size: 16px;
+                    max-width: 170px;
+                }
+            }
+        }
+    }
+}
+
+
+
+/*                  1024px                  */
+@media screen and (max-width: @desktopWidthSmall) {
+    .content-wrapper {
+        .influencer-list-table {
+            .user-main-info {
+                padding-right: 10px;
+                h2 {
+                    font-size: 17px;
+                }
+            }
+
+            .influencer-status,
+            .influencer-avatar{
+                height: 60px;
+                width: 60px;
+            }
+            .influencer-status {
+                margin-right: 10px;
+            } 
+            &.compact-view {
+                .table_header {
+                    .fa {
+                        &.fa-user {
+                            margin-left: 20px;
+                        }
+                    }
+                }
+            }
+            .table_header {
+                .fa {
+                    &.fa-user {
+                        margin-left: 50px;
+                    }
+                }
+            }
+            .avatar-image-box {
+                min-width: 150px;
+                width: 150px;
+            }
+            .table-row {
+
+                .table {
+                    > .user-data {
+                        min-width:  345px;
+                    }
+                    > .user-likes {
+                        width: 105px;
+                        min-width: 105px;
+                    }
+                    > .user-content {
+                        width: 105px;
+                        min-width: 85px;
+                    }
+                    > .user-favorits {
+                        padding-right: 15px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+/*                  940px                   */
+@media screen and (max-width: @tabletLandcapeWidth){
+
+    .content-wrapper {
+        .fa{
+            &.fa-thumbs-o-down,
+            &.fa-thumbs-o-up {
+                margin-left: 5px;
+            }
+        }
+
+        .sorting-options {
+            /*display: block;*/
+        }
+
+        .influencer-list-table {
+            &.has--fixed-content {
+                padding-top: 10px;
+            }
+
+            .influencer-status,
+            .influencer-avatar {
+                height: 60px;
+                width: 60px;
+            }
+            .table-cell {
+
+                &.avatar-image-box {
+                    width: 165px;
+                }
+            }
+
+            .fixed-header {
+                display: none;
+            }
+            .table-row{
+                &.is_active {
+                    .influencer-name {
+                        border-bottom: 1px solid @border-color1;
+
+                        .fa{
+                            &.fa-caret-down{
+                                display: none;
+                            }
+                            &.fa-caret-up{
+                                display: block;
+                            }
+                        }
+                    }
+                    .body-row { 
+                        display: block;
+                    }
+                }
+                .table {
+
+                    > .user-data,
+                    > .user-favorits,
+                    > .user-content,
+                    > .language-block,
+                    > .country-block, 
+                    > .user-likes,
+                    > .ages-block {
+                        width: 100%;
+                        max-width: 100%;
+                        min-width: 0;
+                    }
+
+                }
+
+
+            }
+
+            .influencer-name {
+                display: block;
+
+                .fa{
+                    &.fa-caret-down{
+                        display: block;
+                    }
+                }
+            }
+            .user-options {
+                display: block;
+
+                > li {
+                    text-align: right;
+                }
+            }
+            .archive-container {
+                display: block;
+            }
+            .user-main-info {
+                .username {
+                    display: none;
+                }
+            }
+            .no-keywords {
+                .no-keywords-popup {
+                    width: 65%;
+                    max-width: 280px;
+                }
+            }
+            .user-remove-option {
+                display: table-cell;
+                vertical-align: top;
+                width: 30px;
+                font-size: 14px;
+                min-width: 30px;
+
+                &.is_active{
+                    .tooltip-pop-up {
+                        display: block;
+                    }
+                }
+                .archive-block{
+                    a{
+                        .fa{
+                            color: @themes-color7;
+                        }
+                    }
+                }
+                a {
+                    display: block;
+                    text-align: center;
+                }
+                .delete-checkbox-label {
+                    display: none;
+                }
+                .tooltip-pop-up {
+                    top: -25px;
+                }
+                .add-influencer-btn {
+                    margin-bottom: 5px;
+                }
+                .instagram-account {
+                    margin-top: 5px;
+                    display: block;
+                    color: @text-color1;
+                    opacity: 0.7;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+
+            }
+            .right-block {
+                .compact-view-hide {
+                    li{
+                        display: table;
+                        width: 100%;
+
+                        .left-side,
+                        .favorits-keyword {
+                            display: table-cell;
+                            vertical-align: top;
+                            width: 80%;
+                            text-align: left;
+                        }
+
+                        .right-side,
+                        .favorits-persantage{
+                            display: table-cell;
+                            vertical-align: top;
+                            width: 20%;
+                            text-align: right;
+                        }
+                    }
+                }
+            }
+
+            .body-row { 
+                display: none;
+                width:70%;
+                > .table-cell {
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 100%;
+                    padding: 10px 0;
+                    font-size: 0;
+                    border-bottom: 1px solid @border-color1;
+
+                    .tablet-view {
+                        display: none;
+                    }
+
+                }
+                .user-total-posts {
+                    border-bottom: none;
+                }
+                .user-remove {
+                    display: none;
+
+                    .delete-checkbox-label {
+                        display: none;
+                    }
+
+                    a{
+                        .fa{
+                            color: @themes-color7;
+                        }
+                    }
+                }
+                .right-block {
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 50%;
+                    text-align: right;
+
+                    li {
+                        display: table;
+                        width: 100%;
+                        font-size: 14px;
+                    }
+
+                    .favorits-keyword {
+                        display: table-cell;
+                        vertical-align: top;
+                        line-height: 25px;
+                        width: 90%
+                    }
+
+                    .left-side {
+                        display: table-cell;
+                        vertical-align: top;
+                        width: 20%;
+                        min-width: 30px
+                    }
+
+                    .favorits-persantage {
+                        display: table-cell;
+                        vertical-align: top;
+                        width: 10%;
+                    }
+
+                    .right-side {
+                        display: table-cell;
+                        vertical-align: top;
+                        width: 80%;
+                        padding-right: 20px;
+                        text-align: right;
+                    }
+                }
+                .left-block {
+                    display: inline-block;
+                    font-weight: 600;
+                    min-width: 100px;
+                    padding-right: 20px;
+                    vertical-align: middle;
+                    width: 50%;
+                    font-size: 14px;
+                }
+            }
+
+
+            &.compact-view {
+                .influencer-status,
+                .influencer-avatar {
+                    height: 70px;
+                    width: 70px;
+                }
+
+                .body-row {
+                    padding: 5px 0;
+                }
+
+                .table-row {
+                    .table {
+                        .user-favorits {
+                            .no-keywords {
+                                display: block;
+                            }
+                        }
+                        > .table-cell {
+                            width: 100%;
+                            p {
+                                width: auto;
+                            }
+                        }
+                    }
+                }
+
+                .table-cell {
+                    &.avatar-image-box {
+                        width: 165px;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+/*                      600px                   */
+@media screen and (max-width: @tabletWidthSmall){
+    .content-wrapper {
+        .stats-graf{   
+            margin-top: 20px
+        }
+    }
+}
+
+/*                      500px                   */
+@media screen and (max-width: @phoneWidthLarge){
+    .delete_user_pop_inner{
+        width: 90%;
+    }
+    .content-wrapper {
+
+        .list-title {
+            padding-left: 0;
+
+        }
+
+        .sorting-options {
+            .select-option{
+                display: block;
+            }
+            span {
+                margin-bottom: 10px;
+            }
+        }
+
+        .influencer-list-table {
+            padding: 10px 0;
+
+            .body-row {
+                width:95%;
+            }
+
+            .table-cell {
+                &.avatar-image-box {
+                    display: block;
+                    width: 100%;
+                }
+                &.user-main-info {
+                    display: block;
+                    margin-top: 10px;
+                }
+            }
+
+            .user-options {
+                display: inline-block;
+                vertical-align: top;
+                width: auto;
+                padding-left: 10px;
+
+                > li {
+                    display: block;
+                    width: 100%;
+                    margin-bottom: 8px;
+                }
+            }
+            .no-keywords {
+                .no-keywords-popup {
+                    width: 100%;
+                    max-width: 100%;
+                    left: 0;
+                    top: 45px;
+
+                    &:before {
+                        border-bottom: 15px solid @border-color1;
+                        border-left: 15px solid transparent;
+                        border-right: 15px solid transparent;
+                        border-top: none;
+                        left: 122px;
+                        bottom: 100%;
+                        top: auto;
+                    }
+                    &:after {
+                        border-bottom: 15px solid @white-color;
+                        border-left: 15px solid transparent;
+                        border-right: 15px solid transparent;
+                        border-top: none;
+                        left: 122px;
+                        bottom: 100%;
+                        top: auto;
+                    }
+                }
+            }
+            .influencer-status,
+            .influencer-avatar {
+                float: none;
+                margin-right: 16%;
+                vertical-align: top;
+            }
+            .right-block {
+                .compact-view-hide {
+                    li {
+                        .left-side,
+                        .favorits-keyword {
+                            width: 100%;
+                        }
+
+                        .right-side,
+                        .favorits-persantage {
+                            width: auto;
+                        }
+                    }
+                }
+            }
+            &.compact-view {
+                .table-cell {
+                    &.avatar-image-box {
+                        width: 100%;
+                    }
+                }
+            }
+            .influencer-name {
+                h2 {
+                    font-size: 18px;
+                }
+                .fa {
+                    top: 5px;
+                }
+            }
+        }
+
+        .stats-graf {
+            .settings-block {
+                padding: 10px 0;
+
+                a {
+                    vertical-align: top;
+                }
+
+                .import-influencer-pop-up,
+                .upload-influencer-pop-up  {
+                    right: 0;
+                    top: 60px;
+
+
+                    &:before {
+                        border-bottom: 20px solid @border-color1;
+                        border-left: 20px solid transparent;
+                        border-right: 20px solid transparent;
+                        border-top: none;
+                        bottom: 100%;
+                        left: auto;
+                        right: 21px;
+                        top: auto;
+                    }
+                    &:after {
+                        border-bottom: 18px solid @background-color3;
+                        border-right: 18px solid transparent;
+                        border-left: 18px solid transparent;
+                        border-top: none;
+                        bottom: 100%;
+                        left: auto;
+                        right: 23px;
+                        top: auto;
+                    }
+                }
+                .upload-influencer-pop-up {
+                    &:before {
+                        right: 53px;
+                    }
+                    &:after { 
+                        right: 55px;
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+
+/*                  400px               */
+@media screen and (max-width: @phoneWidth) {
+    .content-wrapper {
+
+
+        .list-title {
+
+            h2{
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .page-info {
+                display: block;
+                text-align: left;
+                width: 100%;
+            }
+        }
+    }
+}

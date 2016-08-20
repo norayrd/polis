@@ -18,6 +18,7 @@ class ComposerStaticInit7bc773287392ab6d02f8920466f5da05
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
         '32dcc8afd4335739640db7d200c1971d' => __DIR__ . '/..' . '/symfony/polyfill-apcu/bootstrap.php',
+        'ce89ac35a6c330c55f4710717db9ff78' => __DIR__ . '/..' . '/kriswallsmith/assetic/src/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -33,6 +34,7 @@ class ComposerStaticInit7bc773287392ab6d02f8920466f5da05
             'Symfony\\Component\\' => 18,
             'Symfony\\Bundle\\SwiftmailerBundle\\' => 33,
             'Symfony\\Bundle\\MonologBundle\\' => 29,
+            'Symfony\\Bundle\\AsseticBundle\\' => 29,
             'Symfony\\Bundle\\' => 15,
             'Symfony\\Bridge\\Twig\\' => 20,
             'Symfony\\Bridge\\Swiftmailer\\' => 27,
@@ -100,6 +102,10 @@ class ComposerStaticInit7bc773287392ab6d02f8920466f5da05
         'Symfony\\Bundle\\MonologBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/monolog-bundle',
+        ),
+        'Symfony\\Bundle\\AsseticBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/assetic-bundle',
         ),
         'Symfony\\Bundle\\' => 
         array (
@@ -170,6 +176,10 @@ class ComposerStaticInit7bc773287392ab6d02f8920466f5da05
     public static $prefixesPsr0 = array (
         'T' => 
         array (
+            'Twig_Extensions_' => 
+            array (
+                0 => __DIR__ . '/..' . '/twig/extensions/lib',
+            ),
             'Twig_' => 
             array (
                 0 => __DIR__ . '/..' . '/twig/twig/lib',
@@ -220,6 +230,13 @@ class ComposerStaticInit7bc773287392ab6d02f8920466f5da05
                 0 => __DIR__ . '/..' . '/doctrine/common/lib',
             ),
         ),
+        'A' => 
+        array (
+            'Assetic' => 
+            array (
+                0 => __DIR__ . '/..' . '/kriswallsmith/assetic/src',
+            ),
+        ),
     );
 
     public static $classMap = array (
@@ -239,6 +256,11 @@ class ComposerStaticInit7bc773287392ab6d02f8920466f5da05
         'SessionHandlerInterface' => __DIR__ . '/..' . '/symfony/polyfill-php54/Resources/stubs/SessionHandlerInterface.php',
         'SqlFormatter' => __DIR__ . '/..' . '/jdorn/sql-formatter/lib/SqlFormatter.php',
         'TypeError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/TypeError.php',
+        'lessc' => __DIR__ . '/..' . '/leafo/lessphp/lessc.inc.php',
+        'lessc_formatter_classic' => __DIR__ . '/..' . '/leafo/lessphp/lessc.inc.php',
+        'lessc_formatter_compressed' => __DIR__ . '/..' . '/leafo/lessphp/lessc.inc.php',
+        'lessc_formatter_lessjs' => __DIR__ . '/..' . '/leafo/lessphp/lessc.inc.php',
+        'lessc_parser' => __DIR__ . '/..' . '/leafo/lessphp/lessc.inc.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

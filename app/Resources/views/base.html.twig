@@ -1,13 +1,55 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {#with {title: block('title'), metatags: block('metatags'), javascripts: block('javascripts'), stylesheets: block('stylesheets')}#}
+        {% block headerControls %}
+            <title>{% block title %}Influencer: Influencers List{% endblock %}</title>
+
+            {% include 'util/headerControls.html.twig' %}
+
+            {% block stylesheets  %}
+
+            {% endblock %}
+
+            {% block javascripts %}
+
+                {% block javascripts_child %}
+
+                {% endblock %}
+            {% endblock %}
+            {% block notifyjs %}
+                <script type="text/javascript" src="{{ asset('js/utils/NotifyProgress.js') }}"></script>
+            {% endblock %}
+
+
+
+        {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+    <body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
+
+        {% block header %}
+            {% include 'util/header.html.twig' %}
+        {% endblock %}
+
+        <div class="overlay"><div class="loader"></div></div>
+        <div class="content-main">
+            {% block bodyHeadline %} 
+                <div class="content-main-headline">
+                    {% include 'util/breadcrumb.html.twig' %}
+                    {% include 'util/notify-progress-bar.html.twig' %}
+                </div>
+            {% endblock %}
+            {% block body %} {% endblock %}
+        </div>
+
+        {% block footer %}
+            {% include 'util/footer.html.twig' %}
+        {% endblock %}
+
+        {% block popUp %}
+            {% include 'pop-up.html.twig' %}
+        {% endblock %}
+
     </body>
 </html>

@@ -1,0 +1,403 @@
+/*
+Animations mixin
+============================================
+The mixins provides you a cross-browser compatible method to set animation values.
+*/
+
+.animation(@value) {
+    -webkit-animation: @value;
+    -moz-animation: @value;
+    -o-animation: @value;
+    animation: @value;
+}
+
+/*
+Appearance mixin
+============================================
+The mixins provides you a cross-browser compatible method to set the appearance of the element.
+*/
+
+.appearance(@type: none) {
+  -webkit-appearance: @type;
+  -moz-appearance: @type;
+  -ms-appearance: @type;
+  -o-appearance: @type;
+  appearance: @type;
+}
+
+
+/*
+Backface visibility mixin
+============================================
+The mixins provides you a cross-browser compatible method to set the backface-visibility of the element.
+*/
+
+.backface-visibility(@visibility: hidden) {
+  -webkit-backface-visibility: @visibility;
+  -moz-backface-visibility: @visibility;
+  backface-visibility: @visibility;
+}
+
+/*
+Border-radius mixin
+=============================================
+The mixins provides you a cross-browser compatible method to set a border-radius.
+*/
+
+.border-radius(@radius: 7px) {
+    border-radius: @radius;
+    -moz-border-radius: @radius;
+    -webkit-border-radius: @radius;
+    -khtml-border-radius: @radius; 
+    -o-border-radius: @radius; 
+    -ms-border-radius: @radius;
+    -icab-border-radius: @radius; 
+    border-radius: @radius; 
+    // Prevent the background color leaks out
+    background-clip: padding-box;
+}
+
+.border-radius-circle(@radius: 50%) {
+    border-radius: @radius;
+    -moz-border-radius: @radius;
+    -webkit-border-radius: @radius;
+    -khtml-border-radius: @radius; 
+    -o-border-radius: @radius; 
+    -ms-border-radius: @radius;
+    -icab-border-radius: @radius; 
+    border-radius: @radius; 
+    // Prevent the background color leaks out
+    background-clip: padding-box;
+}
+.border-radius-multi(@leftTop: 0, @rightTop:0, @rightBottom: 0, @leftBottom: 0) {
+    border-top-left-radius: @leftTop;
+    border-top-right-radius:  @rightTop;
+    border-bottom-right-radius: @rightBottom;
+    border-bottom-left-radius: @leftBottom;
+    // Prevent the background color leaks out
+    background-clip: padding-box;
+}
+.reset-border-radius() {
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    -khtml-border-radius: 0; 
+    -o-border-radius: 0; 
+    -ms-border-radius: 0;
+    -icab-border-radius: 0; 
+    border-radius: 0; 
+}
+
+/*
+Box shadow mixin
+==============================================
+The mixins provides you a cross-browser compatible method to set a box-shadow.
+*/
+
+.box-shadow(@shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2)) {
+  box-shadow: @shadow;
+}
+
+.reset-box-shadow() {
+    @shadow: 0 0 0 transparent;
+    box-shadow: @shadow;
+}
+
+/*
+Box-sizing mixin
+========================================
+The mixins provides you a cross-browser compatible method to set the box-sizing which supports IE starting from
+version 8 to the newest one.
+*/
+
+.box-sizing(@box-sizing: border-box) {
+  box-sizing: @box-sizing;
+}
+
+/*
+Clearfix mixin
+================================
+The clearfix mixin allows the easy integration of the floating-solution method.
+*/
+
+.clearfix() {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+/*
+Column count mixin
+=============================================
+This mixin provides you a cross-browser compatible method to set the column count property.
+*/
+
+.column-count(@count: auto) {
+    -moz-column-count: @count;
+    -webkit-column-count: @count;
+    column-count: @count;
+}
+
+.column-break-inside(@type: avoid) {
+    -webkit-column-break-inside: @type;
+    -moz-column-break-inside: @type;
+    -o-column-break-inside: @type;
+    -ms-column-break-inside: @type;
+    column-break-inside: @type;
+}
+
+/*
+Text crop mixin
+=========================================
+The mixins provides you a cross-browser compatible method to crop the text.
+*/
+
+.crop-text(){
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/*
+Grabbing cursor
+==================================
+This mixin provides you a cross-browser compatible method to set the cursor grabbing behavior.
+*/
+
+.cursorGrab() {
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.cursorGrabbing() {
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+/*
+Hypheration mixin
+======================================
+The mixins provides you a cross-browser compatible method to set the hyphenation.
+*/
+
+.hyphens(@hyphenation: auto) {
+    -webkit-hyphens: @hyphenation;
+    -moz-hyphens: @hyphenation;
+    -ms-hyphens: @hyphenation;
+    hyphens: @hyphenation;
+}
+
+/*
+Gradient mixin
+====================================================
+The mixins provides you a cross-browser compatible method to set a linear gradient which goes from top to bottom.
+*/
+
+.linear-gradient(@start, @end) {
+    background: @start;
+    background-color:@start;
+    background-image: -ms-linear-gradient(top, @start, @end);
+    background: -webkit-linear-gradient(to bottom, @start 0%, @end 100%);
+    background: -o-linear-gradient(to bottom, @start 0%, @end 100%);
+    background: -moz-linear-gradient(to bottom, @start 0%, @end 100%);
+    background: linear-gradient(to bottom, @start 0%, @end 100%);
+}
+.linear-gradient-horizontal(@start, @end) {
+    background-image: -ms-linear-gradient(left, @start, @end);
+    background-image: linear-gradient(to right, @start 0%, @end 100%);
+}
+.linear-gradient-multi(@firstPos, @firstColor, @secondPos, @secondColor, @thirdPos, @thirdColor, @startFrom: top, @endTo: bottom) {
+    background-image: -ms-linear-gradient(@startFrom, @firstColor @firstPos,@secondColor @secondPos,@thirdColor @thirdPos);
+    background-image: linear-gradient(to @endTo, @firstColor @firstPos,@secondColor @secondPos,@thirdColor @thirdPos);
+}
+
+/*
+Opacity
+===============================================
+The mixins provides you a cross-browser compatible opacity which supports IE starting from version 8 to the
+newest one. Safari, Chrome and Firefox are supported in all versions.
+*/
+
+.opacity(@opacity) {
+  opacity: @opacity;
+}
+
+/*
+Rotate mixin
+===============================================
+The mixins provides you a cross-browser compatible method to set a transformation which rotates the element. Keep in
+mind that you can not mix different transformations.
+*/
+
+.rotate(@degree) {
+  -webkit-transform: rotate(@degree);
+  -moz-transform: rotate(@degree);
+  -ms-transform: rotate(@degree);
+  -o-transform: rotate(@degree);
+  transform: rotate(@degree);
+}
+
+/*
+Scale mixin
+===============================
+The mixins provides you a cross-browser compatible method to set a transformation which scales the element.
+Keep in mind that you can not mix different transformations.
+*/
+
+.scale(@scale-value) {
+  -webkit-transform: scale(@scale-value);
+  -moz-transform: scale(@scale-value);
+  -ms-transform: scale(@scale-value);
+  -o-transform: scale(@scale-value);
+  transform: scale(@scale-value);
+}
+
+/*
+Tab highlighting mixin
+===========================
+Sets the color of the highlighting when a link was clicked / tapped.
+*/
+
+.tap-highlight-color(@color: rgba(0, 0, 0, 0)) {
+    -webkit-tap-highlight-color: @color;
+    -moz-tap-highlight-color: @color;
+    tap-highlight-color: @color;
+}
+
+/*
+Touch callout mixin
+===========================================
+Disables the default callout shown when you touch and hold a touch target.
+*/
+
+.touch-callout(@type: none) {
+    -webkit-touch-callout: @type;
+    -moz-touch-callout: @type;
+    touch-callout: @type;
+}
+
+/*
+Transform origin mixin
+======================================
+The mixins provides you a cross-browser compatible method to set the transform origin position.
+*/
+
+.transform-origin(@x: 50%, @y: 50%, @z: 0) {
+  -webkit-transform-origin: @x @y @z;
+  -moz-transform-origin: @x @y @z;
+  -o-transform-origin: @x @y @z;
+  -ms-transform-origin: @x @y; // IE9 does not support z parameter.
+  transform-origin: @x @y @z;
+}
+
+/*
+Transform style mixin
+======================================
+The mixins provides you a cross-browser compatible method to set a transformation style.
+*/
+
+.transform-style(@style: preserve-3d) {
+  -webkit-transform-style: @style;
+  -moz-transform-style: @style;
+  -ms-transform-style: @style;
+  transform-style: @style;
+}
+
+/*
+Transform mixin
+==============================================
+The mixins provides you a cross-browser compatible method to set a transformation.
+*/
+
+.transform(@transformation) {
+  -webkit-transform: @transformation;
+  -moz-transform: @transformation;
+  -o-transform: @transformation;
+  -ms-transform: @transformation;
+    transform: @transformation;
+}
+
+/*
+Transition mixin
+=========================================
+The mixins provides you a cross-browser compatible method to set a transition.
+*/
+
+.transition(@transition: all 0.3s ease-out) {
+    -webkit-transition: @transition;
+    -moz-transition: @transition;
+    -ms-transition: @transition;
+    -o-transition: @transition;
+    transition: @transition;
+}
+
+/*
+Translate mixin
+============================================
+The mixins provides you a cross-browser compatible method to set a transition.
+*/
+
+.translate(@x: 0, @y: 0, @z: -1) when (@z > -1) {
+  -webkit-transform: translate3d(@x, @y, @z);
+  -moz-transform: translate3d(@x, @y, @z);
+  -ms-transform: translate3d(@x, @y, @z);
+  -o-transform: translate3d(@x, @y, @z);
+  transform: translate3d(@x, @y, @z);
+}
+.translate(@x: 0, @y: 0, @z: -1) when (@z < 0) {
+  -webkit-transform: translate(@x, @y);
+  -moz-transform: translate(@x, @y);
+  -ms-transform: translate(@x, @y);
+  -o-transform: translate(@x, @y);
+  transform: translate(@x, @y);
+}
+
+/*
+User-select mixin
+===============================
+The mixins provides you a cross-browser compatible method to set a user selection mode.
+*/
+
+.user-select(@type: none) {
+  -webkit-user-select: @type;
+  -moz-user-select: @type;
+  -ms-user-select: @type;
+  -o-user-select: @type;
+  user-select: @type;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

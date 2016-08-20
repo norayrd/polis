@@ -1,0 +1,471 @@
+.ctl-single-analysis {
+
+    &.ctl-index {
+        .project-main-header {
+            .header-inner {
+                .search-box {
+                    display: none;
+                }
+            }
+        }
+/*        .single-analysis-start { 
+            height: 100vh;
+        }*/
+    }
+
+    .single-analysis-header {
+        position: fixed;
+        padding: 0 15px;
+        z-index: 1000;
+        width: 100%;
+        left: 0;
+        top: 0;
+    }
+    .single-analysis-header-inner {
+        padding-top: 10px;
+        max-width: 1200px;
+        background-color: @white-color;
+
+        .table-cell {
+            width: 50%;
+        }
+        .login-cell {
+            text-align: right;
+
+            .login-btn {
+                margin-right: 15px;
+                color: @text-color2;
+            }
+        }
+        .logo-cell {
+            a {
+                color: @primary-color;
+                font-size: 16px;
+                font-weight: bold;
+                letter-spacing: 2px;
+                line-height: 25px;
+
+                &:hover {
+                    text-decoration: none;
+                }
+                &:focus {
+                    text-decoration: none;
+                }
+            }
+            .logo-icon {
+                background: rgba(0, 0, 0, 0) url("../../../img/clusoo_logo_correct_blue.png") no-repeat scroll center center / 100% auto;
+                display: inline-block;
+                height: 40px;
+                margin-right: 10px;
+                vertical-align: middle;
+                width: 40px;
+            }
+        }
+    }
+
+
+    .content-main {
+        padding: 0;
+        color: @text-color1;
+    }
+    .single-analysis-start {
+        display: table;
+        max-width: 450px;
+        margin: auto;
+        padding: 10px;
+        height: 100vh;
+        width: 100%;
+
+        .single-analysis-start-inner {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .single-analysis-limit {
+            display: table-cell;
+            vertical-align: middle;
+
+
+            .actions-btn {
+                text-align: center;
+
+                .btn {
+                    vertical-align: middle;
+                    padding: 10px 20px;
+                    min-width: 100px;
+                }
+                .login-btn {
+                    margin-right: 10px;
+                }
+            }
+        }
+
+
+        .clusoo-logo {
+            background: rgba(0,0,0,0) url("../../img/clusoo_logo_correct_blue.png") no-repeat scroll center center;
+            width: 200px;
+            height: 114px;
+            background-size: contain;
+            margin: 0 auto 20px;
+
+            &.logo-small {
+                width: 80px;
+                height: 80px;
+            }
+        }
+        .search-container-box {
+            position: relative;
+            .border-radius(25px);
+            overflow: hidden;
+
+            span {
+                position: absolute;
+                top: 0;
+                left: 0;
+                pointer-events: none;
+                display: block;
+                width: 45px;
+                height: 100%;
+                text-align: center;
+
+                .fa {
+                    vertical-align: middle;
+                    padding-top: 8px;
+                }
+            }
+            .option-load {
+                position: absolute;
+                right: 10px;
+                top: 7px;
+                z-index: 100;
+
+            }
+            .search-container {
+                width: 100%;
+                border: 1px solid @border-color1;
+                .border-radius(25px);
+                line-height: 18px;
+                padding: 10px 40px;
+            }
+        }
+        .result-box-container {
+            position: relative;
+        }
+        .limiting-popup {
+            position: absolute;
+            width: 300px;
+            background-color: @white-color;
+            font-size: 12px;
+            border: 1px solid @border-color1;
+            .border-radius(4px);
+            line-height: 16px;
+            padding: 10px;
+            z-index: 1000;
+
+            &:before{
+                position: absolute;
+                content: "";
+                bottom: 100%;
+                left: 14px;
+                border-bottom: 11px solid @border-color1;
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+            }
+            &:after{
+                position: absolute;
+                content: "";
+                bottom: 100%;
+                left: 14px;
+                border-bottom: 10px solid @white-color;
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+            }
+            &.single-limit-popup {
+                top: 0px;
+                left: 30px; 
+            }
+        }
+        .result-box {
+            background: @white-color none repeat scroll 0 0;
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.5);
+            min-width: 300px;
+            height: 0;
+            max-height: 300px;
+            overflow-x: hidden;
+            width: 100%;
+            z-index: 1000;
+            .transition(height 0.3s ease);
+
+            &.is_active {
+                height: 300px;
+            }
+
+            & > li {
+                color: @text-color1;
+                width: 100%;
+                font-size: 20px;
+                padding: 0 15px;
+
+                .table {
+                    background-color: transparent;
+                }
+
+                .table-cell {
+                    vertical-align: middle;
+                }
+
+                .name-cell {
+                    padding-left: 10px;
+                    width: 100%;
+                }
+
+                .option-icon {
+                    cursor: pointer;
+                    width: 30px;
+                    text-align: center;
+                }
+
+                .fa {
+                    transition: color 0.3s ease;
+
+                    :hover {
+                        color: @border-color1;
+                    }
+                }
+
+                .option-load {
+                    -moz-border-bottom-colors: none;
+                    -moz-border-left-colors: none;
+                    -moz-border-right-colors: none;
+                    -moz-border-top-colors: none;
+                    animation: spin 1.5s linear infinite;
+                    border-color: @themes-color1 @themes-color2 @themes-color2;
+                    border-image: none;
+                    border-radius: 100%;
+                    border-style: solid;
+                    border-width: 2px;
+                    height: 25px;
+                    width: 25px;
+                }
+
+                &:nth-child(2n-1) {
+                    background: @background-color1 none repeat scroll 0 0;
+                }
+                .influencer-avatar {
+                    background-size: 100% auto;
+                    border-radius: 50%;
+                    margin: 0;
+                    display: inline-block;
+                    height: 40px;
+                    margin: 10px;
+                    width: 40px;
+                    vertical-align: middle;
+                }
+            }
+        }
+        .single-analysis-process-content {
+            p {
+                font-size: 20px;
+                margin-bottom: 20px;
+                min-height: 50px;
+                margin-top: 40px;
+                text-align: center;
+            }
+        }
+        .single-analysis-process {
+            .border-radius-circle();
+            padding-top: 100%;
+            width: 100%;
+            text-align: center;
+            position: relative;
+
+            .process-progress {
+                font-size: 120px;
+                line-height: 1;
+                display: inline-block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                .translate(-50%, -50%);
+            }
+
+            canvas {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100% !important;
+                height: 100% !important;
+            }
+        }
+    }
+
+    .single-analysis-info-content {
+        max-width: 1230px;
+        margin: 0 auto;
+        padding: 0 15px 70px;
+
+
+        .another-single-analysis-content {
+            padding-top: 100px;
+            text-align: center;
+
+            .another-single-analysis-desc {
+                margin-right: 30px;
+            }
+        }
+        .analyzed-influencer-container {
+            margin: 100px auto 0;
+            max-width: 900px;
+            .analyzed-influencer-image {
+                width: 150px;
+                height: 150px;
+                margin: 0 auto 20px;
+                img {
+                    max-width: 100%;
+                    max-height: 100%;
+                    .border-radius-circle();
+                }
+            }
+            .analyzed-influencer-main-info {
+                margin-bottom: 60px;
+                .analyzed-influencer-name-cell {
+                    h2 {
+                        position: relative;
+                        padding-left: 30px;
+                        font-size: 20px;
+                        line-height: 28px;
+                        color: @text-color1;
+                    }
+                    .instagram-account {
+                        position: absolute;
+                        color: @text-color2;
+                        left: 0;
+                        top: 50%;
+                        .translate(0, -50%);
+                        opacity: 0.7;
+
+                        &:hover {
+                            opacity: 1;
+                        }
+                    }
+                }
+                .analyzed-influencer-bio-cell {
+                    width: 70%;
+                    padding-left: 40px;
+                    font-size: 16px;
+                    line-height: 20px;
+                }
+            }
+
+            .analyzed-influencer-data {
+                margin-bottom: 60px;
+                .status-cell {
+                    vertical-align: middle;
+                    min-width: 90px;
+                    width: 90px;
+
+                    .influencer-status {
+                        .border-radius-circle();
+                        height: 70px;
+                        width: 70px;
+                        text-align: center;
+                        color: @white-color;
+                        position: relative;
+
+                        span {
+                            position: absolute;
+                            top: 50%;
+                            left: 0;
+                            width: 100%;
+                            display: block;
+                            .translate(0, -50%);
+                            font-size: 18px;
+                            line-height: 22px;
+                        }
+                    }
+                }
+                .followers-cell,
+                .likes-comments-cell,
+                .post-tags-cell {
+                    .table-cell {
+                        padding-bottom: 10px;
+                        font-size: 15px;
+                        padding-right: 30px;
+                        text-align: right;
+                    }
+                    .left-cell {
+                        font-weight: 600;
+                        text-align: left;
+                        padding-right: 10px;
+                    }
+                }
+                .post-tags-cell {
+                    .right-cell {
+                        padding-right: 0;
+                    }
+                }
+            }
+
+            .analyzed-influencer-interests {
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: 20px;
+            }
+            .analyzed-influencer-keywords {
+                .keywords-empty-cell {
+                    min-width: 90px;
+                    width: 90px;
+                }
+                .keywords-cell {
+                    .table-cell {
+                        padding-bottom: 10px;
+                        font-size: 15px;
+                        padding-right: 30px;
+                        text-align: right;
+                    }
+                    .left-cell {
+                        font-weight: 600;
+                        text-align: left;
+                        padding-right: 10px;
+                    }
+
+                    &:last-child {
+                        .right-cell {
+                            padding-right: 0;
+                        }
+                    }
+                }
+                &.col-count-2{
+                    .followers-cell {
+
+                    }
+                }
+            }
+            .analyzed-influencer-data {
+
+                &.table-col3 {
+                    .audience-row {
+                        height: 80px;
+
+                        .analyzed-influencer-interests {
+                            vertical-align: bottom;
+                            padding-bottom: 20px;
+                        }
+                    }
+                    .analyzed-influencer-keywords {
+                        .keywords-cell {
+                            &:nth-child(4){
+                                .right-cell {
+                                    padding-right: 0;
+                                }
+                            }
+                            .table-cell {
+                                padding-right: 30px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

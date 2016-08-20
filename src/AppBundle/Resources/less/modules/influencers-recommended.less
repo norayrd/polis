@@ -1,0 +1,322 @@
+.ctl-recommended {
+
+    .influencer-list-table {
+
+        &.has_fixed-content {
+            .fixed-header {
+                padding: 0 14px;
+                .table_header {
+                    max-width: 1200px;
+                }
+            }
+        }
+        .table_header {
+            .table-cell {
+                text-align: left;
+            }
+            > .user-remove {
+                text-align: right;
+                padding-right: 25px;
+            }
+            .user-info {
+                .fa {
+                    &.fa-user {
+                        margin-left: 32px;
+                    }
+                }
+            }
+        }
+        .table_header,
+        .body-row  {
+            > .user-info {
+                width: 40%;
+                min-width: 345px;
+            }
+            > .user-followers {
+                width: 110px;
+                min-width: 100px;
+            }
+            > .user-like {
+                width: 120px;
+                min-width: 100px;
+            }
+            > .user-engagement {
+                width: 110px;
+                min-width: 100px;
+            }
+            > .user-comments {
+                width: 90px;
+                min-width: 90px;
+            }
+            > .user-total-posts {
+                width: 100px;
+                min-width: 100px;
+            }
+            > .user-remove {
+                min-width: 90px;
+                width: 90px;
+            }
+
+            .add-influencer-btn {
+                color: @themes-color1;
+            }
+            .infuencer-archive-btn {
+                color: @themes-color3;
+            }
+        }
+        .body-row {
+            > .table-cell {
+                vertical-align: middle;
+                text-align: left;
+            }
+            .user-info {
+                vertical-align: top;
+
+
+            }
+            .left-side {
+                min-width: 20px;
+                text-align: left;
+            }
+            .right-side {
+                text-align: left;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+            .avatar-image-box {
+                width: 95px;
+                min-width: 95px;
+                padding-right: 15px;
+            }
+            .user-main-info {
+
+                a {
+                    color: @text-color2;
+                    cursor: default;
+
+                }
+                h2 {
+                    opacity: 0.7; 
+                    max-width: 290px;
+                }
+
+                .bio-info {
+                    font-size: 12px;
+                    line-height: 16px;
+                    color: @text-color1;
+                    word-break: break-all;
+                }
+            }
+            .user-remove {
+                .tooltip-pop-up {
+                    top: -25px;
+                    right: 55px;
+                }
+                .add-influencer-btn {
+                    margin-right: 10px;
+                    vertical-align: middle;
+
+                    .fa {
+                        color: @themes-color2;
+                    }
+                    
+                    &:hover {
+                        .fa {
+                        color: @themes-color1;
+                    }
+                    }
+                }
+                .infuencer-archive-btn {
+                    margin-right: 5px;
+                }
+                .instagram-account {
+                    display: none;
+                }
+            }
+            .user-remove,
+            .user-remove-option {
+                .limiting-popup {
+                    position: absolute;
+                    width: 300px;
+                    background-color: @white-color;
+                    font-size: 12px;
+                    border: 1px solid @border-color1;
+                    line-height: 16px;
+                    .border-radius(4px);
+                    padding: 10px;
+                    z-index: 1000;
+                    bottom: 70px;
+                    right: 68%;
+
+                    &:before{
+                        position: absolute;
+                        content: "";
+                        top: 100%;
+                        right: 14px;
+                        border-top: 11px solid @border-color1;
+                        border-left: 10px solid transparent;
+                        border-right: 10px solid transparent;
+                    }
+                    &:after{
+                        position: absolute;
+                        content: "";
+                        top: 100%;
+                        right: 14px;
+                        border-top: 10px solid @white-color;
+                        border-left: 10px solid transparent;
+                        border-right: 10px solid transparent;
+                    }
+                }
+                .option-load {
+                    margin: 0 auto;
+                }
+            }
+            .influencer-avatar {
+                width: 83px;
+                height: 83px;
+                margin: 0;
+
+
+                a {
+                    cursor: default;
+                }
+            }
+
+        }
+    }
+}
+
+
+
+
+/*                  1260px                  */
+@media screen and (max-width: @desktopWidth) {
+    .ctl-recommended {
+        .influencer-list-table {
+            .body-row {
+                .user-main-info {
+                    h2 {
+                        max-width: 240px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/*                  1024px                  */
+@media screen and (max-width: @desktopWidthSmall) {
+    .ctl-recommended {
+        .influencer-list-table {
+
+            .table_header,
+            .body-row  {
+                > .user-followers {
+                    width: 110px;
+                    min-width: 90px;
+                }
+                > .user-like {
+                    width: 120px;
+                    min-width: 90px;
+                }
+                > .user-engagement {
+                    width: 110px;
+                    min-width: 90px;
+                }
+                > .user-comments {
+                    width: 90px;
+                    min-width: 80px;
+                }
+                > .user-total-posts {
+                    width: 100px;
+                    min-width: 80px;
+                }
+            }
+            .table_header {
+                .user-info {
+                    .fa{
+                        &.fa-user{
+                            margin-left: 18px;
+                        }
+                    }
+                }
+            }
+            .body-row {
+                .avatar-image-box {
+                    min-width: 75px;
+                    width: 75px;
+                }
+                .influencer-avatar {
+                    width: 60px;
+                    height: 60px;
+                }
+            }
+        }
+    }
+}
+
+
+/*                  940px                  */
+@media screen and (max-width: @tabletLandcapeWidth) {
+    .ctl-recommended {
+
+        .influencer-list-table {
+
+            .table_header,
+            .body-row  {
+                > .table-cell {
+                    width: 100%;
+                    min-width: 0;
+                }
+            }
+            .body-row {
+                .right-side {
+                    text-align: right;
+                }
+                .user-remove-option {
+                    .limiting-popup {
+                        right: -10px;
+                        bottom: 80px;
+                    }
+                }
+            }
+            .user-remove-option {
+                position: relative;
+
+                .tooltip-pop-up {
+                    top: -28px;
+                }
+                .add-influencer-btn {
+                    .fa {
+                        color: @themes-color2;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/*                  500px                  */
+@media screen and (max-width: @phoneWidthLarge) {
+    .ctl-recommended {
+        .influencer-list-table {
+            .body-row {
+                width: 100%;
+
+                .avatar-image-box {
+                    display: table-cell;
+                }
+                .user-main-info {
+                    display: table-cell;
+                }
+            }
+            .table_header,
+            .body-row 
+            > .user-info {
+                min-width: 0;
+            }
+        }
+    }
+}

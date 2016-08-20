@@ -1,0 +1,250 @@
+/*          influencer Login            */
+/*.remember-block label {
+    font-weight: 400;
+    cursor: pointer;
+}
+.remember-block label input{
+    vertical-align: middle;
+    margin-top: 0;
+}
+.remember-block label span {
+    vertical-align: middle;
+    line-height: normal;
+}
+*/
+
+
+/*          influencer table header            */
+
+/*.influencer-list-table .table_header .fa.fa-user {
+    margin-left: 60px;
+}
+.influencer-list-table.compact-view .table_header .fa.fa-user{
+    margin-left: 19px;
+}*/
+
+/*          influencer table row            */
+/*
+.influencer-list-table .user-main-info h2 {
+    font-size: 20px;
+    padding-bottom: 5px;
+}
+.influencer-list-table .user-main-info li {
+    font-size: 12px;
+}*/
+
+/*.influencer-list-table .influencer-status, 
+.influencer-list-table .influencer-avatar {
+    height: 80px;
+    width: 80px;
+    margin-right: 0;
+}
+.influencer-list-table .influencer-status {
+    margin-right: 19px;
+}*/
+/*.influencer-list-table .table-cell span {
+    padding-left: 0;
+    font-size: 16px;
+}*/
+/*.influencer-list-table .table-cell.avatar-image-box {
+    width: 190px;
+    min-width: 190px;
+    padding-right: 10px;
+}*/
+/*.stats-graf .influencer-list-table .table-row .table > .user-data {
+    width: 40%;
+    min-width:  385px;
+}
+
+.stats-graf .influencer-list-table .table-row .table > .user-favorits {
+    width: 180px;
+    min-width: 170px;
+    padding-right: 30px;
+}
+
+.stats-graf .influencer-list-table .table-row .table > .user-likes {
+    width: 120px;
+    min-width: 110px;
+}
+
+.stats-graf .influencer-list-table .table-row .table > .user-content {
+    width: 105px;
+    min-width: 95px;
+}*/
+/*
+.stats-graf .influencer-list-table .body-row .right-block li {
+    display: table;
+    width: 100%;
+
+} */
+/*.stats-graf .influencer-list-table .body-row .right-block .favorits-keyword {
+    display: table-cell;
+    vertical-align: top;
+    line-height: 25px;
+    width: 90%
+}*/
+/*.stats-graf .influencer-list-table .body-row .right-block .left-side {
+    display: table-cell;
+    vertical-align: top;
+    width: 20%;
+    min-width: 30px
+}*/
+
+/*.stats-graf .influencer-list-table .body-row .right-block .favorits-persantage {
+    display: table-cell;
+    vertical-align: top;
+    width: 10%;
+}*/
+/*.stats-graf .influencer-list-table .body-row .right-block .right-side {
+    display: table-cell;
+    vertical-align: top;
+    width: 80%;
+    padding-right: 20px;
+}*/
+/*.influencer-list-table.compact-view .body-row {
+    padding: 5px 0;
+}*/
+/*.influencer-list-table.compact-view .table-row.is--fixed .table_header {
+    max-width: 890px;
+}*/
+
+
+
+/*          influencer header            */
+
+/*          influencer header search            */
+/*.project-main-header .search-box .search-box-open {
+    background: transparent;
+
+}
+.project-main-header .search-box .search-box-open .fa {
+    font-size: 29px;
+    color: #cdcdcd;
+}
+
+.project-main-header .search-box .search-box-inner .resultBox {
+    max-height: 300px;
+    max-width: 320px;
+    overflow: auto;
+}
+
+.project-main-header .search-box .search-box-inner .resultBox > li .table {
+    background-color: transparent;
+}
+.project-main-header .search-box .search-box-inner .resultBox > li .table-cell {
+    vertical-align: middle;
+}
+.project-main-header .search-box .search-box-inner .resultBox > li .name-cell {
+    padding-left: 10px;
+    width: 100%;
+}
+.project-main-header .search-box .search-box-inner .resultBox > li .option-icon {
+    cursor: pointer;
+    width: 30px;
+    text-align: center;
+}
+.project-main-header .search-box .search-box-inner .resultBox > li .fa {
+    transition: color 0.3s ease;
+}
+.project-main-header .search-box .search-box-inner .resultBox > li .fa:hover {
+    color: #18191a;
+}
+.project-main-header .search-box .search-box-inner .resultBox > li .influencer-avatar {
+    margin: 0;
+}
+.project-main-header .search-box .search-box-inner .resultBox > li .influencer-name {
+    color: #18191a;
+}
+
+.project-main-header .search-box .search-box-inner .resultBox > li .option-load {
+
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    animation: spin 1.5s linear infinite;
+    border-color: #656565 #e4e4e4 #e4e4e4;
+    border-image: none;
+    border-radius: 100%;
+    border-style: solid;
+    border-width: 2px;
+    height: 25px;
+    width: 25px;
+}*/
+
+@media screen and (max-width: 1024px) {
+/*
+              influencer table header            
+
+    .influencer-list-table .table_header .fa.fa-user {
+        margin-left: 30px;
+    }
+    .influencer-list-table.compact-view .table_header .fa.fa-user{
+        margin-left: 10px;
+    }
+
+              influencer table row            
+    .influencer-list-table .influencer-status, 
+    .influencer-list-table .influencer-avatar {
+        height: 60px;
+        width: 60px;
+    }
+    .influencer-list-table .influencer-status {
+        margin-right: 10px;
+    }
+    .influencer-list-table .table-cell.avatar-image-box {
+        min-width: 150px;
+        width: 150px;
+    }
+    .influencer-list-table .user-main-info {
+        padding-right: 10px;
+    }
+    .stats-graf .influencer-list-table .table-row .table > .user-data {
+        min-width:  345px;
+    }
+    .influencer-list-table .table-cell span {
+        font-size: 16px;
+    }
+    .stats-graf .influencer-list-table .table-row .table > .user-likes {
+        width: 105px;
+        min-width: 105px;
+    }
+
+    .stats-graf .influencer-list-table .table-row .table > .user-content {
+        width: 105px;
+        min-width: 85px;
+    }
+    .stats-graf .influencer-list-table .table-row .table > .user-favorits {
+        padding-right: 15px;
+    }
+    .influencer-list-table.compact-view .table-row.is--fixed .table_header {
+        max-width: 830px;
+    }*/
+}
+
+/*@media screen and (max-width: 940px) {
+    .stats-graf .influencer-list-table .table-row .table > .user-data,
+    .stats-graf .influencer-list-table .table-row .table > .user-favorits,
+    .stats-graf .influencer-list-table .table-row .table > .user-content,
+    .stats-graf .influencer-list-table .table-row .table > .language-block,
+    .stats-graf .influencer-list-table .table-row .table > .country-block, 
+    .stats-graf .influencer-list-table .table-row .table > .user-likes,
+    .stats-graf .influencer-list-table .table-row .table > .ages-block {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+}*/
+
+
+/*@media screen and (max-width: 480px) {
+    .project-main-header .search-box .search-box-inner .resultBox {
+        max-height: 240px;
+    }
+}*/
+/*
+@media screen and (max-height: 360px) {
+    .project-main-header .search-box .search-box-inner .resultBox {
+        max-height: 180px;
+    }
+}*/

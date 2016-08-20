@@ -1,0 +1,40 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+{#{% if metatags is not empty %} {{ metatags|raw }} {% endif %}#}
+
+
+{#<title>{% if title is not empty %} {{ title|raw }} {% else %}Influencer{% endif %}</title>#}
+
+<link rel="stylesheet" href="{{ asset('fonts/font-awesome/css/font-awesome.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-theme.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/colors.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/flags16.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style_new.css') }}">
+<link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/sunny/jquery-ui.css">
+
+{% stylesheets '@AppBundle/Resources/less/style.less' output='css/compiled/style.css' %}
+<link rel="stylesheet" href="{{ asset_url }}">
+{% endstylesheets %}
+
+{#{% if stylesheets is not empty %} {{ stylesheets|raw }} {% endif %}#}
+
+<script type="text/javascript" src="{{ asset('js/libs/jquery-1.11.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/libs/jquery.canvasjs.min.js') }}"></script>
+<script src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.min.js"></script>
+<script type="text/javascript" src="{{ asset('js/libs/circle-progress.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/libs/highcharts.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/libs/exporting.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/libs/graphTheme.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/libs/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/manager/deleteManager.class.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/manager/CookieManager.class.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/manager/CompactViewManager.class.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/manager/RemoveErrorMessageManager.class.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/header.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/search-result.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/utils/AjaxRequest.class.js') }}"></script>
+
+{#{% if javascripts is not empty %} {{ javascripts|raw }} {% endif %}#}

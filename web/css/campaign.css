@@ -1,0 +1,220 @@
+/*
+.campaign-block {
+    max-width: 500px;
+    margin: auto;
+}
+
+.campaign-block .block {
+    padding-left: 60px;
+}
+
+.campaign-block .campaign-manegement-title {
+    font-size: 30px;
+    line-height: 40px;
+    margin-bottom: 15px;
+}
+
+.campaign-block .campaign-manegement-desc {
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.campaign-block .campaign-inner-block {
+    margin-top: 30px;
+}
+
+.campaign-block .campaign-inner-block .block {
+    position: relative;
+    margin-bottom: 50px;
+}
+.campaign-block .campaign-inner-block .block:last-child {
+    margin-bottom: 0;
+}
+.campaign-block .campaign-inner-block .block .buttons-block {
+    margin-top: 10px;
+}
+.campaign-block .campaign-inner-block .block .buttons-block label {
+    position: relative;
+    margin-bottom: 10px;
+    display: inline-block;
+    margin-right: 5px;
+}
+.campaign-block .campaign-inner-block .block .buttons-block label .fa {
+    position: absolute;
+    cursor: pointer;
+    color: #fff;
+    font-size: 20px;
+    top: 7px;
+    right: 10px;
+}
+.campaign-block .campaign-inner-block .block .buttons-block .btn{
+    padding-right: 40px;
+    line-height: 20px;
+    cursor: default;
+}
+.campaign-block .campaign-inner-block .block .icon-block{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.campaign-block .campaign-inner-block .block .icon-block .fa {
+    font-size: 35px;
+}
+
+.campaign-block .campaign-inner-block .block h2 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.campaign-block .campaign-inner-block .block p {
+    font-size: 12px;
+    line-height: 16px;
+    margin-bottom: 5px;
+}
+
+.campaign-block .campaign-inner-block .block .input-field-box {
+    position: relative;
+}
+
+.campaign-block .campaign-inner-block .block .input-field-box.is--active:before {
+    
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    animation-name: spin;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    background-clip: padding-box;
+    border-color: #656565 #e4e4e4 #e4e4e4;
+    border-image: none;
+    border-radius: 100%;
+    border-style: solid;
+    border-width: 2px;
+    content: "";
+    display: block;
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    right: 5px;
+    top: 4px;
+    
+}
+.campaign-block .campaign-inner-block .block .input-field {
+    border: 2px solid #000;
+    width: 100%;
+    height: 34px;
+    padding: 0px 10px;
+}
+
+.campaign-block .campaign-inner-block .block .input-field::-webkit-input-placeholder {
+    line-height: 18px;
+}
+.campaign-block .campaign-inner-block .block .input-field::-moz-placeholder {
+    line-height: 30px;
+}
+.campaign-block .campaign-inner-block .block .input-field::-ms-input-placeholder {
+    line-height: 28px;
+}
+.campaign-block .campaign-inner-block .benchmark-block p {
+    margin-bottom: 15px;
+}
+
+.campaign-block .campaign-inner-block .relevant-block .follower-size {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.campaign-block .campaign-inner-block .relevant-block p {
+    margin-bottom: 30px;
+}
+.campaign-block .campaign-inner-block .relevant-block .relevant-inner-content li {
+    margin-bottom: 30px;
+}
+
+.campaign-block .campaign-inner-block .relevant-block .buttons-block {
+    margin-bottom: 30px;
+}
+.campaign-block .campaign-inner-block .relevant-block .buttons-block:last-child {
+    margin-bottom: 0;
+}
+
+.campaign-block .campaign-inner-block .follower-content {
+    display: none;
+    text-align: center;
+}
+.campaign-block .campaign-inner-block .follower-inner-content {
+    display: table;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.campaign-block .campaign-inner-block .follower-inner-content .follower-image { 
+    display: table-cell;
+    vertical-align: top;
+    width: 70px;
+    height: 70px;
+}
+.campaign-block .campaign-inner-block .follower-inner-content .follower-image img { 
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -khtml-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -icab-border-radius: 50%;
+    border-radius: 50%;
+    max-width: 100%;
+    max-height: 100%;
+}
+.campaign-block .campaign-inner-block .follower-inner-content .follower-info { 
+    display: table-cell;
+    vertical-align: top;
+    padding-left: 10px;
+}
+
+.campaign-block .campaign-inner-block .follower-inner-content .follower-rait {
+    display: table;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.campaign-block .campaign-inner-block .follower-inner-content .follower-rait li {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+@media screen and (max-width: 480px) {
+    .campaign-block .campaign-manegement-title {
+        font-size: 24px;
+        line-height: 30px;
+    }
+    .campaign-block .campaign-manegement-desc {
+        font-size: 14px;
+        line-height: 18px;
+    }
+    .campaign-block .block {
+        padding-left: 10px; 
+    }
+    .campaign-block .campaign-inner-block .block .icon-block {
+        left: -10px;
+        top: 4px;
+    }
+    .campaign-block .campaign-inner-block .block .icon-block .fa {
+        font-size: 15px;
+    }
+    
+    .campaign-block .campaign-inner-block .block .buttons-block .keyword-btn {
+        padding-right: 35px;
+    }
+    .campaign-block .campaign-inner-block .follower-inner-content .follower-image {
+        width: 40px;
+        height: 40px;
+    }
+    .campaign-block .campaign-inner-block .follower-inner-content .follower-name {
+        font-size: 14px;
+    }
+}*/

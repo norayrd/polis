@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/login/signup.js') }}"></script>
+{% endblock %}
+{% block notifyjs %} {% endblock %}
+
+{% block header %}
+    <header class="project-main-header">
+        <div class="header-inner  f_header-inner table">
+            <div class="logo-box table-cell">
+                {# <a href="{{ path('dashboard') }}"><span class="logo-icon"></span>clusoo</a> #}
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block body_class %}act-register{% endblock %}
+{% block bodyHeadline %}{% endblock %}
+
+{% block body %}
+    <div class="login-wrapper">
+        <div class="login-inner">
+            <form action="{{ path('security_sign_up_check') }}" method="post" id="signup_form">
+                <div class="login-form-inner">
+                    <h2>Sign Up</h2>
+                    {#<div class="form-group">
+                        <span class="login-star"></span>
+                        <input type="text" placeholder="First name" id="firstname" name="_firstname" value="{{ last_request.get('_firstname') }}" 
+                                class="required {% if errors["firstname"] %}is_fill{% endif %}" 
+                                title="{% if errors["firstname"] %} {{ errors['firstname'] }}{% endif %}" />
+                    </div>#}
+                    {#<div class="form-group">
+                        <span class="login-star"></span>
+                        <input type="text" placeholder="Last name" id="lastname" name="_lastname" value="{{ last_request.get('_lastname') }}" 
+                                class="required {% if errors["lastname"] %}is_fill{% endif %}" 
+                                title="{% if errors["lastname"] %} {{errors["lastname"]}} {% endif %}" />
+                    </div>#}
+                    <div class="form-group">
+                        <span class="login-star"></span>
+                        <input type="text" placeholder="Email Address" id="email" name="_email" value="{{ last_request.get('_email') }}"
+                               class="form-control required {% if errors["email"] is defined or errors["username"]  is defined or errors["userNameIsUsed"] is defined %}is_fill{% endif %}"
+                               title="{{ errors["email"]  is defined }} {{ errors["username"]  is defined }} {{ errors["userNameIsUsed"] is defined }}" />
+                    </div>
+                    <div class="form-group">
+                        <span class="login-star"></span>
+                        <input type="password" placeholder="Password" id="password" name="_password" 
+                               class="form-control required {% if errors["password"] is defined %}is_fill{% endif %}"
+                               title=" {% if errors["password"] is defined %}{ errors["password"] }}{% endif %}" />
+                    </div>
+                    <div class="form-group">
+                        <span class="login-star"></span>
+                        <input type="password" placeholder="Retype Password" id="retype_password" name="_retype_password" 
+                                class="required form-control {% if errors["retype_password"] is defined %}is_fill{% endif %}"
+                                title="{% if errors["retype_password"] is defined %}{{ errors["retype_password"] }}{% endif %}" />
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                    <button type="submit" class="btn btn-primary signup-btn" id="submit_form">
+                        Sign Up
+                    </button>
+                    <div class="registration-block">
+                        <a href="{{ path('security_login_form') }}">Login</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block footer %}{% endblock %}
