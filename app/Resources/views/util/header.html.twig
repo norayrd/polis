@@ -5,7 +5,7 @@
             <div class="logo-box table-cell">
                 {# <a href="{{ path('dashboard') }}"><span class="logo-icon"></span>clusoo</a> #}
             </div>
-            {% block header_search_box %}
+            {# {% block header_search_box %}
                 <div class="search-box table-cell">
                     <div class="search-box-inner f_search-container-box">
                         <div class="search-box-open f_search-box-open">
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                 </div>
-            {% endblock %}
+            {% endblock %} #}
             <div class="header-menu table-cell">
                 {% block header_notification_box %}
                     {#<div class="notification-icon">
@@ -29,10 +29,7 @@
                     <div class="header-menu-btn f_header-menu-btn-content">
                         <span class="f_header-menu-btn"><i class="fa fa-bars"></i></span>
                         <ul class="header-menu-content f_header-menu-content">
-                            <li><a href="{{ path('influencers_analysis_list') }}">Influencers</a></li>
-                            <li><a href="{{ path('influencers_recommended_list') }}">Recommended</a></li>
-                            <li><a href="{{ path('influencers_batch') }}">Batch Update</a></li>
-                            <li><a href="{{ path('campaign_management') }}">Campaign Management</a></li>
+                            <li><a href="{{ path('home') }}">Home</a></li>
                             <li><a href="{{ path('security_logout') }}">Logout</a></li>
                         </ul>
                     </div>
