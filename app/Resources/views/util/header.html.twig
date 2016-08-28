@@ -5,20 +5,6 @@
             <div class="logo-box table-cell">
                 {# <a href="{{ path('dashboard') }}"><span class="logo-icon"></span>clusoo</a> #}
             </div>
-            {# {% block header_search_box %}
-                <div class="search-box table-cell">
-                    <div class="search-box-inner f_search-container-box">
-                        <div class="search-box-open f_search-box-open">
-                            <i class="fa fa-search fa-flip-horizontal"></i>
-                        </div>
-                        <div class="search-container-box f_search-field-box"><input id="searchContainer" class="search-container f_search-container" type="text" placeholder="Type an instagram account name"/></div>
-                        <div id="resultBoxContainer" class="result-box-container">
-                            <ul class="result-box f_search-result is_hidden"></ul>
-                            <div id="searchLimitingPopup" class="limiting-popup f_limiting-popup is_hidden"></div>
-                        </div>
-                    </div>
-                </div>
-            {% endblock %} #}
             <div class="header-menu table-cell">
                 {% block header_notification_box %}
                     {#<div class="notification-icon">
@@ -29,13 +15,14 @@
                     <div class="header-menu-btn f_header-menu-btn-content">
                         <span class="f_header-menu-btn"><i class="fa fa-bars"></i></span>
                         <ul class="header-menu-content f_header-menu-content">
-                            <li><a href="{{ path('home') }}">Home</a></li>
+                            <li><a href="{{ path('home') }}">Главная</a></li>
                             
-                            {% if user.getId() is defined %}
-                            <li><a href="{{ path('security_logout') }}">Logout</a></li>
-                            {% else %}
-                            <li><a href="{{ path('login') }}">Login</a></li>
-                            {% endif %}
+                        {% if user.getId() is defined %}
+                            <li><a href="{{ path('polis_list') }}">Журнал</a></li>
+                            <li><a href="{{ path('security_logout') }}">Выход</a></li>
+                        {% else %}
+                            <li><a href="{{ path('login') }}">Вход</a></li>
+                        {% endif %}
                         </ul>
                     </div>
                 {% endblock %}

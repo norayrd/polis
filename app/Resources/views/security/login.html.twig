@@ -1,64 +1,101 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="ru">
 
-{% block title %}Login{% endblock %}
+<head>
+    <meta charset="utf-8">
+    <title>Полис V 1.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
+    <!-- Le styles -->
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
 
-{% block javascripts %}
-    <script type="text/javascript" src="{{ asset('js/login/login.js') }}"></script>
-{% endblock %}
-{% block notifyjs %} {% endblock %}
+   <!--  <link rel="stylesheet" href="assets/css/style.css"> -->
+    <link rel="stylesheet" href="assets/css/loader-style.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/signin.css">
 
-{% block body_class %}act-login{% endblock %}
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="assets/ico/minus.png">
+</head>
 
-{% block header %}
-    <header class="project-main-header">
-        <div class="header-inner  f_header-inner table">
-            <div class="logo-box table-cell">
-                {# <a href="{{ path('dashboard') }}"><span class="logo-icon"></span>clusoo</a> #}
-            </div>
-        </div>
-    </header>
-{% endblock %}
-{% block bodyHeadline %}{% endblock %}
-{% block body %}
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+    </div>
+    <div class="container">
 
-    <div class="login-wrapper">
-
-        <div class="login-inner">
-            <form action="{{ path('security_login_check') }}" method="post" id="login_form">
-                {% if message_text is not empty %}
-                    <div class="alert alert-success login-success-message">
-                        <p>{{ message_text }}</p>
-                    </div>
-                {% endif %}
-                <div class="login-form-inner">
-                    <h2>Login</h2>
-                    <div class="form-group">
-                        <input type="text" placeholder="Email address" id="username" name="_username" value="{% if registered_email  is defined  %}{{ registered_email }}{% else %}{{ last_username }}{% endif %}" class="form-control required {% if error.message is defined  %}is_fill{% endif %}"/>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" placeholder="Password" id="password" name="_password" class="form-control required {% if error.message is defined  %}is_fill{% endif %}" />
-                    </div>
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
-                    <input type="hidden" name="_target_path" value="/" />
-                    <div class="remember-block">
-                        <label for='remember_me'>
-                            <input type="checkbox" id="remember_me" name="_remember_me" /> <span> Remember Me </span>
-                        </label>
-                    </div>
-                    <div class="registration-block">
-                        <a href="{{ path('forgot_password') }}">Forgot Password</a>
-                    </div>
-                    <button type="submit" class="btn btn-primary signup-btn" id="submit_form">
-                        Login
-                    </button>
-                    <div class="registration-block">
-                        <a href="{{ path('security_sign_up_form') }}">Sign Up</a>
+        <div class="" id="login-wrapper">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div id="logo-login">
+                        <h1>Полис
+                            <span>v1.0</span>
+                        </h1>
                     </div>
                 </div>
-            </form>
-        </div>
-    </div>
-{% endblock %}
 
-{% block footer %}{% endblock %}
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="account-box">
+
+                        <form role="form" action="{{ path('security_login_check') }}" method="post">
+
+                            <div class="form-group">
+                                <label for="inputUsernameEmail">E-mail</label>
+                                <input type="text" id="inputUsernameEmail" class="form-control" name="_username" value="{% if registered_email  is defined  %}{{ registered_email }}{% else %}{{ last_username }}{% endif %}">
+                            </div>
+                            <div class="form-group">
+                                <a href="{{ path('forgot_password') }}" class="pull-right label-forgot">Забыли пароль?</a>
+                                <label for="inputPassword">Пароль</label>
+                                <input type="password" id="inputPassword" name="_password" class="form-control">
+                            </div>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                            <input type="hidden" name="_target_path" value="/" />
+                            <div class="checkbox pull-left">
+                                <label>
+                                    <input type="checkbox" name="_remember_me" >Запомнить</label>
+                            </div>
+                            <button class="btn btn btn-primary pull-right" type="submit">
+                                Вход
+                            </button>
+                        </form>
+
+                        <div class="row-block">
+                            <div class="row">
+                                <div class="col-md-12 row-block">
+                                    <a href="{{ path('security_sign_up_form') }}" class="btn btn-primary btn-block">Регистрация</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align:center;margin:0 auto;">
+            <h6 style="color:#fff;">Release 1.0 Powered by © norayrd 2016</h6>
+        </div>
+
+    </div>
+
+    <!--  END OF PAPER WRAP -->
+
+    <!-- MAIN EFFECT -->
+    <script type="text/javascript" src="assets/js/preloader.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="assets/js/app.js"></script>
+    <script type="text/javascript" src="assets/js/load.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+
+</body>
+
+</html>

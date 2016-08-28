@@ -32,3 +32,7 @@ services:
     security_service:
         class: AppBundle\Services\SecurityService
         arguments: ["@influencer_logger", "@em"]
+
+    polis_service:
+        class: AppBundle\Services\PolisService
+        arguments: ["@influencer_logger", "@em"]
