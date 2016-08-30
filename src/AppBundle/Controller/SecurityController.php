@@ -243,7 +243,7 @@ class SecurityController extends Controller
             $message = $this->get('mail_manager');
             $message->sendEmail('emails/forgot_password_email.html.twig', $mail_params, $email, $email_from, $email_from_name, $email_replay_to);
            
-            $success_message_text = 'An email to change your password has been sent.';
+            $success_message_text = 'На указанную почту было отправлено письмо для изменения пароля.';
         } else if (isset($username)) {
             
             $error_message_text = 'User not found!';
