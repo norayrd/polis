@@ -1,35 +1,12 @@
-<!DOCTYPE html>
-<html lang="ru">
+{% extends 'security/security-base.html.twig' %}
 
-<head>
-    <meta charset="utf-8">
-    <title>Полис V 1.0</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+{% block stylesheets  %}
 
-    <!-- Le styles -->
-    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
-
-   <!--  <link rel="stylesheet" href="assets/css/style.css"> -->
-    <link rel="stylesheet" href="assets/css/loader-style.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/signin.css">
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-    <!-- Fav and touch icons -->
-    <link rel="shortcut icon" href="assets/ico/minus.png">
-</head>
+{% endblock %}
 
-<body>
-    <!-- Preloader -->
-    <div id="preloader">
-        <div id="status">&nbsp;</div>
-    </div>
-    <div class="container">
+{% block body %}
 
         <div class="" id="login-wrapper">
             <div class="row">
@@ -85,17 +62,4 @@
             <h6 style="color:#fff;">Release 1.0 Powered by © norayrd 2016</h6>
         </div>
 
-    </div>
-
-    <!--  END OF PAPER WRAP -->
-
-    <!-- MAIN EFFECT -->
-    <script type="text/javascript" src="assets/js/preloader.js"></script>
-    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
-    <script type="text/javascript" src="assets/js/app.js"></script>
-    <script type="text/javascript" src="assets/js/load.js"></script>
-    <script type="text/javascript" src="assets/js/main.js"></script>
-
-</body>
-
-</html>
+{% endblock %}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        {% block headerControls %}
+
+            <meta charset="utf-8">
+            <title>{% block title %}Polis{% endblock %}</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="description" content="">
+            <meta name="author" content="">
+    
+            <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
+    
+            <link rel="stylesheet" href="assets/css/style.css">    
+            <link rel="stylesheet" href="assets/css/loader-style.css">
+            <link rel="stylesheet" href="assets/css/bootstrap.css">
+    
+            <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+            <!--[if lt IE 9]>
+                <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+                <![endif]-->
+            <!-- Fav and touch icons -->
+            <link rel="shortcut icon" href="assets/ico/minus.png">
+
+
+            {% block stylesheets  %}
+
+            {% endblock %}
+
+            {% block javascripts %}
+
+            {% endblock %}
+
+        {% endblock %}
+    </head>
+
+    <body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
+
+        {% block preloader %}
+            <!-- Preloader -->
+            <div id="preloader">
+                <div id="status">&nbsp;</div>
+            </div>
+        {% endblock %}
+
+        <div class="container">
+
+            {% block body %} 
+
+            {% endblock %}
+
+        </div>
+
+        {% block main_effect %}
+            <!-- MAIN EFFECT -->
+            <script type="text/javascript" src="assets/js/preloader.js"></script>
+            <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+            <script type="text/javascript" src="assets/js/app.js"></script>
+            <script type="text/javascript" src="assets/js/load.js"></script>
+            <script type="text/javascript" src="assets/js/main.js"></script>
+
+        {% endblock %}
+
+    </body>
+</html>
