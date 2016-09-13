@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
     <head>
-        {#with {title: block('title'), metatags: block('metatags'), javascripts: block('javascripts'), stylesheets: block('stylesheets')}#}
         {% block headerControls %}
-            <title>{% block title %}Polis{% endblock %}</title>
 
-            {% include 'util/headerControls.html.twig' %}
+            <meta charset="utf-8">
+            <title>{% block title %}Полис V 1.0 {% endblock %}</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="description" content="">
+            <meta name="author" content="">
+    
+            <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
+    
+            <link rel="stylesheet" href="assets/css/style.css">
+            <link rel="stylesheet" href="assets/css/loader-style.css">
+            <link rel="stylesheet" href="assets/css/bootstrap.css">
+    
+            <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+            <!--[if lt IE 9]>
+                <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+                <![endif]-->
+            <!-- Fav and touch icons -->
+            <link rel="shortcut icon" href="assets/ico/minus.png">
 
             {% block stylesheets  %}
 
@@ -13,42 +29,15 @@
 
             {% block javascripts %}
 
-                {% block javascripts_child %}
-
-                {% endblock %}
             {% endblock %}
-            {# {% block notifyjs %}
-                <script type="text/javascript" src="{{ asset('js/utils/NotifyProgress.js') }}"></script>
-            {% endblock %} #}
-
-
 
         {% endblock %}
     </head>
 
     <body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
 
-        {% block header %}
-            {% include 'util/header.html.twig' %}
-        {% endblock %}
+        {% block body %} 
 
-        <div class="overlay"><div class="loader"></div></div>
-        <div class="content-main">
-            {% block bodyHeadline %} 
-                <div class="content-main-headline">
-                    {% include 'util/breadcrumb.html.twig' %}
-                    {# {% include 'util/notify-progress-bar.html.twig' %} #}
-                </div>
-            {% endblock %}
-            {% block body %} {% endblock %}
-        </div>
-
-        {% block footer %}
-            {% include 'util/footer.html.twig' %}
-        {% endblock %}
-
-        {% block popUp %}
-            {% include 'pop-up.html.twig' %}
         {% endblock %}
 
     </body>

@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <title>Apricot V1.3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Le styles -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
+
+    <link rel="stylesheet" href={{ asset("assets/css/style.css") }}>
+    <link rel="stylesheet" href={{ asset("assets/css/loader-style.css") }}>
+    <link rel="stylesheet" href={{ asset("assets/css/bootstrap.css") }}>
+
+    <link href={{ asset("assets/js/colorPicker/bootstrap-colorpicker.css") }} rel="stylesheet">
+    <link href={{ asset("assets/js/validate/validate.css") }} rel="stylesheet">
+    <link href={{ asset("assets/js/idealform/css/jquery.idealforms.css") }} rel="stylesheet">
+
+
+
+    <link rel="stylesheet" href={{ asset("assets/js/timepicker/bootstrap-timepicker.css") }}>
+    <link rel="stylesheet" href={{ asset("assets/js/datepicker/datepicker.css") }}>
+    <link rel="stylesheet" href={{ asset("assets/js/datepicker/clockface.css") }}>
+    <link rel="stylesheet" href={{ asset("assets/js/datepicker/bootstrap-datetimepicker.min.css") }}>
+
+    <link rel="stylesheet" type="text/css" href={{ asset("assets/js/tag/jquery.tagsinput.css") }}>
+
+
+
+
+
+
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href={{ asset("assets/ico/minus.png") }}>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+    </div>
+    <!-- TOP NAVBAR -->
+    <nav role="navigation" class="navbar navbar-static-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" class="navbar-toggle" type="button">
+                    <span class="entypo-menu"></span>
+                </button>
+                <button class="navbar-toggle toggle-menu-mobile toggle-left" type="button">
+                    <span class="entypo-list-add"></span>
+                </button>
+
+                <div id="logo-mobile" class="visible-xs">
+                    <h1>Apricot
+                        <span>v1.3</span>
+                    </h1>
+                </div>
+
+            </div>
+
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
+                <div id="nt-title-container" class="navbar-left running-text visible-lg">
+                    <ul class="date-top">
+                        <li class="entypo-calendar" style="margin-right:5px"></li>
+                        <li id="Date"></li>
+
+
+                    </ul>
+
+                    <ul id="digital-clock" class="digital">
+                        <li class="entypo-clock" style="margin-right:5px"></li>
+                        <li class="hour"></li>
+                        <li>:</li>
+                        <li class="min"></li>
+                        <li>:</li>
+                        <li class="sec"></li>
+                        <li class="meridiem"></li>
+                    </ul>
+                </div>
+
+                <ul style="margin-right:0;" class="nav navbar-nav navbar-right">
+                    <li>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <img alt="" class="admin-pic img-circle" src="http://api.randomuser.me/portraits/thumb/men/10.jpg">Hi, Dave Mattew <b class="caret"></b>
+                        </a>
+                        <ul style="margin-top:14px;" role="menu" class="dropdown-setting dropdown-menu">
+                            <li>
+                                <a href="#">
+                                    <span class="entypo-user"></span>&#160;&#160;My Profile</a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="entypo-vcard"></span>&#160;&#160;Account Setting</a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="entypo-lifebuoy"></span>&#160;&#160;Help</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <span class="entypo-logout"></span>&#160;&#160;Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- /END OF TOP NAVBAR -->
+
+    <!-- SIDE MENU -->
+    <div id="skin-select">
+        <div id="logo">
+            <h1>Apricot
+                <span>v1.2</span>
+            </h1>
+        </div>
+
+        <a id="toggle">
+            <span class="entypo-menu"></span>
+        </a>
+        <div class="dark">
+            <form action="#">
+                <span>
+                    <input type="text" name="search" value="" class="search rounded id_search" placeholder="Search Menu..." autofocus />
+                </span>
+            </form>
+        </div>
+
+        <div class="search-hover">
+            <form id="demo-2">
+                <input type="search" placeholder="Search Menu..." class="id_search">
+            </form>
+        </div>
+
+
+        <div class="search-hover">
+            <form id="demo-2">
+                <input type="search" placeholder="Search Menu..." class="id_search">
+            </form>
+        </div>
+
+
+        <div class="skin-part">
+            <div id="tree-wrap">
+                <div class="side-bar">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END OF SIDE MENU -->
+
+
+
+    <!--  PAPER WRAP -->
+    <div class="wrap-fluid">
+        <div class="container-fluid paper-wrap bevel tlbr">
+
+
+            <!-- CONTENT -->
+            <!--TITLE -->
+            <div class="row">
+                <div id="paper-top">
+                    <div class="col-sm-3">
+                        <h2 class="tittle-content-header">
+                            <i class="icon-map"></i> 
+                            <span>Advance Form
+                            </span>
+                        </h2>
+
+                    </div>
+
+                    <div class="col-sm-7">
+                        <div class="devider-vertical visible-lg"></div>
+                        <div class="tittle-middle-header">
+
+                            <div class="alert">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <span class="tittle-alert entypo-info-circled"></span>
+                                Welcome back,&nbsp;
+                                <strong>Dave mattew!</strong>&nbsp;&nbsp;Your last sig in at Yesterday, 16:54 PM
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="devider-vertical visible-lg"></div>
+                        <div class="btn-group btn-wigdet pull-right visible-lg">
+                            <div class="btn">
+                                Widget</div>
+                            <button data-toggle="dropdown" class="btn dropdown-toggle" type="button">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul role="menu" class="dropdown-menu">
+                                <li>
+                                    <a href="#">
+                                        <span class="entypo-plus-circled margin-iconic"></span>Add New</a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="entypo-heart margin-iconic"></span>Favorite</a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="entypo-cog margin-iconic"></span>Setting</a>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <!--/ TITLE -->
+
+            <!-- BREADCRUMB -->
+            <ul id="breadcrumb">
+                <li>
+                    <span class="entypo-home"></span>
+                </li>
+                <li><i class="fa fa-lg fa-angle-right"></i>
+                </li>
+                <li><a href="#" title="Sample page 1">Form</a>
+                </li>
+                <li><i class="fa fa-lg fa-angle-right"></i>
+                </li>
+                <li><a href="#" title="Sample page 1">Advance Form</a>
+                </li>
+                <li class="pull-right">
+                    <div class="input-group input-widget">
+
+                        <input style="border-radius:15px" type="text" placeholder="Search..." class="form-control">
+                    </div>
+                </li>
+            </ul>
+
+            <!-- END OF BREADCRUMB -->
+
+
+            <div class="content-wrap">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="nest" id="validationClose">
+                            <div class="title-alt">
+                                <h6>
+                                    Создание / редактирование полиса</h6>
+                                <!--div class="titleClose">
+                                    <a class="gone" href="#validationClose">
+                                        <span class="entypo-cancel"></span>
+                                    </a>
+                                </div>
+                                <div class="titleToggle">
+                                    <a class="nav-toggle-alt" href="#validation">
+                                        <span class="entypo-up-open"></span>
+                                    </a>
+                                </div-->
+
+                            </div>
+
+
+
+                            <div class="body-nest" id="validation">
+                                <div class="form_center">
+
+                                    <form action="contact" id="contact-form" class="form-horizontal">
+                                        <fieldset>
+                                            
+                                            <div class="row">
+
+                                                <div class="col-md-12">
+
+                                                    <div class="col-md-4 table-bordered">
+
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="p_marka">Марка</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="form-control" name="p_marka" id="p_marka">
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="p_model">Модель</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="form-control" name="p_model" id="p_model">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="control-group">
+                                                            <div class="col-md-6">
+                                                                <label class="control-label" for="p_year">Год выпуска</label>
+                                                                <div class="controls">
+                                                                    <input type="text" class="form-control" name="p_year" id="p_year" disabled>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="control-label" for="p_true_year">&nbsp;</label>
+                                                                <div class="controls">
+                                                                    <input type="text" class="form-control" name="p_true_year" id="p_true_year">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="p_power">Мощность двигателя л.с.</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="form-control" name="p_power" id="p_power">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="control-group">
+                                                            <div class="col-md-6">
+                                                                <label class="control-label" for="p_sts">СТС</label>
+                                                                <div class="controls">
+                                                                    <input type="radio" class="form-control" name="p_sts" value="sts">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="control-label" for="p_sts">ПТС</label>
+                                                                <div class="controls">
+                                                                    <input type="radio" class="form-control" name="p_sts" value="pts">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="control-group">
+                                                            <div class="col-md-6">
+                                                                <label class="control-label" for="p_serya">Серия</label>
+                                                                <div class="controls">
+                                                                    <input type="text" class="form-control" name="p_serya" id="p_serya">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="control-label" for="p_nomer">Номер</label>
+                                                                <div class="controls">
+                                                                    <input type="text" class="form-control" name="p_nomer" id="p_nomer">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="control-group">
+                                                            <div class="col-md-6">
+                                                                <label class="control-label" for="p_doc_date">Дата выдачи</label>
+                                                                <div class="controls">
+                                                                    <input type="text" class="form-control" name="p_doc_date" id="p_doc_date" disabled>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="control-label" for="p_true_year">&nbsp;</label>
+                                                                <div class="controls">
+                                                                    <input type="text" class="form-control" name="p_true_year" id="p_true_year">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="control-group">
+                                                            <div class="col-md-4">
+                                                                <label class="control-label" for="p_vin">Vin<br><br></label>
+                                                                <div class="controls">
+                                                                    <input type="radio" class="form-control" name="p_vin" value="vin">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="control-label" for="p_vin">Номер кузова</label>
+                                                                <div class="controls">
+                                                                    <input type="radio" class="form-control" name="p_vin" value="bort">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="control-label" for="p_vin">Номер шасси</label>
+                                                                <div class="controls">
+                                                                    <input type="radio" class="form-control" name="p_vin" value="chassi">
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="control-group">
+                                                                <label class="control-label" for="p_vin_number"></label>
+                                                                <div class="controls">
+                                                                    <input type="text" class="form-control" name="p_vin_number" id="p_vin_number">
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+
+
+                                                        <div class="col-md-6">
+                                                            <div class="control-group">
+                                                                <label class="control-label" for="p_car_number">Гос. номер</label>
+                                                                <div class="controls">
+                                                                    <input type="text" class="form-control" name="p_car_number" id="p_car_number">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="control-group">
+                                                                <label class="control-label" for="p_car_registered">Нет на учете</label>
+                                                                <div class="controls">
+                                                                    <input type="checkbox" class="form-control" name="p_car_registered" id="p_car_registered">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-1">
+                                                    </div>
+
+                                                    <div class="col-md-7 table-bordered">
+
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="p_surname">Фамилия</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="form-control" name="p_surname" id="p_surname">
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="p_name">Имя</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="form-control" name="p_name" id="p_name">
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="p_lastname">Отчество</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="form-control" name="p_lastname" id="p_lastname">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="control-group">
+                                                                    <label class="control-label" for="p_birthday">Дата рождения</label>
+                                                                    <div class="controls">
+                                                                        <input type="text" class="form-control" name="p_birthday" id="p_birthday" disabled>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="control-group">
+                                                                    <label class="control-label" for="p_true_birthday">&nbsp;</label>
+                                                                    <div class="controls">
+                                                                        <input type="text" class="form-control" name="p_true_birthday" id="p_true_birthday">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <p></p>
+                                                        </div>
+                                                        <div class="row">
+
+                                                            <div class="col-md-1">
+                                                            </div>
+                                                            
+                                                            <div class="col-md-10 table-bordered">
+
+                                                                <p>Паспорт</p>
+
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="control-group">
+                                                                            <label class="control-label" for="p_serya">Серия</label>
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_serya" id="p_serya">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="control-group">
+                                                                            <label class="control-label" for="p_nomer">Номер</label>
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_nomer" id="p_nomer">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="control-group">
+                                                                            <label class="control-label" for="p_doc_date">Дата выдачи</label>
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_doc_date" id="p_doc_date" disabled>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="control-group">
+                                                                            <label class="control-label" for="p_true_year">&nbsp;</label>
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_true_year" id="p_true_year">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                        
+                                                        <div class="row">
+                                                            <p></p>
+                                                        </div>
+                                                        <div class="row">
+                                                            
+                                                            <div class="col-md-1">
+                                                            </div>
+
+                                                            <div class="col-md-10 table-bordered">
+
+                                                                <p>Адрес постоянной регистрации</p>
+
+                                                                <div class="row">
+
+                                                                    <div class="col-md-4">
+                                                                        <div class="control-group">
+                                                                            <label class="control-label" for="p_kray">Край</label>
+                                                                            <div class="controls">
+                                                                                <input type="checkbox" class="form-control" name="p_chk_kray" id="p_chk_kray">
+                                                                            </div>
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_kray" id="p_kray" disabled>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-4">
+                                                                        <div class="control-group">
+                                                                            <label class="control-label" for="p_oblast">Область</label>
+                                                                            <div class="controls">
+                                                                                <input type="checkbox" class="form-control" name="p_chk_oblast" id="p_chk_oblast">
+                                                                            </div>
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_oblast" id="p_oblast" disabled>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-4">
+                                                                        <div class="control-group">
+                                                                            <label class="control-label" for="p_region">Район</label>
+                                                                            <div class="controls">
+                                                                                <input type="checkbox" class="form-control" name="p_chk_region" id="p_chk_region">
+                                                                            </div>
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_region" id="p_region" disabled>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    
+                                                                    <div class="col-md-4">
+                                                                        <div class="control-group">
+                                                                            <label class="control-label" for="p_city">Город</label>
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_city" id="p_city">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-5">
+                                                                        <div class="control-group">
+                                                                            <label class="control-label" for="p_city">Улица</label>
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_city" id="p_city">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-1">
+                                                                        <div class="control-group">
+                                                                            <label class="control-label" for="p_city">Дом</label>
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_city" id="p_city">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-1">
+                                                                        <div class="control-group">
+                                                                            <label class="control-label" for="p_city">Кв.</label>
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_city" id="p_city">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                        
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="p_region">Коэффициент территории</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="form-control" name="p_region" id="p_region" disabled>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="p_polisdate">Полис действителен 12 месяцев начиная с:</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="form-control" name="p_polisdate" id="p_polisdate" value="02-16-2012">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="row">
+                                                            <p></p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row">
+                                                    <p></p>
+                                                </div>
+                                                
+                                                <div class="row">
+                                                    <div class="col-md-12 table-bordered">
+                                                        
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="control-group">
+                                                                    <label class="control-label" for="p_region">Водители - без ограничений</label>
+                                                                    <div class="controls">
+                                                                        <input type="checkbox" class="form-control" name="p_region" id="p_region">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <table class="table-striped table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>№</th>
+                                                                    <th>Фамилия</th>
+                                                                    <th>Имя</th>
+                                                                    <th>Без отч.</th>
+                                                                    <th>Отчество</th>
+                                                                    <th>Дата родж.</th>
+                                                                    <th>Серия в/у</th>
+                                                                    <th>Номер в/у</th>
+                                                                    <th>Начало стажа</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        1
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_surname">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_name">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="checkbox" class="form-control" name="p_dr_nolastname">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_lastname" disabled>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_birthdate" id="p_dr_birthdate">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_seria">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_number">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_start">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>
+                                                                        1
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_surname">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_name">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="checkbox" class="form-control" name="p_dr_nolastname">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_lastname" disabled>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_birthdate" id="p_dr_birthdate">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_seria">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_number">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_start">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>
+                                                                        1
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_surname">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_name">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="checkbox" class="form-control" name="p_dr_nolastname">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_lastname" disabled>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_birthdate" id="p_dr_birthdate">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_seria">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_number">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <div class="control-group">
+                                                                            <div class="controls">
+                                                                                <input type="text" class="form-control" name="p_dr_start">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                        
+                                                    </div>
+                                                </div>
+                                                
+
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="col-md-12">
+
+                                                        <div class="form-actions" style="margin:20px 0 0 0;">
+                                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                                            <button type="reset" class="btn">Cancel</button>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </fieldset>
+                                    </form>
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- /END OF CONTENT -->
+
+
+
+            <!-- FOOTER -->
+            <div class="footer-space"></div>
+            <div id="footer">
+                <div class="devider-footer-left"></div>
+                <div class="time">
+                    <p id="spanDate"></p>
+                    <p id="clock"></p>
+                </div>
+                <div class="copyright">Make with Love
+                    <span class="entypo-heart"></span>2014 <a href="http://gamatechno.com">Thesmile</a> All Rights Reserved</div>
+                <div class="devider-footer"></div>
+
+            </div>
+            <!-- / END OF FOOTER -->
+
+
+        </div>
+    </div>
+    <!--  END OF PAPER WRAP -->
+
+
+    <!-- MAIN EFFECT -->
+    <script type="text/javascript" src={{ asset("assets/js/preloader.js") }}></script>
+    <script type="text/javascript" src={{ asset("assets/js/bootstrap.js") }}></script>
+    <script type="text/javascript" src={{ asset("assets/js/app.js") }}></script>
+    <script type="text/javascript" src={{ asset("assets/js/load.js") }}></script>
+    <script type="text/javascript" src={{ asset("assets/js/main.js") }}></script>
+
+
+
+
+
+
+
+
+    <!-- /MAIN EFFECT -->
+
+    <script type="text/javascript" src={{ asset("assets/js/colorPicker/bootstrap-colorpicker.min.js") }}></script>
+    <script type="text/javascript" src={{ asset("assets/js/inputMask/jquery.maskedinput.js") }}></script>
+    <script type="text/javascript" src={{ asset("assets/js/switch/bootstrap-switch.js") }}></script>
+    <script type="text/javascript" src={{ asset("assets/js/validate/jquery.validate.min.js") }}></script>
+    <script type="text/javascript" src={{ asset("assets/js/idealform/jquery.idealforms.js") }}></script>
+
+    <script type="text/javascript" src={{ asset("assets/js/timepicker/bootstrap-timepicker.js") }}></script>
+    <script type="text/javascript" src={{ asset("assets/js/datepicker/bootstrap-datepicker.js") }}></script>
+    <script type="text/javascript" src={{ asset("assets/js/datepicker/clockface.js") }}></script>
+    <script type="text/javascript" src={{ asset("assets/js/datepicker/bootstrap-datetimepicker.js") }}></script>
+
+
+    <script type="text/javascript" src={{ asset("assets/js/tag/jquery.tagsinput.js") }}></script>
+
+    <script type="text/javascript">
+    $('#datetimepicker1').datetimepicker({
+        language: 'ru-RU'
+    });
+    $('#p_polisdate').datepicker();
+    $('#p_dr_birthdate').datepicker();
+    $('#p_dr_start').datepicker();
+    $('#dpYears').datepicker();
+    $('#timepicker1').timepicker();
+    $('#t1').clockface();
+    $('#t2').clockface({
+        format: 'HH:mm',
+        trigger: 'manual'
+    });
+
+    $('#toggle-btn').click(function(e) {
+        e.stopPropagation();
+        $('#t2').clockface('toggle');
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        //Validation
+        $('#contact-form').validate({
+            rules: {
+                name: {
+                    minlength: 2,
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                subject: {
+                    minlength: 2,
+                    required: true
+                },
+                message: {
+                    minlength: 2,
+                    required: true
+                }
+            },
+            highlight: function(element) {
+                $(element).closest('.control-group').removeClass('success').addClass('error');
+            },
+            success: function(element) {
+                element
+                    .text('OK!').addClass('valid')
+                    .closest('.control-group').removeClass('error').addClass('success');
+            }
+        });
+
+        // MASKED INPUT
+
+        $("#date").mask("99/99/9999", {
+            completed: function() {
+                alert("Your birthday was: " + this.val());
+            }
+        });
+        $("#phone").mask("(999) 999-9999");
+
+        $("#money").mask("99.999.9999", {
+            placeholder: "*"
+        });
+        $("#ssn").mask("99--AAA--9999", {
+            placeholder: "*"
+        });
+
+    });
+    </script>
+
+    <script type="text/javascript">
+    function onAddTag(tag) {
+        alert("Added a tag: " + tag);
+    }
+
+    function onRemoveTag(tag) {
+        alert("Removed a tag: " + tag);
+    }
+
+    function onChangeTag(input, tag) {
+        alert("Changed a tag: " + tag);
+    }
+
+    $(function() {
+
+        $('#tags_1').tagsInput({
+            width: 'auto'
+        });
+        $('#tags_2').tagsInput({
+            width: 'auto',
+            onChange: function(elem, elem_tags) {
+                var languages = ['php', 'ruby', 'javascript'];
+                $('.tag', elem_tags).each(function() {
+                    if ($(this).text().search(new RegExp('\\b(' + languages.join('|') + ')\\b')) >= 0)
+                        $(this).css('background-color', '#FBB44C');
+                });
+            }
+        });
+        $('#tags_3').tagsInput({
+            width: 'auto',
+
+            //autocomplete_url:'test/fake_plaintext_endpoint.html' //jquery.autocomplete (not jquery ui)
+            autocomplete_url: 'test/fake_json_endpoint.html' // jquery ui autocomplete requires a json endpoint
+        });
+
+
+        // Uncomment this line to see the callback functions in action
+        //          $('input.tags').tagsInput({onAddTag:onAddTag,onRemoveTag:onRemoveTag,onChange: onChangeTag});       
+
+        // Uncomment this line to see an input with no interface for adding new tags.
+        //          $('input.tags').tagsInput({interactive:false});
+    });
+    </script>
+
+</body>
+
+</html>

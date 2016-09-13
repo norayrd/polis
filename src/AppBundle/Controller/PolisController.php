@@ -11,9 +11,14 @@
 
 namespace AppBundle\Controller;
 
+use PHPExcel_Style_Alignment;
+use PHPExcel_Style_Border;
+use PHPExcel_Style_Fill;
+use PHPExcel_Worksheet_Drawing;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /**
  * Controller used to manage the application security.
@@ -36,7 +41,7 @@ class PolisController extends Controller
 
         $polisList = $polisService ->getPolisList($this->getUser());
         
-        return $this->render('polis/polisList.html.twig', array(
+        return $this->render('polis/polis_list.html.twig', array(
             'user' => $this->getUser(),
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
             'polisList' => $polisList,
@@ -51,7 +56,7 @@ class PolisController extends Controller
 
         $is_guest = !is_object($this->getUser());
         
-        return $this->render('polis/polisList.html.twig', array(
+        return $this->render('polis/polis-view.html.twig', array(
             'user' => $this->getUser(),
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
         ));
@@ -66,14 +71,30 @@ class PolisController extends Controller
         $is_guest = !is_object($this->getUser());
 
         $polisId = $request ->get("polisid");
-        var_dump($polisId);exit;
-
         
-        return $this->render('polis/polisList.html.twig', array(
+        return $this->render('polis/polis-view.html.twig', array(
             'user' => $this->getUser(),
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
         ));
 
     }
+    
+    /**
+     * @Route("/user-profile", name="user_profile")
+     */
+    public function userProfileAction(Request $request){
 
+        $is_guest = !is_object($this->getUser());
+
+        $polisId = $request ->get("polisid");
+        
+        var_dump('Sorry, but "user account" yet not ready!');exit;
+        
+        /*return $this->render('polis/polis-view.html.twig', array(
+            'user' => $this->getUser(),
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+        ));*/
+
+    }
 }
+

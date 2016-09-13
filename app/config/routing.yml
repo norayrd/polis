@@ -36,3 +36,11 @@ polis_new:
 polis_edit:
     pattern:   /polis-edit/{polisid}
     defaults:  { _controller: AppBundle:Polis:polisEdit }
+
+polis_xls:
+    pattern:   /polis-xls/{polisid}
+    defaults:  { _controller: AppBundle:ExportXls:polisXls }
+
+user_profile:
+    pattern:   /user-profile
+    defaults:  { _controller: AppBundle:Polis:userProfile }

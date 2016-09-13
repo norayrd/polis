@@ -37,10 +37,12 @@ class MainController extends Controller
 
         $is_guest = !is_object($this->getUser());
         
-        return $this->render('polis/index.html.twig', array(
+        /*return $this->render('polis/index.html.twig', array(
             'user' => $this->getUser(),
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-        ));
+        ));*/
+        
+        return $this->redirect('/polis-list');
 
     }
 

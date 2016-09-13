@@ -1,0 +1,431 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Полис V 1.0 - Восстановление пароля{% endblock %}
+
+{% block stylesheets  %}
+
+    <link href="assets/js/footable/css/footable.core.css?v=2-0-1" rel="stylesheet" type="text/css" />
+    <link href="assets/js/footable/css/footable.standalone.css" rel="stylesheet" type="text/css" />
+    <link href="assets/js/footable/css/footable-demos.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="assets/js/dataTable/lib/jquery.dataTables/css/DT_bootstrap.css" />
+    <link rel="stylesheet" href="assets/js/dataTable/css/datatables.responsive.css" />
+
+{% endblock %}
+
+{% block body %}
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+    </div>
+    <!-- TOP NAVBAR -->
+    <nav role="navigation" class="navbar navbar-static-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" class="navbar-toggle" type="button">
+                    <span class="entypo-menu"></span>
+                </button>
+                <button class="navbar-toggle toggle-menu-mobile toggle-left" type="button">
+                    <span class="entypo-list-add"></span>
+                </button>
+
+                <div id="logo-mobile" class="visible-xs">
+                    <h1>Полис
+                        <span>v1.0</span>
+                    </h1>
+                </div>
+
+            </div>
+
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
+                <div id="nt-title-container" class="navbar-left running-text visible-lg">
+                    <ul class="date-top">
+                        <li class="entypo-calendar" style="margin-right:5px"></li>
+                        <li id="Date"></li>
+
+
+                    </ul>
+
+                    <ul id="digital-clock" class="digital">
+                        <li class="entypo-clock" style="margin-right:5px"></li>
+                        <li class="hour"></li>
+                        <li>:</li>
+                        <li class="min"></li>
+                        <li>:</li>
+                        <li class="sec"></li>
+                        <li class="meridiem"></li>
+                    </ul>
+                </div>
+
+                <ul style="margin-right:0;" class="nav navbar-nav navbar-right">
+                    <li>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <img alt="" class="admin-pic img-circle" src="" 1src="http://api.randomuser.me/portraits/thumb/men/10.jpg">{{ user.getUserName() }} <b class="caret"></b>
+                        </a>
+                        <ul style="margin-top:14px;" role="menu" class="dropdown-setting dropdown-menu">
+                            <li>
+                                <a href="{{ path('user_profile') }}">
+                                    <span class="entypo-user"></span>&#160;&#160;Учетная запись</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('polis_list') }}">
+                                    <span class="entypo-vcard"></span>&#160;&#160;Журнал</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="{{ path('security_logout') }}">
+                                    <span class="entypo-logout"></span>&#160;&#160;Выход</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- /END OF TOP NAVBAR -->
+
+    <!-- SIDE MENU -->
+    <div id="skin-select">
+        <div id="logo">
+            <h1>Полис
+                <span>v1.0</span>
+            </h1>
+        </div>
+
+        <a id="toggle">
+            <span class="entypo-menu"></span>
+        </a>
+        <div class="dark">
+            <form action="#">
+                <span>
+                    <input type="text" name="search" value="" class="search rounded id_search" placeholder="Поиск..." autofocus />
+                </span>
+            </form>
+        </div>
+
+        <div class="search-hover">
+            <form id="demo-2">
+                <input type="search" placeholder="Search Menu..." class="id_search">
+            </form>
+        </div>
+
+        <div class="skin-part">
+            <div id="tree-wrap">
+                <div class="side-bar">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END OF SIDE MENU -->
+
+    <!--  PAPER WRAP -->
+    <div class="wrap-fluid">
+        <div class="container-fluid paper-wrap bevel tlbr">
+
+            <!-- CONTENT -->
+            <!--TITLE -->
+            <div class="row">
+                <div id="paper-top">
+                    <div class="col-sm-3">
+                        <h2 class="tittle-content-header">
+                            <span class="entypo-menu"></span>
+                            <span>Журнал
+                            </span>
+                        </h2>
+
+                    </div>
+
+                    <!--div class="col-sm-7">
+                        <div class="devider-vertical visible-lg"></div>
+                        <div class="tittle-middle-header">
+                            <div class="alert">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <span class="tittle-alert entypo-info-circled"></span>
+                                Welcome back,&nbsp;
+                                <strong>Dave mattew!</strong>&nbsp;&nbsp;Your last sig in at Yesterday, 16:54 PM
+                            </div>
+                        </div>
+                    </div-->
+                </div>
+            </div>
+            <!--/ TITLE -->
+
+            <!-- BREADCRUMB -->
+            <ul id="breadcrumb">
+                <li>
+                    <span class="entypo-home"></span>
+                </li>
+                <li><i class="fa fa-lg fa-angle-right"></i>
+                </li>
+                <li><a href="#" >Полис</a>
+                </li>
+                <li><i class="fa fa-lg fa-angle-right"></i>
+                </li>
+                <li><a href="#" >Журнал</a>
+                </li>
+                <!--li class="pull-right">
+                    <div class="input-group input-widget">
+                        <input style="border-radius:15px" type="text" placeholder="Search..." class="form-control">
+                    </div>
+                </li-->
+            </ul>
+
+            <!-- END OF BREADCRUMB -->
+
+            <div class="content-wrap">
+                <div class="row">
+
+                    <div class="col-sm-12">
+
+                        <div class="nest" id="FootableClose">
+                            <div class="title-alt">
+                                <h6>
+                                    Журнал заявок / полисов</h6>
+                                <!--div class="titleClose">
+                                    <a class="gone" href="#FootableClose">
+                                        <span class="entypo-cancel"></span>
+                                    </a>
+                                </div>
+                                <div class="titleToggle">
+                                    <a class="nav-toggle-alt" href="#Footable">
+                                        <span class="entypo-up-open"></span>
+                                    </a>
+                                </div-->
+
+                            </div>
+
+                            <div class="body-nest" id="Footable">
+
+                                <!--p class="lead well">FooTable is a jQuery plugin that aims to make HTML tables on smaller devices look awesome - No matter how many columns of data you may have in them. And it's responsive i think this better than DataTable in some way</p-->
+
+                                <table class="table-striped footable-res footable metro-blue" data-page-size="6">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                №
+                                            </th>
+                                            <th>
+                                                Марка
+                                            </th>
+                                            <th>
+                                                Модель
+                                            </th>
+                                            <th data-hide="phone,tablet">
+                                                Год выпуска (реальный)
+                                            </th>
+                                            {#<th data-hide="phone,tablet">
+                                                Мощность
+                                            </th>#}
+                                            {#<th data-hide="phone,tablet">
+                                                (СТС или ПТС)Тс
+                                            </th>#}
+                                            {#<th data-hide="phone,tablet">
+                                                Серия-номер
+                                            </th>#}
+                                            {#<th data-hide="phone,tablet">
+                                                Дата выдачи(реальная)
+                                            </th>
+                                            <th data-hide="phone,tablet">
+                                                VIN|Кузов|Шасси
+                                            </th>
+                                            <th data-hide="phone,tablet">
+                                                Номер
+                                            </th>#}
+                                            <th>
+                                                Гос.номер
+                                            </th>
+                                            <th>
+                                                Фамилия
+                                            </th>
+                                            <th>
+                                                Имя
+                                            </th>
+                                            {#<th data-hide="phone,tablet">
+                                                Отчество
+                                            </th>
+                                            <th data-hide="phone,tablet">
+                                                День рождения (реальная)
+                                            </th>
+                                            <th data-hide="phone,tablet">
+                                                Серия-номер пасп.
+                                            </th>
+                                            <th data-hide="phone,tablet">
+                                                Дата выдачи (реальная)
+                                            </th>
+                                            <th data-hide="phone,tablet">
+                                                Адрес рег.
+                                            </th>
+                                            <th data-hide="phone,tablet">
+                                                Коэф.терр.
+                                            </th>#}
+                                            <th data-hide="phone,tablet">
+                                                Полис действ. с
+                                            </th>
+                                            <th>
+                                                Статус
+                                            </th>
+                                            <th>
+                                                XLS
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+    {% for polis in polisList %}
+                                        <tr>
+                                            <td data-value="{{ polis.getId() }}"><a href="#">{{ polis.getId() }}</a></td>
+                                            <td>{{ polis.getTrMake() }}</td>
+                                            <td>{{ polis.getTrModel() }}</td>
+                                            <td>{{ polis.getTrYear() }} ({{ polis.getTrTrueYear() }})</td>
+                                            {#<td>{{ polis.getTrPower() }}</td>
+                                            <td>{{ polis.getTrTs() }}</td>
+                                            <td>{{ polis.getTrDocSerya() }}-{{ polis.getTrDocNumber() }}</td>
+                                            <td>{{ polis.getTrDocDate()|date("d/m/Y") }} ({{ polis.getTrDocTrue_date()|date("d/m/Y") }})</td>
+                                            <td>{{ polis.getTrVinType() }}</td>
+                                            <td>{{ polis.getTrVinNumber() }}</td>#}
+                                            <td>{{ polis.getTrCarNumber() }}</td>
+                                            <td>{{ polis.getOwnerSurname() }}</td>
+                                            <td>{{ polis.getOwnerName() }}</td>
+                                            {#<td>{{ polis.getOwnerMiddlename() }}</td>#}
+                                            {# <td>{{ polis.getOwnerNoMiddlename() }}</td> #}
+                                            {#<td>{{ polis.getOwnerBirthday()|date("d/m/Y") }} ({{ polis.getOwnerTrueBirthday()|date("d/m/Y") }})</td>
+                                            <td>{{ polis.getOwnerPaspSerya() }}-{{ polis.getOwnerPaspNumber() }}</td>
+                                            <td>{{ polis.getOwnerPaspDate()|date("d/m/Y") }} ({{ polis.getOwnerPaspTrueDate()|date("d/m/Y") }})</td>
+                                            <td>{{ polis.getRegCity() }}, {{ polis.getRegStateType() }} {{ polis.getRegState() }}, {{ polis.getRegStreet() }}, {{ polis.getRegNhome() }}, кв {{ polis.getRegNflat() }}</td>
+                                            <td>{{ polis.getRegTerritoryRatio() }}</td>#}
+                                            <td>{{ polis.getPolisStartDate()|date("d/m/Y") }}</td>
+                                            <td data-value="1">
+                                                <span class="status-metro status-active" title="Active">Active</span>
+                                            </td>
+                                            <td data-value="1">
+                                                <a href="/polis-xls/'{{ polis.getId() }}"><i class="icon-export" title='Export to Excel' ></i></a>
+                                            </td>
+                                        </tr>
+    {% else %}
+        <tr>
+            <td>Пусто</td>
+        </tr>
+    {% endfor %}
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10">
+                                                <div class="pagination pagination-centered"></div>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <!-- /END OF CONTENT -->
+
+
+
+            <!-- FOOTER -->
+            <div class="footer-space"></div>
+            <div id="footer">
+                <div class="devider-footer-left"></div>
+                <div class="time">
+                    <p id="spanDate"></p>
+                    <p id="clock"></p>
+                </div>
+                <div class="copyright">norayrd 2016 All Rights Reserved</div>
+                <div class="devider-footer"></div>
+
+            </div>
+            <!-- / END OF FOOTER -->
+
+
+        </div>
+    </div>
+    <!--  END OF PAPER WRAP -->
+
+    <!-- MAIN EFFECT -->
+    <script type="text/javascript" src="assets/js/preloader.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="assets/js/app.js"></script>
+    <script type="text/javascript" src="assets/js/load.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+
+
+
+    <!-- /MAIN EFFECT -->
+    <!-- GAGE -->
+    <script type="text/javascript" src="assets/js/toggle_close.js"></script>
+    <script src="assets/js/footable/js/footable.js?v=2-0-1" type="text/javascript"></script>
+    <script src="assets/js/footable/js/footable.sort.js?v=2-0-1" type="text/javascript"></script>
+    <script src="assets/js/footable/js/footable.filter.js?v=2-0-1" type="text/javascript"></script>
+    <script src="assets/js/footable/js/footable.paginate.js?v=2-0-1" type="text/javascript"></script>
+    <script src="assets/js/footable/js/footable.paginate.js?v=2-0-1" type="text/javascript"></script>
+
+
+
+
+
+    <script type="text/javascript">
+    $(function() {
+        $('.footable-res').footable();
+    });
+    </script>
+    <script type="text/javascript">
+    $(function() {
+        $('#footable-res2').footable().bind('footable_filtering', function(e) {
+            var selected = $('.filter-status').find(':selected').text();
+            if (selected && selected.length > 0) {
+                e.filter += (e.filter && e.filter.length > 0) ? ' ' + selected : selected;
+                e.clear = !e.filter;
+            }
+        });
+
+        $('.clear-filter').click(function(e) {
+            e.preventDefault();
+            $('.filter-status').val('');
+            $('table.demo').trigger('footable_clear_filter');
+        });
+
+        $('.filter-status').change(function(e) {
+            e.preventDefault();
+            $('table.demo').trigger('footable_filter', {
+                filter: $('#filter').val()
+            });
+        });
+
+        $('.filter-api').click(function(e) {
+            e.preventDefault();
+
+            //get the footable filter object
+            var footableFilter = $('table').data('footable-filter');
+
+            alert('about to filter table by "tech"');
+            //filter by 'tech'
+            footableFilter.filter('tech');
+
+            //clear the filter
+            if (confirm('clear filter now?')) {
+                footableFilter.clearFilter();
+            }
+        });
+    });
+    </script>
+
+{% endblock %}

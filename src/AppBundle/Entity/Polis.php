@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -42,7 +43,7 @@ class Polis
     private $tr_year;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $tr_power;
 
@@ -175,6 +176,11 @@ class Polis
      * @ORM\Column(type="date")
      */
     private $polis_start_date;
+    
+//    /**
+//     * @ORM\OneToMany(targetEntity="Drivers", mappedBy="polis", cascade={"persist"})
+//     */
+//    private $drivers;
 
     /**
      * Get id
@@ -373,7 +379,7 @@ class Polis
     /**
      * Set tr_doc_date
      *
-     * @param \DateTime $trDocDate
+     * @param DateTime $trDocDate
      * @return Polis
      */
     public function setTrDocDate($trDocDate)
@@ -386,7 +392,7 @@ class Polis
     /**
      * Get tr_doc_date
      *
-     * @return \DateTime 
+     * @return DateTime 
      */
     public function getTrDocDate()
     {
@@ -396,7 +402,7 @@ class Polis
     /**
      * Set tr_doc_true_date
      *
-     * @param \DateTime $trDocTrueDate
+     * @param DateTime $trDocTrueDate
      * @return Polis
      */
     public function setTrDocTrueDate($trDocTrueDate)
@@ -409,7 +415,7 @@ class Polis
     /**
      * Get tr_doc_true_date
      *
-     * @return \DateTime 
+     * @return DateTime 
      */
     public function getTrDocTrueDate()
     {
@@ -580,7 +586,7 @@ class Polis
     /**
      * Set owner_true_birthday
      *
-     * @param \DateTime $ownerTrueBirthday
+     * @param DateTime $ownerTrueBirthday
      * @return Polis
      */
     public function setOwnerTrueBirthday($ownerTrueBirthday)
@@ -593,7 +599,7 @@ class Polis
     /**
      * Get owner_true_birthday
      *
-     * @return \DateTime 
+     * @return DateTime 
      */
     public function getOwnerTrueBirthday()
     {
@@ -603,7 +609,7 @@ class Polis
     /**
      * Set owner_birthday
      *
-     * @param \DateTime $ownerBirthday
+     * @param DateTime $ownerBirthday
      * @return Polis
      */
     public function setOwnerBirthday($ownerBirthday)
@@ -616,7 +622,7 @@ class Polis
     /**
      * Get owner_birthday
      *
-     * @return \DateTime 
+     * @return DateTime 
      */
     public function getOwnerBirthday()
     {
@@ -672,7 +678,7 @@ class Polis
     /**
      * Set owner_pasp_date
      *
-     * @param \DateTime $ownerPaspDate
+     * @param DateTime $ownerPaspDate
      * @return Polis
      */
     public function setOwnerPaspDate($ownerPaspDate)
@@ -685,7 +691,7 @@ class Polis
     /**
      * Get owner_pasp_date
      *
-     * @return \DateTime 
+     * @return DateTime 
      */
     public function getOwnerPaspDate()
     {
@@ -695,7 +701,7 @@ class Polis
     /**
      * Set owner_pasp_true_date
      *
-     * @param \DateTime $ownerPaspTrueDate
+     * @param DateTime $ownerPaspTrueDate
      * @return Polis
      */
     public function setOwnerPaspTrueDate($ownerPaspTrueDate)
@@ -708,7 +714,7 @@ class Polis
     /**
      * Get owner_pasp_true_date
      *
-     * @return \DateTime 
+     * @return DateTime 
      */
     public function getOwnerPaspTrueDate()
     {
@@ -879,7 +885,7 @@ class Polis
     /**
      * Set polis_start_date
      *
-     * @param \DateTime $polisStartDate
+     * @param DateTime $polisStartDate
      * @return Polis
      */
     public function setPolisStartDate($polisStartDate)
@@ -892,7 +898,7 @@ class Polis
     /**
      * Get polis_start_date
      *
-     * @return \DateTime 
+     * @return DateTime 
      */
     public function getPolisStartDate()
     {
