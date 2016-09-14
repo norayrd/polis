@@ -177,10 +177,10 @@ class Polis
      */
     private $polis_start_date;
     
-//    /**
-//     * @ORM\OneToMany(targetEntity="Drivers", mappedBy="polis", cascade={"persist"})
-//     */
-//    private $drivers;
+    /**
+     * @ORM\OneToMany(targetEntity="Drivers", mappedBy="polis", cascade={"persist"})
+     */
+    private $drivers;
 
     /**
      * Get id
@@ -903,5 +903,45 @@ class Polis
     public function getPolisStartDate()
     {
         return $this->polis_start_date;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->drivers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add drivers
+     *
+     * @param \AppBundle\Entity\Drivers $drivers
+     * @return Polis
+     */
+    public function addDriver(\AppBundle\Entity\Drivers $drivers)
+    {
+        $this->drivers[] = $drivers;
+
+        return $this;
+    }
+
+    /**
+     * Remove drivers
+     *
+     * @param \AppBundle\Entity\Drivers $drivers
+     */
+    public function removeDriver(\AppBundle\Entity\Drivers $drivers)
+    {
+        $this->drivers->removeElement($drivers);
+    }
+
+    /**
+     * Get drivers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDrivers()
+    {
+        return $this->drivers;
     }
 }
