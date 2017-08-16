@@ -187,54 +187,58 @@ class ExportXlsController extends Controller
                     ->getStartColor()->setRGB('FF8080');
             $this ->setBorders($activeSheet, $arrayAG, 12);
             $this ->setBold($activeSheet, array('B','D'), 12);
+            
+            if ( count($polis->getDrivers())>0 ) {
 
-            // row 13
-            $activeSheet ->mergeCells('A13:G13')
-                    ->getStyle('A13')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID )
-                    ->getStartColor()->setRGB('CC99FF');
-            $activeSheet ->setCellValue('A13', 'ВОДИТЕЛИ');
-            $activeSheet ->getStyle('A13') ->getAlignment() ->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-            $this ->setBorders($activeSheet, $arrayAG, 13);
-            $this ->setBold($activeSheet, $arrayAG, 13);
+                // row 13
+                $activeSheet ->mergeCells('A13:G13')
+                        ->getStyle('A13')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID )
+                        ->getStartColor()->setRGB('CC99FF');
+                $activeSheet ->setCellValue('A13', 'ВОДИТЕЛИ');
+                $activeSheet ->getStyle('A13') ->getAlignment() ->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+                $this ->setBorders($activeSheet, $arrayAG, 13);
+                $this ->setBold($activeSheet, $arrayAG, 13);
 
-            $r = 1;
-            foreach ( $polis->getDrivers() as $driver) {
-                
-                $rowNo = 14 + ($r-1)*3;
+                $r = 1;
+                foreach ( $polis->getDrivers() as $driver) {
 
-                // row 14
-                $activeSheet ->mergeCells('A'.$rowNo.':G'.$rowNo)
-                        ->getStyle('A'.$rowNo)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID )
-                        ->getStartColor()->setRGB('DDDDDD');
-                $activeSheet ->setCellValue('A'.$rowNo, $r);
-                $activeSheet ->getStyle('A'.$rowNo) ->getAlignment() ->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-                $this ->setBorders($activeSheet, $arrayAG, $rowNo);
-                $this ->setBold($activeSheet, $arrayAG, $rowNo);
+                    $rowNo = 14 + ($r-1)*3;
 
-                // row 15
-                $activeSheet ->setCellValue('A'.($rowNo+1), 'фамилия');
-                $activeSheet ->setCellValue('B'.($rowNo+1), 'имя');
-                $activeSheet ->setCellValue('C'.($rowNo+1), 'отчество');
-                $activeSheet ->setCellValue('D'.($rowNo+1), 'дата рождения');
-                $activeSheet ->setCellValue('E'.($rowNo+1), 'серия в/у');
-                $activeSheet ->setCellValue('F'.($rowNo+1), 'номер в/у');
-                $activeSheet ->setCellValue('G'.($rowNo+1), 'дата начала стажа');
-                $this ->setBorders($activeSheet, $arrayAG, $rowNo+1);
+                    // row 14
+                    $activeSheet ->mergeCells('A'.$rowNo.':G'.$rowNo)
+                            ->getStyle('A'.$rowNo)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID )
+                            ->getStartColor()->setRGB('DDDDDD');
+                    $activeSheet ->setCellValue('A'.$rowNo, $r);
+                    $activeSheet ->getStyle('A'.$rowNo) ->getAlignment() ->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+                    $this ->setBorders($activeSheet, $arrayAG, $rowNo);
+                    $this ->setBold($activeSheet, $arrayAG, $rowNo);
 
-                // row 16
-                $activeSheet ->setCellValue('A'.($rowNo+2), $driver->getSurname());
-                $activeSheet ->setCellValue('B'.($rowNo+2), $driver->getName());
-                $activeSheet ->setCellValue('C'.($rowNo+2), $driver->getMiddlename());
-                $activeSheet ->setCellValue('D'.($rowNo+2), $driver->getBirthday()->format('d.m.Y'));
-                $activeSheet ->setCellValue('E'.($rowNo+2), $driver->getDocSerya());
-                $activeSheet ->setCellValue('F'.($rowNo+2), $driver->getDocNumber());
-                $activeSheet ->setCellValue('G'.($rowNo+2), $driver->getDocDate()->format('d.m.Y'));
-                $this ->setBorders($activeSheet, $arrayAG, $rowNo+2);
-                $this ->setBold($activeSheet, $arrayAG, $rowNo+2);
+                    // row 15
+                    $activeSheet ->setCellValue('A'.($rowNo+1), 'фамилия');
+                    $activeSheet ->setCellValue('B'.($rowNo+1), 'имя');
+                    $activeSheet ->setCellValue('C'.($rowNo+1), 'отчество');
+                    $activeSheet ->setCellValue('D'.($rowNo+1), 'дата рождения');
+                    $activeSheet ->setCellValue('E'.($rowNo+1), 'серия в/у');
+                    $activeSheet ->setCellValue('F'.($rowNo+1), 'номер в/у');
+                    $activeSheet ->setCellValue('G'.($rowNo+1), 'дата начала стажа');
+                    $this ->setBorders($activeSheet, $arrayAG, $rowNo+1);
 
-                $r++;
+                    // row 16
+                    $activeSheet ->setCellValue('A'.($rowNo+2), $driver->getSurname());
+                    $activeSheet ->setCellValue('B'.($rowNo+2), $driver->getName());
+                    $activeSheet ->setCellValue('C'.($rowNo+2), $driver->getMiddlename());
+                    $activeSheet ->setCellValue('D'.($rowNo+2), $driver->getBirthday()->format('d.m.Y'));
+                    $activeSheet ->setCellValue('E'.($rowNo+2), $driver->getDocSerya());
+                    $activeSheet ->setCellValue('F'.($rowNo+2), $driver->getDocNumber());
+                    $activeSheet ->setCellValue('G'.($rowNo+2), $driver->getDocDate()->format('d.m.Y'));
+                    $this ->setBorders($activeSheet, $arrayAG, $rowNo+2);
+                    $this ->setBold($activeSheet, $arrayAG, $rowNo+2);
+
+                    $r++;
+                }
+
             }
-
+            
             #$activeSheet ->getColumnDimension('B')->setWidth(40);
             #$imagePath = './data/pi.jpg';
             #if (file_exists($imagePath)) {
