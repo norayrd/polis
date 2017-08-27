@@ -84,6 +84,12 @@ class User implements UserInterface
      * @ORM\Column(type="json_array")
      */
     private $roles = array();
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Company", inversedBy="User", cascade={"persist"})
+     * @ORM\JoinColumn(name="company_id", referencedColumnName="company_id")
+     */
+    private $company_id;
 
     public function getId()
     {
@@ -316,5 +322,28 @@ class User implements UserInterface
     public function getLastAccessedDefault()
     {
         return $this->lastAccessedDefault;
+    }
+
+    /**
+     * Set company_id
+     *
+     * @param \AppBundle\Entity\Company $companyId
+     * @return User
+     */
+    public function setCompanyId(\AppBundle\Entity\Company $companyId = null)
+    {
+        $this->company_id = $companyId;
+    
+        return $this;
+    }
+
+    /**
+     * Get company_id
+     *
+     * @return \AppBundle\Entity\Company 
+     */
+    public function getCompanyId()
+    {
+        return $this->company_id;
     }
 }

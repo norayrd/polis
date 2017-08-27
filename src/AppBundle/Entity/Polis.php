@@ -20,928 +20,298 @@ class Polis
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private $polis_id;
 
     /**
      * @ORM\Column(type="string")
      */
-    private $tr_make;
+    private $polis_num;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $polis_date;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="PolisNum", inversedBy="Polis", cascade={"persist"})
+     * @ORM\JoinColumn(name="polis_num_id", referencedColumnName="polis_num_id")
+     */
+    private $polis_num_id;
+
+    /**
+     * @ORM\Column(type="decimal", scale=2)
+     */
+    private $sum;
 
     /**
      * @ORM\Column(type="string")
      */
-    private $tr_model;
+    private $fio;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $tr_true_year;
+    private $agent_id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Company", inversedBy="Polis", cascade={"persist"})
+     * @ORM\JoinColumn(name="company_id", referencedColumnName="company_id")
+     */
+    private $company_id;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date_curr;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $actual_id;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $tr_year;
+    private $user_id;
+
 
     /**
-     * @ORM\Column(type="float")
+     * Get polis_id
+     *
+     * @return integer 
      */
-    private $tr_power;
+    public function getPolisId()
+    {
+        return $this->polis_id;
+    }
 
     /**
-     * @ORM\Column(type="integer")
+     * Set polis_num
+     *
+     * @param string $polisNum
+     * @return Polis
      */
-    private $tr_ts;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $tr_doc_serya;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $tr_doc_number;
-
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $tr_doc_date;
-
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $tr_doc_true_date;
-
-    /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('N/A', 'Vin', 'Body', 'Chassis')")
-     */
-    private $tr_vin_type;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $tr_vin_number;
-
-    /**
-     * @ORM\Column(type="string" )
-     */
-    private $tr_car_number;
-
-    /**
-     * @ORM\Column(type="string" )
-     */
-    private $owner_name;
-
-    /**
-     * @ORM\Column(type="string" )
-     */
-    private $owner_surname;
-
-    /**
-     * @ORM\Column(type="string" )
-     */
-    private $owner_middlename;
-
-    /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('0', '1')" )
-     */
-    private $owner_no_middlename;
-
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $owner_true_birthday;
-
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $owner_birthday;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $owner_pasp_serya;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $owner_pasp_number;
-
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $owner_pasp_date;
-
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $owner_pasp_true_date;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $reg_city;
-
-    /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('Край', 'Область', 'Район' )", nullable=true )
-     */
-    private $reg_state_type;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $reg_state;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $reg_street;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $reg_nhome;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $reg_nflat;
-
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $reg_territory_ratio;
-
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $polis_start_date;
+    public function setPolisNum($polisNum)
+    {
+        $this->polis_num = $polisNum;
     
-    /**
-     * @ORM\OneToMany(targetEntity="Drivers", mappedBy="polis", cascade={"persist"})
-     */
-    private $drivers;
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set tr_make
-     *
-     * @param string $trMake
-     * @return Polis
-     */
-    public function setTrMake($trMake)
-    {
-        $this->tr_make = $trMake;
-
         return $this;
     }
 
     /**
-     * Get tr_make
+     * Get polis_num
      *
      * @return string 
      */
-    public function getTrMake()
+    public function getPolisNum()
     {
-        return $this->tr_make;
+        return $this->polis_num;
     }
 
     /**
-     * Set tr_model
+     * Set polis_date
      *
-     * @param string $trModel
+     * @param \DateTime $polisDate
      * @return Polis
      */
-    public function setTrModel($trModel)
+    public function setPolisDate($polisDate)
     {
-        $this->tr_model = $trModel;
-
+        $this->polis_date = $polisDate;
+    
         return $this;
     }
 
     /**
-     * Get tr_model
+     * Get polis_date
+     *
+     * @return \DateTime 
+     */
+    public function getPolisDate()
+    {
+        return $this->polis_date;
+    }
+
+    /**
+     * Set sum
+     *
+     * @param string $sum
+     * @return Polis
+     */
+    public function setSum($sum)
+    {
+        $this->sum = $sum;
+    
+        return $this;
+    }
+
+    /**
+     * Get sum
      *
      * @return string 
      */
-    public function getTrModel()
+    public function getSum()
     {
-        return $this->tr_model;
+        return $this->sum;
     }
 
     /**
-     * Set tr_true_year
+     * Set fio
      *
-     * @param integer $trTrueYear
+     * @param string $fio
      * @return Polis
      */
-    public function setTrTrueYear($trTrueYear)
+    public function setFio($fio)
     {
-        $this->tr_true_year = $trTrueYear;
-
+        $this->fio = $fio;
+    
         return $this;
     }
 
     /**
-     * Get tr_true_year
+     * Get fio
+     *
+     * @return string 
+     */
+    public function getFio()
+    {
+        return $this->fio;
+    }
+
+    /**
+     * Set agent_id
+     *
+     * @param integer $agentId
+     * @return Polis
+     */
+    public function setAgentId($agentId)
+    {
+        $this->agent_id = $agentId;
+    
+        return $this;
+    }
+
+    /**
+     * Get agent_id
      *
      * @return integer 
      */
-    public function getTrTrueYear()
+    public function getAgentId()
     {
-        return $this->tr_true_year;
+        return $this->agent_id;
     }
 
     /**
-     * Set tr_year
+     * Set date_curr
      *
-     * @param integer $trYear
+     * @param \DateTime $dateCurr
      * @return Polis
      */
-    public function setTrYear($trYear)
+    public function setDateCurr($dateCurr)
     {
-        $this->tr_year = $trYear;
-
+        $this->date_curr = $dateCurr;
+    
         return $this;
     }
 
     /**
-     * Get tr_year
+     * Get date_curr
+     *
+     * @return \DateTime 
+     */
+    public function getDateCurr()
+    {
+        return $this->date_curr;
+    }
+
+    /**
+     * Set actual_id
+     *
+     * @param integer $actualId
+     * @return Polis
+     */
+    public function setActualId($actualId)
+    {
+        $this->actual_id = $actualId;
+    
+        return $this;
+    }
+
+    /**
+     * Get actual_id
      *
      * @return integer 
      */
-    public function getTrYear()
+    public function getActualId()
     {
-        return $this->tr_year;
+        return $this->actual_id;
     }
 
     /**
-     * Set tr_power
+     * Set user_id
      *
-     * @param integer $trPower
+     * @param integer $userId
      * @return Polis
      */
-    public function setTrPower($trPower)
+    public function setUserId($userId)
     {
-        $this->tr_power = $trPower;
-
+        $this->user_id = $userId;
+    
         return $this;
     }
 
     /**
-     * Get tr_power
+     * Get user_id
      *
      * @return integer 
      */
-    public function getTrPower()
+    public function getUserId()
     {
-        return $this->tr_power;
+        return $this->user_id;
     }
 
     /**
-     * Set tr_ts
+     * Set polis_num_id
      *
-     * @param integer $trTs
+     * @param \AppBundle\Entity\PolisNum $polisNumId
      * @return Polis
      */
-    public function setTrTs($trTs)
+    public function setPolisNumId(\AppBundle\Entity\PolisNum $polisNumId = null)
     {
-        $this->tr_ts = $trTs;
-
+        $this->polis_num_id = $polisNumId;
+    
         return $this;
     }
 
     /**
-     * Get tr_ts
+     * Get polis_num_id
      *
-     * @return integer 
+     * @return \AppBundle\Entity\PolisNum 
      */
-    public function getTrTs()
+    public function getPolisNumId()
     {
-        return $this->tr_ts;
+        return $this->polis_num_id;
     }
 
     /**
-     * Set tr_doc_serya
+     * Set company_id
      *
-     * @param string $trDocSerya
+     * @param \AppBundle\Entity\Company $companyId
      * @return Polis
      */
-    public function setTrDocSerya($trDocSerya)
+    public function setCompanyId(\AppBundle\Entity\Company $companyId = null)
     {
-        $this->tr_doc_serya = $trDocSerya;
-
+        $this->company_id = $companyId;
+    
         return $this;
     }
 
     /**
-     * Get tr_doc_serya
+     * Get company_id
      *
-     * @return string 
+     * @return \AppBundle\Entity\Company 
      */
-    public function getTrDocSerya()
+    public function getCompanyId()
     {
-        return $this->tr_doc_serya;
-    }
-
-    /**
-     * Set tr_doc_number
-     *
-     * @param string $trDocNumber
-     * @return Polis
-     */
-    public function setTrDocNumber($trDocNumber)
-    {
-        $this->tr_doc_number = $trDocNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get tr_doc_number
-     *
-     * @return string 
-     */
-    public function getTrDocNumber()
-    {
-        return $this->tr_doc_number;
-    }
-
-    /**
-     * Set tr_doc_date
-     *
-     * @param DateTime $trDocDate
-     * @return Polis
-     */
-    public function setTrDocDate($trDocDate)
-    {
-        $this->tr_doc_date = $trDocDate;
-
-        return $this;
-    }
-
-    /**
-     * Get tr_doc_date
-     *
-     * @return DateTime 
-     */
-    public function getTrDocDate()
-    {
-        return $this->tr_doc_date;
-    }
-
-    /**
-     * Set tr_doc_true_date
-     *
-     * @param DateTime $trDocTrueDate
-     * @return Polis
-     */
-    public function setTrDocTrueDate($trDocTrueDate)
-    {
-        $this->tr_doc_true_date = $trDocTrueDate;
-
-        return $this;
-    }
-
-    /**
-     * Get tr_doc_true_date
-     *
-     * @return DateTime 
-     */
-    public function getTrDocTrueDate()
-    {
-        return $this->tr_doc_true_date;
-    }
-
-    /**
-     * Set tr_vin_type
-     *
-     * @param string $trVinType
-     * @return Polis
-     */
-    public function setTrVinType($trVinType)
-    {
-        $this->tr_vin_type = $trVinType;
-
-        return $this;
-    }
-
-    /**
-     * Get tr_vin_type
-     *
-     * @return string 
-     */
-    public function getTrVinType()
-    {
-        return $this->tr_vin_type;
-    }
-
-    /**
-     * Set tr_vin_number
-     *
-     * @param integer $trVinNumber
-     * @return Polis
-     */
-    public function setTrVinNumber($trVinNumber)
-    {
-        $this->tr_vin_number = $trVinNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get tr_vin_number
-     *
-     * @return integer 
-     */
-    public function getTrVinNumber()
-    {
-        return $this->tr_vin_number;
-    }
-
-    /**
-     * Set tr_car_number
-     *
-     * @param string $trCarNumber
-     * @return Polis
-     */
-    public function setTrCarNumber($trCarNumber)
-    {
-        $this->tr_car_number = $trCarNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get tr_car_number
-     *
-     * @return string 
-     */
-    public function getTrCarNumber()
-    {
-        return $this->tr_car_number;
-    }
-
-    /**
-     * Set owner_name
-     *
-     * @param string $ownerName
-     * @return Polis
-     */
-    public function setOwnerName($ownerName)
-    {
-        $this->owner_name = $ownerName;
-
-        return $this;
-    }
-
-    /**
-     * Get owner_name
-     *
-     * @return string 
-     */
-    public function getOwnerName()
-    {
-        return $this->owner_name;
-    }
-
-    /**
-     * Set owner_surname
-     *
-     * @param string $ownerSurname
-     * @return Polis
-     */
-    public function setOwnerSurname($ownerSurname)
-    {
-        $this->owner_surname = $ownerSurname;
-
-        return $this;
-    }
-
-    /**
-     * Get owner_surname
-     *
-     * @return string 
-     */
-    public function getOwnerSurname()
-    {
-        return $this->owner_surname;
-    }
-
-    /**
-     * Set owner_middlename
-     *
-     * @param string $ownerMiddlename
-     * @return Polis
-     */
-    public function setOwnerMiddlename($ownerMiddlename)
-    {
-        $this->owner_middlename = $ownerMiddlename;
-
-        return $this;
-    }
-
-    /**
-     * Get owner_middlename
-     *
-     * @return string 
-     */
-    public function getOwnerMiddlename()
-    {
-        return $this->owner_middlename;
-    }
-
-    /**
-     * Set owner_no_middlename
-     *
-     * @param string $ownerNoMiddlename
-     * @return Polis
-     */
-    public function setOwnerNoMiddlename($ownerNoMiddlename)
-    {
-        $this->owner_no_middlename = $ownerNoMiddlename;
-
-        return $this;
-    }
-
-    /**
-     * Get owner_no_middlename
-     *
-     * @return string 
-     */
-    public function getOwnerNoMiddlename()
-    {
-        return $this->owner_no_middlename;
-    }
-
-    /**
-     * Set owner_true_birthday
-     *
-     * @param DateTime $ownerTrueBirthday
-     * @return Polis
-     */
-    public function setOwnerTrueBirthday($ownerTrueBirthday)
-    {
-        $this->owner_true_birthday = $ownerTrueBirthday;
-
-        return $this;
-    }
-
-    /**
-     * Get owner_true_birthday
-     *
-     * @return DateTime 
-     */
-    public function getOwnerTrueBirthday()
-    {
-        return $this->owner_true_birthday;
-    }
-
-    /**
-     * Set owner_birthday
-     *
-     * @param DateTime $ownerBirthday
-     * @return Polis
-     */
-    public function setOwnerBirthday($ownerBirthday)
-    {
-        $this->owner_birthday = $ownerBirthday;
-
-        return $this;
-    }
-
-    /**
-     * Get owner_birthday
-     *
-     * @return DateTime 
-     */
-    public function getOwnerBirthday()
-    {
-        return $this->owner_birthday;
-    }
-
-    /**
-     * Set owner_pasp_serya
-     *
-     * @param string $ownerPaspSerya
-     * @return Polis
-     */
-    public function setOwnerPaspSerya($ownerPaspSerya)
-    {
-        $this->owner_pasp_serya = $ownerPaspSerya;
-
-        return $this;
-    }
-
-    /**
-     * Get owner_pasp_serya
-     *
-     * @return string 
-     */
-    public function getOwnerPaspSerya()
-    {
-        return $this->owner_pasp_serya;
-    }
-
-    /**
-     * Set owner_pasp_number
-     *
-     * @param string $ownerPaspNumber
-     * @return Polis
-     */
-    public function setOwnerPaspNumber($ownerPaspNumber)
-    {
-        $this->owner_pasp_number = $ownerPaspNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get owner_pasp_number
-     *
-     * @return string 
-     */
-    public function getOwnerPaspNumber()
-    {
-        return $this->owner_pasp_number;
-    }
-
-    /**
-     * Set owner_pasp_date
-     *
-     * @param DateTime $ownerPaspDate
-     * @return Polis
-     */
-    public function setOwnerPaspDate($ownerPaspDate)
-    {
-        $this->owner_pasp_date = $ownerPaspDate;
-
-        return $this;
-    }
-
-    /**
-     * Get owner_pasp_date
-     *
-     * @return DateTime 
-     */
-    public function getOwnerPaspDate()
-    {
-        return $this->owner_pasp_date;
-    }
-
-    /**
-     * Set owner_pasp_true_date
-     *
-     * @param DateTime $ownerPaspTrueDate
-     * @return Polis
-     */
-    public function setOwnerPaspTrueDate($ownerPaspTrueDate)
-    {
-        $this->owner_pasp_true_date = $ownerPaspTrueDate;
-
-        return $this;
-    }
-
-    /**
-     * Get owner_pasp_true_date
-     *
-     * @return DateTime 
-     */
-    public function getOwnerPaspTrueDate()
-    {
-        return $this->owner_pasp_true_date;
-    }
-
-    /**
-     * Set reg_city
-     *
-     * @param string $regCity
-     * @return Polis
-     */
-    public function setRegCity($regCity)
-    {
-        $this->reg_city = $regCity;
-
-        return $this;
-    }
-
-    /**
-     * Get reg_city
-     *
-     * @return string 
-     */
-    public function getRegCity()
-    {
-        return $this->reg_city;
-    }
-
-    /**
-     * Set reg_state_type
-     *
-     * @param string $regStateType
-     * @return Polis
-     */
-    public function setRegStateType($regStateType)
-    {
-        $this->reg_state_type = $regStateType;
-
-        return $this;
-    }
-
-    /**
-     * Get reg_state_type
-     *
-     * @return string 
-     */
-    public function getRegStateType()
-    {
-        return $this->reg_state_type;
-    }
-
-    /**
-     * Set reg_state
-     *
-     * @param string $regState
-     * @return Polis
-     */
-    public function setRegState($regState)
-    {
-        $this->reg_state = $regState;
-
-        return $this;
-    }
-
-    /**
-     * Get reg_state
-     *
-     * @return string 
-     */
-    public function getRegState()
-    {
-        return $this->reg_state;
-    }
-
-    /**
-     * Set reg_street
-     *
-     * @param string $regStreet
-     * @return Polis
-     */
-    public function setRegStreet($regStreet)
-    {
-        $this->reg_street = $regStreet;
-
-        return $this;
-    }
-
-    /**
-     * Get reg_street
-     *
-     * @return string 
-     */
-    public function getRegStreet()
-    {
-        return $this->reg_street;
-    }
-
-    /**
-     * Set reg_nhome
-     *
-     * @param string $regNhome
-     * @return Polis
-     */
-    public function setRegNhome($regNhome)
-    {
-        $this->reg_nhome = $regNhome;
-
-        return $this;
-    }
-
-    /**
-     * Get reg_nhome
-     *
-     * @return string 
-     */
-    public function getRegNhome()
-    {
-        return $this->reg_nhome;
-    }
-
-    /**
-     * Set reg_nflat
-     *
-     * @param string $regNflat
-     * @return Polis
-     */
-    public function setRegNflat($regNflat)
-    {
-        $this->reg_nflat = $regNflat;
-
-        return $this;
-    }
-
-    /**
-     * Get reg_nflat
-     *
-     * @return string 
-     */
-    public function getRegNflat()
-    {
-        return $this->reg_nflat;
-    }
-
-    /**
-     * Set reg_territory_ratio
-     *
-     * @param float $regTerritoryRatio
-     * @return Polis
-     */
-    public function setRegTerritoryRatio($regTerritoryRatio)
-    {
-        $this->reg_territory_ratio = $regTerritoryRatio;
-
-        return $this;
-    }
-
-    /**
-     * Get reg_territory_ratio
-     *
-     * @return float 
-     */
-    public function getRegTerritoryRatio()
-    {
-        return $this->reg_territory_ratio;
-    }
-
-    /**
-     * Set polis_start_date
-     *
-     * @param DateTime $polisStartDate
-     * @return Polis
-     */
-    public function setPolisStartDate($polisStartDate)
-    {
-        $this->polis_start_date = $polisStartDate;
-
-        return $this;
-    }
-
-    /**
-     * Get polis_start_date
-     *
-     * @return DateTime 
-     */
-    public function getPolisStartDate()
-    {
-        return $this->polis_start_date;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->drivers = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add drivers
-     *
-     * @param \AppBundle\Entity\Drivers $drivers
-     * @return Polis
-     */
-    public function addDriver(\AppBundle\Entity\Drivers $drivers)
-    {
-        $this->drivers[] = $drivers;
-
-        return $this;
-    }
-
-    /**
-     * Remove drivers
-     *
-     * @param \AppBundle\Entity\Drivers $drivers
-     */
-    public function removeDriver(\AppBundle\Entity\Drivers $drivers)
-    {
-        $this->drivers->removeElement($drivers);
-    }
-
-    /**
-     * Get drivers
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getDrivers()
-    {
-        return $this->drivers;
+        return $this->company_id;
     }
 }
