@@ -11,14 +11,10 @@
 
 namespace AppBundle\Controller;
 
-use PHPExcel_Style_Alignment;
-use PHPExcel_Style_Border;
-use PHPExcel_Style_Fill;
-use PHPExcel_Worksheet_Drawing;
+use AppBundle\Entity\Company;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /**
  * Controller used to manage the application security.
@@ -31,15 +27,53 @@ class PolisController extends Controller
 {
 
     /**
+     * @Route("/order-list", name="order_list")
+     */
+    public function orderListAction(Request $request){
+        
+        $polisService = $this->get("polis_service");
+
+        /*$is_guest = !is_object($this->getUser());
+        
+        $polisService = $this->get("polis_service");
+
+        $polisList = $polisService ->getPolisList($this->getUser());
+         */
+        
+        return $this->render('polis/order_list.html.twig', array(
+            'user' => $this->getUser(),
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'orderList' => $orderList,
+        ));
+
+    }
+
+    /**
      * @Route("/polis-list", name="polis_list")
      */
     public function polisListAction(Request $request){
+        
+        /*$polisService = $this->get("polis_service");
+
+        // reversing Company
+        $polisService ->reverseCompany( 32, $this->getUser()->getId());
+        
+        // adding Company
+        $company = new Company();
+        $company->setCompName('Новый Тест ' . date('d.m.Y H:i'));
+        $company->setType('1');
+        $company->setPolisCountLimit(12);
+
+        $test = $polisService ->addCompany( $company, $this->getUser()->getId());
+        
+        var_dump($test);exit;
+        */
 
         $is_guest = !is_object($this->getUser());
         
         $polisService = $this->get("polis_service");
 
-        $polisList = $polisService ->getPolisList($this->getUser());
+        $polisList = null;//$polisService ->getPolisList($this->getUser());
         
         return $this->render('polis/polis_list.html.twig', array(
             'user' => $this->getUser(),
@@ -96,5 +130,28 @@ class PolisController extends Controller
         ));*/
 
     }
+
+    /**
+     * @Route("/report", name="report")
+     */
+    public function reportAction(Request $request){
+
+        $is_guest = !is_object($this->getUser());
+
+        $polisId = $request ->get("polisid");
+        
+        $breadcrumb = array(
+            array('name' => 'home', 'url' => 'home'),
+            array('name' => 'Отчет', 'url' => 'report'),
+        );
+        
+        return $this->render('polis/report.html.twig', array(
+            'user' => $this->getUser(),
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'breadcrumb' => $breadcrumb,
+        ));
+
+    }
+    
 }
 

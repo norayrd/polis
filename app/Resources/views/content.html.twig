@@ -1,0 +1,319 @@
+{% block stylesheets  %}
+    <link href="assets/js/footable/css/footable.core.css?v=2-0-1" rel="stylesheet" type="text/css" />
+    <link href="assets/js/footable/css/footable.standalone.css" rel="stylesheet" type="text/css" />
+    <link href="assets/js/footable/css/footable-demos.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="assets/js/dataTable/lib/jquery.dataTables/css/DT_bootstrap.css" />
+    <link rel="stylesheet" href="assets/js/dataTable/css/datatables.responsive.css" />
+
+    {% block content_stylesheets %}
+
+    {% endblock content_stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block javascripts %}
+
+    {% block content_javascripts %}
+
+    {% endblock content_javascripts %}
+
+{% endblock javascripts %}
+
+{% block body %}
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+    </div>
+    <!-- TOP NAVBAR -->
+    <nav role="navigation" class="navbar navbar-static-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" class="navbar-toggle" type="button">
+                    <span class="entypo-menu"></span>
+                </button>
+                <button class="navbar-toggle toggle-menu-mobile toggle-left" type="button">
+                    <span class="entypo-list-add"></span>
+                </button>
+
+                <div id="logo-mobile" class="visible-xs">
+                    <h1>Полис
+                        <span>v1.0</span>
+                    </h1>
+                </div>
+
+            </div>
+
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
+                <div id="nt-title-container" class="navbar-left running-text hidden-sm hidden-xs">
+                    <ul class="date-top">
+                        <li class="entypo-calendar" style="margin-right:5px"></li>
+                        <li id="Date"></li>
+                    </ul>
+
+                    <ul id="digital-clock" class="digital">
+                        <li class="entypo-clock" style="margin-right:5px"></li>
+                        <li class="hour"></li>
+                        <li>:</li>
+                        <li class="min"></li>
+                        <li>:</li>
+                        <li class="sec"></li>
+                        <li class="meridiem"></li>
+                    </ul>
+                </div>
+
+                <ul style="margin-right:0;" class="nav navbar-nav navbar-right">
+                    <li>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <img alt="" class="admin-pic img-circle" src="assets\img\icon-user2.png">{{ user.getUserName() }} <b class="caret"></b>
+                        </a>
+                        <ul style="margin-top:14px;" role="menu" class="dropdown-setting dropdown-menu">
+                            <li>
+                                <a href="{{ path('user_profile') }}">
+                                    <span class="entypo-user"></span>&#160;&#160;Учетная запись</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('polis_list') }}">
+                                    <span class="entypo-vcard"></span>&#160;&#160;Журнал</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="{{ path('security_logout') }}">
+                                    <span class="entypo-logout"></span>&#160;&#160;Выход</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- /END OF TOP NAVBAR -->
+
+    <!-- SIDE MENU -->
+    <div id="skin-select">
+        <div id="logo">
+            <h1>Полис
+                <span>v1.0</span>
+            </h1>
+        </div>
+
+        <a id="toggle">
+            <span class="entypo-menu"></span>
+        </a>
+        {#
+        <div class="dark">
+            <form action="#">
+                <span>
+                    <input type="text" name="search" value="" class="search rounded id_search" placeholder="Поиск..." autofocus />
+                </span>
+            </form>
+        </div>
+
+        <div class="search-hover">
+            <form id="demo-2">
+                <input type="search" placeholder="Search Menu..." class="id_search">
+            </form>
+        </div>
+        #}
+
+        <div class="skin-part">
+            <div id="tree-wrap">
+                <div class="side-bar">
+                    <ul id="menu-showhide" class="topnav menu-left-nest">
+                        <li>
+                            <a href="#" style="border-left:0px solid!important;" class="title-menu-left">
+                                <span> Меню пользователя</span>
+                                <!--i data-toggle="tooltip" class="entypo-cog pull-right config-wrap"></i-->
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tooltip-tip ajax-load" href="desktop" title="Рабочий стол">
+                                <i class="entypo-window"></i>
+                                <span>Рабочий стол</span>
+
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tooltip-tip ajax-load" href="polis-list" title="Журнал полисов">
+                                <i class="entypo-newspaper"></i>
+                                <span>Журнал полисов</span>
+
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tooltip-tip ajax-load" href="company-list" title="Компании">
+                                <i class="entypo-star"></i>
+                                <span>Компании</span>
+
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tooltip-tip ajax-load" href="user-list" title="Пользователи">
+                                <i class="entypo-users"></i>
+                                <span>Пользователи</span>
+
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tooltip-tip ajax-load" href="report" title="Отчеты">
+                                <i class="entypo-doc"></i>
+                                <span>Отчеты</span>
+
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- END OF SIDE MENU -->
+
+    <!--  PAPER WRAP -->
+    <div class="wrap-fluid">
+        <div class="container-fluid paper-wrap bevel tlbr">
+
+            <!-- CONTENT -->
+            <!--TITLE -->
+            <div class="row">
+                <div id="paper-top">
+                    <div class="col-sm-3">
+                        <h2 class="tittle-content-header">
+                            <span class="entypo-menu"></span>
+                            <span>{{ breadcrumb|last['name'] }}
+                            </span>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <!--/ TITLE -->
+
+            <!-- BREADCRUMB -->
+            <ul id="breadcrumb">
+            {% set isfirst = 0 %}
+            {% for bk in breadcrumb %}
+
+                {% if isfirst!=0 %}
+                    <li>
+                        <i class="fa fa-lg fa-angle-right"></i>
+                    </li>
+                {% endif %}
+
+                {% if bk['name']=='home' %}
+                    <li>
+                        <span class="entypo-home"></span>
+                    </li>
+                {% else %}
+                    <li><a href="{{ bk['url'] }}" title={{ bk['name'] }}>{{ bk['name'] }}</a>
+                    </li>
+                {% endif %}
+                {% set isfirst = 1 %}
+            {% endfor %}
+            </ul>
+
+            <!-- END OF BREADCRUMB -->
+
+            {% block block_content %}
+
+            {% endblock %}
+
+            <!-- /END OF CONTENT -->
+
+
+
+            <!-- FOOTER -->
+            <div class="footer-space"></div>
+            <div id="footer">
+                <div class="devider-footer-left"></div>
+                <div class="time">
+                    <p id="spanDate"></p>
+                    <p id="clock"></p>
+                </div>
+                <div class="copyright">norayrd 2016 All Rights Reserved</div>
+                <div class="devider-footer"></div>
+
+            </div>
+            <!-- / END OF FOOTER -->
+
+
+        </div>
+    </div>
+    <!--  END OF PAPER WRAP -->
+
+    <!-- MAIN EFFECT -->
+    <script type="text/javascript" src="assets/js/preloader.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="assets/js/app.js"></script>
+    <script type="text/javascript" src="assets/js/load.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+
+
+    <!-- /MAIN EFFECT -->
+
+    <!-- GAGE -->
+    <script type="text/javascript" src="assets/js/toggle_close.js"></script>
+    <script src="assets/js/footable/js/footable.js?v=2-0-1" type="text/javascript"></script>
+    <script src="assets/js/footable/js/footable.sort.js?v=2-0-1" type="text/javascript"></script>
+    <script src="assets/js/footable/js/footable.filter.js?v=2-0-1" type="text/javascript"></script>
+    <script src="assets/js/footable/js/footable.paginate.js?v=2-0-1" type="text/javascript"></script>
+
+
+
+
+    {#
+    <script type="text/javascript">
+    $(function() {
+        $('.footable-res').footable();
+    });
+    </script>
+    <script type="text/javascript">
+    $(function() {
+        $('#footable-res2').footable().bind('footable_filtering', function(e) {
+            var selected = $('.filter-status').find(':selected').text();
+            if (selected && selected.length > 0) {
+                e.filter += (e.filter && e.filter.length > 0) ? ' ' + selected : selected;
+                e.clear = !e.filter;
+            }
+        });
+
+        $('.clear-filter').click(function(e) {
+            e.preventDefault();
+            $('.filter-status').val('');
+            $('table.demo').trigger('footable_clear_filter');
+        });
+
+        $('.filter-status').change(function(e) {
+            e.preventDefault();
+            $('table.demo').trigger('footable_filter', {
+                filter: $('#filter').val()
+            });
+        });
+
+        $('.filter-api').click(function(e) {
+            e.preventDefault();
+
+            //get the footable filter object
+            var footableFilter = $('table').data('footable-filter');
+
+            alert('about to filter table by "tech"');
+            //filter by 'tech'
+            footableFilter.filter('tech');
+
+            //clear the filter
+            if (confirm('clear filter now?')) {
+                footableFilter.clearFilter();
+            }
+        });
+    });
+    </script>
+    #}
+
+{% endblock %}

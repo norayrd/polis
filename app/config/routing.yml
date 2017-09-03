@@ -44,3 +44,15 @@ polis_xls:
 user_profile:
     pattern:   /user-profile
     defaults:  { _controller: AppBundle:Polis:userProfile }
+
+order_list:
+    pattern:   /order-list
+    defaults:  { _controller: AppBundle:Polis:orderList }
+
+desktop:
+    pattern:   /desktop
+    defaults:  { _controller: AppBundle:Main:desktop }
+
+report:
+    pattern:   /report
+    defaults:  { _controller: AppBundle:Polis:report }

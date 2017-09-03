@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use DateTime;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,4 +13,48 @@ use Doctrine\ORM\EntityRepository;
  */
 class CompanyRepository extends EntityRepository
 {
+
+    public function reverseCompany( $companyId, $userId) {
+
+        $em = $this->getEntityManager();
+        
+        $company = $this ->findOneBy( array( "company_id" => $companyId, "actual_id" => NULL) );
+        
+        if ($company !== NULL) {
+        
+            $company->setActualId( $company->getCompanyId() );
+            $company->setDateEndFact( new DateTime() );
+            $company->setUserId2( $userId );
+        
+            $company = $em->persist($company);
+            $em->flush();
+            
+            $company = $this ->findOneBy( array( "company_id" => $companyId ) );
+        }
+
+        return $company;
+    }
+    
+    public function addCompany( $company, $userId) {
+
+        $em = $this->getEntityManager();
+
+        if ($company !== NULL) {
+            
+            try {
+                $company->setUserId1( $userId );
+                $company->setDateBeginFact( new \dateTime() );
+                $company->setDateEndFact( new \dateTime('9999-12-31 23:59:59') );
+                $em->persist($company);
+                $em->flush();
+            } catch (\Exception $ex) {
+                return null;
+            }
+            
+            $company = $this ->findOneBy( array( "company_id" => $company->getCompanyId() ) );
+        }
+        
+        return $company;
+    }
+    
 }

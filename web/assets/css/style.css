@@ -3031,19 +3031,3 @@ button.navbar-toggle.toggle-menu-mobile {
     position: absolute;
     right: 40px;
 }
-.invoice-header {
-    background: #EFEFF0;
-    color: #fff;
-    border-radius: 4px 4px 0 0;
-    margin: -16px 0 30px 0px;
-}
-small.pull-right {
-    color: #fff;
-    font-size: 17px;
-    margin: 8px 0;
-}
-.page-header {
-    padding-bottom: 9px!important;
-    margin: 30px 0 20px!important;
-    border-bottom: 0px solid #eee!important;
-}

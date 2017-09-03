@@ -22,14 +22,31 @@ class Company
     private $company_id;
 
     /**
-     * @ORM\Column(type="string" )
+     * @ORM\Column(type="string", unique=true )
      */
     private $comp_name;
 
     /**
-     * @ORM\Column(type="datetime")
+     * 1 - Insurance company; 2 - Agent Company
+     * @ORM\Column(type="string", columnDefinition="ENUM('1', '2')" )
      */
-    private $date_curr;
+    private $type;
+
+    /**
+     * Maximal polis count limit
+     * @ORM\Column(type="integer", options={"defoult": "12"} )
+     */
+    private $polis_count_limit;
+
+    /**
+     * @ORM\Column(type="datetime", options={"default": "0000-00-00 00:00:00"} )
+     */
+    private $date_begin_fact;
+
+    /**
+     * @ORM\Column(type="datetime", options={"default": "9999-12-31 23:59:59"})
+     */
+    private $date_end_fact;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -39,7 +56,13 @@ class Company
     /**
      * @ORM\Column(type="integer")
      */
-    private $user_id;
+    private $user_id1;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $user_id2;
+
 
 
     /**
@@ -76,26 +99,49 @@ class Company
     }
 
     /**
-     * Set date_curr
+     * Set date_begin_fact
      *
-     * @param \DateTime $dateCurr
+     * @param \DateTime $dateBeginFact
      * @return Company
      */
-    public function setDateCurr($dateCurr)
+    public function setDateBeginFact($dateBeginFact)
     {
-        $this->date_curr = $dateCurr;
+        $this->date_begin_fact = $dateBeginFact;
     
         return $this;
     }
 
     /**
-     * Get date_curr
+     * Get date_begin_fact
      *
      * @return \DateTime 
      */
-    public function getDateCurr()
+    public function getDateBeginFact()
     {
-        return $this->date_curr;
+        return $this->date_begin_fact;
+    }
+
+    /**
+     * Set date_end_fact
+     *
+     * @param \DateTime $dateEndFact
+     * @return Company
+     */
+    public function setDateEndFact($dateEndFact)
+    {
+        $this->date_end_fact = $dateEndFact;
+
+        return $this;
+    }
+
+    /**
+     * Get date_end_fact
+     *
+     * @return \DateTime 
+     */
+    public function getDateEndFact()
+    {
+        return $this->date_end_fact;
     }
 
     /**
@@ -122,25 +168,94 @@ class Company
     }
 
     /**
-     * Set user_id
+     * Set user_id1
      *
-     * @param integer $userId
+     * @param integer $userId1
      * @return Company
      */
-    public function setUserId($userId)
+    public function setUserId1($userId1)
     {
-        $this->user_id = $userId;
+        $this->user_id1 = $userId1;
     
         return $this;
     }
 
     /**
-     * Get user_id
+     * Get user_id1
      *
      * @return integer 
      */
-    public function getUserId()
+    public function getUserId1()
     {
-        return $this->user_id;
+        return $this->user_id1;
+    }
+
+    /**
+     * Set user_id2
+     *
+     * @param integer $userId2
+     * @return Company
+     */
+    public function setUserId2($userId2)
+    {
+        $this->user_id2 = $userId2;
+    
+        return $this;
+    }
+
+    /**
+     * Get user_id2
+     *
+     * @return integer 
+     */
+    public function getUserId2()
+    {
+        return $this->user_id2;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return Company
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set polis_count_limit
+     *
+     * @param string $polisCountLimit
+     * @return Company
+     */
+    public function setPolisCountLimit($polisCountLimit)
+    {
+        $this->polis_count_limit = $polisCountLimit;
+    
+        return $this;
+    }
+
+    /**
+     * Get polis_count_limit
+     *
+     * @return string 
+     */
+    public function getPolisCountLimit()
+    {
+        return $this->polis_count_limit;
     }
 }

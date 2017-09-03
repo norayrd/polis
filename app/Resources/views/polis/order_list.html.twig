@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Полис V 1.0{% endblock %}
+{% block title %}Полис V 1.0 - Журнал заявок/полисов{% endblock %}
 
 {% block stylesheets  %}
 
@@ -64,20 +64,16 @@
                 <ul style="margin-right:0;" class="nav navbar-nav navbar-right">
                     <li>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <img alt="" class="admin-pic img-circle" src="http://api.randomuser.me/portraits/thumb/men/10.jpg">Hi, Dave Mattew <b class="caret"></b>
+                            <img alt="" class="admin-pic img-circle" src="" 1src="http://api.randomuser.me/portraits/thumb/men/10.jpg">{{ user.getUserName() }} <b class="caret"></b>
                         </a>
                         <ul style="margin-top:14px;" role="menu" class="dropdown-setting dropdown-menu">
                             <li>
-                                <a href="#">
-                                    <span class="entypo-user"></span>&#160;&#160;My Profile</a>
+                                <a href="{{ path('user_profile') }}">
+                                    <span class="entypo-user"></span>&#160;&#160;Учетная запись</a>
                             </li>
                             <li>
-                                <a href="#">
-                                    <span class="entypo-vcard"></span>&#160;&#160;Account Setting</a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="entypo-lifebuoy"></span>&#160;&#160;Help</a>
+                                <a href="{{ path('polis_list') }}">
+                                    <span class="entypo-vcard"></span>&#160;&#160;Журнал</a>
                             </li>
                             <li class="divider"></li>
                             <li>
@@ -85,11 +81,6 @@
                                     <span class="entypo-logout"></span>&#160;&#160;Выход</a>
                             </li>
                         </ul>
-                    </li>
-                    <li class="hidden-xs">
-                        <a class="toggle-left" href="#">
-                            <span style="font-size:20px;" class="entypo-list-add"></span>
-                        </a>
                     </li>
                 </ul>
 
@@ -175,11 +166,11 @@
                 </li>
                 <li><i class="fa fa-lg fa-angle-right"></i>
                 </li>
-                <li><a href="#" title="Sample page 1">Полис</a>
+                <li><a href="#" >Полис</a>
                 </li>
                 <li><i class="fa fa-lg fa-angle-right"></i>
                 </li>
-                <li><a href="#" title="Sample page 1">Журнал</a>
+                <li><a href="#" >Журнал</a>
                 </li>
                 <!--li class="pull-right">
                     <div class="input-group input-widget">
@@ -282,6 +273,9 @@
                                             <th>
                                                 Статус
                                             </th>
+                                            <th>
+                                                XLS
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -311,6 +305,9 @@
                                             <td data-value="1">
                                                 <span class="status-metro status-active" title="Active">Active</span>
                                             </td>
+                                            <td data-value="1">
+                                                <a href="/polis-xls/{{ polis.getId() }}"><i class="icon-export" title='Export to Excel' ></i></a>
+                                            </td>
                                         </tr>
     {% else %}
         <tr>
@@ -321,7 +318,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td colspan="6">
+                                            <td colspan="10">
                                                 <div class="pagination pagination-centered"></div>
                                             </td>
                                         </tr>

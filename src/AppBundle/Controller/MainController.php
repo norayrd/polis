@@ -42,7 +42,28 @@ class MainController extends Controller
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
         ));*/
         
-        return $this->redirect('/polis-list');
+        return $this->redirect('/desktop');
+
+    }
+
+    /**
+     * @Route("/desktop", name="desktop")
+     */
+    public function desktopAction(Request $request){
+
+        $is_guest = !is_object($this->getUser());
+        
+        $breadcrumb = array(
+            array('name' => 'home', 'url' => 'home'),
+            array('name' => 'branch2', 'url' => 'url2'),
+            array('name' => 'branch3', 'url' => 'url3'),
+            );
+        
+        return $this->render('polis/desktop.html.twig', array(
+            'user' => $this->getUser(),
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'breadcrumb' => $breadcrumb,
+        ));
 
     }
 

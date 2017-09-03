@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'content.html.twig' %}
 
 {% block title %}Полис V 1.0{% endblock %}
 

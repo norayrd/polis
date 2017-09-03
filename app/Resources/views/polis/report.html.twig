@@ -1,0 +1,228 @@
+{% extends 'base.html.twig' %}
+
+{% use 'content.html.twig' %}
+
+{% block title %}Полис V 1.0{% endblock %}
+
+{% block content_stylesheets  %}
+    
+    <link rel="stylesheet" href="assets/invoice.css">
+
+{% endblock %}
+    
+{% block content_javascripts %}
+
+{% endblock %}
+
+{% block block_content %}
+    <div class="content-wrap">
+        <div class="page-extra">
+
+            <!-- Main content -->
+            <section class="content invoice">
+                <!-- title row -->
+                <div class="row">
+                    <div class="col-xs-12 invoice-col">
+                        <small class="pull-left">г.Краснодар</small>
+                        <small class="pull-right">"28" АВГУСТА 2017 г.</small>
+                        <br>
+                        <br>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 invoice-header">
+                        <h2 class="page-header">
+                            <!--i class="fa fa-globe"></i--> АГЕНТ РСА
+                        </h2>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- info row -->
+                
+                <div class="row invoice-info">
+                    <div class="col-sm-12 invoice-col">
+                        <center>
+                            <br><strong>Реестр передачи договоров страхования №64</strong>
+                            <br>Агентом Танашевич С.В. № идентификационный
+                            <br>ФИО
+                            <br>за период с 01.07.2017 г. до 28.08.2017
+                        </center>
+                    </div>
+                </div>
+                <div class="row invoice-info">
+                    <div class="col-sm-12 invoice-col">
+                        <br>1. Заключены договоры страхования и получены страховые взносы (премии), в т.ч. по ранее заключенным договорам страхования
+                        <br>
+                        <br>
+                    </div>
+                </div>
+                {#<div class="row invoice-info">
+                    <div class="col-sm-4 invoice-col">
+                        From
+                        <address>
+                            <strong>Admin, Inc.</strong>
+                            <br>795 Folsom Ave, Suite 600
+                            <br>San Francisco, CA 94107
+                            <br>Phone: (804) 123-5432
+                            <br/>Email: info@almasaeedstudio.com
+                        </address>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-4 invoice-col">
+                        To
+                        <address>
+                            <strong>John Doe</strong>
+                            <br>795 Folsom Ave, Suite 600
+                            <br>San Francisco, CA 94107
+                            <br>Phone: (555) 539-1037
+                            <br/>Email: john.doe@example.com
+                        </address>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-4 invoice-col">
+                        <b>Invoice #007612</b>
+                        <br/>
+                        <br/>
+                        <b>Order ID:</b> 4F3S8J
+                        <br/>
+                        <b>Payment Due:</b> 2/22/2014
+                        <br/>
+                        <b>Account:</b> 968-34567
+                    </div>
+                    <!-- /.col -->
+                </div>
+                #}
+                <!-- /.row -->
+
+                <!-- Table row -->
+                <div class="row">
+                    <div class="col-xs-12 table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="valign-top-center" rowspan="2">#№ п/п</th>
+                                    <th class="valign-top-center" colspan="2">Полис</th>
+                                    <th class="valign-top-center" rowspan="2">Ф.И.О. страхователя</th>
+                                    <th class="valign-top-center" rowspan="2">Дата договора</th>
+                                    <th class="valign-top-center" rowspan="2">Поступившая страховая премия (взнос). руб.</th>
+                                    <th class="valign-top-center" rowspan="2">Квитанция формы А-7 (при использовании)</th>
+                                    <th class="valign-top-center" rowspan="2">№ плат. документа</th>
+                                    <th class="valign-top-center" rowspan="2">Дата платежа</th>
+                                    <th class="valign-top-center" rowspan="2">Тип оплаты страхователем (терминал (Т), банк (Б), наличные (Н))</th>
+                                </tr>
+                                <tr>
+                                    <th class="valign-top-center">серия</th>
+                                    <th class="valign-top-center">Номер</th>
+                                </tr>
+                                <tr>
+                                    <th class="valign-top-center">1</th>
+                                    <th class="valign-top-center">2</th>
+                                    <th class="valign-top-center">3</th>
+                                    <th class="valign-top-center">4</th>
+                                    <th class="valign-top-center">5</th>
+                                    <th class="valign-top-center">6</th>
+                                    <th class="valign-top-center">7</th>
+                                    <th class="valign-top-center">8</th>
+                                    <th class="valign-top-center">9</th>
+                                    <th class="valign-top-center">10</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>ЕЕЕ</td>
+                                    <td>2002913721</td>
+                                    <td>Репченко Олег Олегович</td>
+                                    <td>20.08.17</td>
+                                    <td>7120.02</td>
+                                    <td>079301-008</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>ЕЕЕ</td>
+                                    <td>2002913723</td>
+                                    <td>Шалюбина Юлия Олеговна</td>
+                                    <td>24.08.17</td>
+                                    <td>6588.80</td>
+                                    <td>079303-008</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>ЕЕЕ</td>
+                                    <td>2002913393</td>
+                                    <td>Головань Павел Александрович</td>
+                                    <td>20.08.17</td>
+                                    <td>5555.55</td>
+                                    <td>079345-008</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <!-- accepted payments column -->
+                    <div class="col-xs-6">
+                        {#
+                        <p class="lead">Payment Methods:</p>
+                        <img src="assets/img/credit/visa.png" alt="Visa" />
+                        <img src="assets/img/credit/mastercard.png" alt="Mastercard" />
+                        <img src="assets/img/credit/american-express.png" alt="American Express" />
+                        <img src="assets/img/credit/paypal2.png" alt="Paypal" />
+                        <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+                        </p>
+                        #}
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-xs-6">
+                        {#<p class="lead">Amount Due 2/22/2014</p>#}
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <th style="width:50%">Всего:</th>
+                                    <td> 3 полиса</td>
+                                </tr>
+                                <tr>
+                                    <th>На сумму</th>
+                                    <td>12345.67</td>
+                                </tr>
+                                <tr>
+                                    <th>Взносов:</th>
+                                    <td>2345.67</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+
+            </section>
+            <!-- this row will not appear when printing -->
+            <div class="row no-print">
+                <div class="col-xs-12">
+                    <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Печать</button>
+                    <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Экспорт в Excel</button>
+                </div>
+            </div>
+            <!-- /.content -->
+        </div>
+    </div>
+                        
+
+{% endblock %}
+
+
