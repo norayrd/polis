@@ -41,7 +41,7 @@ class PolisController extends Controller
             array('name' => 'Журнал заявок', 'url' => 'order-list'),
         );
 
-        $page_title = $this->container->getParameter('default_title') . ' - ' . end($breadcrumb)['name'];
+        $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
 
         return $this->render('polis/order_list.html.twig', array(
             'user' => $this->getUser(),
@@ -85,7 +85,7 @@ class PolisController extends Controller
             array('name' => 'Журнал полисов', 'url' => 'polis-list'),
         );
 
-        $page_title = $this->container->getParameter('default_title') . ' - ' . end($breadcrumb)['name'];
+        $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
 
         return $this->render('polis/polis_list.html.twig', array(
             'user' => $this->getUser(),
@@ -159,7 +159,7 @@ class PolisController extends Controller
             array('name' => 'Отчет', 'url' => 'report'),
         );
         
-        $page_title = $this->container->getParameter('default_title') . ' - ' . end($breadcrumb)['name'];
+        $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
 
         return $this->render('polis/report.html.twig', array(
             'user' => $this->getUser(),
@@ -186,7 +186,7 @@ class PolisController extends Controller
             array('name' => 'Реестр компаний', 'url' => 'company-list'),
         );
 
-        $page_title = $this->container->getParameter('default_title') . ' - ' . end($breadcrumb)['name'];
+        $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
 
         return $this->render('polis/company_list.html.twig', array(
             'user' => $this->getUser(),
@@ -214,7 +214,7 @@ class PolisController extends Controller
             array('name' => 'Реестр пользователей', 'url' => 'company-list'),
         );
 
-        $page_title = $this->container->getParameter('default_title') . ' - ' . end($breadcrumb)['name'];
+        $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
 
         return $this->render('polis/user_list.html.twig', array(
             'user' => $this->getUser(),
