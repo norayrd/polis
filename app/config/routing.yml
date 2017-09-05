@@ -25,10 +25,6 @@ check_email:
     pattern:   /sign-up/check-email
     defaults:  { _controller: AppBundle:Security:checkEmail }
 
-polis_list:
-    pattern:   /polis-list
-    defaults:  { _controller: AppBundle:Polis:polisList }
-
 polis_new:
     pattern:   /polis-new
     defaults:  { _controller: AppBundle:Polis:polisNew }
@@ -56,3 +52,15 @@ desktop:
 report:
     pattern:   /report
     defaults:  { _controller: AppBundle:Polis:report }
+
+polis_list:
+    pattern:   /polis-list
+    defaults:  { _controller: AppBundle:Polis:polisList }
+
+company_list:
+    pattern:   /company-list
+    defaults:  { _controller: AppBundle:Polis:companyList }
+
+user_list:
+    pattern:   /user-list
+    defaults:  { _controller: AppBundle:Polis:userList }

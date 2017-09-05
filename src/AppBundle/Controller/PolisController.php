@@ -11,7 +11,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Company;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,18 +30,24 @@ class PolisController extends Controller
      */
     public function orderListAction(Request $request){
         
-        $polisService = $this->get("polis_service");
-
-        /*$is_guest = !is_object($this->getUser());
+        $is_guest = !is_object($this->getUser());
         
         $polisService = $this->get("polis_service");
 
-        $polisList = $polisService ->getPolisList($this->getUser());
-         */
+        $orderList = null;//$polisService ->getorderList($this->getUser());
         
+        $breadcrumb = array(
+            array('name' => 'home', 'url' => 'home'),
+            array('name' => 'Журнал заявок', 'url' => 'order-list'),
+        );
+
+        $page_title = $this->container->getParameter('default_title') . ' - ' . end($breadcrumb)['name'];
+
         return $this->render('polis/order_list.html.twig', array(
             'user' => $this->getUser(),
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'page_title' => $page_title,
+            'breadcrumb' => $breadcrumb,
             'orderList' => $orderList,
         ));
 
@@ -75,9 +80,18 @@ class PolisController extends Controller
 
         $polisList = null;//$polisService ->getPolisList($this->getUser());
         
+        $breadcrumb = array(
+            array('name' => 'home', 'url' => 'home'),
+            array('name' => 'Журнал полисов', 'url' => 'polis-list'),
+        );
+
+        $page_title = $this->container->getParameter('default_title') . ' - ' . end($breadcrumb)['name'];
+
         return $this->render('polis/polis_list.html.twig', array(
             'user' => $this->getUser(),
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'page_title' => $page_title,
+            'breadcrumb' => $breadcrumb,
             'polisList' => $polisList,
         ));
 
@@ -120,11 +134,11 @@ class PolisController extends Controller
 
         $is_guest = !is_object($this->getUser());
 
-        $polisId = $request ->get("polisid");
+        $puserId = $request ->get("userid");
         
         var_dump('Sorry, but "user account" yet not ready!');exit;
         
-        /*return $this->render('polis/polis-view.html.twig', array(
+        /*return $this->render('polis/user-view.html.twig', array(
             'user' => $this->getUser(),
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
         ));*/
@@ -145,13 +159,72 @@ class PolisController extends Controller
             array('name' => 'Отчет', 'url' => 'report'),
         );
         
+        $page_title = $this->container->getParameter('default_title') . ' - ' . end($breadcrumb)['name'];
+
         return $this->render('polis/report.html.twig', array(
             'user' => $this->getUser(),
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'page_title' => $page_title,
             'breadcrumb' => $breadcrumb,
         ));
 
     }
     
+    /**
+     * @Route("/company-list", name="company_list")
+     */
+    public function companyListAction(Request $request){
+        
+        $is_guest = !is_object($this->getUser());
+        
+        $polisService = $this->get("polis_service");
+
+        $companyList = null;//$polisService ->getPolisList($this->getUser());
+        
+        $breadcrumb = array(
+            array('name' => 'home', 'url' => 'home'),
+            array('name' => 'Реестр компаний', 'url' => 'company-list'),
+        );
+
+        $page_title = $this->container->getParameter('default_title') . ' - ' . end($breadcrumb)['name'];
+
+        return $this->render('polis/company_list.html.twig', array(
+            'user' => $this->getUser(),
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'page_title' => $page_title,
+            'breadcrumb' => $breadcrumb,
+            'companyList' => $companyList,
+        ));
+
+    }
+    
+    /**
+     * @Route("/user-list", name="user_list")
+     */
+    public function userListAction(Request $request){
+        
+        $is_guest = !is_object($this->getUser());
+        
+        $polisService = $this->get("polis_service");
+
+        $userList = null;//$polisService ->getUserList($this->getUser());
+        
+        $breadcrumb = array(
+            array('name' => 'home', 'url' => 'home'),
+            array('name' => 'Реестр пользователей', 'url' => 'company-list'),
+        );
+
+        $page_title = $this->container->getParameter('default_title') . ' - ' . end($breadcrumb)['name'];
+
+        return $this->render('polis/user_list.html.twig', array(
+            'user' => $this->getUser(),
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'page_title' => $page_title,
+            'breadcrumb' => $breadcrumb,
+            'userList' => $userList,
+        ));
+
+    }
+
 }
 

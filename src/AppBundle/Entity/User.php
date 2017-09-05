@@ -47,9 +47,26 @@ class User implements UserInterface
     private $lastname;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $patronymic;
+
+    /**
      * @ORM\Column(type="string", unique=true)
      */
     private $email;
+
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $address;
+
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $phone;
 
     /**
      * @ORM\Column(type="string")

@@ -27,10 +27,26 @@ class Company
     private $comp_name;
 
     /**
+     * @ORM\Column(type="string", nullable=true )
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="string", nullable=true )
+     */
+    private $phone;
+
+    /**
      * 1 - Insurance company; 2 - Agent Company
      * @ORM\Column(type="string", columnDefinition="ENUM('1', '2')" )
      */
     private $type;
+
+    /**
+     * 1 - Active; 2 - Inactive
+     * @ORM\Column(type="string", columnDefinition="ENUM('1', '2')" )
+     */
+    private $status;
 
     /**
      * Maximal polis count limit

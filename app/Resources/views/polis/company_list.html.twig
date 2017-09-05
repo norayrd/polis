@@ -19,10 +19,10 @@
                     <div class="col-sm-12">
 
                         <div class="nest" id="FootableClose">
-                            <div class="title-alt">
+                            {#<div class="title-alt">
                                 <h6>
                                     Журнал заявок / полисов</h6>
-                                {#<div class="titleClose">
+                                <div class="titleClose">
                                     <a class="gone" href="#FootableClose">
                                         <span class="entypo-cancel"></span>
                                     </a>
@@ -31,9 +31,9 @@
                                     <a class="nav-toggle-alt" href="#Footable">
                                         <span class="entypo-up-open"></span>
                                     </a>
-                                </div>#}
+                                </div>
 
-                            </div>
+                            </div>#}
 
                             <div class="body-nest" id="Footable">
 
@@ -46,72 +46,32 @@
                                                 ID
                                             </th>
                                             <th>
-                                                Стр. компания
+                                                Название
                                             </th>
                                             <th>
-                                                Кол.-во
+                                                Адрес
                                             </th>
                                             <th>
-                                                Номер от
+                                                Телефон
                                             </th>
                                             <th>
-                                                Номер до
-                                            </th>
-                                            <th>
-                                                Дата от
-                                            </th>
-                                            <th>
-                                                Дата до
-                                            </th>
-                                            <th data-hide="phone,tablet">
-                                                Квит. от
-                                            </th>
-                                            <th data-hide="phone,tablet">
-                                                Квит. до
+                                                Тип
                                             </th>
                                             <th>
                                                 Статус
                                             </th>
-                                            <th>
-                                                Компания
-                                            </th>
-                                            <th>
-                                                Агент
-                                            </th>
-                                            <th>
-                                                Причина
-                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-    {% for polis in polisList %}
+    {% for company in companyList %}
                                         <tr>
-                                            <td data-value="{{ polis.getId() }}"><a href="#">{{ polis.getId() }}</a></td>
-                                            <td>{{ polis.getTrMake() }}</td>
-                                            <td>{{ polis.getTrModel() }}</td>
-                                            <td>{{ polis.getTrYear() }} ({{ polis.getTrTrueYear() }})</td>
-                                            {#<td>{{ polis.getTrPower() }}</td>
-                                            <td>{{ polis.getTrTs() }}</td>
-                                            <td>{{ polis.getTrDocSerya() }}-{{ polis.getTrDocNumber() }}</td>
-                                            <td>{{ polis.getTrDocDate()|date("d/m/Y") }} ({{ polis.getTrDocTrue_date()|date("d/m/Y") }})</td>
-                                            <td>{{ polis.getTrVinType() }}</td>
-                                            <td>{{ polis.getTrVinNumber() }}</td>#}
-                                            <td>{{ polis.getTrCarNumber() }}</td>
-                                            <td>{{ polis.getOwnerSurname() }}</td>
-                                            <td>{{ polis.getOwnerName() }}</td>
-                                            {#<td>{{ polis.getOwnerMiddlename() }}</td>#}
-                                            {# <td>{{ polis.getOwnerNoMiddlename() }}</td> #}
-                                            {#<td>{{ polis.getOwnerBirthday()|date("d/m/Y") }} ({{ polis.getOwnerTrueBirthday()|date("d/m/Y") }})</td>
-                                            <td>{{ polis.getOwnerPaspSerya() }}-{{ polis.getOwnerPaspNumber() }}</td>
-                                            <td>{{ polis.getOwnerPaspDate()|date("d/m/Y") }} ({{ polis.getOwnerPaspTrueDate()|date("d/m/Y") }})</td>
-                                            <td>{{ polis.getRegCity() }}, {{ polis.getRegStateType() }} {{ polis.getRegState() }}, {{ polis.getRegStreet() }}, {{ polis.getRegNhome() }}, кв {{ polis.getRegNflat() }}</td>
-                                            <td>{{ polis.getRegTerritoryRatio() }}</td>#}
-                                            <td>{{ polis.getPolisStartDate()|date("d/m/Y") }}</td>
+                                            <td data-value="{{ company.getCompanyId() }}"><a href="#">{{ company.getCompanyId() }}</a></td>
+                                            <td>{{ company.getCompName() }}</td>
+                                            <td>{{ company.getAddress() }}</td>
+                                            <td>{{ company.getPhone() }}</td>
+                                            <td>{{ company.getType() }}</td>
                                             <td data-value="1">
                                                 <span class="status-metro status-active" title="Active">Active</span>
-                                            </td>
-                                            <td data-value="1">
-                                                <a href="/polis-xls/{{ polis.getId() }}"><i class="icon-export" title='Export to Excel' ></i></a>
                                             </td>
                                         </tr>
     {% else %}
