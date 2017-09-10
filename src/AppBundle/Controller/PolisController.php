@@ -379,7 +379,7 @@ class PolisController extends Controller
                     $puser->setPhone($pphone);
                     //$puser->setCompanyid($pcompanyid);
                     
-                    if ($this->getUser()->haveRole(['ROLE_ADMIN','ROLE_TOPMANAGER']) ) {
+                    if ($this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
                         $puser->setRoles($proles);
                     }
                     
