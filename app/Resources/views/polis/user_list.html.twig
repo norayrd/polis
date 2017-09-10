@@ -69,9 +69,6 @@
                                             <th {#data-hide="phone,tablet"#}>
                                                 Группа прав
                                             </th>
-                                            <th>
-                                                Статус
-                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -90,9 +87,6 @@
                                                     <span class="{{ polRoles[rol]['icon'] }}" title="{{ polRoles[rol]['name'] }}"></span>
                                                     
                                                 {% endfor %}
-                                            </td>
-                                            <td data-value="1">
-                                                <span class="status-metro status-disabled" title="Disabled">Disabled</span>
                                             </td>
                                         </tr>
     {% else %}
