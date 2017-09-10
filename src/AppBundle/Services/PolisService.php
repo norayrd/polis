@@ -45,6 +45,11 @@ class PolisService {
         return $this->em->getRepository('AppBundle:Company') -> addCompany($company, $userId);
     }
 
+    public function getCompanyById( $user, $pcompanyId) {
+
+        return $this->em->getRepository('AppBundle:Company') -> findOneBy(array('company_id' => $pcompanyId));
+    }
+
     public function getCompanyList( $userId) {
 
         return $this->em->getRepository('AppBundle:Company') -> findBy(array());

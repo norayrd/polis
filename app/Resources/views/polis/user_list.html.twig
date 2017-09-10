@@ -57,16 +57,16 @@
                                             <th>
                                                 E-mail
                                             </th>
-                                            <th data-hide="phone,tablet">
+                                            <th {#data-hide="phone,tablet"#}>
                                                 Адрес
                                             </th>
-                                            <th data-hide="phone,tablet">
+                                            <th {#data-hide="phone,tablet"#}>
                                                 Телефон
                                             </th>
-                                            <th data-hide="phone,tablet">
+                                            <th {#data-hide="phone,tablet"#}>
                                                 Компания
                                             </th>
-                                            <th data-hide="phone,tablet">
+                                            <th {#data-hide="phone,tablet"#}>
                                                 Группа прав
                                             </th>
                                             <th>
@@ -77,15 +77,20 @@
                                     <tbody>
     {% for puser in userList %}
                                         <tr>
-                                            <td data-value="{{ puser.getId() }}"><a href="{{ path('user_view',{'puserid': puser.id}) }}">{{ puser.getId() }}</a></td>
+                                            <td data-value="{{ puser.getId() }}">{{ puser.getId() }} <a href="{{ path('user_view',{'puserid': puser.id}) }}"><span class="fontawesome-pencil"></span></a></td>
                                             <td>{{ puser.getLastname() }}</td>
                                             <td>{{ puser.getFirstname() }}</td>
                                             <td>{{ puser.getPatronymic() }}</td>
                                             <td>{{ puser.getEmail() }}</td>
                                             <td>{{ puser.getAddress() }}</td>
                                             <td>{{ puser.getPhone() }}</td>
-                                            <td>{{ puser.getCompany() }}</td>
-                                            <td>{{ puser.getRole() }}</td>
+                                            <td>{{ puser.getCompany().getCompName() }}</td>
+                                            <td>
+                                                {% for rol in puser.getRoles() %}
+                                                    <span class="{{ polRoles[rol]['icon'] }}" title="{{ polRoles[rol]['name'] }}"></span>
+                                                    
+                                                {% endfor %}
+                                            </td>
                                             <td data-value="1">
                                                 <span class="status-metro status-disabled" title="Disabled">Disabled</span>
                                             </td>

@@ -187,10 +187,6 @@ class PolisController extends Controller
             return $this->redirect('/desktop');
         }
         
-        var_dump($userRoles);exit;
-        
-        //["ROLE_USER"]
-        
         $polisService = $this->get("polis_service");
 
         $companyList = $polisService ->getCompanyList($this->getUser());
@@ -251,7 +247,18 @@ class PolisController extends Controller
         $polisService = $this->get("polis_service");
 
         $userList = $polisService ->getUserList($this->getUser());
+
+        $polisRoles = $this->container->getParameter('polis_roles');
         
+        $polRoles = array();
+        
+        foreach ($polisRoles as $value) {
+            $polRoles[$value['id']] = array(
+                'name' => $value['name'],
+                'icon' => $value['icon'],
+            );
+        }
+
         $breadcrumb = array(
             array('name' => 'home', 'url' => 'home'),
             array('name' => 'Реестр пользователей', 'url' => 'user-list'),
@@ -265,6 +272,7 @@ class PolisController extends Controller
             'page_title' => $page_title,
             'breadcrumb' => $breadcrumb,
             'userList' => $userList,
+            'polRoles' => $polRoles,
         ));
 
     }
@@ -288,7 +296,7 @@ class PolisController extends Controller
         }
         
         $polisRoles = $this->container->getParameter('polis_roles');
-        
+                
         $puserRoles = array();
         
         if (is_object($puser)) {
@@ -298,11 +306,12 @@ class PolisController extends Controller
                 $puserRoles[$key] = array(
                     'key' => $key, 
                     'name' => $value['name'], 
-                    'checked' => in_array($value['id'], $puser->getRoles()) 
+                    'checked' => in_array($value['id'], $puser->getRoles()),
+                    'icon' => $value['icon'],
                 );
             }
         }
-        
+
         $breadcrumb = array(
             array('name' => 'home', 'url' => 'home'),
             array('name' => 'Реестр пользователей', 'url' => 'user-list'),
@@ -347,9 +356,11 @@ class PolisController extends Controller
             
             $proles = array();
             
-            foreach ($puserroles as $value) {
-                if (isset($polisRoles[$value])) {
-                    $proles[] = $polisRoles[$value]['id'];
+            if (is_array($puserroles)) {
+                foreach ($puserroles as $value) {
+                    if (isset($polisRoles[$value])) {
+                        $proles[] = $polisRoles[$value]['id'];
+                    }
                 }
             }
             

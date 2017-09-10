@@ -1,0 +1,51 @@
+{#% extends 'base.html.twig' %#}
+{% extends 'security/security-base.html.twig' %}
+
+
+{% block title %}403 - Доступ запрещен.{% endblock title %}
+
+{% block stylesheets  %}
+
+    <link rel="stylesheet" href="{{ asset("assets/css/signin.css") }}">
+    <link rel="stylesheet" href="{{ asset("assets/css/extra-pages.css") }}">
+
+{% endblock %}
+    
+{% block javascripts %}
+
+{% endblock javascripts %}
+
+
+{% block body %}
+ {#
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+    </div>
+
+
+    <div class="logo-error">
+        <h1>Apricot
+            <span>v1.0</span>
+        </h1>
+    </div>
+#}
+
+    <!-- Main content -->
+    <section class="page-error">
+
+        <div class="error-page">
+            <h2 class="headline text-info">403</h2>
+            <div class="error-content">
+                <h3><i class="fa fa-warning text-yellow"></i> 403 - Доступ запрещен.</h3>
+                <p>
+                    У Вас не хватает прав для просмотра данной страницы. Вернуться на <a class="error-link" href='#' onclick="javascript:history.back(); return false;">предидущую страницу</a>.
+                </p>
+            </div>
+            <!-- /.error-content -->
+        </div>
+        <!-- /.error-page -->
+
+    </section>
+
+{% endblock %}

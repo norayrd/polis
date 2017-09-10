@@ -104,9 +104,9 @@ class User implements UserInterface
     
     /**
      * @ORM\ManyToOne(targetEntity="Company", inversedBy="User", cascade={"persist"})
-     * @ORM\JoinColumn(name="company_id", referencedColumnName="company_id")
+     * @ORM\JoinColumn(name="company", referencedColumnName="company_id")
      */
-    private $company_id;
+    private $company;
     
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -176,18 +176,19 @@ class User implements UserInterface
     {
         $roles = $this->roles;
 
-        // guarantees that a user always has at least one role for security
-        if (empty($roles)) {
-            $roles[] = 'ROLE_USER';
+        //guarantees that a user always has at least one role for security
+        if (count($roles)==0) {
+            $roles = array("ROLE_GUEST");
+            $roles = array_unique($roles);
         }
 
-        return array_unique($roles);
+        return $roles;
     }
 
     public function setRoles(array $roles)
     {
-        if (empty($roles)) {
-            $this->roles = array("ROLE_USER");
+        if (count($roles)==0) {
+            $this->roles = array("ROLE_GUEST");
         } else {
             $this->roles = $roles;
         }
@@ -347,29 +348,6 @@ class User implements UserInterface
     }
 
     /**
-     * Set company_id
-     *
-     * @param \AppBundle\Entity\Company $companyId
-     * @return User
-     */
-    public function setCompanyId(\AppBundle\Entity\Company $companyId = null)
-    {
-        $this->company_id = $companyId;
-    
-        return $this;
-    }
-
-    /**
-     * Get company_id
-     *
-     * @return \AppBundle\Entity\Company 
-     */
-    public function getCompanyId()
-    {
-        return $this->company_id;
-    }
-
-    /**
      * Set patronymic
      *
      * @param string $patronymic
@@ -466,4 +444,27 @@ class User implements UserInterface
         return (count(array_intersect($role, $this->roles)) > 0);
     }
 
+
+    /**
+     * Set company
+     *
+     * @param \AppBundle\Entity\Company $company
+     * @return User
+     */
+    public function setCompany(\AppBundle\Entity\Company $company = null)
+    {
+        $this->company = $company;
+    
+        return $this;
+    }
+
+    /**
+     * Get company
+     *
+     * @return \AppBundle\Entity\Company 
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
 }
