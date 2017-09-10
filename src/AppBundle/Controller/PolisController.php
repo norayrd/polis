@@ -338,7 +338,7 @@ class PolisController extends Controller
         
         $is_guest = !is_object($this->getUser());
         
-        if ( !$is_guest && $this->getUser()->hasRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
+        if ( !$is_guest && $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
             
             $puserid = $request ->get("puserid");
             $pid = $request ->get("u_id");
@@ -378,7 +378,10 @@ class PolisController extends Controller
                     $puser->setAddress($paddress);
                     $puser->setPhone($pphone);
                     //$puser->setCompanyid($pcompanyid);
-                    $puser->setRoles($proles);
+                    
+                    if ($this->getUser()->haveRole(['ROLE_ADMIN','ROLE_TOPMANAGER']) ) {
+                        $puser->setRoles($proles);
+                    }
                     
                     $polisService ->saveUser($this->getUser(),$puser);
 

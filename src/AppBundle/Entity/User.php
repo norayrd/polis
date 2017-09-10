@@ -439,7 +439,7 @@ class User implements UserInterface
         return $this->polis_limit;
     }
     
-    public function hasRole($role) {
+    public function haveRole($role) {
         
         return (count(array_intersect($role, $this->roles)) > 0);
     }
