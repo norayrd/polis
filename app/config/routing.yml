@@ -61,6 +61,18 @@ company_list:
     pattern:   /company-list
     defaults:  { _controller: AppBundle:Polis:companyList }
 
+company_view:
+    pattern:   /company-view
+    defaults:  { _controller: AppBundle:Polis:companyView }
+
 user_list:
     pattern:   /user-list
     defaults:  { _controller: AppBundle:Polis:userList }
+
+user_view:
+    pattern:   /user-view/{puserid}
+    defaults:  { _controller: AppBundle:Polis:userView }
+
+user_edit:
+    pattern:   /user-edit/{puserid}
+    defaults:  { _controller: AppBundle:Polis:userEdit }

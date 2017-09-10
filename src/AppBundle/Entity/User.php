@@ -107,6 +107,11 @@ class User implements UserInterface
      * @ORM\JoinColumn(name="company_id", referencedColumnName="company_id")
      */
     private $company_id;
+    
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $polis_limit;
 
     public function getId()
     {
@@ -363,4 +368,102 @@ class User implements UserInterface
     {
         return $this->company_id;
     }
+
+    /**
+     * Set patronymic
+     *
+     * @param string $patronymic
+     * @return User
+     */
+    public function setPatronymic($patronymic)
+    {
+        $this->patronymic = $patronymic;
+    
+        return $this;
+    }
+
+    /**
+     * Get patronymic
+     *
+     * @return string 
+     */
+    public function getPatronymic()
+    {
+        return $this->patronymic;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return User
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     * @return User
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+    
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set polis_limit
+     *
+     * @param integer $polisLimit
+     * @return User
+     */
+    public function setPolisLimit($polisLimit)
+    {
+        $this->polis_limit = $polisLimit;
+    
+        return $this;
+    }
+
+    /**
+     * Get polis_limit
+     *
+     * @return integer 
+     */
+    public function getPolisLimit()
+    {
+        return $this->polis_limit;
+    }
+    
+    public function hasRole($role) {
+        
+        return (count(array_intersect($role, $this->roles)) > 0);
+    }
+
 }

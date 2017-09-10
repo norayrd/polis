@@ -39,7 +39,7 @@
 
                                 {#<p class="lead well">FooTable is a jQuery plugin that aims to make HTML tables on smaller devices look awesome - No matter how many columns of data you may have in them. And it's responsive i think this better than DataTable in some way</p>#}
 
-                                <table class="table-striped footable-res footable metro-blue" data-page-size="6">
+                                <table class="table-striped footable-res footable metro-blue" data-page-size="20">
                                     <thead>
                                         <tr>
                                             <th>
@@ -77,16 +77,17 @@
                                     <tbody>
     {% for puser in userList %}
                                         <tr>
-                                            <td data-value="{{ puser.getId() }}"><a href="#">{{ puser.getId() }}</a></td>
+                                            <td data-value="{{ puser.getId() }}"><a href="{{ path('user_view',{'puserid': puser.id}) }}">{{ puser.getId() }}</a></td>
                                             <td>{{ puser.getLastname() }}</td>
                                             <td>{{ puser.getFirstname() }}</td>
                                             <td>{{ puser.getPatronymic() }}</td>
                                             <td>{{ puser.getEmail() }}</td>
                                             <td>{{ puser.getAddress() }}</td>
                                             <td>{{ puser.getPhone() }}</td>
+                                            <td>{{ puser.getCompany() }}</td>
                                             <td>{{ puser.getRole() }}</td>
                                             <td data-value="1">
-                                                <span class="status-metro status-active" title="Active">Active</span>
+                                                <span class="status-metro status-disabled" title="Disabled">Disabled</span>
                                             </td>
                                         </tr>
     {% else %}
@@ -116,11 +117,11 @@
             </div>
     
     <!-- GAGE -->
-    <script type="text/javascript" src="assets/js/toggle_close.js"></script>
-    <script src="assets/js/footable/js/footable.js?v=2-0-1" type="text/javascript"></script>
-    <script src="assets/js/footable/js/footable.sort.js?v=2-0-1" type="text/javascript"></script>
-    <script src="assets/js/footable/js/footable.filter.js?v=2-0-1" type="text/javascript"></script>
-    <script src="assets/js/footable/js/footable.paginate.js?v=2-0-1" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/toggle_close.js') }}"></script>
+    <script src="{{ asset('assets/js/footable/js/footable.js?v=2-0-1') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/js/footable/js/footable.sort.js?v=2-0-1') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/js/footable/js/footable.filter.js?v=2-0-1') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/js/footable/js/footable.paginate.js?v=2-0-1') }}" type="text/javascript"></script>
 
 
 

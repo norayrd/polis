@@ -1,10 +1,10 @@
 {% block stylesheets  %}
-    <link href="assets/js/footable/css/footable.core.css?v=2-0-1" rel="stylesheet" type="text/css" />
-    <link href="assets/js/footable/css/footable.standalone.css" rel="stylesheet" type="text/css" />
-    <link href="assets/js/footable/css/footable-demos.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/js/footable/css/footable.core.css?v=2-0-1') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/js/footable/css/footable.standalone.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/js/footable/css/footable-demos.css') }}" rel="stylesheet" type="text/css" />
 
-    <link rel="stylesheet" href="assets/js/dataTable/lib/jquery.dataTables/css/DT_bootstrap.css" />
-    <link rel="stylesheet" href="assets/js/dataTable/css/datatables.responsive.css" />
+    <link rel="stylesheet" href="{{ asset('assets/js/dataTable/lib/jquery.dataTables/css/DT_bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/js/dataTable/css/datatables.responsive.css') }}" />
 
     {% block content_stylesheets %}
 
@@ -69,7 +69,7 @@
                 <ul style="margin-right:0;" class="nav navbar-nav navbar-right">
                     <li>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <img alt="" class="admin-pic img-circle" src="assets\img\icon-user2.png">{{ user.getUserName() }} <b class="caret"></b>
+                            <img alt="" class="admin-pic img-circle" src="{{ asset("assets/img/icon-user2.png") }}">{{ user.getUserName() }} <b class="caret"></b>
                         </a>
                         <ul style="margin-top:14px;" role="menu" class="dropdown-setting dropdown-menu">
                             <li>
@@ -135,42 +135,42 @@
                             </a>
                         </li>
                         <li>
-                            <a class="tooltip-tip ajax-load" href="desktop" title="Рабочий стол">
+                            <a class="tooltip-tip ajax-load" href="{{ path("desktop") }}" title="Рабочий стол">
                                 <i class="entypo-window"></i>
                                 <span>Рабочий стол</span>
 
                             </a>
                         </li>
                         <li>
-                            <a class="tooltip-tip ajax-load" href="order-list" title="Журнал заявок">
+                            <a class="tooltip-tip ajax-load" href="{{ path("order_list") }}" title="Журнал заявок">
                                 <i class="entypo-docs"></i>
                                 <span>Журнал заявок</span>
 
                             </a>
                         </li>
                         <li>
-                            <a class="tooltip-tip ajax-load" href="polis-list" title="Журнал полисов">
+                            <a class="tooltip-tip ajax-load" href="{{ path("polis_list") }}" title="Журнал полисов">
                                 <i class="entypo-newspaper"></i>
                                 <span>Журнал полисов</span>
 
                             </a>
                         </li>
                         <li>
-                            <a class="tooltip-tip ajax-load" href="company-list" title="Компании">
+                            <a class="tooltip-tip ajax-load" href="{{ path("company_list") }}" title="Компании">
                                 <i class="entypo-star"></i>
                                 <span>Компании</span>
 
                             </a>
                         </li>
                         <li>
-                            <a class="tooltip-tip ajax-load" href="user-list" title="Пользователи">
+                            <a class="tooltip-tip ajax-load" href="{{ path("user_list") }}" title="Пользователи">
                                 <i class="entypo-users"></i>
                                 <span>Пользователи</span>
 
                             </a>
                         </li>
                         <li>
-                            <a class="tooltip-tip ajax-load" href="report" title="Отчеты">
+                            <a class="tooltip-tip ajax-load" href="{{ path("report") }}" title="Отчеты">
                                 <i class="entypo-doc"></i>
                                 <span>Отчеты</span>
 
@@ -256,11 +256,11 @@
     <!--  END OF PAPER WRAP -->
 
     <!-- MAIN EFFECT -->
-    <script type="text/javascript" src="assets/js/preloader.js"></script>
-    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
-    <script type="text/javascript" src="assets/js/app.js"></script>
-    <script type="text/javascript" src="assets/js/load.js"></script>
-    <script type="text/javascript" src="assets/js/main.js"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/preloader.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/bootstrap.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/app.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/load.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
 
 
     <!-- /MAIN EFFECT -->

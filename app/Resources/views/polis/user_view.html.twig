@@ -1,0 +1,207 @@
+{% extends 'base.html.twig' %}
+
+{% use 'content.html.twig' %}
+
+{% block title %}{{ page_title }}{% endblock title %}
+
+{% block content_stylesheets %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset("assets/js/tag/jquery.tagsinput.css") }}">
+
+{% endblock content_stylesheets %}
+    
+{% block content_javascripts %}
+
+{% endblock content_javascripts %}
+
+{% block block_content %}
+                                
+    
+            <div class="content-wrap">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="nest" id="validationClose">
+                            <div class="title-alt">
+                                <h6>
+                                    Редактирование пользователя</h6>
+                                {#<div class="titleClose">
+                                    <a class="gone" href="#validationClose">
+                                        <span class="entypo-cancel"></span>
+                                    </a>
+                                </div>
+                                <div class="titleToggle">
+                                    <a class="nav-toggle-alt" href="#validation">
+                                        <span class="entypo-up-open"></span>
+                                    </a>
+                                </div>#}
+
+                            </div>
+
+
+
+                            <div class="body-nest" id="validation">
+                                <div class="form_center">
+
+                                    <form action="{{ path('user_edit',{'puserid': puser.id}) }}" id="puser-form" class="form-horizontal" method="post" >
+                                        <fieldset>
+                                            
+                                            <div class="row">
+                                                <div class="col-sm-4">
+
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="name">Фамилия</label>
+                                                        <div class="controls">
+                                                            <input type="text" class="form-control" name="u_lastname" id="u_lastname" value="{{ puser.getLastname() }}">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-sm-4">
+
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="name">Имя</label>
+                                                        <div class="controls">
+                                                            <input type="text" class="form-control" name="u_firstname" id="u_firstname" value="{{ puser.getFirstname() }}">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-sm-4">
+
+
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="name">Отчество</label>
+                                                        <div class="controls">
+                                                            <input type="text" class="form-control" name="u_patronymic" id="u_patronymic" value="{{ puser.getPatronymic() }}">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-1">
+
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="email">ID</label>
+                                                        <div class="controls">
+                                                            <input type="text" class="form-control" readonly="" name="u_id" id="u_id" value="{{ puser.getId() }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-7">
+
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="email">E-mail</label>
+                                                        <div class="controls">
+                                                            <input type="text" class="form-control" name="u_email" id="u_email" value="{{ puser.getEmail() }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                        
+                                            <div class="row">
+                                                <div class="col-sm-8">
+                                                        
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="subject">Адрес</label>
+                                                        <div class="controls">
+                                                            <input type="text" class="form-control" name="u_address" id="u_address" value="{{ puser.getAddress() }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="subject">Телефон</label>
+                                                        <div class="controls">
+                                                            <input type="text" class="form-control" name="u_phone" id="u_phone" value="{{ puser.getPhone() }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                               
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="subject">Организация</label>
+                                                        <div class="controls">
+                                                            <input type="text" class="form-control" name="u_company_id" id="u_company_id" value="{{ puser.getCompanyId() }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                
+                                            <div class="control-group">
+                                                <label>Группа прав</label>
+                                                <input name="u_role" id="u_role" type="text" class="tags" value="{{ puser.getRole() }}ROLE_COMPANY_ADMIN, ROLE_SITE_ADMIN, ROLE_USER,   ROLE_ADMIN   " />
+                                            </div>
+                                                
+                                            <div class="control-group">
+                                                <label>Группа прав</label>
+                                                
+                                            {% for puser_role in puser_roles %}
+                                                <p>
+                                                    <input type="checkbox" name="u_roles[]" id="u_roles" value="{{ puser_role['key'] }}" {% if (puser_role['checked'] == true) %} checked="" {% endif %} />
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;<label>{{ puser_role['name'] }}</label>
+                                                </p>
+                                            {% endfor %}
+                                            </div>
+
+                                            <div class="form-actions" style="margin:20px 0 0 0;">
+                                                <button type="submit" class="btn btn-primary">Принять</button>
+                                                <button type="reset" class="btn">Отменить</button>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+    <script type="text/javascript" src="{{ asset("assets/js/tag/jquery.tagsinput.js") }}"></script>
+
+    <script type="text/javascript">
+    function onAddTag(tag) {
+        alert("Added a tag: " + tag);
+    }
+
+    function onRemoveTag(tag) {
+        alert("Removed a tag: " + tag);
+    }
+
+    function onChangeTag(input, tag) {
+        alert("Changed a tag: " + tag);
+    }
+
+    $(function() {
+
+        $('#u_role').tagsInput({
+            width: 'auto',
+            onChange: function(elem, elem_tags) {
+                var languages = ['ROLE_USER', 'ROLE_ADMIN'];
+
+                
+                $('.tag', elem_tags).each(function() {
+                    if ($(this).text().search(new RegExp('\\b(' + languages.join('|') + ')\\b')) >= 0)
+                        $(this).css('background-color', '#FBB44C');
+                });
+            }
+        });
+
+
+        // Uncomment this line to see the callback functions in action
+                  //$('input.tags').tagsInput({onAddTag:onAddTag,onRemoveTag:onRemoveTag,onChange: onChangeTag});       
+
+        // Uncomment this line to see an input with no interface for adding new tags.
+                  //$('input.tags').tagsInput({interactive:false});
+    });
+    
+    </script>
+
+{% endblock block_content %}

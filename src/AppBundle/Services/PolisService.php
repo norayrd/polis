@@ -9,11 +9,14 @@ class PolisService {
     
     private $em;
     private $logger;
+    private $container;
     
-    public function __construct($logger, $em ) {
+    public function __construct($logger, $em, $container ) {
 
         $this->em = $em;
         $this->logger = $logger;
+        $this->container = $container;
+
     }
 
     /*public function getPolis($user, $polisId) {
@@ -42,4 +45,27 @@ class PolisService {
         return $this->em->getRepository('AppBundle:Company') -> addCompany($company, $userId);
     }
 
+    public function getCompanyList( $userId) {
+
+        return $this->em->getRepository('AppBundle:Company') -> findBy(array());
+    }
+
+    public function getUserById( $user, $puserId) {
+
+        return $this->em->getRepository('AppBundle:User') -> findOneBy(array('id' => $puserId));
+    }
+
+    public function getUserList( $userId) {
+
+        return $this->em->getRepository('AppBundle:User') -> findBy(array());
+    }
+    
+    public function saveUser( $user, $puser) {
+        
+        $this->em->persist($puser);
+        $this->em->flush();
+
+        return true;
+    }
+    
 }

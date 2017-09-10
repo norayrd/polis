@@ -177,9 +177,23 @@ class PolisController extends Controller
         
         $is_guest = !is_object($this->getUser());
         
+        $userRoles = array();
+        
+        if (!$is_guest) {
+            $userRoles = $this->getUser() -> getRoles();
+        }
+        
+        if ($is_guest || empty($userRoles)) {
+            return $this->redirect('/desktop');
+        }
+        
+        var_dump($userRoles);exit;
+        
+        //["ROLE_USER"]
+        
         $polisService = $this->get("polis_service");
 
-        $companyList = null;//$polisService ->getPolisList($this->getUser());
+        $companyList = $polisService ->getCompanyList($this->getUser());
         
         $breadcrumb = array(
             array('name' => 'home', 'url' => 'home'),
@@ -199,6 +213,35 @@ class PolisController extends Controller
     }
     
     /**
+     * @Route("/company-view", name="company_view")
+     */
+    public function companyViewAction(Request $request){
+        
+        $is_guest = !is_object($this->getUser());
+        
+        $polisService = $this->get("polis_service");
+
+        $pcompany = $polisService ->getCompanyList($companyId, $this->getUser());
+        
+        $breadcrumb = array(
+            array('name' => 'home', 'url' => 'home'),
+            array('name' => 'Реестр компаний', 'url' => 'company-list'),
+            array('name' => 'Анкета компании', 'url' => '#'),
+        );
+
+        $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
+
+        return $this->render('polis/company_view.html.twig', array(
+            'user' => $this->getUser(),
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'page_title' => $page_title,
+            'breadcrumb' => $breadcrumb,
+            'pcompany' => $pcompany,
+        ));
+
+    }
+    
+    /**
      * @Route("/user-list", name="user_list")
      */
     public function userListAction(Request $request){
@@ -207,11 +250,11 @@ class PolisController extends Controller
         
         $polisService = $this->get("polis_service");
 
-        $userList = null;//$polisService ->getUserList($this->getUser());
+        $userList = $polisService ->getUserList($this->getUser());
         
         $breadcrumb = array(
             array('name' => 'home', 'url' => 'home'),
-            array('name' => 'Реестр пользователей', 'url' => 'company-list'),
+            array('name' => 'Реестр пользователей', 'url' => 'user-list'),
         );
 
         $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
@@ -223,6 +266,118 @@ class PolisController extends Controller
             'breadcrumb' => $breadcrumb,
             'userList' => $userList,
         ));
+
+    }
+
+    /**
+     * @Route("/user-view/{puserid}", name="user_view")
+     */
+    public function userViewAction(Request $request){
+        
+        $is_guest = !is_object($this->getUser());
+        
+        $puserid = $request ->get("puserid");
+        
+        $polisService = $this->get("polis_service");
+        
+        $puser = null;
+     
+        if ( ($puserid !== null) && ($puserid > 0) ) {
+            
+            $puser = $polisService ->getUserById($this->getUser(),$puserid);
+        }
+        
+        $polisRoles = $this->container->getParameter('polis_roles');
+        
+        $puserRoles = array();
+        
+        if (is_object($puser)) {
+        
+            foreach ($polisRoles as $key => $value) {
+
+                $puserRoles[$key] = array(
+                    'key' => $key, 
+                    'name' => $value['name'], 
+                    'checked' => in_array($value['id'], $puser->getRoles()) 
+                );
+            }
+        }
+        
+        $breadcrumb = array(
+            array('name' => 'home', 'url' => 'home'),
+            array('name' => 'Реестр пользователей', 'url' => 'user-list'),
+            array('name' => 'Анкета пользователя', 'url' => '#'),
+        );
+
+        $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
+
+        return $this->render('polis/user_view.html.twig', array(
+            'user' => $this->getUser(),
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'page_title' => $page_title,
+            'breadcrumb' => $breadcrumb,
+            'puser' => $puser,
+            'puser_roles' => $puserRoles,
+        ));
+
+    }
+    
+    /**
+     * @Route("/user-edit/{puserid}", name="user_edit")
+     */
+    public function userEditAction(Request $request){
+        
+        $is_guest = !is_object($this->getUser());
+        
+        if ( !$is_guest && $this->getUser()->hasRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
+            
+            $puserid = $request ->get("puserid");
+            $pid = $request ->get("u_id");
+            $plastname = $request ->get("u_lastname");
+            $pfirstname = $request ->get("u_firstname");
+            $ppatronymic = $request ->get("u_patronymic");
+            $pemail = $request ->get("u_email");
+            $paddress = $request ->get("u_address");
+            $pphone = $request ->get("u_phone");
+            $pcompanyid = $request ->get("u_company_id");
+            $prole = $request ->get("u_role");
+            $puserroles = $request ->get("u_roles");
+
+            $polisRoles = $this->container->getParameter('polis_roles');
+            
+            $proles = array();
+            
+            foreach ($puserroles as $value) {
+                if (isset($polisRoles[$value])) {
+                    $proles[] = $polisRoles[$value]['id'];
+                }
+            }
+            
+            if ( ($puserid !== null) && ($puserid > 0) ) {
+
+                $polisService = $this->get("polis_service");
+                $puser = $polisService ->getUserById($this->getUser(),$puserid);
+
+                if (is_object($puser)) {
+                    
+                    $puser->setLastname($plastname);
+                    $puser->setFirstname($pfirstname);
+                    $puser->setPatronymic($ppatronymic);
+                    $puser->setEmail($pemail);
+                    $puser->setAddress($paddress);
+                    $puser->setPhone($pphone);
+                    //$puser->setCompanyid($pcompanyid);
+                    $puser->setRoles($proles);
+                    
+                    $polisService ->saveUser($this->getUser(),$puser);
+
+                }
+                
+            }
+            
+        }
+        
+        return $this->redirect($this->generateUrl('user_list'));
 
     }
 

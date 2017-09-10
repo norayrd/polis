@@ -35,4 +35,4 @@ services:
 
     polis_service:
         class: AppBundle\Services\PolisService
-        arguments: ["@influencer_logger", "@em"]
+        arguments: ["@influencer_logger", "@em", "@service_container"]
