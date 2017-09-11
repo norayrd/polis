@@ -189,7 +189,16 @@ class PolisController extends Controller
         
         $polisService = $this->get("polis_service");
 
-        $companyList = $polisService ->getCompanyList($this->getUser());
+        if ($this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
+            
+            $companyList = $polisService ->getCompanyList($this->getUser());
+        } else if ($this->getUser()->haveRole(array('ROLE_AGENT','ROLE_MANAGER')) ) {
+
+            $companyList = array($polisService ->getCompanyById($this->getUser(), $this->getUser()->getCompany()->getCompanyId()));
+        } else {
+            
+            $companyList = array();
+        }
         
         $breadcrumb = array(
             array('name' => 'home', 'url' => 'home'),
@@ -215,9 +224,21 @@ class PolisController extends Controller
         
         $is_guest = !is_object($this->getUser());
         
+        $pcompanyId = $request ->get("puserid");
+
         $polisService = $this->get("polis_service");
 
-        $pcompany = $polisService ->getCompanyList($companyId, $this->getUser());
+        if ( $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
+            
+            $pcompany = $polisService ->getCompanyById($this->getUser(), $pcompanyId );
+        } else if ($this->getUser()->haveRole(array('ROLE_AGENT','ROLE_MANAGER')) && 
+             ($this->getUser()->getCompany()->getCompanyId() == $pcompanyId ) ) {
+
+            $pcompany = $polisService ->getCompanyById($this->getUser(), $pcompanyId );
+        } else {
+            
+            $pcompany = null;
+        }
         
         $breadcrumb = array(
             array('name' => 'home', 'url' => 'home'),
@@ -245,8 +266,17 @@ class PolisController extends Controller
         $is_guest = !is_object($this->getUser());
         
         $polisService = $this->get("polis_service");
+        
+        if ($this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
+            
+            $userList = $polisService ->getUserList($this->getUser());
+        } else if ($this->getUser()->haveRole(array('ROLE_AGENT','ROLE_MANAGER')) ) {
 
-        $userList = $polisService ->getUserList($this->getUser());
+            $userList = array($polisService ->getUserById($this->getUser(), $this->getUser()->getId()));
+        } else {
+            
+            $userList = array();
+        }
 
         $polisRoles = $this->container->getParameter('polis_roles');
         
@@ -288,11 +318,16 @@ class PolisController extends Controller
         
         $polisService = $this->get("polis_service");
         
-        $puser = null;
-     
-        if ( ($puserid !== null) && ($puserid > 0) ) {
+        if ( $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
             
             $puser = $polisService ->getUserById($this->getUser(),$puserid);
+        } else if ($this->getUser()->haveRole(array('ROLE_AGENT','ROLE_MANAGER')) && 
+             ($this->getUser()->getId() == $puserid ) ) {
+
+            $puser = $polisService ->getUserById($this->getUser(),$puserid);
+        } else {
+            
+            $puser = null;
         }
         
         $polisRoles = $this->container->getParameter('polis_roles');

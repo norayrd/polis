@@ -65,13 +65,23 @@
                                     <tbody>
     {% for company in companyList %}
                                         <tr>
-                                            <td data-value="{{ company.getCompanyId() }}"><a href="#">{{ company.getCompanyId() }}</a></td>
+                                            <td data-value="{{ company.getCompanyId() }}">{{ company.getCompanyId() }} <a href="{{ path('company_view',{'pcompanyid': company.companyid}) }}"><span class="fontawesome-pencil"></span></a></td>
                                             <td>{{ company.getCompName() }}</td>
                                             <td>{{ company.getAddress() }}</td>
                                             <td>{{ company.getPhone() }}</td>
-                                            <td>{{ company.getType() }}</td>
-                                            <td data-value="1">
+                                            <td>
+                                            {% if company.getType()==1 %}
+                                                <span class="fontawesome-building" title="Страховая"></span>
+                                            {% else %}
+                                                <span class="fontawesome-font" title="Агентская"></span>
+                                            {% endif %}
+                                            </td>
+                                            <td >
+                                            {% if company.getStatus()==1 %}
                                                 <span class="status-metro status-active" title="Active">Active</span>
+                                            {% else %}
+                                                <span class="status-metro status-disabled" title="Disabled">Disabled</span>
+                                            {% endif %}
                                             </td>
                                         </tr>
     {% else %}
