@@ -72,7 +72,7 @@
                                             <td>
                                             {% if company.getType()==1 %}
                                                 <span class="fontawesome-building" title="Страховая"></span>
-                                            {% else %}
+                                            {% elseif company.getType()==2 %}
                                                 <span class="fontawesome-font" title="Агентская"></span>
                                             {% endif %}
                                             </td>
