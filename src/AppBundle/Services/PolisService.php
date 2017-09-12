@@ -73,4 +73,12 @@ class PolisService {
         return true;
     }
     
+    public function saveCompany( $user, $pcompany) {
+        
+        $this->em->persist($pcompany);
+        $this->em->flush();
+
+        return true;
+    }
+    
 }

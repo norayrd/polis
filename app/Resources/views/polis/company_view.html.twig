@@ -6,6 +6,14 @@
 
 {% block content_stylesheets %}
 
+    <link href="{{ asset('assets/js/iCheck/flat/all.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/js/iCheck/line/all.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('assets/js/colorPicker/bootstrap-colorpicker.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/js/switch/bootstrap-switch.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/js/validate/validate.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/js/idealform/css/jquery.idealforms.css') }}" rel="stylesheet">
+
 {% endblock content_stylesheets %}
     
 {% block content_javascripts %}
@@ -13,24 +21,174 @@
 {% endblock content_javascripts %}
 
 {% block block_content %}
+
             <div class="content-wrap">
                 <div class="row">
-
                     <div class="col-sm-12">
-
-                        <div class="nest" id="FootableClose">
-
-                            <div class="body-nest" id="Footable">
-
+                        <div class="nest" id="validationClose">
+                            <div class="title-alt">
+                                <h6>
+                                    Редактирование компании</h6>
+                                {#<div class="titleClose">
+                                    <a class="gone" href="#validationClose">
+                                        <span class="entypo-cancel"></span>
+                                    </a>
+                                </div>
+                                <div class="titleToggle">
+                                    <a class="nav-toggle-alt" href="#validation">
+                                        <span class="entypo-up-open"></span>
+                                    </a>
+                                </div>#}
 
                             </div>
 
+
+
+                            <div class="body-nest" id="validation">
+                                <div class="form_center">
+
+                                    <form action="{{ path('company_edit',{'pcompanyid': pcompany.companyid}) }}" id="pcompany-form" class="form-horizontal" method="post" >
+                                        <fieldset>
+                                            
+                                            <div class="row">
+                                                <div class="col-sm-12">
+
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="c_compname">Название</label>
+                                                        <div class="controls">
+                                                            <input type="text" class="form-control" name="c_compname" id="c_compname" value="{{ pcompany.getCompName() }}">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-1">
+
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="c_companyid">ID</label>
+                                                        <div class="controls">
+                                                            <input type="text" class="form-control" readonly="" name="c_companyid" id="c_companyid" value="{{ pcompany.getCompanyId() }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-7">
+
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="c_email">E-mail</label>
+                                                        <div class="controls">
+                                                            <input type="text" class="form-control" name="c_email" id="c_email" value="{{ pcompany.getEmail() }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                        
+                                            <div class="row">
+                                                <div class="col-sm-8">
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="c_address">Адрес</label>
+                                                        <div class="controls">
+                                                            <input type="text" class="form-control" name="c_address" id="c_address" value="{{ pcompany.getAddress() }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="c_hone">Телефон</label>
+                                                        <div class="controls">
+                                                            <input type="text" class="form-control" name="c_phone" id="c_phone" value="{{ pcompany.getPhone() }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                               
+                                            {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_TOPMANAGER')) %}
+                                            <br/>
+                                            <br/>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="skin skin-flat">
+                                                        <ul class="list">
+                                                            <li>
+                                                                <input type="checkbox" name="c_status" id="c_status" value="1" {% if (pcompany.status() == 1) %} checked="" {% endif %} />
+                                                                <label for="c_status">Статус</label>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="control-group">
+                                                        <label for="c_type">Тип компании</label>
+                                                        <div class="skin skin-flat">
+                                                            <ul class="list">
+                                                                <li>
+                                                                    <input tabindex="1" type="radio" id="c_type1" name="c_type" value="1" {% if pcompany.type()==1 %} checked {% endif %}>
+                                                                    <label for="c_type1">головная</label>
+                                                                </li>
+                                                                <li>
+                                                                    <input tabindex="2" type="radio" id="c_type2" name="c_type" value="2" {% if pcompany.type()==2 %} checked {% endif %}>
+                                                                    <label for="c_type2">страховая</label>
+                                                                </li>
+                                                                <li>
+                                                                    <input tabindex="3" type="radio" id="c_type3" name="c_type" value="3" {% if pcompany.type()==3 %} checked {% endif %}>
+                                                                    <label for="c_type3">агентская</label>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            
+                                            <div class="form-actions" style="margin:20px 0 0 0;">
+                                            {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER') or is_granted('ROLE_TOPMANAGER')) %}
+                                                <button type="submit" class="btn btn-primary">Принять</button>
+                                            {% endif %}
+                                                <a href="{{ path('company_list') }}" class="btn">Назад</a>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+
+                                </div>
+                            </div>
+
                         </div>
-
-
                     </div>
-
                 </div>
             </div>
+                                            
+    <!-- /MAIN EFFECT -->
+    <script type="text/javascript" src="{{ asset('assets/js/iCheck/jquery.icheck.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/switch/bootstrap-switch.js') }}"></script>
+
+    <!--  PLUGIN -->
+    <script>
+    $(document).ready(function() {
+        //CHECKBOX PRETTYFY
+        $('.skin-flat input').iCheck({
+            checkboxClass: 'icheckbox_flat-red',
+            radioClass: 'iradio_flat-red'
+        });
+        $('.skin-line input').each(function() {
+            var self = $(this),
+                label = self.next(),
+                label_text = label.text();
+
+            label.remove();
+            self.iCheck({
+                checkboxClass: 'icheckbox_line-blue',
+                radioClass: 'iradio_line-blue',
+                insert: '<div class="icheck_line-icon"></div>' + label_text
+            });
+        });
+        //Switch Button
+
+        $('.make-switch').bootstrapSwitch('setSizeClass', 'switch-small');
+    });
+    </script>
     
 {% endblock block_content %}

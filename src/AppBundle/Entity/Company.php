@@ -37,8 +37,13 @@ class Company
     private $phone;
 
     /**
-     * 1 - Insurance company; 2 - Agent Company
-     * @ORM\Column(type="string", columnDefinition="ENUM('1', '2')" )
+     * @ORM\Column(type="string", nullable=true )
+     */
+    private $email;
+
+    /**
+     * 1 - Head company; 2 - Insurance company; 3 - Agent Company
+     * @ORM\Column(type="string", columnDefinition="ENUM('1', '2', '3')" )
      */
     private $type;
 
@@ -342,5 +347,28 @@ class Company
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Company
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 }

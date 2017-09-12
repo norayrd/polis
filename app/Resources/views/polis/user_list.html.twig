@@ -42,7 +42,9 @@
                                 <table class="table-striped footable-res footable metro-blue" data-page-size="20">
                                     <thead>
                                         <tr>
-                                            <th>
+                                            <th data-sort-ignore="true" width="32px">
+                                            </th>
+                                            <th width="60px">
                                                 ID
                                             </th>
                                             <th>
@@ -66,7 +68,7 @@
                                             <th data-hide="phone,tablet">
                                                 Компания
                                             </th>
-                                            <th >
+                                            <th data-sort-ignore="true" width="90px">
                                                 Права
                                             </th>
                                         </tr>
@@ -74,7 +76,8 @@
                                     <tbody>
     {% for puser in userList %}
                                         <tr>
-                                            <td data-value="{{ puser.getId() }}">{{ puser.getId() }} <a href="{{ path('user_view',{'puserid': puser.id}) }}"><span class="fontawesome-pencil"></span></a></td>
+                                            <td><a href="{{ path('user_view',{'puserid': puser.id}) }}"><span class="fontawesome-pencil"></span></a></td>
+                                            <td data-value="{{ puser.getId() }}">{{ puser.getId() }}</td>
                                             <td>{{ puser.getLastname() }}</td>
                                             <td>{{ puser.getFirstname() }}</td>
                                             <td>{{ puser.getPatronymic() }}</td>

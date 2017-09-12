@@ -224,7 +224,7 @@ class PolisController extends Controller
         
         $is_guest = !is_object($this->getUser());
         
-        $pcompanyId = $request ->get("puserid");
+        $pcompanyId = $request ->get("pcompanyid");
 
         $polisService = $this->get("polis_service");
 
@@ -258,6 +258,53 @@ class PolisController extends Controller
 
     }
     
+    /**
+     * @Route("/company-edit/{pcompanyid}", name="company_edit")
+     */
+    public function companyEditAction(Request $request){
+        
+        $is_guest = !is_object($this->getUser());
+        
+        if ( !$is_guest && $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
+            
+            $pcompanyid = $request ->get("pcompanyid");
+            $pcompid = $request ->get("c_companyid");
+            $pcompname = $request ->get("c_compname");
+            $pemail = $request ->get("c_email");
+            $paddress = $request ->get("c_address");
+            $pphone = $request ->get("c_phone");
+            $pstatus = $request ->get("c_status");
+            $ptype = $request ->get("c_type");
+            
+            if ( ($pcompanyid !== null) && ($pcompanyid > 0) && ($pcompanyid == $pcompid) ) {
+
+                $polisService = $this->get("polis_service");
+                $pcompany = $polisService ->getCompanyById($this->getUser(),$pcompanyid);
+
+                if (is_object($pcompany)) {
+                    
+                    $pcompany->setCompName($pcompname);
+                    $pcompany->setEmail($pemail);
+                    $pcompany->setAddress($paddress);
+                    $pcompany->setPhone($pphone);
+                    $pcompany->setStatus($pstatus);
+                    
+                    if ($this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
+                        $pcompany->setType($ptype);
+                    }
+                    
+                    $polisService ->saveCompany($this->getUser(),$pcompany);
+
+                }
+                
+            }
+            
+        }
+        
+        return $this->redirect($this->generateUrl('company_list'));
+
+    }
+
     /**
      * @Route("/user-list", name="user_list")
      */
