@@ -160,10 +160,20 @@ class PolisController extends Controller
         
         $polisService = $this->get("polis_service");
 
-        if ($this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
+        //--------------------------
+        //access rights
+        $can_create =  $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER'));
+        
+        $can_view_all = $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER'));
+        
+        $can_view_self = $this->getUser()->haveRole(array('ROLE_AGENT','ROLE_MANAGER'));
+        
+        //--------------------------
+
+        if ($can_view_all) {
             
             $companyList = $polisService ->getCompanyList($this->getUser());
-        } else if ($this->getUser()->haveRole(array('ROLE_AGENT','ROLE_MANAGER')) ) {
+        } else if ($can_view_self) {
 
             $companyList = array($polisService ->getCompanyById($this->getUser(), $this->getUser()->getCompany()->getCompanyId()));
         } else {
@@ -184,6 +194,7 @@ class PolisController extends Controller
             'page_title' => $page_title,
             'breadcrumb' => $breadcrumb,
             'companyList' => $companyList,
+            'can_create' => $can_create,
         ));
 
     }
@@ -198,12 +209,29 @@ class PolisController extends Controller
         $pcompanyId = $request ->get("pcompanyid");
 
         $polisService = $this->get("polis_service");
+        
+        //--------------------------
+        //access rights
+        // submit button
+        if ($pcompanyId !== 'new') {
+            $can_edit =  $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_MANAGER','ROLE_TOPMANAGER'));
+        } else if ($pcompanyId === 'new') {
+            $can_edit =  $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER'));
+        }
+        //access to "type", "status" and "polis_count_limit".
+        $can_edit_type = $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER'));
+        
+        $can_view_all = $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER'));
+        
+        $can_view_self = $this->getUser()->haveRole(array('ROLE_AGENT','ROLE_MANAGER')) 
+                && ($this->getUser()->getCompany()->getCompanyId() == $pcompanyId );
+        
+        //--------------------------
 
-        if ( $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
+        if ( $can_view_all ) {
             
             $pcompany = $polisService ->getCompanyById($this->getUser(), $pcompanyId );
-        } else if ($this->getUser()->haveRole(array('ROLE_AGENT','ROLE_MANAGER')) && 
-             ($this->getUser()->getCompany()->getCompanyId() == $pcompanyId ) ) {
+        } else if ($can_view_self) {
 
             $pcompany = $polisService ->getCompanyById($this->getUser(), $pcompanyId );
         } else {
@@ -225,6 +253,8 @@ class PolisController extends Controller
             'page_title' => $page_title,
             'breadcrumb' => $breadcrumb,
             'pcompany' => $pcompany,
+            'can_edit' => $can_edit,
+            'can_edit_type' => $can_edit_type,
         ));
 
     }

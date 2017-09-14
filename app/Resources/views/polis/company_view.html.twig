@@ -109,6 +109,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                               
+                                            {% if (can_edit_type) %}
+
                                             <div class="row">
                                                 <div class="col-sm-2">
                                                     <div class="control-group">
@@ -119,8 +122,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                               
-                                            {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_TOPMANAGER')) %}
+                                                
                                             <br/>
                                             <br/>
                                             <div class="row">
@@ -162,7 +164,7 @@
                                             {% endif %}
                                             
                                             <div class="form-actions" style="margin:20px 0 0 0;">
-                                            {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER') or is_granted('ROLE_TOPMANAGER')) %}
+                                            {% if (can_edit) %}
                                                 <button type="submit" class="btn btn-primary">Принять</button>
                                             {% endif %}
                                                 <a href="{{ path('company_list') }}" class="btn">Назад</a>
