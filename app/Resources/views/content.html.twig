@@ -34,9 +34,9 @@
                 <button data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" class="navbar-toggle" type="button">
                     <span class="entypo-menu"></span>
                 </button>
-                <button class="navbar-toggle toggle-menu-mobile toggle-left" type="button">
+                {#<button class="navbar-toggle toggle-menu-mobile toggle-left" type="button">
                     <span class="entypo-list-add"></span>
-                </button>
+                </button>#}
 
                 <div id="logo-mobile" class="visible-xs">
                     <h1>Полис
@@ -216,10 +216,19 @@
 
                 {% if bk['name']=='home' %}
                     <li>
-                        <span class="entypo-home"></span>
+                        {% if bk['url']==null %}
+                            <span class="entypo-home"></span>
+                        {% else %}
+                            <a href="{{ bk['url'] }}"><span class="entypo-home"></span></a>
+                        {% endif %}
                     </li>
                 {% else %}
-                    <li><a href="{{ bk['url'] }}" title={{ bk['name'] }}>{{ bk['name'] }}</a>
+                    <li>
+                        {% if bk['url']==null %}
+                            <span>{{ bk['name'] }}</span>
+                        {% else %}
+                            <a href="{{ bk['url'] }}" title={{ bk['name'] }}>{{ bk['name'] }}</a>
+                        {% endif %}
                     </li>
                 {% endif %}
                 {% set isfirst = 1 %}

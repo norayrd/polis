@@ -36,3 +36,7 @@ services:
     polis_service:
         class: AppBundle\Services\PolisService
         arguments: ["@influencer_logger", "@em", "@service_container"]
+
+    i_key_service:
+        class: AppBundle\Services\IKeyService
+        arguments: ["@influencer_logger", "@em"]

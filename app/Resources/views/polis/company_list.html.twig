@@ -34,6 +34,9 @@
                                 </div>
 
                             </div>#}
+                            <div class="body-nest" id="Footable">
+                                <a class="btn" href="{{ path('company_view',{'pcompanyid': 'new'}) }}"><span class="fontawesome-asterisk"></span> Создать </a>
+                            </div>
 
                             <div class="body-nest" id="Footable">
 
@@ -53,13 +56,13 @@
                                             <th width="200px">
                                                 Название
                                             </th>
-                                            <th>
+                                            <th data-hide="phone,tablet">
                                                 Адрес
                                             </th>
-                                            <th>
+                                            <th data-hide="phone,tablet">
                                                 E-mail
                                             </th>
-                                            <th>
+                                            <th data-hide="phone,tablet">
                                                 Телефон
                                             </th>
                                             <th data-sort-ignore="true" width="60px">

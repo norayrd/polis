@@ -46,8 +46,15 @@
 
                             <div class="body-nest" id="validation">
                                 <div class="form_center">
+                                    
+                                    {% if pcompany == null %}
+                                        {% set pcompanyid = 'new' %}
+                                    {% else %}
+                                        {% set pcompanyid = pcompany.companyid() %}
+                                    {% endif %}
 
-                                    <form action="{{ path('company_edit',{'pcompanyid': pcompany.companyid}) }}" id="pcompany-form" class="form-horizontal" method="post" >
+
+                                    <form action="{{ path('company_edit',{'pcompanyid': pcompanyid}) }}" id="pcompany-form" class="form-horizontal" method="post" >
                                         <fieldset>
                                             
                                             <div class="row">
@@ -64,7 +71,7 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-sm-1">
+                                                <div class="col-sm-2">
 
                                                     <div class="control-group">
                                                         <label class="control-label" for="c_companyid">ID</label>
@@ -98,6 +105,16 @@
                                                         <label class="control-label" for="c_hone">Телефон</label>
                                                         <div class="controls">
                                                             <input type="text" class="form-control" name="c_phone" id="c_phone" value="{{ pcompany.getPhone() }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="c_polis_count_limit">Ограничение на количество полисов</label>
+                                                        <div class="controls">
+                                                            <input type="text" class="form-control" name="c_polis_count_limit" id="c_polis_count_limit" value="{{ pcompany.getPolisCountLimit() }}">
                                                         </div>
                                                     </div>
                                                 </div>

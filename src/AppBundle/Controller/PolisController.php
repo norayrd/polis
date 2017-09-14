@@ -11,6 +11,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Company;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,8 +38,8 @@ class PolisController extends Controller
         $orderList = null;//$polisService ->getorderList($this->getUser());
         
         $breadcrumb = array(
-            array('name' => 'home', 'url' => 'home'),
-            array('name' => 'Журнал заявок', 'url' => 'order-list'),
+            array('name' => 'home', 'url' => $this->generateUrl('home')),
+            array('name' => 'Журнал заявок', 'url' => null),
         );
 
         $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
@@ -81,8 +82,8 @@ class PolisController extends Controller
         $polisList = null;//$polisService ->getPolisList($this->getUser());
         
         $breadcrumb = array(
-            array('name' => 'home', 'url' => 'home'),
-            array('name' => 'Журнал полисов', 'url' => 'polis-list'),
+            array('name' => 'home', 'url' => $this->generateUrl('home')),
+            array('name' => 'Журнал полисов', 'url' => null),
         );
 
         $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
@@ -97,36 +98,6 @@ class PolisController extends Controller
 
     }
 
-    /**
-     * @Route("/polis-new", name="polis_new")
-     */
-    public function polisNewAction(Request $request){
-
-        $is_guest = !is_object($this->getUser());
-        
-        return $this->render('polis/polis-view.html.twig', array(
-            'user' => $this->getUser(),
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-        ));
-
-    }
-
-    /**
-     * @Route("/polis-edit", name="polis_edit")
-     */
-    public function polisEditAction(Request $request){
-
-        $is_guest = !is_object($this->getUser());
-
-        $polisId = $request ->get("polisid");
-        
-        return $this->render('polis/polis-view.html.twig', array(
-            'user' => $this->getUser(),
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-        ));
-
-    }
-    
     /**
      * @Route("/user-profile", name="user_profile")
      */
@@ -155,8 +126,8 @@ class PolisController extends Controller
         $polisId = $request ->get("polisid");
         
         $breadcrumb = array(
-            array('name' => 'home', 'url' => 'home'),
-            array('name' => 'Отчет', 'url' => 'report'),
+            array('name' => 'home', 'url' => $this->generateUrl('home')),
+            array('name' => 'Отчет', 'url' => null),
         );
         
         $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
@@ -201,8 +172,8 @@ class PolisController extends Controller
         }
         
         $breadcrumb = array(
-            array('name' => 'home', 'url' => 'home'),
-            array('name' => 'Реестр компаний', 'url' => 'company-list'),
+            array('name' => 'home', 'url' => $this->generateUrl('home')),
+            array('name' => 'Реестр компаний', 'url' => null),
         );
 
         $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
@@ -241,9 +212,9 @@ class PolisController extends Controller
         }
         
         $breadcrumb = array(
-            array('name' => 'home', 'url' => 'home'),
-            array('name' => 'Реестр компаний', 'url' => 'company-list'),
-            array('name' => 'Анкета компании', 'url' => '#'),
+            array('name' => 'home', 'url' => $this->generateUrl('home')),
+            array('name' => 'Реестр компаний', 'url' => $this->generateUrl('company_list')),
+            array('name' => 'Анкета компании', 'url' => null),
         );
 
         $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
@@ -265,9 +236,10 @@ class PolisController extends Controller
         
         $is_guest = !is_object($this->getUser());
         
+        $pcompanyid = $request ->get("pcompanyid");
+        
         if ( !$is_guest && $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
             
-            $pcompanyid = $request ->get("pcompanyid");
             $pcompid = $request ->get("c_companyid");
             $pcompname = $request ->get("c_compname");
             $pemail = $request ->get("c_email");
@@ -275,28 +247,42 @@ class PolisController extends Controller
             $pphone = $request ->get("c_phone");
             $pstatus = $request ->get("c_status");
             $ptype = $request ->get("c_type");
+            $polisCountLimit = $request ->get("c_polis_count_limit");
             
-            if ( ($pcompanyid !== null) && ($pcompanyid > 0) && ($pcompanyid == $pcompid) ) {
+            $polisService = $this->get("polis_service");
+            
+            if ( ($pcompanyid == 'new') || ($pcompid == '') ) {
 
-                $polisService = $this->get("polis_service");
-                $pcompany = $polisService ->getCompanyById($this->getUser(),$pcompanyid);
-
-                if (is_object($pcompany)) {
-                    
-                    $pcompany->setCompName($pcompname);
-                    $pcompany->setEmail($pemail);
-                    $pcompany->setAddress($paddress);
-                    $pcompany->setPhone($pphone);
-                    $pcompany->setStatus($pstatus);
-                    
-                    if ($this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
-                        $pcompany->setType($ptype);
-                    }
-                    
-                    $polisService ->saveCompany($this->getUser(),$pcompany);
-
-                }
+                $pcompany = new Company();
                 
+            } else if ( ($pcompanyid !== null) && ($pcompanyid > 0) && ($pcompanyid == $pcompid) ) {
+
+                $pcompany = $polisService ->getCompanyById($this->getUser(),$pcompanyid);
+            }
+
+            if (isset($pcompany) && is_object($pcompany)) {
+                
+                if (!isset($polisCountLimit)) {
+                    $polisCountLimit = 0;
+                }
+                    
+                $pcompany->setCompName($pcompname);
+                $pcompany->setEmail($pemail);
+                $pcompany->setAddress($paddress);
+                $pcompany->setPhone($pphone);
+                $pcompany->setStatus($pstatus);
+                $pcompany->setPolisCountLimit(0);
+                $pcompany->setDateBeginFact(new \DateTime());
+                $pcompany->setDateEndFact(new \DateTime('9999-12-31 23:59:59'));
+                $pcompany->setUserId1($this->getUser()->getId());
+
+                if ($this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
+                    $pcompany->setType($ptype);
+                    $pcompany->setPolisCountLimit($polisCountLimit);
+                }
+
+                $polisService ->saveCompany($this->getUser(),$pcompany);
+
             }
             
         }
@@ -337,8 +323,8 @@ class PolisController extends Controller
         }
 
         $breadcrumb = array(
-            array('name' => 'home', 'url' => 'home'),
-            array('name' => 'Реестр пользователей', 'url' => 'user-list'),
+            array('name' => 'home', 'url' => $this->generateUrl('home')),
+            array('name' => 'Реестр пользователей', 'url' => null),
         );
 
         $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
@@ -395,9 +381,9 @@ class PolisController extends Controller
         }
 
         $breadcrumb = array(
-            array('name' => 'home', 'url' => 'home'),
-            array('name' => 'Реестр пользователей', 'url' => 'user-list'),
-            array('name' => 'Анкета пользователя', 'url' => '#'),
+            array('name' => 'home', 'url' => $this->generateUrl('home')),
+            array('name' => 'Реестр пользователей', 'url' => $this->generateUrl('user_list')),
+            array('name' => 'Анкета пользователя', 'url' => null),
         );
 
         $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];

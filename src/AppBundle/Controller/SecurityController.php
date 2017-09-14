@@ -12,13 +12,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use DateTime;
 use Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use DateTime;
 
 /**
  * Controller used to manage the application security.
@@ -41,7 +40,12 @@ class SecurityController extends Controller
         $registered_email = $session->get('regemail');
         $session->remove('regsuccess');
         $session->remove('regemail');
-
+        
+        $hideRegistrationButton = 0;
+        if ($this->container->hasParameter('hide_registration_button')) {
+            $hideRegistrationButton = ($this->container->getParameter('hide_registration_button')==1)?1:0;
+        }
+        
         $helper = $this->get('security.authentication_utils');
         
         return $this->render('security/login.html.twig', array(
@@ -51,6 +55,7 @@ class SecurityController extends Controller
             'error' => $helper->getLastAuthenticationError(), 
             'message_text' => $message_text,
             'registered_email' => $registered_email,
+            'hide_registration_button' => $hideRegistrationButton,
         ));
 
     }
@@ -63,6 +68,26 @@ class SecurityController extends Controller
         $request = $this->getRequest();
         $err = array();
         $error_text = "";
+        
+        $hideRegistrationButton = 0;
+        if ($this->container->hasParameter('hide_registration_button')) {
+            $hideRegistrationButton = ($this->container->getParameter('hide_registration_button')==1)?1:0;
+        }
+
+        if ($hideRegistrationButton == 1) {
+            $pIKey = $request ->get("i");
+            $email = $request ->get("email");
+        
+            $iKeyService = $this->get("i_key_service");
+
+            if ( !$iKeyService ->checkIKey( $email, $pIKey ) ) {
+                
+                return $this->render('security/sign_up_wrong_url.html.twig', array(
+                    'message' => 'Устаревшая или не существующая ссылка!',
+                ));
+            }
+            
+        }
         
         if (!empty($error)) {
             $error_text = "Have some errors!";
