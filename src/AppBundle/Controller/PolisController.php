@@ -566,10 +566,9 @@ class PolisController extends Controller
                 'base_url_name' => $base_url_name,
             );
 
-            //var_dump($mail_params);exit;
-            
             $message = $this->get('mail_manager');
-            $message->sendEmail('emails/sign_up_email.html.twig', $mail_params, $email, $email_from, $email_from_name, $email_replay_to);
+
+            $message->sendEmail('emails/sign_up_email.html.twig', $mail_params, $pemail, $email_from, $email_from_name, $email_replay_to);
 
             //$success_message_text = 'На указанную почту было отправлено письмо для изменения пароля.';
             
