@@ -493,5 +493,93 @@ class PolisController extends Controller
 
     }
 
+    /**
+     * @Route("/invitation-sign-up", name="invitation_sign_up")
+     */
+    public function invitationSignUpAction(Request $request){
+        
+        $is_guest = !is_object($this->getUser());
+        
+        $polisService = $this->get("polis_service");
+        
+        if ( $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
+            
+            $companyList = $polisService ->getCompanyList($this->getUser());
+        } else {
+            
+            $companyList = null;
+        }
+
+        $breadcrumb = array(
+            array('name' => 'home', 'url' => $this->generateUrl('home')),
+            array('name' => 'Приглашение на регистрацию', 'url' => null),
+        );
+
+        $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
+
+        return $this->render('polis/invitation_sign_up.html.twig', array(
+            'user' => $this->getUser(),
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'page_title' => $page_title,
+            'breadcrumb' => $breadcrumb,
+            'companyList' => $companyList,
+        ));
+
+    }
+    
+    /**
+     * @Route("/send-invitation-sign-up", name="send_invitation_sign_up")
+     */
+    public function sendInvitationSignUpAction(Request $request){
+        
+        $is_guest = !is_object($this->getUser());
+        
+        $polisService = $this->get("polis_service");
+        
+        $pemail = $request ->get("email");
+        $pcompanyid = $request ->get("companyid");
+
+        if ( $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
+            
+            $user = $this->getUser();
+            
+            $securityService = $this->get("security_service");
+            
+            $hash = 'sdfasdfasdfa'; //$securityService ->getForgotPasswordHash($user, $this->container->getParameter('secret'));
+
+            $forgot_link = 'asdasda'; //$this->generateUrl('change_password',array(),true) . 
+                    //'?email=' . rawurlencode($pemail) .
+                    //'&h=' . $hash ;
+
+            $email_from_name = $this->container->getParameter('support_email_from_name');
+            $email_from = $this->container->getParameter('support_email_from');
+            $email_replay_to = $this->container->getParameter('support_email_replay_to');
+            $email_footer_message = $this->container->getParameter('support_email_footer_message');
+            $base_url = $this->container->getParameter('base_url');
+            $base_url_name = $this->container->getParameter('base_url_name');
+
+            $mail_params = array(
+                'fullname' => $user->getFirstName().' '.$user->getLastName(),
+                'forgot_link' => $forgot_link,
+                'email_footer_message' => $email_footer_message,
+                'base_url' => $base_url,
+                'base_url_name' => $base_url_name,
+            );
+
+            //var_dump($mail_params);exit;
+            
+            $message = $this->get('mail_manager');
+            $message->sendEmail('emails/sign_up_email.html.twig', $mail_params, $email, $email_from, $email_from_name, $email_replay_to);
+
+            //$success_message_text = 'На указанную почту было отправлено письмо для изменения пароля.';
+            
+        } else {
+            
+        }
+        
+        return $this->redirect($this->generateUrl('invitation_sign_up'));
+            
+    }
+    
 }
 

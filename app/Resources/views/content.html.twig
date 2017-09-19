@@ -76,10 +76,6 @@
                                 <a href="{{ path('user_profile') }}">
                                     <span class="entypo-user"></span>&#160;&#160;Учетная запись</a>
                             </li>
-                            <li>
-                                <a href="{{ path('polis_list') }}">
-                                    <span class="entypo-vcard"></span>&#160;&#160;Журнал</a>
-                            </li>
                             <li class="divider"></li>
                             <li>
                                 <a href="{{ path('security_logout') }}">
@@ -136,46 +132,41 @@
                         </li>
                         <li>
                             <a class="tooltip-tip ajax-load" href="{{ path("desktop") }}" title="Рабочий стол">
-                                <i class="entypo-window"></i>
-                                <span>Рабочий стол</span>
-
+                                <i class="entypo-window"></i><span>Рабочий стол</span>
                             </a>
                         </li>
                         <li>
                             <a class="tooltip-tip ajax-load" href="{{ path("order_list") }}" title="Журнал заявок">
-                                <i class="entypo-docs"></i>
-                                <span>Журнал заявок</span>
-
+                                <i class="entypo-docs"></i><span>Журнал заявок</span>
                             </a>
                         </li>
                         <li>
                             <a class="tooltip-tip ajax-load" href="{{ path("polis_list") }}" title="Журнал полисов">
-                                <i class="entypo-newspaper"></i>
-                                <span>Журнал полисов</span>
-
+                                <i class="entypo-newspaper"></i><span>Журнал полисов</span>
                             </a>
                         </li>
                         <li>
                             <a class="tooltip-tip ajax-load" href="{{ path("company_list") }}" title="Компании">
-                                <i class="entypo-star"></i>
-                                <span>Компании</span>
-
+                                <i class="entypo-star"></i><span>Компании</span>
                             </a>
                         </li>
                         <li>
                             <a class="tooltip-tip ajax-load" href="{{ path("user_list") }}" title="Пользователи">
-                                <i class="entypo-users"></i>
-                                <span>Пользователи</span>
-
+                                <i class="entypo-users"></i><span>Пользователи</span>
                             </a>
                         </li>
                         <li>
                             <a class="tooltip-tip ajax-load" href="{{ path("report") }}" title="Отчеты">
-                                <i class="entypo-doc"></i>
-                                <span>Отчеты</span>
-
+                                <i class="entypo-doc"></i><span>Отчеты</span>
                             </a>
                         </li>
+                        {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_TOPMANAGER')) %}
+                        <li>
+                            <a class="tooltip-tip ajax-load" href="{{ path("invitation_sign_up") }}" title="Приглашение на регистрацию">
+                                <i class="entypo-mail"></i><span>Приглашение</span>
+                            </a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
                 

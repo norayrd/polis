@@ -32,6 +32,11 @@ class IKey
     private $email;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $company_id;
+
+    /**
      * @var DateTime
      *
      * @ORM\Column(type="datetime")
@@ -143,5 +148,28 @@ class IKey
     public function getData()
     {
         return $this->data;
+    }
+
+    /**
+     * Set company_id
+     *
+     * @param integer $companyId
+     * @return IKey
+     */
+    public function setCompanyId($companyId)
+    {
+        $this->company_id = $companyId;
+    
+        return $this;
+    }
+
+    /**
+     * Get company_id
+     *
+     * @return integer 
+     */
+    public function getCompanyId()
+    {
+        return $this->company_id;
     }
 }

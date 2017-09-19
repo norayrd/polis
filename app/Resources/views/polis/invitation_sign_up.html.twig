@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% use 'content.html.twig' %}
+
+{% block title %}{{ page_title }}{% endblock title %}
+
+{% block content_stylesheets %}
+
+{% endblock content_stylesheets %}
+    
+{% block content_javascripts %}
+
+{% endblock content_javascripts %}
+
+{% block block_content %}
+                                
+    
+            <div class="content-wrap">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="nest" id="validationClose">
+                            <div class="title-alt">
+                                <h6>
+                                    {{ breadcrumb|last['name'] }}</h6>
+                                {#<div class="titleClose">
+                                    <a class="gone" href="#validationClose">
+                                        <span class="entypo-cancel"></span>
+                                    </a>
+                                </div>
+                                <div class="titleToggle">
+                                    <a class="nav-toggle-alt" href="#validation">
+                                        <span class="entypo-up-open"></span>
+                                    </a>
+                                </div>#}
+
+                            </div>
+
+
+
+                            <div class="body-nest" id="validation">
+                                <div class="form_center">
+
+                                    <form action="{{ path('send_invitation_sign_up') }}" class="form-horizontal" method="post" >
+                                        <fieldset>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="email">E-mail</label>
+                                                        <div class="controls">
+                                                            <input type="text" class="form-control" name="u_email" id="u_email" value="{{ puser.getEmail() }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                        
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="subject">Организация</label>
+                                                        <div class="controls">
+                                                            <select class="form-control" name="u_company_id" id="u_company_id" value="">
+                                                                {% for pcompany in companyList %}
+                                                                <option value="{{ pcompany.getCompanyId() }}">{{ pcompany.getCompName() }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                
+                                            <div class="form-actions" style="margin:20px 0 0 0;">
+                                            {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_TOPMANAGER')) %}
+                                                <button type="submit" class="btn btn-primary">Отправить</button>
+                                            {% endif %}
+                                                <a href="{{ path('user_list') }}" class="btn">Назад</a>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{% endblock block_content %}

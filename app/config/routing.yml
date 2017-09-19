@@ -80,3 +80,11 @@ user_view:
 user_edit:
     pattern:   /user-edit/{puserid}
     defaults:  { _controller: AppBundle:Polis:userEdit }
+
+invitation_sign_up:
+    pattern:   /invitation-sign-up
+    defaults:  { _controller: AppBundle:Polis:invitationSignUp }
+
+send_invitation_sign_up:
+    pattern:   /send-invitation-sign-up
+    defaults:  { _controller: AppBundle:Polis:sendInvitationSignUp }

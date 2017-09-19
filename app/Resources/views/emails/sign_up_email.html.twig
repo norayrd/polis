@@ -1,0 +1,20 @@
+{% block subject %}
+    Auto Polis Приглашение на регистрацию
+{% endblock %}
+ 
+{% block body_text %}
+
+{% endblock %}
+ 
+{% block body_html %}
+    {% autoescape false %}
+Для регистрации на сайте {{ site_name }} перейдите по ссылке:<br>
+<br>
+<a href="{{ register_link }}">{{ register_link }}</a><br>
+<br>
+С уважением,<br>
+<br>
+{{ email_footer_message }}
+    {% endautoescape %}
+{% endblock %}
+ 
