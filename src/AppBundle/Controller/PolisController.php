@@ -569,6 +569,19 @@ class PolisController extends Controller
             $message = $this->get('mail_manager');
 
             $message->sendEmail('emails/sign_up_email.html.twig', $mail_params, $pemail, $email_from, $email_from_name, $email_replay_to);
+            
+            $mailBody = $this->renderView(
+                'emails/sign_up_email.html.twig',
+                array()
+            );
+            $mailSubject = 'Test';
+            $mailHeaders = 'MIME-Version: 1.0' . "\r\n";
+            $mailHeaders .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+            $mailHeaders .= 'FROM: Test message <'.$email_from.'>' . "\r\n";
+
+
+            
+            $res=mail($pemail, $mailSubject, $mailBody, $headers);
 
             //$success_message_text = 'На указанную почту было отправлено письмо для изменения пароля.';
             
