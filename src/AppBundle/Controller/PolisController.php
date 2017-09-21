@@ -12,6 +12,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Company;
+use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -302,8 +303,8 @@ class PolisController extends Controller
                 $pcompany->setPhone($pphone);
                 $pcompany->setStatus($pstatus);
                 $pcompany->setPolisCountLimit(0);
-                $pcompany->setDateBeginFact(new \DateTime());
-                $pcompany->setDateEndFact(new \DateTime('9999-12-31 23:59:59'));
+                $pcompany->setDateBeginFact(new DateTime());
+                $pcompany->setDateEndFact(new DateTime('9999-12-31 23:59:59'));
                 $pcompany->setUserId1($this->getUser()->getId());
 
                 if ($this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
@@ -536,8 +537,8 @@ class PolisController extends Controller
         
         $polisService = $this->get("polis_service");
         
-        $pemail = $request ->get("email");
-        $pcompanyid = $request ->get("companyid");
+        $pemail = $request ->get("u_email");
+        $pcompanyid = $request ->get("u_company_id");
 
         if ( $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
             
@@ -570,6 +571,7 @@ class PolisController extends Controller
 
             $message->sendEmail('emails/sign_up_email.html.twig', $mail_params, $pemail, $email_from, $email_from_name, $email_replay_to);
 
+            /*
             $mailBody = $this->renderView(
                 'emails/sign_up_email.html.twig',
                 array()
@@ -578,16 +580,25 @@ class PolisController extends Controller
             $mailHeaders = 'MIME-Version: 1.0' . "\r\n";
             $mailHeaders .= 'Content-type: text/html; charset=utf-8' . "\r\n";
             $mailHeaders .= 'FROM: Test message <'.$email_from.'>' . "\r\n";
-
-
-            
             $res=mail($pemail, $mailSubject, $mailBody, $mailHeaders);
-var_dump($mailBody);exit;
+            */
+            
+            /*
+            $email_from = $this->container->getParameter('support_email_from');
+            $to = $pemail; //'norayrd@rambler.ru';
+            $subject = 'polis test';
+            $message = 'Test message';
+            $headers = 'MIME-Version: 1.0' . "\r\n";
+            $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+            $headers .= 'FROM: Test message <'.$email_from.'>' . "\r\n";
+
+            $res = \mail($to, $subject, $message, $headers);
+            */
+            
             //$success_message_text = 'На указанную почту было отправлено письмо для изменения пароля.';
             
         } else {
             
-var_dump(7);exit;
         }
         
         return $this->redirect($this->generateUrl('invitation_sign_up'));
