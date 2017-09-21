@@ -569,7 +569,7 @@ class PolisController extends Controller
             $message = $this->get('mail_manager');
 
             $message->sendEmail('emails/sign_up_email.html.twig', $mail_params, $pemail, $email_from, $email_from_name, $email_replay_to);
-            
+
             $mailBody = $this->renderView(
                 'emails/sign_up_email.html.twig',
                 array()
@@ -582,11 +582,12 @@ class PolisController extends Controller
 
             
             $res=mail($pemail, $mailSubject, $mailBody, $mailHeaders);
-
+var_dump($mailBody);exit;
             //$success_message_text = 'На указанную почту было отправлено письмо для изменения пароля.';
             
         } else {
             
+var_dump(7);exit;
         }
         
         return $this->redirect($this->generateUrl('invitation_sign_up'));
