@@ -581,7 +581,7 @@ class PolisController extends Controller
 
 
             
-            $res=mail($pemail, $mailSubject, $mailBody, $headers);
+            $res=mail($pemail, $mailSubject, $mailBody, $mailHeaders);
 
             //$success_message_text = 'На указанную почту было отправлено письмо для изменения пароля.';
             
