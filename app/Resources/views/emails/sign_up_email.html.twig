@@ -5,10 +5,18 @@
 {% block body_text %}
 
 {% endblock %}
- 
+
 {% block body_html %}
     {% autoescape false %}
-123
+Вы получили приглашение на регистрацию на сайте <a href="{{ base_url }}">{{ base_url_name }}</a>.
+<br/>
+<br/>Для этого перейдите по ссылке:
+<br/>
+<br/><a href="{{ signup_link }}">{{ signup_link }}</a>
+<br/>
+<br/>С уважением,<br>
+<br>
+{{ email_footer_message }}
     {% endautoescape %}
 {% endblock %}
  

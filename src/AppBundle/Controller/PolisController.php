@@ -538,19 +538,21 @@ class PolisController extends Controller
         $polisService = $this->get("polis_service");
         
         $pemail = $request ->get("u_email");
-        $pcompanyid = $request ->get("u_company_id");
+        $pcompanyId = $request ->get("u_company_id");
 
         if ( $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
             
             $user = $this->getUser();
             
-            $securityService = $this->get("security_service");
+            $iKeyService = $this->get("i_key_service");
             
-            $hash = 'sdfasdfasdfa'; //$securityService ->getForgotPasswordHash($user, $this->container->getParameter('secret'));
+            $piKey = $iKeyService ->createIKey($user, $pemail, $pcompanyId, $this->container->getParameter('secret') );
 
-            $forgot_link = 'asdasda'; //$this->generateUrl('change_password',array(),true) . 
-                    //'?email=' . rawurlencode($pemail) .
-                    //'&h=' . $hash ;
+
+            
+            $hash = $piKey ->getIKey();
+
+            $signup_link = $this->generateUrl('sign_up',array('i' => $hash, 'email' => rawurlencode($pemail)),true);
 
             $email_from_name = $this->container->getParameter('support_email_from_name');
             $email_from = $this->container->getParameter('support_email_from');
@@ -560,8 +562,7 @@ class PolisController extends Controller
             $base_url_name = $this->container->getParameter('base_url_name');
 
             $mail_params = array(
-                'fullname' => $user->getFirstName().' '.$user->getLastName(),
-                'forgot_link' => $forgot_link,
+                'signup_link' => $signup_link,
                 'email_footer_message' => $email_footer_message,
                 'base_url' => $base_url,
                 'base_url_name' => $base_url_name,
@@ -570,30 +571,6 @@ class PolisController extends Controller
             $message = $this->get('mail_manager');
 
             $message->sendEmail('emails/sign_up_email.html.twig', $mail_params, $pemail, $email_from, $email_from_name, $email_replay_to);
-
-            /*
-            $mailBody = $this->renderView(
-                'emails/sign_up_email.html.twig',
-                array()
-            );
-            $mailSubject = 'Test';
-            $mailHeaders = 'MIME-Version: 1.0' . "\r\n";
-            $mailHeaders .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-            $mailHeaders .= 'FROM: Test message <'.$email_from.'>' . "\r\n";
-            $res=mail($pemail, $mailSubject, $mailBody, $mailHeaders);
-            */
-            
-            /*
-            $email_from = $this->container->getParameter('support_email_from');
-            $to = $pemail; //'norayrd@rambler.ru';
-            $subject = 'polis test';
-            $message = 'Test message';
-            $headers = 'MIME-Version: 1.0' . "\r\n";
-            $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-            $headers .= 'FROM: Test message <'.$email_from.'>' . "\r\n";
-
-            $res = \mail($to, $subject, $message, $headers);
-            */
             
             //$success_message_text = 'На указанную почту было отправлено письмо для изменения пароля.';
             

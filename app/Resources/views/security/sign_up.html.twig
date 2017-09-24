@@ -4,7 +4,16 @@
 
 {% block stylesheets  %}
 
-    <link rel="stylesheet" href="assets/css/signin.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/signin.css') }}">
+    <link rel="stylesheet" href="{{ asset('js/validate/validate.css') }}">
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script type="text/javascript" src="{{ asset('js/utils/AjaxRequest.class.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/sign-up.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/validate/jquery.validate.js') }}"></script>
 
 {% endblock %}
 
@@ -27,55 +36,72 @@
                     <div class="account-box">
                         <h3>Регистрация</h3>
 
-                        <form role="form" action="{{ path('security_sign_up_check') }}" method="post">
+                        <form role="form" action="{{ path('security_sign_up_check') }}" method="post" id="frm-sign-up">
+                            <fieldset>
 
-                            <div class="form-group">
-                                <label for="inputUserName">Имя</label>
-                                <input type="text" id="inputUserName" class="form-control" name="_firstname" value="{{ last_request.get('_firstname') }}" 
-                                       title="{% if errors["firstname"] %} {{ errors['firstname'] }}{% endif %}" >
-                            </div>
-                            <div class="form-group">
-                                <label for="inputUserLastname">Фамилия</label>
-                                <input type="text" id="inputUserLastname" class="form-control" name="_lastname" value="{{ last_request.get('_lastname') }}"
-                                       title="{% if errors["lastname"] %} {{ errors["lastname"] }} {% endif %}" >
-                            </div>
-                            <div class="form-group">
-                                <label for="inputUsernameEmail">E-mail</label>
-                                <input type="text" id="inputUsernameEmail" class="form-control" name="_email" value="{{ last_request.get('_email') }}"
-                                       title="{% if errors["email"] is defined %}
-                                                  {{ errors["email"] }}
-                                              {% else %}
-                                                  {% if errors["username"] is defined %} 
-                                                      {{ errors["username"] }}
-                                                  {% else %}
-                                                      {% if errors["userNameIsUsed"] is defined %} 
-                                                          {{ errors["userNameIsUsed"] }}
-                                                      {% endif %}
-                                                  {% endif %}
-                                              {% endif %}" >
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPassword">Пароль</label>
-                                <input type="password" id="inputPassword" class="form-control" name="_password"
-                                       title=" {% if errors["password"] is defined %} {{ errors["password"] }}{% endif %}" >
-                            </div>
-                            <div class="form-group">
-                                <label for="inputRetypePassword">Повторите пароль</label>
-                                <input type="password" id="inputRetypePassword" class="form-control" name="_retype_password" 
-                                       title="{% if errors["retype_password"] is defined %}{{ errors["retype_password"] }}{% endif %}" >
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <a class="forgotLnk" href="{{ path('security_login_form') }}">Вход</a>
+                                <div class="control-group">
+                                    <label class="control-label" for="inputUserName">Имя</label>
+                                    <div class="controls">
+                                        <input type="text" id="inputUserName" class="form-control" name="_firstname" value="{{ last_request.get('_firstname') }}" 
+                                               title="{% if errors["firstname"] %} {{ errors['firstname'] }}{% endif %}" >
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <button class="btn btn-primary pull-right" type="submit">
-                                        Регистрация <span class="entypo-check">
-                                    </button>
+                                <div class="control-group">
+                                    <label class="control-label" for="inputUserLastname">Фамилия</label>
+                                    <div class="controls">
+                                        <input type="text" id="inputUserLastname" class="form-control" name="_lastname" value="{{ last_request.get('_lastname') }}"
+                                               title="{% if errors["lastname"] %} {{ errors["lastname"] }} {% endif %}" >
+                                    </div>
                                 </div>
-                            </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="inputUsernameEmail">E-mail</label>
+                                    <div class="controls">
+                                        <input type="text" id="inputUsernameEmail" class="form-control" name="_email" value="{% if email is defined %}{{ email }}{% else %}{{ last_request.get('_email') }}{% endif %}"
+                                               title="{% if errors["email"] is defined %}
+                                                          {{ errors["email"] }}
+                                                      {% else %}
+                                                          {% if errors["username"] is defined %} 
+                                                              {{ errors["username"] }}
+                                                          {% else %}
+                                                              {% if errors["userNameIsUsed"] is defined %} 
+                                                                  {{ errors["userNameIsUsed"] }}
+                                                              {% endif %}
+                                                          {% endif %}
+                                                      {% endif %}"
+                                                      {% if email is defined %}
+                                                      readonly=""
+                                                      {% endif %} >
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="inputPassword">Пароль</label>
+                                    <div class="controls">
+                                        <input type="password" id="inputPassword" class="form-control" name="_password"
+                                               title=" {% if errors["password"] is defined %} {{ errors["password"] }}{% endif %}" >
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="inputRetypePassword">Повторите пароль</label>
+                                    <div class="controls">
+                                        <input type="password" id="inputRetypePassword" class="form-control" name="_retype_password" 
+                                               title="{% if errors["retype_password"] is defined %}{{ errors["retype_password"] }}{% endif %}" >
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <input type="hidden" name="_hash" value="{{ hash }}"/>
+                                    <div class="col-md-6">
+                                        <a class="forgotLnk" href="{{ path('security_login_form') }}">Вход</a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-primary pull-right" type="submit" id="btn_submit">
+                                            Регистрация <span class="entypo-check">
+                                        </button>
+                                    </div>
+                                </div>
                             
+                            </fieldset>
                         </form>
                     </div>
                 </div>
@@ -85,5 +111,45 @@
         <div style="text-align:center;margin:0 auto;">
             <h6 style="color:#fff;">Release 1.0 Powered by © norayrd 2016</h6>
         </div>
+                                
+    <script>
+    $(document).ready(function() {
+        //Validation
+        $('#frm-sign-up').validate({
+            rules: {
+                _firstname: {
+                    minlength: 2,
+                    required: true
+                },
+                _lastname: {
+                    minlength: 2,
+                    required: true
+                },
+                _email: {
+                    required: true,
+                    email: true
+                },
+                _password: {
+                    minlength: 5,
+                    required: true
+                },
+                _retype_password: {
+                    minlength: 5,
+                    required: true,
+                    equalTo: inputPassword
+                }
+            },
+            highlight: function(element) {
+                $(element).closest('.control-group').removeClass('success').addClass('error');
+            },
+            success: function(element) {
+                element
+                    .text('OK!').addClass('valid')
+                    .closest('.control-group').removeClass('error').addClass('success');
+            }
+        });
+    });
+    </script>
+                                
 
 {% endblock %}

@@ -49,6 +49,11 @@ class IKey
     private $data = array();
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $user_id;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -171,5 +176,28 @@ class IKey
     public function getCompanyId()
     {
         return $this->company_id;
+    }
+
+    /**
+     * Set user_id
+     *
+     * @param integer $userId
+     * @return IKey
+     */
+    public function setUserId($userId)
+    {
+        $this->user_id = $userId;
+    
+        return $this;
+    }
+
+    /**
+     * Get user_id
+     *
+     * @return integer 
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
     }
 }

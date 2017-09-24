@@ -73,14 +73,24 @@ class SecurityController extends Controller
         if ($this->container->hasParameter('hide_registration_button')) {
             $hideRegistrationButton = ($this->container->getParameter('hide_registration_button')==1)?1:0;
         }
+        
+        $phash=null;
+        $pemail = null;
 
         if ($hideRegistrationButton == 1) {
-            $pIKey = $request ->get("i");
-            $email = $request ->get("email");
+            $phash = $request ->get("i");
+            $pemail = rawurldecode( $request ->get("email"));
         
             $iKeyService = $this->get("i_key_service");
+            
+            $iKey = $iKeyService ->findIKey( $pemail, $phash );
+            
+            $securityService = $this->get("security_service");
+            
+            $foundUser = $securityService->findUserByEmail( $pemail );
 
-            if ( !$iKeyService ->checkIKey( $email, $pIKey ) ) {
+            
+            if ( !$iKey || is_object($foundUser) ) {
                 
                 return $this->render('security/sign_up_wrong_url.html.twig', array(
                     'message' => 'Устаревшая или не существующая ссылка!',
@@ -92,11 +102,13 @@ class SecurityController extends Controller
         if (!empty($error)) {
             $error_text = "Have some errors!";
         }
-
+        
         return $this->render('security/sign_up.html.twig', array(
             'last_request' => $request->request,
             'error_text' => $error_text,
             'errors' => $error,
+            'hash' => $phash,
+            'email' => $pemail,
         ));
 
     }
