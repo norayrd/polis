@@ -1,18 +1,20 @@
 AjaxRequest  = {
    
-   
-   
-   _call:function(_url,_params,_method,_responseHandler){
-       $.ajax({
+    _call:function( _method, _url, _data, _successHandler, _errorHandler, _completeHandler){
+        $.ajax({
                 type: _method,
                 url: _url,
-                data: _params,
-                success:_responseHandler
-                        
-                   
-                   
-                });
+                data: _data,
+                success:_successHandler,
+                error: _errorHandler,
+                complete: _completeHandler,
+            });
+
+	//beforeSend, 
+	//error, 
+	//dataFilter
+	//success
+	//complete
        
-       
-   }
+    }
 };
