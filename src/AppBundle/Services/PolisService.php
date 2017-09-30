@@ -19,22 +19,6 @@ class PolisService {
 
     }
 
-    /*public function getPolis($user, $polisId) {
-        
-        $polis = $this->em->getRepository('AppBundle:Polis') 
-                -> findOneBy(array('id'=> $polisId ));
-        
-        return $polis;
-    }
-    
-    public function getPolisList($user) {
-        
-        $polisList = $this->em->getRepository('AppBundle:Polis') 
-                -> findBy(array());
-        
-        return $polisList;
-    }*/
-    
     public function reverseCompany( $companyId, $userId) {
 
         return $this->em->getRepository('AppBundle:Company') -> reverseCompany($companyId, $userId);
@@ -81,4 +65,9 @@ class PolisService {
         return true;
     }
     
+    public function getOrderById( $user, $porderId) {
+
+        return $this->em->getRepository('AppBundle:Order') -> findOneBy(array('order_id' => $porderId));
+    }
+
 }

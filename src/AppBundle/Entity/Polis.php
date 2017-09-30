@@ -33,10 +33,10 @@ class Polis
     private $polis_date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="PolisNum", inversedBy="Polis", cascade={"persist"})
-     * @ORM\JoinColumn(name="polis_num_id", referencedColumnName="polis_num_id")
+     * @ORM\ManyToOne(targetEntity="Order", inversedBy="Polis", cascade={"persist"})
+     * @ORM\JoinColumn(name="order", referencedColumnName="order_id")
      */
-    private $polis_num_id;
+    private $order;
 
     /**
      * @ORM\Column(type="decimal", scale=2)
@@ -270,26 +270,26 @@ class Polis
     }
 
     /**
-     * Set polis_num_id
+     * Set order
      *
-     * @param \AppBundle\Entity\PolisNum $polisNumId
+     * @param \AppBundle\Entity\Order $order
      * @return Polis
      */
-    public function setPolisNumId(\AppBundle\Entity\PolisNum $polisNumId = null)
+    public function setOrder(\AppBundle\Entity\Order $order = null)
     {
-        $this->polis_num_id = $polisNumId;
+        $this->order = $order;
     
         return $this;
     }
 
     /**
-     * Get polis_num_id
+     * Get order
      *
-     * @return \AppBundle\Entity\PolisNum 
+     * @return \AppBundle\Entity\Order 
      */
-    public function getPolisNumId()
+    public function getOrder()
     {
-        return $this->polis_num_id;
+        return $this->order;
     }
 
     /**

@@ -34,13 +34,45 @@ class PolisController extends Controller
         
         $is_guest = !is_object($this->getUser());
         
+        $userRoles = array();
+        
+        if (!$is_guest) {
+            $userRoles = $this->getUser() -> getRoles();
+        }
+        
+        if ($is_guest || empty($userRoles)) {
+            return $this->redirect('/desktop');
+        }
+
         $polisService = $this->get("polis_service");
 
-        $orderList = null;//$polisService ->getorderList($this->getUser());
+        //--------------------------
+        //access rights
+        $can_create =  $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER'));
         
+        $can_view_all = $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER'));
+        
+        $can_view_self = $this->getUser()->haveRole(array('ROLE_AGENT','ROLE_MANAGER'));
+        
+        //--------------------------
+
+
+        $orderList = null;
+        
+        /*if ($can_view_all) {
+            
+            $companyList = $polisService ->getCompanyList($this->getUser());
+        } else if ($can_view_self) {
+
+            $companyList = array($polisService ->getCompanyById($this->getUser(), $this->getUser()->getCompany()->getCompanyId()));
+        } else {
+            
+            $companyList = array();
+        }*/
+
         $breadcrumb = array(
             array('name' => 'home', 'url' => $this->generateUrl('home')),
-            array('name' => 'Журнал заявок', 'url' => null),
+            array('name' => 'Журнал АКТов', 'url' => null),
         );
 
         $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
@@ -51,11 +83,73 @@ class PolisController extends Controller
             'page_title' => $page_title,
             'breadcrumb' => $breadcrumb,
             'orderList' => $orderList,
+            'can_create' => $can_create,
+            'can_view_all'=> $can_view_all,
+            'can_view_self' => $can_view_self,
         ));
 
     }
 
     /**
+     * @Route("/order-view", name="order_view")
+     */
+    public function orderViewAction(Request $request){
+        
+        $is_guest = !is_object($this->getUser());
+        
+        $porderId = $request ->get("porderid");
+
+        $polisService = $this->get("polis_service");
+        
+        //--------------------------
+        //access rights
+        // submit button
+        if ($porderId !== 'new') {
+            $can_edit =  $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_MANAGER','ROLE_TOPMANAGER'));
+        } else if ($porderId === 'new') {
+            $can_edit =  $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER'));
+        }
+        
+        $can_view_all = $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER'));
+        
+        $can_view_self = $this->getUser()->haveRole(array('ROLE_AGENT','ROLE_MANAGER')) 
+                && ($this->getUser()->getCompany()->getCompanyId() == $pcompanyId );
+        
+        //--------------------------
+        
+        if ( $can_view_all && is_numeric($porderId)) {
+            
+            $porder = $polisService ->getOrderById($this->getUser(), $porderId );
+        } else if ($can_view_self && is_numeric($porderId)) {
+
+            $porder = $polisService ->getOrderById($this->getUser(), $porderId );
+        } else {
+            
+            $porder = null;
+        }
+        
+        $breadcrumb = array(
+            array('name' => 'home', 'url' => $this->generateUrl('home')),
+            array('name' => 'Журнал АКТов', 'url' => $this->generateUrl('order_list')),
+            array('name' => 'АКТ приема передачи', 'url' => null),
+        );
+
+        $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
+
+        return $this->render('polis/order_view.html.twig', array(
+            'user' => $this->getUser(),
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'page_title' => $page_title,
+            'breadcrumb' => $breadcrumb,
+            'porder' => $porder,
+            'can_edit' => $can_edit,
+        ));
+
+    }
+    
+    /**
+    }
+    }
      * @Route("/polis-list", name="polis_list")
      */
     public function polisListAction(Request $request){

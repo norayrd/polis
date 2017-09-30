@@ -21,7 +21,7 @@
                         <div class="nest" id="FootableClose">
                             <div class="title-alt">
                                 <h6>
-                                    Журнал заявок / полисов</h6>
+                                    Журнал АКТов</h6>
                                 {#<div class="titleClose">
                                     <a class="gone" href="#FootableClose">
                                         <span class="entypo-cancel"></span>
@@ -35,6 +35,16 @@
 
                             </div>
 
+                            {% if (can_create) %}
+                            <div class="body-nest" id="Footable">
+                                <a class="btn" href="{{ path('order_view',{'porderid': 'new', 'ptype': '10'}) }}"><span class="fontawesome-asterisk"></span> АКТ приема </a>
+                                <a class="btn" href="{{ path('order_view',{'porderid': 'new', 'ptype': '30'}) }}"><span class="fontawesome-asterisk"></span> Реестр полисов </a>
+                                <a class="btn" href="{{ path('order_view',{'porderid': 'new', 'ptype': '40'}) }}"><span class="fontawesome-asterisk"></span> АКТ возврата чистых</a>
+                                <a class="btn" href="{{ path('order_view',{'porderid': 'new', 'ptype': '50'}) }}"><span class="fontawesome-asterisk"></span> АКТ возврата порченых</a>
+                                <a class="btn" href="{{ path('order_view',{'porderid': 'new', 'ptype': '60'}) }}"><span class="fontawesome-asterisk"></span> АКТ об утерии</a>
+                            </div>
+                            {% endif %}
+                            
                             <div class="body-nest" id="Footable">
 
                                 {#<p class="lead well">FooTable is a jQuery plugin that aims to make HTML tables on smaller devices look awesome - No matter how many columns of data you may have in them. And it's responsive i think this better than DataTable in some way</p>#}
