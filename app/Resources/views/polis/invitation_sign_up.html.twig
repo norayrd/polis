@@ -60,6 +60,7 @@
                                                         <label class="control-label" for="subject">Организация</label>
                                                         <div class="controls">
                                                             <select class="form-control" name="u_company_id" id="u_company_id" value="">
+                                                                <option value=""></option>
                                                                 {% for pcompany in companyList %}
                                                                 <option value="{{ pcompany.getCompanyId() }}">{{ pcompany.getCompName() }}</option>
                                                                 {% endfor %}
