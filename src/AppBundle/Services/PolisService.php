@@ -38,6 +38,16 @@ class PolisService {
 
         return $this->em->getRepository('AppBundle:Company') -> findBy(array());
     }
+    
+    public function getAgentCompanyes( $user) {
+
+        return $this->em->getRepository('AppBundle:Company') -> findBy(array('parent' => $user->getCompany()));
+    }
+
+    public function getInsuranceCompanyes( $user) {
+
+        return $this->em->getRepository('AppBundle:Company') -> findBy(array('type' => 2));
+    }
 
     public function getUserById( $user, $puserId) {
 
@@ -68,6 +78,11 @@ class PolisService {
     public function getOrderById( $user, $porderId) {
 
         return $this->em->getRepository('AppBundle:Order') -> findOneBy(array('order_id' => $porderId));
+    }
+
+    public function getUserSignList( $user) {
+
+        return $this->em->getRepository('AppBundle:UserSign') -> findBy(array());
     }
 
 }

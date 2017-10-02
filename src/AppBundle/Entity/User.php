@@ -467,4 +467,15 @@ class User implements UserInterface
     {
         return $this->company;
     }
+
+    /**
+     * Get FIO
+     *
+     * @return \AppBundle\Entity\Company 
+     */
+    public function getFio()
+    {
+        
+        return $this->lastname . ' ' . $this->firstname . ' ' . $this->patronymic;
+    }
 }

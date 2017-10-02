@@ -49,6 +49,10 @@ order_view:
     pattern:   /order-view/{porderid}
     defaults:  { _controller: AppBundle:Polis:orderView }
 
+order_edit:
+    pattern:   /order-edit/{porderid}
+    defaults:  { _controller: AppBundle:Polis:orderEdit }
+
 desktop:
     pattern:   /desktop
     defaults:  { _controller: AppBundle:Main:desktop }

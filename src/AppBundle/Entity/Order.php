@@ -22,6 +22,11 @@ class Order
     private $order_id;
 
     /**
+     * @ORM\Column(type="date" )
+     */
+    private $order_date;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Order", inversedBy="Order", cascade={"persist"})
      * @ORM\JoinColumn(name="parent", referencedColumnName="order_id")
      */
@@ -48,19 +53,17 @@ class Order
     private $date_end;
 
     /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('10', '20', '30', '40', '50', '60', '110', '120', '130', '140', '150', '160')" )
+     * @ORM\Column(type="string", columnDefinition="ENUM('10', '20', '30', '40', '50', '110', '120', '130', '140', '150')" )
      * 10 - приход
      * 20 - дозаказ
-     * 30 - реестр полисов
-     * 40 - возврат чистых
-     * 50 - возврат порченых
-     * 60 - утерянные
+     * 30 - возврат чистых
+     * 40 - возврат порченых
+     * 50 - утерянные
      * 110 - приход (между своими)
      * 120 - дозаказ (между своими)
-     * 130 - реестр полисов (между своими)
-     * 140 - возврат чистых (между своими)
-     * 150 - возврат порченых (между своими)
-     * 160 - утерянные (между своими)
+     * 130 - возврат чистых (между своими)
+     * 140 - возврат порченых (между своими)
+     * 150 - утерянные (между своими)
      */
     private $type;
     
@@ -77,16 +80,6 @@ class Order
     private $user_from;
 
     /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('0', '1')" )
-     * 10 - запрос
-     * 20 - отказ
-     * 30 - добро
-     * 40 - отправлено
-     * 50 - получено
-     */
-    private $user_sign_from;
-    
-    /**
      * @ORM\ManyToOne(targetEntity="Company", inversedBy="Order", cascade={"persist"})
      * @ORM\JoinColumn(name="company_to", referencedColumnName="company_id")
      */
@@ -99,9 +92,10 @@ class Order
     private $user_to;
     
     /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('0', '1')" )
+     * @ORM\ManyToOne(targetEntity="UserSign", inversedBy="Order", cascade={"persist"})
+     * @ORM\JoinColumn(name="user_sign", referencedColumnName="user_sign_id")
      */
-    private $user_sign_to;
+    private $user_sign;
 
     /**
      * @ORM\Column(type="datetime")
@@ -118,7 +112,6 @@ class Order
      */
     private $user_id;
 
-
     /**
      * Get order_id
      *
@@ -127,6 +120,29 @@ class Order
     public function getOrderId()
     {
         return $this->order_id;
+    }
+
+    /**
+     * Set order_date
+     *
+     * @param \DateTime $orderDate
+     * @return Order
+     */
+    public function setOrderDate($orderDate)
+    {
+        $this->order_date = $orderDate;
+    
+        return $this;
+    }
+
+    /**
+     * Get order_date
+     *
+     * @return \DateTime 
+     */
+    public function getOrderDate()
+    {
+        return $this->order_date;
     }
 
     /**
@@ -245,52 +261,6 @@ class Order
     }
 
     /**
-     * Set user_sign_from
-     *
-     * @param string $userSignFrom
-     * @return Order
-     */
-    public function setUserSignFrom($userSignFrom)
-    {
-        $this->user_sign_from = $userSignFrom;
-    
-        return $this;
-    }
-
-    /**
-     * Get user_sign_from
-     *
-     * @return string 
-     */
-    public function getUserSignFrom()
-    {
-        return $this->user_sign_from;
-    }
-
-    /**
-     * Set user_sign_to
-     *
-     * @param string $userSignTo
-     * @return Order
-     */
-    public function setUserSignTo($userSignTo)
-    {
-        $this->user_sign_to = $userSignTo;
-    
-        return $this;
-    }
-
-    /**
-     * Get user_sign_to
-     *
-     * @return string 
-     */
-    public function getUserSignTo()
-    {
-        return $this->user_sign_to;
-    }
-
-    /**
      * Set date_curr
      *
      * @param \DateTime $dateCurr
@@ -357,6 +327,29 @@ class Order
     public function getUserId()
     {
         return $this->user_id;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \AppBundle\Entity\Order $parent
+     * @return Order
+     */
+    public function setParent(\AppBundle\Entity\Order $parent = null)
+    {
+        $this->parent = $parent;
+    
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \AppBundle\Entity\Order 
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 
     /**
@@ -452,25 +445,25 @@ class Order
     }
 
     /**
-     * Set parent
+     * Set user_sign
      *
-     * @param \AppBundle\Entity\Order $parent
+     * @param \AppBundle\Entity\UserSign $userSign
      * @return Order
      */
-    public function setParent(\AppBundle\Entity\Order $parent = null)
+    public function setUserSign(\AppBundle\Entity\UserSign $userSign = null)
     {
-        $this->parent = $parent;
+        $this->user_sign = $userSign;
     
         return $this;
     }
 
     /**
-     * Get parent
+     * Get user_sign
      *
-     * @return \AppBundle\Entity\Order 
+     * @return \AppBundle\Entity\UserSign 
      */
-    public function getParent()
+    public function getUserSign()
     {
-        return $this->parent;
+        return $this->user_sign;
     }
 }

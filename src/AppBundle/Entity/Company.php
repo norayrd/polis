@@ -22,6 +22,12 @@ class Company
     private $company_id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Company", inversedBy="Company", cascade={"persist"})
+     * @ORM\JoinColumn(name="parent", referencedColumnName="company_id")
+     */
+    private $parent;
+
+    /**
      * @ORM\Column(type="string", unique=true )
      */
     private $comp_name;
@@ -370,5 +376,28 @@ class Company
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \AppBundle\Entity\Company $parent
+     * @return Company
+     */
+    public function setParent(\AppBundle\Entity\Company $parent = null)
+    {
+        $this->parent = $parent;
+    
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \AppBundle\Entity\Company 
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 }

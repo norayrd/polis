@@ -98,6 +98,8 @@ class PolisController extends Controller
         $is_guest = !is_object($this->getUser());
         
         $porderId = $request ->get("porderid");
+        $ptype = $request ->get("ptype");
+        $pparentid = $request ->get("pparentid");
 
         $polisService = $this->get("polis_service");
         
@@ -116,6 +118,10 @@ class PolisController extends Controller
                 && ($this->getUser()->getCompany()->getCompanyId() == $pcompanyId );
         
         //--------------------------
+        
+        $agentCompanyList = $polisService ->getAgentCompanyes($this->getUser());
+        $insuranceCompanyList = $polisService ->getInsuranceCompanyes($this->getUser());
+        $userSignList = $polisService ->getUserSignList($this->getUser());
         
         if ( $can_view_all && is_numeric($porderId)) {
             
@@ -142,8 +148,76 @@ class PolisController extends Controller
             'page_title' => $page_title,
             'breadcrumb' => $breadcrumb,
             'porder' => $porder,
+            'ptype' => $ptype,
+            '$pparentid' => $pparentid,
+            'pagentcompanylist' => $agentCompanyList,
+            'pinsurancecompanylist' => $insuranceCompanyList,
             'can_edit' => $can_edit,
+            'usersignlist' => $userSignList,
         ));
+
+    }
+
+    /**
+     * @Route("/order-edit/{porderid}", name="order_edit")
+     */
+    public function orderEditAction(Request $request){
+        
+        $is_guest = !is_object($this->getUser());
+        
+        $porderid = $request ->get("porderid");
+        
+        if ( !$is_guest && $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
+            
+/*      
+            $pcompid = $request ->get("o_orderid");
+            $pcompname = $request ->get("c_compname");
+            $pemail = $request ->get("c_email");
+            $paddress = $request ->get("c_address");
+            $pphone = $request ->get("c_phone");
+            $pstatus = $request ->get("c_status");
+            $ptype = $request ->get("c_type");
+            $polisCountLimit = $request ->get("c_polis_count_limit");
+            
+            $polisService = $this->get("polis_service");
+            
+            if ( ($pcompanyid == 'new') || ($pcompid == '') ) {
+
+                $pcompany = new Company();
+                
+            } else if ( ($pcompanyid !== null) && ($pcompanyid > 0) && ($pcompanyid == $pcompid) ) {
+
+                $pcompany = $polisService ->getCompanyById($this->getUser(),$pcompanyid);
+            }
+
+            if (isset($pcompany) && is_object($pcompany)) {
+                
+                if (!isset($polisCountLimit)) {
+                    $polisCountLimit = 0;
+                }
+                    
+                $pcompany->setCompName($pcompname);
+                $pcompany->setEmail($pemail);
+                $pcompany->setAddress($paddress);
+                $pcompany->setPhone($pphone);
+                $pcompany->setStatus($pstatus);
+                $pcompany->setPolisCountLimit(0);
+                $pcompany->setDateBeginFact(new DateTime());
+                $pcompany->setDateEndFact(new DateTime('9999-12-31 23:59:59'));
+                $pcompany->setUserId1($this->getUser()->getId());
+
+                if ($this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
+                    $pcompany->setType($ptype);
+                    $pcompany->setPolisCountLimit($polisCountLimit);
+                }
+
+                $polisService ->saveCompany($this->getUser(),$pcompany);
+
+            }
+*/
+        }
+        
+        return $this->redirect($this->generateUrl('order_list'));
 
     }
     
