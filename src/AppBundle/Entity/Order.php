@@ -33,6 +33,17 @@ class Order
     private $parent;
     
     /**
+     * @ORM\ManyToOne(targetEntity="Company", inversedBy="Order", cascade={"persist"})
+     * @ORM\JoinColumn(name="insurance_company", referencedColumnName="company_id")
+     */
+    private $insurance_company;
+    
+    /**
+     * @ORM\Column(type="integer" )
+     */
+    private $count;
+
+    /**
      * @ORM\Column(type="string" )
      */
     private $numbers;
@@ -465,5 +476,51 @@ class Order
     public function getUserSign()
     {
         return $this->user_sign;
+    }
+
+    /**
+     * Set count
+     *
+     * @param integer $count
+     * @return Order
+     */
+    public function setCount($count)
+    {
+        $this->count = $count;
+    
+        return $this;
+    }
+
+    /**
+     * Get count
+     *
+     * @return integer 
+     */
+    public function getCount()
+    {
+        return $this->count;
+    }
+
+    /**
+     * Set insurance_company
+     *
+     * @param \AppBundle\Entity\Company $insuranceCompany
+     * @return Order
+     */
+    public function setInsuranceCompany(\AppBundle\Entity\Company $insuranceCompany = null)
+    {
+        $this->insurance_company = $insuranceCompany;
+    
+        return $this;
+    }
+
+    /**
+     * Get insurance_company
+     *
+     * @return \AppBundle\Entity\Company 
+     */
+    public function getInsuranceCompany()
+    {
+        return $this->insurance_company;
     }
 }

@@ -36,9 +36,17 @@
                             </div>
 
                             {% if (can_create) %}
-                            <div class="body-nest" id="Footable">
-                                <a class="btn" href="{{ path('order_view',{'porderid': 'new', 'ptype': '10'}) }}"><span class="fontawesome-asterisk"></span> АКТ приема </a>
-                            </div>
+
+                                {% if user.getCompany().getType()==1 %}
+                                <div class="body-nest" id="Footable">
+                                    <a class="btn" href="{{ path('order_view',{'porderid': 'new', 'ptype': '10'}) }}"><span class="fontawesome-asterisk"></span> АКТ приема </a>
+                                </div>
+                                {% endif %}
+                                {% if user.getCompany().getType()==3 %}
+                                <div class="body-nest" id="Footable">
+                                    <a class="btn" href="{{ path('order_view',{'porderid': 'new', 'ptype': '110'}) }}"><span class="fontawesome-asterisk"></span> АКТ приема </a>
+                                </div>
+                                {% endif %}
                             {% endif %}
                             
                             <div class="body-nest" id="Footable">

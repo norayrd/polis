@@ -85,4 +85,9 @@ class PolisService {
         return $this->em->getRepository('AppBundle:UserSign') -> findBy(array());
     }
 
+    public function getOrderTypeById( $user, $orderTypeId) {
+
+        return $this->em->getRepository('AppBundle:orderType') -> findBy(array('order_type_id' => $orderTypeId));
+    }
+
 }

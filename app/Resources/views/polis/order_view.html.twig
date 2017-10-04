@@ -98,10 +98,36 @@
                                                 <div class="col-sm-12">
                                                     
                                                     <div class="form-group">
-                                                        <label class="col-lg-3 col-sm-3 control-label" for="o_companyto">Контрагент</label>
-                                                        <div class="col-sm-9">
+                                                        <label class="col-lg-3 col-sm-3 control-label" >Контрагент</label>
+                                                        <div class="col-lg-9">
+                                                        {% if porder==null %}
+                                                            {% if ptype>=100 %}
+                                                                <h4>{{ user.getCompany.getParent().getCompName() }}</h4>
+                                                            {% else %}
+                                                                <select class="form-control" name="o_companyto" id="o_companyto" value="">
+                                                                    <option value=""></option>
+                                                                    {% for pcompany in pinsurancecompanylist %}
+                                                                    <option value="{{ pcompany.getCompanyId() }}">{{ pcompany.getCompName() }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            {% endif %}
+                                                        {% else %}
+                                                            <h4>{{ porder.getCompanyFrom().getParent().getCompName() }}</h4>
+                                                        {% endif %}
+                                                        </div>
+                                                    </div>
+                                                        
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 col-sm-3 control-label" for="o_companyto">Полис от</label>
+                                                        <div class="col-sm-5">
                                                             
-                                                            <select class="form-control" name="o_companyto" id="o_companyto" value="">
+                                                            <select class="form-control" name="o_insurancecompany" id="o_insurancecompany" value="">
                                                                 <option value=""></option>
                                                             {% if type<100 %}
                                                                 {% for pcompany in pinsurancecompanylist %}
@@ -114,6 +140,10 @@
                                                             {% endif %}
                                                             
                                                             </select>
+                                                        </div>
+                                                        <label class="col-lg-2 col-sm-2 control-label" for="o_companyto">Кол-во</label>
+                                                        <div class="col-sm-2">
+                                                            <input type="text" class="form-control" id="o_count" name="o_count" value="{{ porder.getCount() }}">
                                                         </div>
                                                     </div>
                                                         
@@ -295,6 +325,7 @@
                 //alert("Your birthday was: " + this.val());
             }
         });
+        
     </script>
 
 

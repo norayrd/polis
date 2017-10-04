@@ -114,8 +114,7 @@ class PolisController extends Controller
         
         $can_view_all = $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER'));
         
-        $can_view_self = $this->getUser()->haveRole(array('ROLE_AGENT','ROLE_MANAGER')) 
-                && ($this->getUser()->getCompany()->getCompanyId() == $pcompanyId );
+        $can_view_self = $this->getUser()->haveRole(array('ROLE_AGENT','ROLE_MANAGER'));
         
         //--------------------------
         
@@ -169,7 +168,7 @@ class PolisController extends Controller
         
         if ( !$is_guest && $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
             
-/*      
+      
             $pcompid = $request ->get("o_orderid");
             $pcompname = $request ->get("c_compname");
             $pemail = $request ->get("c_email");
@@ -181,7 +180,7 @@ class PolisController extends Controller
             
             $polisService = $this->get("polis_service");
             
-            if ( ($pcompanyid == 'new') || ($pcompid == '') ) {
+/*            if ( ($pcompanyid == 'new') || ($pcompid == '') ) {
 
                 $pcompany = new Company();
                 
@@ -510,16 +509,20 @@ class PolisController extends Controller
             $userList = array();
         }
 
-        $polisRoles = $this->container->getParameter('polis_roles');
+        //--------------------
+        $securityService = $this->get("security_service");
+        $userRolesList = $securityService->getUserRolesList($this->getUser());
         
         $polRoles = array();
         
-        foreach ($polisRoles as $value) {
-            $polRoles[$value['id']] = array(
-                'name' => $value['name'],
-                'icon' => $value['icon'],
+        foreach ($userRolesList as $role) {
+            
+            $polRoles[$role->getRole()] = array(
+                'name' => $role->getName(),
+                'icon' => $role->getIcon(),
             );
         }
+        //--------------------
 
         $breadcrumb = array(
             array('name' => 'home', 'url' => $this->generateUrl('home')),
@@ -562,19 +565,20 @@ class PolisController extends Controller
             $puser = null;
         }
         
-        $polisRoles = $this->container->getParameter('polis_roles');
+        $securityService = $this->get("security_service");
+        $userRolesList = $securityService->getUserRolesList($this->getUser());
                 
         $puserRoles = array();
         
         if (is_object($puser)) {
         
-            foreach ($polisRoles as $key => $value) {
+            foreach ($userRolesList as $key => $role) {
 
                 $puserRoles[$key] = array(
                     'key' => $key, 
-                    'name' => $value['name'], 
-                    'checked' => in_array($value['id'], $puser->getRoles()),
-                    'icon' => $value['icon'],
+                    'name' => $role->getName(), 
+                    'checked' => in_array($role->getRole(), $puser->getRoles()),
+                    'icon' => $role->getIcon(),
                 );
             }
         }
@@ -619,17 +623,27 @@ class PolisController extends Controller
             $prole = $request ->get("u_role");
             $puserroles = $request ->get("u_roles");
 
-            $polisRoles = $this->container->getParameter('polis_roles');
+            //---------------------------
+            $securityService = $this->get("security_service");
+            $userRolesList = $securityService->getUserRolesList($this->getUser());
+            
+            $polisRoles = array();
+            foreach ($userRolesList as $key => $role) {
+                $polisRoles[$key] = array(
+                    'role' => $role->getRole(),
+                );
+            }
             
             $proles = array();
             
             if (is_array($puserroles)) {
                 foreach ($puserroles as $value) {
                     if (isset($polisRoles[$value])) {
-                        $proles[] = $polisRoles[$value]['id'];
+                        $proles[] = $polisRoles[$value]['role'];
                     }
                 }
             }
+        //--------------------
             
             if ( ($puserid !== null) && ($puserid > 0) ) {
 
