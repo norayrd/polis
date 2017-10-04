@@ -64,17 +64,8 @@ class Order
     private $date_end;
 
     /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('10', '20', '30', '40', '50', '110', '120', '130', '140', '150')" )
-     * 10 - приход
-     * 20 - дозаказ
-     * 30 - возврат чистых
-     * 40 - возврат порченых
-     * 50 - утерянные
-     * 110 - приход (между своими)
-     * 120 - дозаказ (между своими)
-     * 130 - возврат чистых (между своими)
-     * 140 - возврат порченых (между своими)
-     * 150 - утерянные (между своими)
+     * @ORM\ManyToOne(targetEntity="OrderType", inversedBy="Order", cascade={"persist"})
+     * @ORM\JoinColumn(name="type", referencedColumnName="order_type_id", nullable=false)
      */
     private $type;
     
@@ -246,29 +237,6 @@ class Order
     public function getDateEnd()
     {
         return $this->date_end;
-    }
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     * @return Order
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string 
-     */
-    public function getType()
-    {
-        return $this->type;
     }
 
     /**
@@ -522,5 +490,28 @@ class Order
     public function getInsuranceCompany()
     {
         return $this->insurance_company;
+    }
+
+    /**
+     * Set type
+     *
+     * @param \AppBundle\Entity\OrderType $type
+     * @return Order
+     */
+    public function setType(\AppBundle\Entity\OrderType $type = null)
+    {
+        $this->type = $type;
+    
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return \AppBundle\Entity\OrderType 
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }
