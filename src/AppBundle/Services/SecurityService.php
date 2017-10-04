@@ -53,4 +53,15 @@ class SecurityService {
         return $user->getForgotPasswordHash();
     }
     
+    /*
+     * Getting UserRoles list
+     */
+    public function getUserRolesList($user) {
+        
+        $userRolesList = $this->em->getRepository('AppBundle:UserRoles') 
+                -> findBy(array());
+
+        return $userRolesList;
+    }
+    
 }
