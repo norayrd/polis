@@ -21,10 +21,10 @@
                         <div class="nest" id="FootableClose">
                             <div class="title-alt">
                                 <h6>
-                                {% if porder is defined %}
-                                    АКТ № {{ porder.getOrderId() }} от {{ porder.getOrderDate() }}
+                                {% if porder==null %}
+                                    Заказ № - от -
                                 {% else %}
-                                    АКТ № - от -
+                                    Заказ № {{ porder.getOrderId() }} от {{ porder.getOrderDate()|date('d.m.Y') }}
                                 {% endif %}
                                 </h6>
 
@@ -48,40 +48,7 @@
                                                 <div class="col-sm-12">
                                                     
                                                     <div class="form-group">
-                                                        <label class="col-lg-3 col-sm-3 control-label" >Тип</label>
-                                                        <div class="col-lg-9">
-                                                        {% if ptype==10 %}
-                                                            <h4>АКТ приема</h4>
-                                                        {% elseif ptype==20 %}
-                                                            <h4>АКТ дозаказа</h4>
-                                                        {% elseif ptype==30 %}
-                                                            <h4>АКТ возврата чистых бланков</h4>
-                                                        {% elseif ptype==40 %}
-                                                            <h4>АКТ возврата испорченных бланков</h4>
-                                                        {% elseif ptype==50 %}
-                                                            <h4>АКТ возврата утерянных бланков</h4>
-                                                        {% elseif ptype==110 %}
-                                                            <h4>АКТ приема</h4>
-                                                        {% elseif ptype==120 %}
-                                                            <h4>АКТ дозаказа</h4>
-                                                        {% elseif ptype==130 %}
-                                                            <h4>АКТ возврата чистых бланков</h4>
-                                                        {% elseif ptype==140 %}
-                                                            <h4>АКТ возврата испорченных бланков</h4>
-                                                        {% elseif ptype==150 %}
-                                                            <h4>АКТ возврата утерянных бланков</h4>
-                                                        {% endif %}
-                                                        </div>
-                                                    </div>
-                                                        
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    
-                                                    <div class="form-group">
-                                                        <label class="col-lg-3 col-sm-3 control-label" >Компания</label>
+                                                        <label class="col-lg-3 col-sm-3 control-label" >От</label>
                                                         <div class="col-lg-9">
                                                         {% if porder==null %}
                                                             <h4>{{ user.Company.CompName() }}</h4>
@@ -100,19 +67,31 @@
                                                     <div class="form-group">
                                                         <label class="col-lg-3 col-sm-3 control-label" >Контрагент</label>
                                                         <div class="col-lg-9">
-                                                        {% if porder==null %}
-                                                            {% if ptype>=100 %}
-                                                                <h4>{{ user.getCompany.getParent().getCompName() }}</h4>
-                                                            {% else %}
-                                                                <select class="form-control" name="o_companyto" id="o_companyto" value="">
-                                                                    <option value=""></option>
-                                                                    {% for pcompany in pinsurancecompanylist %}
-                                                                    <option value="{{ pcompany.getCompanyId() }}">{{ pcompany.getCompName() }}</option>
-                                                                    {% endfor %}
+                                                        {% if (porder==null) %}
+
+                                                            <select class="form-control" name="o_companyto" id="o_companyto" value="">
+                                                                <option selected value="{{ user.getCompany().getParent().getCompanyId() }}" >{{ user.getCompany().getParent().getCompName() }}</option>
+                                                            </select>
+
+                                                        {% elseif porder.getCompanyCreate().getCompanyId()==user.getCompany().getCompanyId() %}
+                                                            
+                                                            <select class="form-control" name="o_companyto" id="o_companyto" value="">
+                                                                <option value="{{ user.getCompany().getParent().getCompanyId() }}" 
+                                                                        {% if porder.getCompanyTo().getCompanyId()==user.getCompany().getParent().getCompanyId() %}
+                                                                            selected
+                                                                        {% endif %}
+                                                                        >{{ user.getCompany().getParent().getCompName() }}</option>
                                                                 </select>
-                                                            {% endif %}
+
+                                                            {#<select class="form-control" name="o_companyto" id="o_companyto" value="">
+                                                                <option value=""></option>
+                                                                {% for pcompany in pinsurancecompanylist %}
+                                                                <option value="{{ pcompany.getCompanyId() }}">{{ pcompany.getCompName() }}</option>
+                                                                {% endfor %}
+                                                            </select>#}
+                                                            
                                                         {% else %}
-                                                            <h4>{{ porder.getCompanyFrom().getParent().getCompName() }}</h4>
+                                                            <h4>{{ porder.getCompanyTo().getCompName() }}</h4>
                                                         {% endif %}
                                                         </div>
                                                     </div>
@@ -124,95 +103,27 @@
                                                 <div class="col-sm-12">
                                                     
                                                     <div class="form-group">
-                                                        <label class="col-lg-3 col-sm-3 control-label" for="o_companyto">Полис от</label>
-                                                        <div class="col-sm-5">
-                                                            
-                                                            <select class="form-control" name="o_insurancecompany" id="o_insurancecompany" value="">
-                                                                <option value=""></option>
-                                                            {% if type<100 %}
-                                                                {% for pcompany in pinsurancecompanylist %}
-                                                                <option value="{{ pcompany.getCompanyId() }}">{{ pcompany.getCompName() }}</option>
-                                                                {% endfor %}
-                                                            {% else %}
-                                                                {% for pcompany in pagentcompanylist %}
-                                                                <option value="{{ pcompany.getCompanyId() }}">{{ pcompany.getCompName() }}</option>
-                                                                {% endfor %}
-                                                            {% endif %}
-                                                            
-                                                            </select>
-                                                        </div>
-                                                        <label class="col-lg-2 col-sm-2 control-label" for="o_companyto">Кол-во</label>
-                                                        <div class="col-sm-2">
-                                                            <input type="text" class="form-control" id="o_count" name="o_count" value="{{ porder.getCount() }}">
+                                                        <label class="col-lg-3 col-sm-3 control-label" >Создал</label>
+                                                        <div class="col-lg-9">
+                                                        {% if porder==null %}
+                                                            <h4>{{ user.getFio() }}</h4>
+                                                        {% else %}
+                                                            <h4>{{ porder.getUserCreate().getFio() }}</h4>
+                                                        {% endif %}
                                                         </div>
                                                     </div>
                                                         
                                                 </div>
                                             </div>
 
-                                            <div class="row">
-                                                <div class="col-sm-12">
-
-                                                    <div class="form-group">
-
-                                                        <label class="col-lg-3 col-sm-3 control-label" for="o_datebegin">Дата действия от</label>
-                                                        <div class="col-lg-4">
-                                                            <div class="input-group ">
-                                                                <span class="input-group-addon btn-success"><i class="fa fa-calendar"></i>
-                                                                </span>
-                                                                <input type="text" class="form-control" id="o_datebegin" name="o_datebegin" value="{{ porder.getDateBegin() }}">
-                                                                <span class="input-group-addon ">99/99/9999</span>
-                                                            </div>
-                                                        </div>
-                                                                
-                                                        <label class="col-lg-1 col-sm-1 control-label" for="o_dateend">до</label>
-                                                        <div class="col-lg-4">
-                                                            <div class="input-group ">
-                                                                <span class="input-group-addon btn-success"><i class="fa fa-calendar"></i>
-                                                                </span>
-                                                                <input type="text" class="form-control" id="o_dateend" name="o_dateend" value="{{ porder.getDateEnd() }}">
-                                                                <span class="input-group-addon ">99/99/9999</span>
-                                                            </div>
-                                                        </div>
-                                                                
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-sm-12">
-
-                                                    <div class="form-group">
-                                                        <label class="col-lg-3 col-sm-3 control-label" for="o_numbers">Номера полисов</label>
-                                                        <div class="col-lg-9">
-                                                            <input type="text" class="form-control" name="o_numbers" id="o_numbers" value="{{ porder.getNumbers() }}">
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-12">
-
-                                                    <div class="form-group">
-                                                        <label class="col-lg-3 col-sm-3 control-label" for="o_paynumbers">Номера квитанций</label>
-                                                        <div class="col-lg-9">
-                                                            <input type="text" class="form-control" name="o_paynumbers" id="o_paynumbers" value="{{ porder.getPayNumbers() }}">
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                                        
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     
                                                     <div class="form-group">
-                                                        <label class="col-lg-3 col-sm-3 control-label" >Составил</label>
+                                                        <label class="col-lg-3 col-sm-3 control-label" >Отправил</label>
                                                         <div class="col-lg-9">
                                                         {% if porder==null %}
-                                                            <h4>{{ user.getFio() }}</h4>
+
                                                         {% else %}
                                                             <h4>{{ porder.getUserFrom().getFio() }}</h4>
                                                         {% endif %}
@@ -239,31 +150,14 @@
                                                 </div>
                                             </div>
                                                         
-                                                        
-                                            
-{#  
-    +private $order_id;
-    +private $order_date;
-    +private $parent;
-    +private $numbers;
-    +private $pay_numbers;
-    +private $date_begin;
-    +private $date_end;
-    +private $type;
-    +private $company_from;
-    private $user_from;
-    +private $company_to;
-    private $user_to;
-    private $user_sign;
-#}
-                                               
-                                            
                                             <div class="form-actions" style="margin:20px 0 0 0;">
                                             {% if (can_edit) %}
                                                 <button type="submit" class="btn btn-primary">Сохранить</button>
-                                                <index type="hidden" name="o_orderid" id="o_orderid" value="{{ porderid }}" />
-                                                <index type="hidden" name="o_type" id="o_type" value="{{ ptype }}" />
-                                                <index type="hidden" name="o_parentid" id="o_parentid" value="{{ pparentid }}" />
+                                                <input type="hidden" name="o_orderid" id="o_orderid" value="{{ porderid }}" >
+                                                <input type="hidden" name="o_type" id="o_type" 
+                                                       value="{% if porder==null %}{{ ptype }}{% else %}{{ porder.getType() }}{% endif %}" >
+                                                <input type="hidden" name="o_parentid" id="o_parentid" 
+                                                       value="{% if porder==null %}{{ pparentid }}{% else %}{{ porder.getParentid() }}{% endif %}" >
                                             {% endif %}
                                                 <a href="{{ path('order_list') }}" class="btn">Назад</a>
                                             </div>

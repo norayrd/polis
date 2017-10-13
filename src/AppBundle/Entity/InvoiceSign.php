@@ -6,20 +6,20 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 /**
- * UserSign
+ * InvoiceSign
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserSignRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\InvoiceSignRepository")
  *
  */
-class UserSign
+class InvoiceSign
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $user_sign_id;
+    private $invoice_sign_id;
 
     /**
      * @ORM\Column(type="string" )
@@ -46,21 +46,22 @@ class UserSign
      */
     private $btn_name;
 
+
     /**
-     * Get user_sign_id
+     * Get invoice_sign_id
      *
      * @return integer 
      */
-    public function getUserSignId()
+    public function getInvoiceSignId()
     {
-        return $this->user_sign_id;
+        return $this->invoice_sign_id;
     }
 
     /**
      * Set name
      *
      * @param string $name
-     * @return UserSign
+     * @return InvoiceSign
      */
     public function setName($name)
     {
@@ -83,7 +84,7 @@ class UserSign
      * Set short_name
      *
      * @param string $shortName
-     * @return UserSign
+     * @return InvoiceSign
      */
     public function setShortName($shortName)
     {
@@ -106,7 +107,7 @@ class UserSign
      * Set icon
      *
      * @param string $icon
-     * @return UserSign
+     * @return InvoiceSign
      */
     public function setIcon($icon)
     {
@@ -129,7 +130,7 @@ class UserSign
      * Set color
      *
      * @param string $color
-     * @return UserSign
+     * @return InvoiceSign
      */
     public function setColor($color)
     {
@@ -152,7 +153,7 @@ class UserSign
      * Set btn_name
      *
      * @param string $btnName
-     * @return UserSign
+     * @return InvoiceSign
      */
     public function setBtnName($btnName)
     {

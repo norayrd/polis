@@ -77,12 +77,12 @@ class PolisService {
     
     public function getOrderById( $user, $porderId) {
 
-        return $this->em->getRepository('AppBundle:Order') -> findOneBy(array('order_id' => $porderId));
+        return $this->em->getRepository('AppBundle:Orders') -> findOneBy(array('order_id' => $porderId));
     }
 
-    public function getUserSignList( $user) {
+    public function getOrderSignList( $user) {
 
-        return $this->em->getRepository('AppBundle:UserSign') -> findBy(array());
+        return $this->em->getRepository('AppBundle:OrderSign') -> findBy(array());
     }
 
     public function getOrderTypeById( $user, $orderTypeId) {

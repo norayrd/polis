@@ -97,7 +97,7 @@ class PolisController extends Controller
         
         $is_guest = !is_object($this->getUser());
         
-        $porderId = $request ->get("porderid");
+        $porderId = $request ->get("porderid")-0;
         $ptype = $request ->get("ptype");
         $pparentid = $request ->get("pparentid");
 
@@ -106,7 +106,11 @@ class PolisController extends Controller
         //--------------------------
         //access rights
         // submit button
-        if ($porderId !== 'new') {
+        $can_view_all = true;
+        $can_view_self = true;
+        $can_edit = true;
+        
+        /*if ($porderId !== 'new') {
             $can_edit =  $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_MANAGER','ROLE_TOPMANAGER'));
         } else if ($porderId === 'new') {
             $can_edit =  $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER'));
@@ -115,12 +119,12 @@ class PolisController extends Controller
         $can_view_all = $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER'));
         
         $can_view_self = $this->getUser()->haveRole(array('ROLE_AGENT','ROLE_MANAGER'));
-        
+        */
         //--------------------------
         
         $agentCompanyList = $polisService ->getAgentCompanyes($this->getUser());
         $insuranceCompanyList = $polisService ->getInsuranceCompanyes($this->getUser());
-        $userSignList = $polisService ->getUserSignList($this->getUser());
+        $orderSignList = $polisService ->getOrderSignList($this->getUser());
         
         if ( $can_view_all && is_numeric($porderId)) {
             
@@ -132,7 +136,7 @@ class PolisController extends Controller
             
             $porder = null;
         }
-        
+
         $breadcrumb = array(
             array('name' => 'home', 'url' => $this->generateUrl('home')),
             array('name' => 'Журнал АКТов', 'url' => $this->generateUrl('order_list')),
@@ -152,7 +156,7 @@ class PolisController extends Controller
             'pagentcompanylist' => $agentCompanyList,
             'pinsurancecompanylist' => $insuranceCompanyList,
             'can_edit' => $can_edit,
-            'usersignlist' => $userSignList,
+            'ordersignlist' => $orderSignList,
         ));
 
     }
@@ -164,19 +168,51 @@ class PolisController extends Controller
         
         $is_guest = !is_object($this->getUser());
         
-        $porderid = $request ->get("porderid");
+        $orderid = $request ->get("porderid");
         
         if ( !$is_guest && $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
             
       
-            $pcompid = $request ->get("o_orderid");
-            $pcompname = $request ->get("c_compname");
-            $pemail = $request ->get("c_email");
-            $paddress = $request ->get("c_address");
-            $pphone = $request ->get("c_phone");
-            $pstatus = $request ->get("c_status");
-            $ptype = $request ->get("c_type");
-            $polisCountLimit = $request ->get("c_polis_count_limit");
+            $pOrderId = $request ->get("o_orderid");
+            $pOrderDate = $request ->get("o_orderdate");
+            $pParent = $request ->get("o_parent");
+            $pNumbers = $request ->get("o_numbers");
+            $pPayNumbers = $request ->get("o_paynumbers");
+            $pDateBegin = $request ->get("o_datebegin");
+            $pDateEnd = $request ->get("o_dateend");
+            
+            $pType = $request ->get("o_type");
+            $pCompanyFrom = $request ->get("o_companyfrom");
+            $pUserFrom = $request ->get("o_userfrom");
+            $pCompanyTo = $request ->get("o_companyto");
+            $pUserTo = $request ->get("o_userto");
+            $pUserSign = $request ->get("o_usersign");
+            $pInsuranceCompany = $request ->get("o_insurancecompany");
+            
+            
+            //var_dump($request->request);exit;
+            
+            
+var_dump(   $pOrderId,
+            $pOrderDate,
+            $pParent,
+            $pNumbers,
+            $pPayNumbers,
+            $pDateBegin,
+            $pDateEnd,
+            
+            $pType,
+            $pCompanyFrom,
+            $pUserFrom,
+            $pCompanyTo,
+            $pUserTo,
+            $pUserSign,
+            $pInsuranceCompany
+);            exit;
+            
+            
+            
+            
             
             $polisService = $this->get("polis_service");
             
