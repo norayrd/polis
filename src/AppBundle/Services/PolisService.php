@@ -2,9 +2,6 @@
 
 namespace AppBundle\Services;
 
-use DateInterval;
-use DateTime;
-
 class PolisService {
     
     private $em;
@@ -80,14 +77,30 @@ class PolisService {
         return $this->em->getRepository('AppBundle:Orders') -> findOneBy(array('order_id' => $porderId));
     }
 
-    public function getOrderSignList( $user) {
+    public function getOrderList( $user ) {
+        
+        $qb = $this->em->createQueryBuilder();
+        
+        $qb->select('o')
+            ->from('AppBundle:Orders', 'o')
+            ->where('(o.company_create=:company_id)'
+                    .'or (o.company_from=:company_id)'
+                    .'or (o.company_to = :company_id and o.order_sign<>(-20))'
+                    )
+            ->setParameter('company_id', $user->getCompany()->getCompanyId());
+        
+        return $qb->getQuery()->getResult();
 
-        return $this->em->getRepository('AppBundle:OrderSign') -> findBy(array());
+    }
+
+    public function getOrderSignList( $user, $orderSignId) {
+
+        return $this->em->getRepository('AppBundle:OrderSign') -> findOneBy(array('order_sign_id' => $orderSignId));
     }
 
     public function getOrderTypeById( $user, $orderTypeId) {
 
         return $this->em->getRepository('AppBundle:orderType') -> findBy(array('order_type_id' => $orderTypeId));
     }
-
+    
 }

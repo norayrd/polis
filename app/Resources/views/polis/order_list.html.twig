@@ -35,13 +35,10 @@
 
                             </div>
 
-                            {% if (can_create) %}
-
-                                {% if user.getCompany().getType()==3 %}
-                                <div class="body-nest" id="Footable">
-                                    <a class="btn" href="{{ path('order_view',{'porderid': 'new'}) }}"><span class="fontawesome-asterisk"></span> Заказ </a>
-                                </div>
-                                {% endif %}
+                            {% if user.getCompany().getType()==3 %}
+                            <div class="body-nest" id="Footable">
+                                <a class="btn" href="{{ path('order_view',{'porderid': 'new'}) }}"><span class="fontawesome-asterisk"></span> Заказ </a>
+                            </div>
                             {% endif %}
                             
                             <div class="body-nest" id="Footable">
@@ -52,75 +49,37 @@
                                     <thead>
                                         <tr>
                                             <th>
-                                                ID
+                                                №
                                             </th>
                                             <th>
-                                                Стр. компания
+                                                Дата
                                             </th>
                                             <th>
-                                                Кол.-во
+                                                От
                                             </th>
                                             <th>
-                                                Номер от
-                                            </th>
-                                            <th>
-                                                Номер до
-                                            </th>
-                                            <th>
-                                                Дата от
-                                            </th>
-                                            <th>
-                                                Дата до
-                                            </th>
-                                            <th data-hide="phone,tablet">
-                                                Квит. от
-                                            </th>
-                                            <th data-hide="phone,tablet">
-                                                Квит. до
+                                                Куда
                                             </th>
                                             <th>
                                                 Статус
                                             </th>
                                             <th>
-                                                Компания
-                                            </th>
-                                            <th>
-                                                Агент
-                                            </th>
-                                            <th>
-                                                Причина
+                                                Создал
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-    {% for polis in polisList %}
+    {% for porder in porderlist %}
                                         <tr>
-                                            <td data-value="{{ polis.getId() }}"><a href="#">{{ polis.getId() }}</a></td>
-                                            <td>{{ polis.getTrMake() }}</td>
-                                            <td>{{ polis.getTrModel() }}</td>
-                                            <td>{{ polis.getTrYear() }} ({{ polis.getTrTrueYear() }})</td>
-                                            {#<td>{{ polis.getTrPower() }}</td>
-                                            <td>{{ polis.getTrTs() }}</td>
-                                            <td>{{ polis.getTrDocSerya() }}-{{ polis.getTrDocNumber() }}</td>
-                                            <td>{{ polis.getTrDocDate()|date("d/m/Y") }} ({{ polis.getTrDocTrue_date()|date("d/m/Y") }})</td>
-                                            <td>{{ polis.getTrVinType() }}</td>
-                                            <td>{{ polis.getTrVinNumber() }}</td>#}
-                                            <td>{{ polis.getTrCarNumber() }}</td>
-                                            <td>{{ polis.getOwnerSurname() }}</td>
-                                            <td>{{ polis.getOwnerName() }}</td>
-                                            {#<td>{{ polis.getOwnerMiddlename() }}</td>#}
-                                            {# <td>{{ polis.getOwnerNoMiddlename() }}</td> #}
-                                            {#<td>{{ polis.getOwnerBirthday()|date("d/m/Y") }} ({{ polis.getOwnerTrueBirthday()|date("d/m/Y") }})</td>
-                                            <td>{{ polis.getOwnerPaspSerya() }}-{{ polis.getOwnerPaspNumber() }}</td>
-                                            <td>{{ polis.getOwnerPaspDate()|date("d/m/Y") }} ({{ polis.getOwnerPaspTrueDate()|date("d/m/Y") }})</td>
-                                            <td>{{ polis.getRegCity() }}, {{ polis.getRegStateType() }} {{ polis.getRegState() }}, {{ polis.getRegStreet() }}, {{ polis.getRegNhome() }}, кв {{ polis.getRegNflat() }}</td>
-                                            <td>{{ polis.getRegTerritoryRatio() }}</td>#}
-                                            <td>{{ polis.getPolisStartDate()|date("d/m/Y") }}</td>
+                                            <td data-value="{{ porder.getOrderId() }}"><a href="#">{{ porder.getOrderId() }}</a></td>
+                                            <td>{{ porder.getOrderDate()|date("d/m/Y") }}</td>
+                                            <td>{{ porder.getCompanyFrom().getCompName() }}</td>
+                                            <td>{{ porder.getCompanyTo().getCompName() }}</td>
                                             <td data-value="1">
-                                                <span class="status-metro status-active" title="Active">Active</span>
+                                                <span class="status-metro" style="background-color: {{ porder.getOrderSign().getColor() }}; color: #2a6496">{{ porder.getOrderSign().getShortName() }}</span>
                                             </td>
-                                            <td data-value="1">
-                                                <a href="/polis-xls/{{ polis.getId() }}"><i class="icon-export" title='Export to Excel' ></i></a>
+                                            <td>
+                                                {{ porder.getUserCreate().getFio() }}
                                             </td>
                                         </tr>
     {% else %}

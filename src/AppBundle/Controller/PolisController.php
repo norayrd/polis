@@ -46,30 +46,8 @@ class PolisController extends Controller
 
         $polisService = $this->get("polis_service");
 
-        //--------------------------
-        //access rights
-        $can_create =  $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER'));
+        $orderList = $polisService ->getOrderList($this->getUser());
         
-        $can_view_all = $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER'));
-        
-        $can_view_self = $this->getUser()->haveRole(array('ROLE_AGENT','ROLE_MANAGER'));
-        
-        //--------------------------
-
-
-        $orderList = null;
-        
-        /*if ($can_view_all) {
-            
-            $companyList = $polisService ->getCompanyList($this->getUser());
-        } else if ($can_view_self) {
-
-            $companyList = array($polisService ->getCompanyById($this->getUser(), $this->getUser()->getCompany()->getCompanyId()));
-        } else {
-            
-            $companyList = array();
-        }*/
-
         $breadcrumb = array(
             array('name' => 'home', 'url' => $this->generateUrl('home')),
             array('name' => 'Журнал АКТов', 'url' => null),
@@ -82,10 +60,7 @@ class PolisController extends Controller
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
             'page_title' => $page_title,
             'breadcrumb' => $breadcrumb,
-            'orderList' => $orderList,
-            'can_create' => $can_create,
-            'can_view_all'=> $can_view_all,
-            'can_view_self' => $can_view_self,
+            'porderlist' => $orderList,
         ));
 
     }
@@ -97,7 +72,7 @@ class PolisController extends Controller
         
         $is_guest = !is_object($this->getUser());
         
-        $porderId = $request ->get("porderid")-0;
+        $porderId = $request ->get("porderid");
         $ptype = $request ->get("ptype");
         $pparentid = $request ->get("pparentid");
 
@@ -124,18 +99,46 @@ class PolisController extends Controller
         
         $agentCompanyList = $polisService ->getAgentCompanyes($this->getUser());
         $insuranceCompanyList = $polisService ->getInsuranceCompanyes($this->getUser());
-        $orderSignList = $polisService ->getOrderSignList($this->getUser());
         
-        if ( $can_view_all && is_numeric($porderId)) {
+        $porder = $polisService ->getOrderById($this->getUser(), $porderId );
+        
+        $submitBtn1 = null;
+        $submitBtn2 = null;
+        $submitBtn3 = null;
+        $submitBtn4 = null;
+        
+        if ($porderId == 'new') {
+            $submitBtn1 = $polisService ->getOrderSignList($this->getUser(),0);
             
-            $porder = $polisService ->getOrderById($this->getUser(), $porderId );
-        } else if ($can_view_self && is_numeric($porderId)) {
+        } else if (
+                ($porderId > 0) && 
+                (is_object ($porder)) &&
+                ($porder->getOrderSign()->getOrderSignId() == 0) && 
+                ($this->getUser()->getCompany()->getCompanyId() == $porder->getCompanyFrom()->getCompanyId())
+                ) {
 
-            $porder = $polisService ->getOrderById($this->getUser(), $porderId );
-        } else {
+            $submitBtn1 = $polisService ->getOrderSignList($this->getUser(),-20);
             
-            $porder = null;
+        } else if (
+                ($porderId > 0) && 
+                ($porder->getOrderSign()->getOrderSignId() == 0) && 
+                ($this->getUser()->getCompany()->getCompanyId() == $porder->getCompanyTo()->getCompanyId())
+                ) {
+            
+            $submitBtn1 = $polisService ->getOrderSignList($this->getUser(),-10);
+            $submitBtn2 = $polisService ->getOrderSignList($this->getUser(),10);
+            
+        } else if (
+                ($porderId > 0) && 
+                ($porder->getOrderSign()->getOrderSignId() == 10) && 
+                ($this->getUser()->getCompany()->getCompanyId() == $porder->getCompanyTo()->getCompanyId())
+                ) {
+            
+            $submitBtn1 = $polisService ->getOrderSignList($this->getUser(),20);
+            
         }
+
+
 
         $breadcrumb = array(
             array('name' => 'home', 'url' => $this->generateUrl('home')),
@@ -156,7 +159,10 @@ class PolisController extends Controller
             'pagentcompanylist' => $agentCompanyList,
             'pinsurancecompanylist' => $insuranceCompanyList,
             'can_edit' => $can_edit,
-            'ordersignlist' => $orderSignList,
+            'submitbtn1' => $submitBtn1,
+            'submitbtn2' => $submitBtn2,
+            'submitbtn3' => $submitBtn3,
+            'submitbtn4' => $submitBtn4,
         ));
 
     }
@@ -169,6 +175,8 @@ class PolisController extends Controller
         $is_guest = !is_object($this->getUser());
         
         $orderid = $request ->get("porderid");
+        
+        var_dump($request);exit;
         
         if ( !$is_guest && $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
             
