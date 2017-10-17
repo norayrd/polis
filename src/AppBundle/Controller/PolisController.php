@@ -12,6 +12,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Company;
+use AppBundle\Entity\Orders;
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -108,7 +109,7 @@ class PolisController extends Controller
         $submitBtn4 = null;
         
         if ($porderId == 'new') {
-            $submitBtn1 = $polisService ->getOrderSignList($this->getUser(),0);
+            $submitBtn1 = $polisService ->getOrderSignById($this->getUser(),0);
             
         } else if (
                 ($porderId > 0) && 
@@ -117,7 +118,7 @@ class PolisController extends Controller
                 ($this->getUser()->getCompany()->getCompanyId() == $porder->getCompanyFrom()->getCompanyId())
                 ) {
 
-            $submitBtn1 = $polisService ->getOrderSignList($this->getUser(),-20);
+            $submitBtn1 = $polisService ->getOrderSignById($this->getUser(),-20);
             
         } else if (
                 ($porderId > 0) && 
@@ -125,8 +126,8 @@ class PolisController extends Controller
                 ($this->getUser()->getCompany()->getCompanyId() == $porder->getCompanyTo()->getCompanyId())
                 ) {
             
-            $submitBtn1 = $polisService ->getOrderSignList($this->getUser(),-10);
-            $submitBtn2 = $polisService ->getOrderSignList($this->getUser(),10);
+            $submitBtn1 = $polisService ->getOrderSignById($this->getUser(),-10);
+            $submitBtn2 = $polisService ->getOrderSignById($this->getUser(),10);
             
         } else if (
                 ($porderId > 0) && 
@@ -134,7 +135,7 @@ class PolisController extends Controller
                 ($this->getUser()->getCompany()->getCompanyId() == $porder->getCompanyTo()->getCompanyId())
                 ) {
             
-            $submitBtn1 = $polisService ->getOrderSignList($this->getUser(),20);
+            $submitBtn1 = $polisService ->getOrderSignById($this->getUser(),20);
             
         }
 
@@ -176,88 +177,88 @@ class PolisController extends Controller
         
         $orderid = $request ->get("porderid");
         
-        var_dump($request);exit;
+        //var_dump($request);exit;
         
         if ( !$is_guest && $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
             
       
+            $gOrderId = $request ->get("porderid"); // GET parameter
+
             $pOrderId = $request ->get("o_orderid");
-            $pOrderDate = $request ->get("o_orderdate");
-            $pParent = $request ->get("o_parent");
-            $pNumbers = $request ->get("o_numbers");
-            $pPayNumbers = $request ->get("o_paynumbers");
-            $pDateBegin = $request ->get("o_datebegin");
-            $pDateEnd = $request ->get("o_dateend");
-            
-            $pType = $request ->get("o_type");
-            $pCompanyFrom = $request ->get("o_companyfrom");
-            $pUserFrom = $request ->get("o_userfrom");
             $pCompanyTo = $request ->get("o_companyto");
-            $pUserTo = $request ->get("o_userto");
-            $pUserSign = $request ->get("o_usersign");
-            $pInsuranceCompany = $request ->get("o_insurancecompany");
-            
-            
-            //var_dump($request->request);exit;
-            
-            
-var_dump(   $pOrderId,
-            $pOrderDate,
-            $pParent,
-            $pNumbers,
-            $pPayNumbers,
-            $pDateBegin,
-            $pDateEnd,
-            
-            $pType,
-            $pCompanyFrom,
-            $pUserFrom,
-            $pCompanyTo,
-            $pUserTo,
-            $pUserSign,
-            $pInsuranceCompany
-);            exit;
-            
-            
-            
-            
+            $pOrderSign = $request ->get("o_ordersign");
             
             $polisService = $this->get("polis_service");
-            
-/*            if ( ($pcompanyid == 'new') || ($pcompid == '') ) {
-
-                $pcompany = new Company();
                 
-            } else if ( ($pcompanyid !== null) && ($pcompanyid > 0) && ($pcompanyid == $pcompid) ) {
-
-                $pcompany = $polisService ->getCompanyById($this->getUser(),$pcompanyid);
-            }
-
-            if (isset($pcompany) && is_object($pcompany)) {
+            if (($pOrderSign == '-20') && ($gOrderId == $pOrderId)) {
                 
-                if (!isset($polisCountLimit)) {
-                    $polisCountLimit = 0;
-                }
+                $pOrder = $polisService->getOrderById($this->getUser(),$pOrderId);
+                
+                if (is_object($pOrder) && ($pOrder->getOrderSign()->getOrderSignId() == 0)) {
                     
-                $pcompany->setCompName($pcompname);
-                $pcompany->setEmail($pemail);
-                $pcompany->setAddress($paddress);
-                $pcompany->setPhone($pphone);
-                $pcompany->setStatus($pstatus);
-                $pcompany->setPolisCountLimit(0);
-                $pcompany->setDateBeginFact(new DateTime());
-                $pcompany->setDateEndFact(new DateTime('9999-12-31 23:59:59'));
-                $pcompany->setUserId1($this->getUser()->getId());
+                    $oldOrder =  $polisService->cloneEntity( $this->getUser(),$pOrder );
+                    
+                    $pOrder->setOrderSign( $polisService->getOrderSignById($this->getUser(),-20) );
 
-                if ($this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
-                    $pcompany->setType($ptype);
-                    $pcompany->setPolisCountLimit($polisCountLimit);
+                    $polisService ->saveOrder($this->getUser(), $pOrder, $oldOrder);
+                }
+                
+            } elseif (($pOrderSign == '-10') && ($gOrderId == $pOrderId)) {
+
+                $pOrder = $polisService->getOrderById($this->getUser(),$pOrderId);
+                
+                if (is_object($pOrder) && ($pOrder->getOrderSign()->getOrderSignId() == 0)) {
+                    
+                    $oldOrder =  $polisService->cloneEntity( $this->getUser(),$pOrder );
+                    
+                    $pOrder->setOrderSign( $polisService->getOrderSignById($this->getUser(),-10) );
+                    
+                    $polisService ->saveOrder($this->getUser(),$pOrder, $oldOrder);
+                }
+                
+            } elseif (($pOrderSign == '0') && ($gOrderId == 'new')) {
+                $pOrder = new Orders();
+                
+                $pOrder->setOrderDate(new DateTime());
+                $pOrder->setOrderType( $polisService->getOrderTypeById($this->getUser(),10) );
+                $pOrder->setOrderSign( $polisService->getOrderSignById($this->getUser(),0) );
+                $pOrder->setCompanyTo( $polisService->getCompanyById($this->getUser(),$pCompanyTo));
+                //$pOrder->setUserTo();
+                $pOrder->setCompanyFrom($this->getUser()->getCompany());
+                //$pOrder->setUserFrom();
+                $pOrder->setCompanyCreate($this->getUser()->getCompany());
+                $pOrder->setUserCreate($this->getUser());
+                
+                $polisService ->saveOrder($this->getUser(),$pOrder);
+
+            } elseif (($pOrderSign == '10') && ($gOrderId == $pOrderId)) {
+                
+                $pOrder = $polisService->getOrderById($this->getUser(),$pOrderId);
+                
+                if (is_object($pOrder) && ($pOrder->getOrderSign()->getOrderSignId() == 0)) {
+                    
+                    $oldOrder =  $polisService->cloneEntity( $this->getUser(),$pOrder );
+                    
+                    $pOrder->setOrderSign( $polisService->getOrderSignById($this->getUser(),10) );
+                    $pOrder->setUserFrom($this->getUser());
+                    
+                    $polisService ->saveOrder($this->getUser(),$pOrder, $oldOrder);
                 }
 
-                $polisService ->saveCompany($this->getUser(),$pcompany);
+            } elseif (($pOrderSign == '20') && ($gOrderId == $pOrderId)) {
 
+                if (is_object($pOrder) && ($pOrder->getOrderSign()->getOrderSignId() == 10)) {
+                    
+                    $oldOrder =  $polisService->cloneEntity( $this->getUser(),$pOrder );
+                    
+                    $pOrder->setOrderSign( $polisService->getOrderSignById($this->getUser(),20) );
+                    $pOrder->setUserTo($this->getUser());
+                    
+                    $polisService ->saveOrder($this->getUser(),$pOrder, $oldOrder);
+                }
+                
             }
-*/
+            
         }
         
         return $this->redirect($this->generateUrl('order_list'));

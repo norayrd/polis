@@ -71,7 +71,7 @@
                                     <tbody>
     {% for porder in porderlist %}
                                         <tr>
-                                            <td data-value="{{ porder.getOrderId() }}"><a href="#">{{ porder.getOrderId() }}</a></td>
+                                            <td data-value="{{ porder.getOrderId() }}"><a href="{{ path('order_view',{'porderid': porder.getOrderId()}) }}">{{ porder.getOrderId() }}</a></td>
                                             <td>{{ porder.getOrderDate()|date("d/m/Y") }}</td>
                                             <td>{{ porder.getCompanyFrom().getCompName() }}</td>
                                             <td>{{ porder.getCompanyTo().getCompName() }}</td>

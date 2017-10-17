@@ -101,6 +101,20 @@ class Orders
     }
 
     /**
+     * Get order_id
+     *
+     * @return integer 
+     */
+    public function setOrderIdToNull()
+    {
+        $this->id = null;
+    
+        return $this;
+    }
+
+
+
+    /**
      * Set order_date
      *
      * @param \DateTime $orderDate
