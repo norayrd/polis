@@ -21,9 +21,33 @@
                         <div class="nest" id="FootableClose">
                             <div class="title-alt">
                                 <h6>
-                                    Журнал полисов</h6>
+                                    Приходные и Расходные накладные</h6>
+                                {#<div class="titleClose">
+                                    <a class="gone" href="#FootableClose">
+                                        <span class="entypo-cancel"></span>
+                                    </a>
+                                </div>
+                                <div class="titleToggle">
+                                    <a class="nav-toggle-alt" href="#Footable">
+                                        <span class="entypo-up-open"></span>
+                                    </a>
+                                </div>#}
+
                             </div>
 
+                            
+                            {% if user.getCompany().getType()==1 %}
+                                <a class="btn" href="{{ path('invoice_view',{'pinvoiceid': 'new','type': '20'}) }}"><span class="fontawesome-asterisk"></span>Возвратная накладная</a>
+                                <a class="btn" href="{{ path('invoice_view',{'pinvoiceid': 'new','type': '10'}) }}"><span class="fontawesome-asterisk"></span>Приходная накладная</a>
+                                <a class="btn" href="{{ path('invoice_view',{'pinvoiceid': 'new','type': '30'}) }}"><span class="fontawesome-asterisk"></span>Расходная накладная</a>
+                            {% elseif user.getCompany().getType()==3 %}
+                            <div class="body-nest" id="Footable">
+                                <a class="btn" href="{{ path('invoice_view',{'pinvoiceid': 'new','type': '20'}) }}"><span class="fontawesome-asterisk"></span>Возвратная накладная</a>
+                                <a class="btn" href="{{ path('invoice_view',{'pinvoiceid': 'new','type': '30'}) }}"><span class="fontawesome-asterisk"></span>Расходная накладная</a>
+                            </div>
+                            {% endif %}
+                            
+                            
                             <div class="body-nest" id="Footable">
 
                                 {#<p class="lead well">FooTable is a jQuery plugin that aims to make HTML tables on smaller devices look awesome - No matter how many columns of data you may have in them. And it's responsive i think this better than DataTable in some way</p>#}
@@ -32,80 +56,44 @@
                                     <thead>
                                         <tr>
                                             <th>
-                                                ID
+                                                №
                                             </th>
                                             <th>
-                                                Стр. компания
+                                                Дата
                                             </th>
                                             <th>
-                                                Кол.-во
+                                                От
                                             </th>
                                             <th>
-                                                Номер от
-                                            </th>
-                                            <th>
-                                                Номер до
-                                            </th>
-                                            <th>
-                                                Дата от
-                                            </th>
-                                            <th>
-                                                Дата до
-                                            </th>
-                                            <th data-hide="phone,tablet">
-                                                Квит. от
-                                            </th>
-                                            <th data-hide="phone,tablet">
-                                                Квит. до
+                                                Куда
                                             </th>
                                             <th>
                                                 Статус
                                             </th>
                                             <th>
-                                                Компания
-                                            </th>
-                                            <th>
-                                                Агент
-                                            </th>
-                                            <th>
-                                                Причина
+                                                Создал
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-    {% for polis in polisList %}
+    {% for pinvoice in pinvoicelist %}
                                         <tr>
-                                            <td data-value="{{ polis.getId() }}"><a href="#">{{ polis.getId() }}</a></td>
-                                            <td>{{ polis.getTrMake() }}</td>
-                                            <td>{{ polis.getTrModel() }}</td>
-                                            <td>{{ polis.getTrYear() }} ({{ polis.getTrTrueYear() }})</td>
-                                            {#<td>{{ polis.getTrPower() }}</td>
-                                            <td>{{ polis.getTrTs() }}</td>
-                                            <td>{{ polis.getTrDocSerya() }}-{{ polis.getTrDocNumber() }}</td>
-                                            <td>{{ polis.getTrDocDate()|date("d/m/Y") }} ({{ polis.getTrDocTrue_date()|date("d/m/Y") }})</td>
-                                            <td>{{ polis.getTrVinType() }}</td>
-                                            <td>{{ polis.getTrVinNumber() }}</td>#}
-                                            <td>{{ polis.getTrCarNumber() }}</td>
-                                            <td>{{ polis.getOwnerSurname() }}</td>
-                                            <td>{{ polis.getOwnerName() }}</td>
-                                            {#<td>{{ polis.getOwnerMiddlename() }}</td>#}
-                                            {# <td>{{ polis.getOwnerNoMiddlename() }}</td> #}
-                                            {#<td>{{ polis.getOwnerBirthday()|date("d/m/Y") }} ({{ polis.getOwnerTrueBirthday()|date("d/m/Y") }})</td>
-                                            <td>{{ polis.getOwnerPaspSerya() }}-{{ polis.getOwnerPaspNumber() }}</td>
-                                            <td>{{ polis.getOwnerPaspDate()|date("d/m/Y") }} ({{ polis.getOwnerPaspTrueDate()|date("d/m/Y") }})</td>
-                                            <td>{{ polis.getRegCity() }}, {{ polis.getRegStateType() }} {{ polis.getRegState() }}, {{ polis.getRegStreet() }}, {{ polis.getRegNhome() }}, кв {{ polis.getRegNflat() }}</td>
-                                            <td>{{ polis.getRegTerritoryRatio() }}</td>#}
-                                            <td>{{ polis.getPolisStartDate()|date("d/m/Y") }}</td>
+                                            <td data-value="{{ pinvoice.getInvoiceId() }}"><a href="{{ path('invoice_view',{'pinvoiceid': pinvoice.getInvoiceId()}) }}">{{ pinvoice.getInvoiceId() }}</a></td>
+                                            <td>{{ pinvoice.getInvoiceDate()|date("d/m/Y") }}</td>
+                                            <td>{{ pinvoice.getCompanyFrom().getCompName() }}</td>
+                                            <td>{{ pinvoice.getCompanyTo().getCompName() }}</td>
                                             <td data-value="1">
-                                                <span class="status-metro status-active" title="Active">Active</span>
+                                                <span class="status-metro" style="background-color: {{ pinvoice.getInvoiceSign().getColor() }}; color: #2a6496">{{ pinvoice.getInvoiceSign().getShortName() }}</span>
                                             </td>
-                                            <td data-value="1">
-                                                <a href="/polis-xls/{{ polis.getId() }}"><i class="icon-export" title='Export to Excel' ></i></a>
+                                            <td>
+                                                {{ pinvoice.getUserCreate().getFio() }}
                                             </td>
                                         </tr>
     {% else %}
         <tr>
-            <td>Пусто</td>
+            <td colspan="6">
+                Пусто
+            </td>
         </tr>
     {% endfor %}
 
@@ -130,12 +118,11 @@
             </div>
     
     <!-- GAGE -->
+    <script type="text/javascript" src="assets/js/toggle_close.js"></script>
     <script src="assets/js/footable/js/footable.js?v=2-0-1" type="text/javascript"></script>
     <script src="assets/js/footable/js/footable.sort.js?v=2-0-1" type="text/javascript"></script>
     <script src="assets/js/footable/js/footable.filter.js?v=2-0-1" type="text/javascript"></script>
     <script src="assets/js/footable/js/footable.paginate.js?v=2-0-1" type="text/javascript"></script>
-
-
 
 
     <script type="text/javascript">

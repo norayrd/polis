@@ -75,8 +75,14 @@ class PolisService {
     }
     
     public function getOrderById( $user, $porderId) {
+        
+        $order = array();
+                
+        if (is_numeric($porderId)) {
+            $order = $this->em->getRepository('AppBundle:Orders') -> findOneBy(array('order_id' => $porderId));
+        }
 
-        return $this->em->getRepository('AppBundle:Orders') -> findOneBy(array('order_id' => $porderId));
+        return $order;
     }
 
     public function getOrderList( $user ) {
@@ -138,4 +144,43 @@ class PolisService {
         return $oldEntity;
     }
     
+    public function getInvoiceList( $user ) {
+        
+        $qb = $this->em->createQueryBuilder();
+        
+        $qb->select('i')
+            ->from('AppBundle:Invoice', 'i')
+            ->where('(i.actual_id is null)'
+                    .'and (  (i.company_create=:company_id)'
+                    .'     or(i.company_from=:company_id)'
+                    .'     or(i.company_to = :company_id and i.invoice_sign>0)'
+                    .'    )'
+                    )
+            ->setParameter('company_id', $user->getCompany()->getCompanyId());
+        
+        return $qb->getQuery()->getResult();
+
+    }
+
+    public function getInvoiceById( $user, $pinvoiceId) {
+        
+        $invoice = array();
+                
+        if (is_numeric($pinvoiceId)) {
+            $invoice = $this->em->getRepository('AppBundle:Invoice') -> findOneBy(array('invoice_id' => $pinvoiceId));
+        }
+
+        return $invoice;
+    }
+    
+    public function getInvoiceSignById( $user, $invoiceSignId) {
+
+        return $this->em->getRepository('AppBundle:InvoiceSign') -> findOneBy(array('invoice_sign_id' => $invoiceSignId));
+    }
+
+    public function getInvoiceSignBtnById( $user, $btnId) {
+
+        return $this->em->getRepository('AppBundle:InvoiceSignBtn') -> findOneBy(array('btn_id' => $btnId));
+    }
+
 }

@@ -25,18 +25,6 @@ check_email:
     pattern:   /sign-up/check-email
     defaults:  { _controller: AppBundle:Security:checkEmail }
 
-polis_new:
-    pattern:   /polis-new
-    defaults:  { _controller: AppBundle:Polis:polisNew }
-
-polis_edit:
-    pattern:   /polis-edit/{polisid}
-    defaults:  { _controller: AppBundle:Polis:polisEdit }
-
-polis_xls:
-    pattern:   /polis-xls/{polisid}
-    defaults:  { _controller: AppBundle:ExportXls:polisXls }
-
 user_profile:
     pattern:   /user-profile
     defaults:  { _controller: AppBundle:Polis:userProfile }
@@ -61,9 +49,17 @@ report:
     pattern:   /report
     defaults:  { _controller: AppBundle:Polis:report }
 
-polis_list:
-    pattern:   /polis-list
-    defaults:  { _controller: AppBundle:Polis:polisList }
+invoice_list:
+    pattern:   /invoice-list
+    defaults:  { _controller: AppBundle:Polis:invoiceList }
+
+invoice_view:
+    pattern:   /invoice-view/{pinvoiceid}
+    defaults:  { _controller: AppBundle:Polis:invoiceView }
+
+invoice_edit:
+    pattern:   /invoice-edit/{pinvoiceid}
+    defaults:  { _controller: AppBundle:Polis:invoiceEdit }
 
 company_list:
     pattern:   /company-list

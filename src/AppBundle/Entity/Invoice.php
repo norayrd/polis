@@ -76,6 +76,16 @@ class Invoice
     private $user_create;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $fio_to;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $fio_from;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $date_curr;
@@ -375,5 +385,51 @@ class Invoice
     public function getUserCreate()
     {
         return $this->user_create;
+    }
+
+    /**
+     * Set fio_to
+     *
+     * @param string $fioTo
+     * @return Invoice
+     */
+    public function setFioTo($fioTo)
+    {
+        $this->fio_to = $fioTo;
+    
+        return $this;
+    }
+
+    /**
+     * Get fio_to
+     *
+     * @return string 
+     */
+    public function getFioTo()
+    {
+        return $this->fio_to;
+    }
+
+    /**
+     * Set fio_from
+     *
+     * @param string $fioFrom
+     * @return Invoice
+     */
+    public function setFioFrom($fioFrom)
+    {
+        $this->fio_from = $fioFrom;
+    
+        return $this;
+    }
+
+    /**
+     * Get fio_from
+     *
+     * @return string 
+     */
+    public function getFioFrom()
+    {
+        return $this->fio_from;
     }
 }

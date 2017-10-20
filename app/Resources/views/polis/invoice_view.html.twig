@@ -1,0 +1,223 @@
+{% extends 'base.html.twig' %}
+
+{% use 'content.html.twig' %}
+
+{% block title %}{{ page_title }}{% endblock title %}
+
+{% block content_stylesheets %}
+
+{% endblock content_stylesheets %}
+    
+{% block content_javascripts %}
+    <script type="text/javascript" src="{{ asset('js/invoice-view.js') }}"></script>
+
+{% endblock content_javascripts %}
+
+{% block block_content %}
+            <div class="content-wrap">
+                <div class="row">
+
+                    <div class="col-sm-12">
+
+                        <div class="nest" id="FootableClose">
+                            <div class="title-alt">
+                                <h6>
+                                {% if pinvoice==null %}
+                                    Накладная № - от -
+                                {% else %}
+                                    Накладная № {{ pinvoice.getInvoiceId() }} от {{ pinvoice.getInvoiceDate()|date('d.m.Y') }}
+                                {% endif %}
+                                </h6>
+
+                            </div>
+
+
+                            <div class="body-nest" id="validation">
+                                <div class="form_center">
+                                    
+                                    {% if pinvoice == null %}
+                                        {% set pinvoiceid = 'new' %}
+                                    {% else %}
+                                        {% set pinvoiceid = pinvoice.getInvoiceId() %}
+                                    {% endif %}
+
+
+                                    <form action="{{ path('invoice_edit',{'pinvoiceid': pinvoiceid}) }}" id="pinvoice-form" class="form-horizontal" method="post" >
+                                        <fieldset>
+                                                        
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    
+                                                    <div class="form-group">
+
+                                                        <label class="col-lg-3 col-sm-3 control-label" >От</label>
+                                                        <div class="col-lg-9">
+                                                        {% if fromcompanylist != null %}
+                                                            <select class="form-control" name="o_companyfrom" id="o_companyfrom">
+                                                            {% for fcompany in fromcompanylist %}
+                                                                <option value="{{ fcompany.getCompanyId() }}" 
+                                                                        {% if pinvoice.getCompanyFrom().getCompanyId()==fcompany.getCompanyId() %}
+                                                                            selected
+                                                                        {% endif %}
+                                                                        >{{ fcompany.getCompName() }}</option>
+                                                            {% endfor %}
+                                                            </select>
+                                                        {% else %}
+                                                            <input type="text" class="form-control" name="o_fiofrom" id="o_fiofrom" value="{{ pinvoice.getFioFrom() }}">
+                                                        {% endif %}
+                                                        </div>
+                                                            
+                                                    </div>
+                                                        
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 col-sm-3 control-label" >Контрагент</label>
+                                                        <div class="col-lg-9">
+                                                        {% if tocompanylist != null %}
+                                                            <select class="form-control" name="o_companyto" id="o_companyto">
+                                                                <option value="" ></option>
+                                                            {% for tcompany in tocompanylist %}
+                                                                <option value="{{ tcompany.getCompanyId() }}" 
+                                                                        {% if pinvoice.getCompanyTo().getCompanyId()==tcompany.getCompanyId() %}
+                                                                            selected
+                                                                        {% endif %}
+                                                                        >{{ tcompany.getCompName() }}</option>
+                                                            {% endfor %}
+                                                            </select>
+                                                        {% else %}
+                                                            <input type="text" class="form-control" name="o_fioto" id="o_fioto" value="{{ pinvoice.getFioTo() }}">
+                                                        {% endif %}
+                                                        </div>
+                                                    </div>
+                                                        
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 col-sm-3 control-label" >Создал</label>
+                                                        <div class="col-lg-9">
+                                                        {% if pinvoice==null %}
+                                                            <h4>{{ user.getFio() }}</h4>
+                                                        {% else %}
+                                                            <h4>{{ pinvoice.getUserCreate().getFio() }}</h4>
+                                                        {% endif %}
+                                                        </div>
+                                                    </div>
+                                                        
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 col-sm-3 control-label" >Отправил</label>
+                                                        <div class="col-lg-9">
+                                                        {% if pinvoice==null %}
+
+                                                        {% else %}
+                                                            <h4>{{ pinvoice.getUserFrom().getFio() }}</h4>
+                                                        {% endif %}
+                                                        </div>
+                                                    </div>
+                                                        
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 col-sm-3 control-label" >Получил</label>
+                                                        <div class="col-lg-9">
+                                                        {% if pinvoice==null %}
+
+                                                        {% else %}
+                                                            <h4>{{ pinvoice.getUserTo().getFio() }}</h4>
+                                                        {% endif %}
+                                                        </div>
+                                                    </div>
+                                                        
+                                                </div>
+                                            </div>
+                                                        
+                                            <div class="form-actions" style="margin:20px 0 0 0;">
+                                            
+                                                {% if submitbtn1 != null %}
+                                                    <a href="#" class="btn" style=" background-color: {{ submitbtn1.getColor() }}" id="submitbtn1"
+                                                       onclick="submitBtn({{ submitbtn1.getSetInvoiceSignId() }})"
+                                                       >{{ submitbtn1.getBtnName() }}</a>
+                                                {% endif %}
+                                            
+                                                {% if submitbtn2 != null %}
+                                                    <a href="#" class="btn" style=" background-color: {{ submitbtn2.getColor() }}" id="submitbtn2"
+                                                       onclick="submitBtn({{ submitbtn2.getSetInvoiceSignId() }})"
+                                                        >{{ submitbtn2.getBtnName() }}</a>
+                                                {% endif %}
+
+                                                {% if submitbtn3 != null %}
+                                                    <a href="#" class="btn" style=" background-color: {{ submitbtn3.getColor() }}" id="submitbtn3"
+                                                       onclick="submitBtn({{ submitbtn3.getSetInvoiceSignId() }})"
+                                                       >{{ submitbtn3.getBtnName() }}</a>
+                                                {% endif %}
+
+                                                {% if submitbtn4 != null %}
+                                                    <a href="#" class="btn" style=" background-color: {{ submitbtn4.getColor() }}" id="submitbtn4"
+                                                       onclick="submitBtn({{ submitbtn4.getSetInvoiceSignId() }})"
+                                                       >{{ submitbtn4.getBtnName() }}</a>
+                                                {% endif %}
+                                                
+                                                <input type="hidden" name="o_invoiceid" id="o_invoiceid" value="{{ pinvoiceid }}" >
+                                                <input type="hidden" name="o_invoicesign" id="o_invoicesign" value="" >
+                                                <input type="hidden" name="o_type" id="o_type" value="{{ ptype }}" >
+                                                
+                                                <a href="{{ path('invoice_list') }}" class="btn">Назад</a>
+                                            </div>
+                                            
+                                            <div class="form-actions" style="margin:20px 0 0 0;">
+                                            {% for usersign in invoicesignlist %}
+                                                <a href="#" class="btn" style=" background-color: {{ usersign.getColor() }}">{{ usersign.getBtnName() }}</a>
+                                            {% endfor %}
+                                            
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                            
+                                </div>
+                            </div>
+                                
+
+                        </div>
+                                            
+                    </div>
+
+                </div>
+            </div>
+    
+    <script type="text/javascript" src="{{ asset("assets/js/inputMask/jquery.maskedinput.js") }}"></script>
+    <script type="text/javascript">
+        // MASKED INPUT
+
+        $("#o_dateend").mask("99/99/9999", {
+            completed: function() {
+                //alert("Your birthday was: " + this.val());
+            }
+        });
+        $("#o_datebegin").mask("99/99/9999", {
+            completed: function() {
+                //alert("Your birthday was: " + this.val());
+            }
+        });
+        
+    </script>
+
+
+{% endblock block_content %}

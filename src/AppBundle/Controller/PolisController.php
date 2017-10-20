@@ -51,7 +51,7 @@ class PolisController extends Controller
         
         $breadcrumb = array(
             array('name' => 'home', 'url' => $this->generateUrl('home')),
-            array('name' => 'Журнал АКТов', 'url' => null),
+            array('name' => 'Заказы', 'url' => null),
         );
 
         $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
@@ -143,8 +143,8 @@ class PolisController extends Controller
 
         $breadcrumb = array(
             array('name' => 'home', 'url' => $this->generateUrl('home')),
-            array('name' => 'Журнал АКТов', 'url' => $this->generateUrl('order_list')),
-            array('name' => 'АКТ приема передачи', 'url' => null),
+            array('name' => 'Заказы', 'url' => $this->generateUrl('order_list')),
+            array('name' => 'Заказ', 'url' => null),
         );
 
         $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
@@ -179,7 +179,7 @@ class PolisController extends Controller
         
         //var_dump($request);exit;
         
-        if ( !$is_guest && $this->getUser()->haveRole(array('ROLE_ADMIN','ROLE_TOPMANAGER')) ) {
+        if ( !$is_guest ) {
             
       
             $gOrderId = $request ->get("porderid"); // GET parameter
@@ -268,46 +268,318 @@ class PolisController extends Controller
     /**
     }
     }
-     * @Route("/polis-list", name="polis_list")
+     * @Route("/invoice-list", name="invoice_list")
      */
-    public function polisListAction(Request $request){
+    public function invoiceListAction(Request $request){
         
-        /*$polisService = $this->get("polis_service");
-
-        // reversing Company
-        $polisService ->reverseCompany( 32, $this->getUser()->getId());
-        
-        // adding Company
-        $company = new Company();
-        $company->setCompName('Новый Тест ' . date('d.m.Y H:i'));
-        $company->setType('1');
-        $company->setPolisCountLimit(12);
-
-        $test = $polisService ->addCompany( $company, $this->getUser()->getId());
-        
-        var_dump($test);exit;
-        */
-
         $is_guest = !is_object($this->getUser());
         
+        $userRoles = array();
+        
+        if (!$is_guest) {
+            $userRoles = $this->getUser() -> getRoles();
+        }
+        
+        if ($is_guest || empty($userRoles)) {
+            return $this->redirect('/desktop');
+        }
+
         $polisService = $this->get("polis_service");
 
-        $polisList = null;//$polisService ->getPolisList($this->getUser());
+        $invoiceList = $polisService ->getInvoiceList($this->getUser());
         
         $breadcrumb = array(
             array('name' => 'home', 'url' => $this->generateUrl('home')),
-            array('name' => 'Журнал полисов', 'url' => null),
+            array('name' => 'Приход / Расход', 'url' => null),
         );
 
         $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
 
-        return $this->render('polis/polis_list.html.twig', array(
+        return $this->render('polis/invoice_list.html.twig', array(
             'user' => $this->getUser(),
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
             'page_title' => $page_title,
             'breadcrumb' => $breadcrumb,
-            'polisList' => $polisList,
+            'pinvoicelist' => $invoiceList,
         ));
+        
+        
+    }
+    
+    /**
+     * @Route("/invoice-view", name="invoice_view")
+     */
+    public function invoiceViewAction(Request $request){
+        
+        $is_guest = !is_object($this->getUser());
+        
+        $pinvoiceId = $request ->get("pinvoiceid");
+        $ptype = $request ->get("type");
+        
+        $polisService = $this->get("polis_service");
+        
+        //--------------------------
+        //access rights
+        // submit button
+        $can_view_all = true;
+        $can_view_self = true;
+        $can_edit = true;
+        
+        //--------------------------
+        
+        $pinvoice = $polisService ->getInvoiceById($this->getUser(), $pinvoiceId );
+        if (is_numeric($pinvoiceId) && is_object($pinvoice)) {
+            $ptype = $pinvoice->getInvoiceType()->getInvoiceTypeId();
+        }
+
+        
+        $agentCompanyList = $polisService ->getAgentCompanyes($this->getUser());
+        $insuranceCompanyList = $polisService ->getInsuranceCompanyes($this->getUser());
+
+        if ( is_object($pinvoice) && ($pinvoice->getCompanyCreate()->getCompanyId() !== $this->getUser()->getCompany()->getCompanyId()) ) {
+            $fromCompanyList = array($pinvoice ->getCompanyFrom());
+            $toCompanyList = array($pinvoice ->getCompanyTo());
+
+        } elseif ($this->getUser()->getCompany()->getType() == 1) {
+        
+            if ($ptype == '10') {
+                $fromCompanyList = $polisService ->getInsuranceCompanyes($this->getUser());
+                $toCompanyList = array($this->getUser()->getCompany());
+
+            } elseif ($ptype == '20') {
+                $fromCompanyList = array($this->getUser()->getCompany());
+                $toCompanyList = $polisService ->getInsuranceCompanyes($this->getUser());
+
+            } elseif ($ptype == '30') {
+                $fromCompanyList = array($this->getUser()->getCompany());
+                $toCompanyList = $polisService ->getAgentCompanyes($this->getUser());
+
+            } elseif ($ptype == '40') {
+                $fromCompanyList = $polisService ->getAgentCompanyes($this->getUser());
+                $toCompanyList = array($this->getUser()->getCompany());
+
+            }
+            
+        } elseif ($this->getUser()->getCompany()->getType() == 3) {
+        
+            if ($ptype == '10') {
+                $fromCompanyList = array($this->getUser()->getCompany()->getParent());
+                $toCompanyList = array($this->getUser()->getCompany());
+
+            } elseif ($ptype == '20') {
+                $fromCompanyList = array($this->getUser()->getCompany());
+                $toCompanyList = array($this->getUser()->getCompany()->getParent());
+
+            } elseif ($ptype == '30') {
+                $fromCompanyList = array($this->getUser()->getCompany());
+                $toCompanyList = null;
+
+            } elseif ($ptype == '40') {
+                $fromCompanyList = null;
+                $toCompanyList = array($this->getUser()->getCompany());
+
+            }
+        }
+        
+        $submitBtn1 = null;
+        $submitBtn2 = null;
+        $submitBtn3 = null;
+        $submitBtn4 = null;
+        
+        
+        $ourInvoice = ($pinvoice) && ($pinvoice->getCompanyCreate()->getCompanyId() == $this->getUser()->getCompany()->getCompanyId() );
+        if ($pinvoice) {
+            $invoiceSignId = $pinvoice->getInvoiceSign()->getInvoiceSignId();
+        } else {
+            $invoiceSignId = null;
+        }
+        
+        
+        if ($pinvoiceId == 'new') {
+            $submitBtn1 = $polisService ->getInvoiceSignBtnById($this->getUser(),0);
+            $submitBtn2 = $polisService ->getInvoiceSignBtnById($this->getUser(),10);
+            
+        } else if (
+                ($pinvoiceId > 0) && 
+                is_object($pinvoice) &&
+                ($invoiceSignId == -10) && 
+                $ourInvoice
+                ) {
+
+            $submitBtn1 = $polisService ->getInvoiceSignBtnById($this->getUser(),-11);
+            
+        } else if (
+                ($pinvoiceId > 0) && 
+                is_object($pinvoice) &&
+                ($invoiceSignId == 0) && 
+                $ourInvoice
+                ) {
+
+            $submitBtn1 = $polisService ->getInvoiceSignBtnById($this->getUser(),-10);
+            $submitBtn2 = $polisService ->getInvoiceSignBtnById($this->getUser(),10);
+            
+        } else if (
+                ($pinvoiceId > 0) && 
+                is_object($pinvoice) &&
+                ($invoiceSignId == 10) && 
+                $ourInvoice
+                ) {
+            
+            $submitBtn1 = $polisService ->getInvoiceSignBtnById($this->getUser(),11);
+            $submitBtn2 = $polisService ->getInvoiceSignBtnById($this->getUser(),20);
+            
+        } else if (
+                ($pinvoiceId > 0) && 
+                is_object($pinvoice) &&
+                ($invoiceSignId == 20) && 
+                $ourInvoice
+                ) {
+            
+            $submitBtn1 = $polisService ->getInvoiceSignBtnById($this->getUser(),21);
+            
+        }
+        //---------------------
+         else if (
+                ($pinvoiceId > 0) && 
+                is_object($pinvoice) &&
+                ($invoiceSignId == 20) && 
+                !$ourInvoice
+                ) {
+            
+            $submitBtn1 = $polisService ->getInvoiceSignBtnById($this->getUser(),30);
+            
+        } else if (
+                ($pinvoiceId > 0) && 
+                is_object($pinvoice) &&
+                ($invoiceSignId == 30) && 
+                !$ourInvoice
+                ) {
+            
+            $submitBtn1 = $polisService ->getInvoiceSignBtnById($this->getUser(),31);
+            
+        }
+
+        $breadcrumb = array(
+            array('name' => 'home', 'url' => $this->generateUrl('home')),
+            array('name' => 'Приход / Расход', 'url' => $this->generateUrl('invoice_list')),
+            array('name' => 'Накладная', 'url' => null),
+        );
+
+        $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
+
+        return $this->render('polis/invoice_view.html.twig', array(
+            'user' => $this->getUser(),
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'page_title' => $page_title,
+            'breadcrumb' => $breadcrumb,
+            'pinvoice' => $pinvoice,
+            'ptype' => $ptype,
+            'fromcompanylist' => $fromCompanyList,
+            'tocompanylist' => $toCompanyList,
+            'can_edit' => $can_edit,
+            'submitbtn1' => $submitBtn1,
+            'submitbtn2' => $submitBtn2,
+            'submitbtn3' => $submitBtn3,
+            'submitbtn4' => $submitBtn4,
+        ));
+
+    }
+    
+    /**
+     * @Route("/invoice-edit/{pinvoiceid}", name="invoice_edit")
+     */
+    public function invoiceEditAction(Request $request){
+        
+        $is_guest = !is_object($this->getUser());
+        
+        $invoiceid = $request ->get("pinvoiceid");
+        
+        //var_dump($request);
+        exit;
+        
+        if ( (1==0) && !$is_guest ) {
+            
+      
+            $gOrderId = $request ->get("porderid"); // GET parameter
+
+            $pOrderId = $request ->get("o_orderid");
+            $pCompanyTo = $request ->get("o_companyto");
+            $pOrderSign = $request ->get("o_ordersign");
+            
+            $polisService = $this->get("polis_service");
+                
+            if (($pOrderSign == '-20') && ($gOrderId == $pOrderId)) {
+                
+                $pOrder = $polisService->getOrderById($this->getUser(),$pOrderId);
+                
+                if (is_object($pOrder) && ($pOrder->getOrderSign()->getOrderSignId() == 0)) {
+                    
+                    $oldOrder =  $polisService->cloneEntity( $this->getUser(),$pOrder );
+                    
+                    $pOrder->setOrderSign( $polisService->getOrderSignById($this->getUser(),-20) );
+
+                    $polisService ->saveOrder($this->getUser(), $pOrder, $oldOrder);
+                }
+                
+            } elseif (($pOrderSign == '-10') && ($gOrderId == $pOrderId)) {
+
+                $pOrder = $polisService->getOrderById($this->getUser(),$pOrderId);
+                
+                if (is_object($pOrder) && ($pOrder->getOrderSign()->getOrderSignId() == 0)) {
+                    
+                    $oldOrder =  $polisService->cloneEntity( $this->getUser(),$pOrder );
+                    
+                    $pOrder->setOrderSign( $polisService->getOrderSignById($this->getUser(),-10) );
+                    
+                    $polisService ->saveOrder($this->getUser(),$pOrder, $oldOrder);
+                }
+                
+            } elseif (($pOrderSign == '0') && ($gOrderId == 'new')) {
+                $pOrder = new Orders();
+                
+                $pOrder->setOrderDate(new DateTime());
+                $pOrder->setOrderType( $polisService->getOrderTypeById($this->getUser(),10) );
+                $pOrder->setOrderSign( $polisService->getOrderSignById($this->getUser(),0) );
+                $pOrder->setCompanyTo( $polisService->getCompanyById($this->getUser(),$pCompanyTo));
+                //$pOrder->setUserTo();
+                $pOrder->setCompanyFrom($this->getUser()->getCompany());
+                //$pOrder->setUserFrom();
+                $pOrder->setCompanyCreate($this->getUser()->getCompany());
+                $pOrder->setUserCreate($this->getUser());
+                
+                $polisService ->saveOrder($this->getUser(),$pOrder);
+
+            } elseif (($pOrderSign == '10') && ($gOrderId == $pOrderId)) {
+                
+                $pOrder = $polisService->getOrderById($this->getUser(),$pOrderId);
+                
+                if (is_object($pOrder) && ($pOrder->getOrderSign()->getOrderSignId() == 0)) {
+                    
+                    $oldOrder =  $polisService->cloneEntity( $this->getUser(),$pOrder );
+                    
+                    $pOrder->setOrderSign( $polisService->getOrderSignById($this->getUser(),10) );
+                    $pOrder->setUserFrom($this->getUser());
+                    
+                    $polisService ->saveOrder($this->getUser(),$pOrder, $oldOrder);
+                }
+
+            } elseif (($pOrderSign == '20') && ($gOrderId == $pOrderId)) {
+
+                if (is_object($pOrder) && ($pOrder->getOrderSign()->getOrderSignId() == 10)) {
+                    
+                    $oldOrder =  $polisService->cloneEntity( $this->getUser(),$pOrder );
+                    
+                    $pOrder->setOrderSign( $polisService->getOrderSignById($this->getUser(),20) );
+                    $pOrder->setUserTo($this->getUser());
+                    
+                    $polisService ->saveOrder($this->getUser(),$pOrder, $oldOrder);
+                }
+                
+            }
+            
+        }
+        
+        return $this->redirect($this->generateUrl('invoice_list'));
 
     }
 
