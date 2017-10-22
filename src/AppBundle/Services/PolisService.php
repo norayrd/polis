@@ -183,4 +183,20 @@ class PolisService {
         return $this->em->getRepository('AppBundle:InvoiceSignBtn') -> findOneBy(array('btn_id' => $btnId));
     }
 
+    public function saveInvoice( $user, $pInvoice, $oldInvoice = null) {
+        
+        if (is_object($oldInvoice)) {
+            $oldInvoice->setActualId($pInvoice->getInvoiceId());
+            $this->em->persist($oldInvoice);
+        }
+
+        $pInvoice->setDateCurr(new DateTime());
+        $pInvoice->setUserId($user->getId());
+        
+        $this->em->persist($pInvoice);
+        $this->em->flush();
+
+        return true;
+    }
+
 }

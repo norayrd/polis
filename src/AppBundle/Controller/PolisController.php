@@ -12,6 +12,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Company;
+use AppBundle\Entity\Invoice;
 use AppBundle\Entity\Orders;
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -416,7 +417,8 @@ class PolisController extends Controller
                 ) {
 
             $submitBtn1 = $polisService ->getInvoiceSignBtnById($this->getUser(),-10);
-            $submitBtn2 = $polisService ->getInvoiceSignBtnById($this->getUser(),10);
+            $submitBtn2 = $polisService ->getInvoiceSignBtnById($this->getUser(),0);
+            $submitBtn3 = $polisService ->getInvoiceSignBtnById($this->getUser(),10);
             
         } else if (
                 ($pinvoiceId > 0) && 
@@ -494,91 +496,175 @@ class PolisController extends Controller
         
         $invoiceid = $request ->get("pinvoiceid");
         
-        //var_dump($request);
-        exit;
-        
-        if ( (1==0) && !$is_guest ) {
+        if ( !$is_guest ) {
             
-      
-            $gOrderId = $request ->get("porderid"); // GET parameter
+            $gInvoiceId = $request ->get("pinvoiceid"); // GET parameter
 
-            $pOrderId = $request ->get("o_orderid");
+            $pInvoiceId = $request ->get("o_invoiceid");
             $pCompanyTo = $request ->get("o_companyto");
-            $pOrderSign = $request ->get("o_ordersign");
+            $pCompanyFrom = $request ->get("o_companyfrom");
+            $pInvoiceSignId = $request ->get("o_invoicesign");
+            $pFioTo = $request ->get("o_fioto");
+            $pFioFrom = $request ->get("o_fiofrom");
+            $pType = $request ->get("o_type");
+            
+            /*
+            var_dump(
+                    '$pInvoiceId = ' . $pInvoiceId,
+                    '$pCompanyTo = ' . $pCompanyTo,
+                    '$pCompanyFrom = ' . $pCompanyFrom,
+                    '$pInvoiceSign = ' . $pInvoiceSign,
+                    '$pType = ' . $pType,
+                    '$pFioTo = ' . $pFioTo,
+                    '$pFioFrom = ' . $pFioFrom
+                    );exit;
+            */
             
             $polisService = $this->get("polis_service");
+            
+            $pInvoice = $polisService->getInvoiceById($this->getUser(),$pInvoiceId);
+            
+            if ($pInvoice) {
+                $oldInvoice =  $polisService->cloneEntity( $this->getUser(),$pInvoice );
+                $oldInvoiceSignId = $pInvoice->getInvoiceSign()->getInvoiceSignId();
+                $ourInvoice = ($pInvoice->getCompanyCreate()->getCompanyId() == $this->getUser()->getCompany()->getCompanyId() );
+            }
                 
-            if (($pOrderSign == '-20') && ($gOrderId == $pOrderId)) {
-                
-                $pOrder = $polisService->getOrderById($this->getUser(),$pOrderId);
-                
-                if (is_object($pOrder) && ($pOrder->getOrderSign()->getOrderSignId() == 0)) {
-                    
-                    $oldOrder =  $polisService->cloneEntity( $this->getUser(),$pOrder );
-                    
-                    $pOrder->setOrderSign( $polisService->getOrderSignById($this->getUser(),-20) );
+            
+            if (
+                    ( ($pInvoiceSignId == '0') || ($pInvoiceSignId == '10') )
+                    && ($gInvoiceId == 'new')
+                    ) {
 
-                    $polisService ->saveOrder($this->getUser(), $pOrder, $oldOrder);
-                }
-                
-            } elseif (($pOrderSign == '-10') && ($gOrderId == $pOrderId)) {
+                    $pInvoice = new Invoice();
 
-                $pOrder = $polisService->getOrderById($this->getUser(),$pOrderId);
-                
-                if (is_object($pOrder) && ($pOrder->getOrderSign()->getOrderSignId() == 0)) {
-                    
-                    $oldOrder =  $polisService->cloneEntity( $this->getUser(),$pOrder );
-                    
-                    $pOrder->setOrderSign( $polisService->getOrderSignById($this->getUser(),-10) );
-                    
-                    $polisService ->saveOrder($this->getUser(),$pOrder, $oldOrder);
-                }
-                
-            } elseif (($pOrderSign == '0') && ($gOrderId == 'new')) {
-                $pOrder = new Orders();
-                
-                $pOrder->setOrderDate(new DateTime());
-                $pOrder->setOrderType( $polisService->getOrderTypeById($this->getUser(),10) );
-                $pOrder->setOrderSign( $polisService->getOrderSignById($this->getUser(),0) );
-                $pOrder->setCompanyTo( $polisService->getCompanyById($this->getUser(),$pCompanyTo));
-                //$pOrder->setUserTo();
-                $pOrder->setCompanyFrom($this->getUser()->getCompany());
-                //$pOrder->setUserFrom();
-                $pOrder->setCompanyCreate($this->getUser()->getCompany());
-                $pOrder->setUserCreate($this->getUser());
-                
-                $polisService ->saveOrder($this->getUser(),$pOrder);
+                    $pInvoice->setInvoiceDate(new DateTime());
+                    $pInvoice->setInvoiceType( $polisService->getInvoiceTypeById($this->getUser(),$pType) );
+                    $pInvoice->setInvoiceSign( $polisService->getInvoiceSignById($this->getUser(), $pInvoiceSignId ) );
+                    $pInvoice->setCompanyTo( $polisService->getCompanyById($this->getUser(),$pCompanyTo));
+                    $pInvoice->setCompanyFrom($this->getUser()->getCompany());
+                    $pInvoice->setCompanyCreate($this->getUser()->getCompany());
+                    $pInvoice->setFioFrom($pFioFrom);
+                    $pInvoice->setFioTo($pFioTo);
+                    $pInvoice->setUserCreate($this->getUser());
 
-            } elseif (($pOrderSign == '10') && ($gOrderId == $pOrderId)) {
-                
-                $pOrder = $polisService->getOrderById($this->getUser(),$pOrderId);
-                
-                if (is_object($pOrder) && ($pOrder->getOrderSign()->getOrderSignId() == 0)) {
-                    
-                    $oldOrder =  $polisService->cloneEntity( $this->getUser(),$pOrder );
-                    
-                    $pOrder->setOrderSign( $polisService->getOrderSignById($this->getUser(),10) );
-                    $pOrder->setUserFrom($this->getUser());
-                    
-                    $polisService ->saveOrder($this->getUser(),$pOrder, $oldOrder);
-                }
+                    $polisService ->saveInvoice($this->getUser(),$pInvoice);
 
-            } elseif (($pOrderSign == '20') && ($gOrderId == $pOrderId)) {
+            } elseif (
+                    ($pInvoiceSignId == '0') 
+                    && ($gInvoiceId == $pInvoiceId) 
+                    && is_object($pInvoice) 
+                    && ($oldInvoiceSignId == 0)
+                    && $ourInvoice
+                    ) {
+                
+                    $pInvoice->setCompanyTo( $polisService->getCompanyById($this->getUser(),$pCompanyTo));
+                    $pInvoice->setCompanyFrom($this->getUser()->getCompany());
+                    $pInvoice->setFioFrom($pFioFrom);
+                    $pInvoice->setFioTo($pFioTo);
+                
+                    $polisService ->saveInvoice($this->getUser(),$pInvoice, $oldInvoice);
 
-                if (is_object($pOrder) && ($pOrder->getOrderSign()->getOrderSignId() == 10)) {
+            } elseif (
+                    ($pInvoiceSignId == '0') 
+                    && ($gInvoiceId == $pInvoiceId) 
+                    && is_object($pInvoice) 
+                    && ($oldInvoiceSignId == 0)
+                    && $ourInvoice
+                    ) {
+                
+                    $pInvoice->setCompanyTo( $polisService->getCompanyById($this->getUser(),$pCompanyTo));
+                    $pInvoice->setCompanyFrom($this->getUser()->getCompany());
+                    $pInvoice->setFioFrom($pFioFrom);
+                    $pInvoice->setFioTo($pFioTo);
+                
+                    $polisService ->saveInvoice($this->getUser(),$pInvoice, $oldInvoice);
+
+            } elseif (
+                    ($pInvoiceSignId == '0') 
+                    && ($gInvoiceId == $pInvoiceId) 
+                    && is_object($pInvoice) 
+                    && ($oldInvoiceSignId == -10)
+                    && $ourInvoice
+                    ) {
+
+                    $pInvoice->setInvoiceSign( $polisService->getInvoiceSignById($this->getUser(),0) );
                     
-                    $oldOrder =  $polisService->cloneEntity( $this->getUser(),$pOrder );
+                    $polisService ->saveInvoice($this->getUser(),$pInvoice, $oldInvoice);
+                
+            } elseif (
+                    ($pInvoiceSignId == '10') 
+                    && ($gInvoiceId == $pInvoiceId) 
+                    && is_object($pInvoice) 
+                    && (($oldInvoiceSignId == 0) || ($oldInvoiceSignId == 20))
+                    && $ourInvoice
+                    ) {
+                
+                    $pInvoice->setInvoiceSign( $polisService->getInvoiceSignById($this->getUser(),10) );
+                    if ($oldInvoiceSignId == 20) {
+                        $pInvoice->setUserFrom(null);
+                    }
                     
-                    $pOrder->setOrderSign( $polisService->getOrderSignById($this->getUser(),20) );
-                    $pOrder->setUserTo($this->getUser());
                     
-                    $polisService ->saveOrder($this->getUser(),$pOrder, $oldOrder);
-                }
+                    $polisService ->saveInvoice($this->getUser(),$pInvoice, $oldInvoice);
+
+            } elseif (
+                    ($pInvoiceSignId == '20') 
+                    && ($gInvoiceId == $pInvoiceId) 
+                    && is_object($pInvoice) 
+                    && ($oldInvoiceSignId == 10)
+                    && $ourInvoice
+                    ) {
+                
+                    $pInvoice->setInvoiceSign( $polisService->getInvoiceSignById($this->getUser(),20) );
+                    $pInvoice->setUserFrom($this->getUser());
+                    
+                    $polisService ->saveInvoice($this->getUser(),$pInvoice, $oldInvoice);
+
+            } elseif (
+                    ($pInvoiceSignId == '0') 
+                    && ($gInvoiceId == $pInvoiceId) 
+                    && is_object($pInvoice) 
+                    && ($oldInvoiceSignId == 10)
+                    && $ourInvoice
+                    ) {
+                
+                    $pInvoice->setInvoiceSign( $polisService->getInvoiceSignById($this->getUser(),0) );
+                    
+                    $polisService ->saveInvoice($this->getUser(),$pInvoice, $oldInvoice);
+
+            } 
+            //-------------------------------
+            elseif (
+                    ($pInvoiceSignId == '30') 
+                    && ($gInvoiceId == $pInvoiceId) 
+                    && is_object($pInvoice) 
+                    && ($oldInvoiceSignId == 20)
+                    && !$ourInvoice
+                    ) {
+
+                    $pInvoice->setInvoiceSign( $polisService->getInvoiceSignById($this->getUser(),30) );
+                    $pInvoice->setUserTo($this->getUser());
+                    
+                    $polisService ->saveInvoice($this->getUser(),$pInvoice, $oldInvoice);
+                
+            }elseif (
+                    ($pInvoiceSignId == '20') 
+                    && ($gInvoiceId == $pInvoiceId) 
+                    && is_object($pInvoice) 
+                    && ($oldInvoiceSignId == 30)
+                    && !$ourInvoice
+                    ) {
+
+                    $pInvoice->setInvoiceSign( $polisService->getInvoiceSignById($this->getUser(),20) );
+                    $pInvoice->setUserTo(null);
+                    
+                    $polisService ->saveInvoice($this->getUser(),$pInvoice, $oldInvoice);
                 
             }
             
         }
-        
+
         return $this->redirect($this->generateUrl('invoice_list'));
 
     }
