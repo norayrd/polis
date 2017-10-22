@@ -566,17 +566,14 @@ class PolisController extends Controller
                     $polisService ->saveInvoice($this->getUser(),$pInvoice, $oldInvoice);
 
             } elseif (
-                    ($pInvoiceSignId == '0') 
+                    ($pInvoiceSignId == '-10') 
                     && ($gInvoiceId == $pInvoiceId) 
                     && is_object($pInvoice) 
                     && ($oldInvoiceSignId == 0)
                     && $ourInvoice
                     ) {
                 
-                    $pInvoice->setCompanyTo( $polisService->getCompanyById($this->getUser(),$pCompanyTo));
-                    $pInvoice->setCompanyFrom($this->getUser()->getCompany());
-                    $pInvoice->setFioFrom($pFioFrom);
-                    $pInvoice->setFioTo($pFioTo);
+                    $pInvoice->setInvoiceSign( $polisService->getInvoiceSignById($this->getUser(),-10) );
                 
                     $polisService ->saveInvoice($this->getUser(),$pInvoice, $oldInvoice);
 
