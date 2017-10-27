@@ -97,6 +97,70 @@
                                                         
                                                 </div>
                                             </div>
+                                                        
+                                                        
+                                                        
+				<!-- data -->
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                                <div class="table-wrap">
+                                                                    <div class="table-responsive">
+                                                                        <table id="edit_datable_1" class="table  table-bordered table-striped m-b-0">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th data-title="name">Наименование</th>
+                                                                                    <th data-title="cost" data-editable="1">Цена</th>
+                                                                                    <th data-title="count" data-editable="1">Кол.</th>
+                                                                                    <th data-title="summ">Сумма</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td>Car</td>
+                                                                                    <td>100</td>
+                                                                                    <td>200</td>
+                                                                                    <td>0</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Bike</td>
+                                                                                    <td>330</td>
+                                                                                    <td>240</td>
+                                                                                    <td>1</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Plane</td>
+                                                                                    <td>430</td>
+                                                                                    <td>540</td>
+                                                                                    <td>3</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Yacht</td>
+                                                                                    <td>100</td>
+                                                                                    <td>200</td>
+                                                                                    <td>0</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Segway</td>
+                                                                                    <td>330</td>
+                                                                                    <td>240</td>
+                                                                                    <td>1</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                            <tfoot>
+                                                                                <tr>
+                                                                                    <th><strong>Всего</strong></th>
+                                                                                    <th></th>
+                                                                                    <th></th>
+                                                                                    <th></th>
+                                                                                </tr>
+                                                                            </tfoot>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                </div>
+                                            </div>
+				<!-- /data -->
+                                                        
 
                                             <div class="row">
                                                 <div class="col-sm-12">
@@ -203,9 +267,14 @@
             </div>
     
     <script type="text/javascript" src="{{ asset("assets/js/inputMask/jquery.maskedinput.js") }}"></script>
+    
+    <!-- Data table JavaScript -->
+    
+    <script src="{{ asset('js/editable-table/mindmup-editabletable.js') }}"></script>
+    <script src="{{ asset('js/editable-table/numeric-input-example.js') }}"></script>
+    
     <script type="text/javascript">
         // MASKED INPUT
-
         $("#o_dateend").mask("99/99/9999", {
             completed: function() {
                 //alert("Your birthday was: " + this.val());
@@ -217,7 +286,11 @@
             }
         });
         
+        $('#edit_datable_1').editableTableWidget({editor: $('<input>')}).numericInputExample(); //.find('td:first').focus();
     </script>
-
-
+    
+    
+<!-- -------------------------------------- -->
+	
+ 
 {% endblock block_content %}
