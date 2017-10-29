@@ -92,3 +92,11 @@ invitation_sign_up:
 send_invitation_sign_up:
     pattern:   /send-invitation-sign-up
     defaults:  { _controller: AppBundle:Polis:sendInvitationSignUp }
+
+popup_prod_list:
+    pattern:   /popup-prod-list
+    defaults:  { _controller: AppBundle:Polis:popupProdList }
+
+popup_nomen_list:
+    pattern:   /popup-nomen-list
+    defaults:  { _controller: AppBundle:Polis:popupNomenList }

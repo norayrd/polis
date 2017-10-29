@@ -204,4 +204,15 @@ class PolisService {
         return $this->em->getRepository('AppBundle:InvoiceType') -> findOneBy(array('invoice_type_id' => $invoiceTypeId));
     }
 
+    public function getNomenList($user) {
+
+        //return $this->em->getRepository('AppBundle:Nomen') -> findBy(array());
+        return array();
+    }
+
+    public function getProdList($user) {
+
+        return array();
+    }
+    
 }

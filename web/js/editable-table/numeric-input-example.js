@@ -18,9 +18,9 @@ $.fn.numericInputExample = function () {
     },
     initialSumm = function (row) {
         var costCol, countCol, summCol;
-        costCol = 1;
-        countCol = 2;
-        summCol = 3;
+        costCol = 2;
+        countCol = 3;
+        summCol = 4;
         
         if ( row !== undefined ) {
             row.children().eq(summCol).text( row.children().eq(costCol).text() * row.children().eq(countCol).text());

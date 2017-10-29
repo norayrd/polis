@@ -13,7 +13,12 @@
 
 {% endblock content_javascripts %}
 
+{% block block_popup %}
+    {% include 'polis/popup_window.html.twig' %}
+{% endblock block_popup %}
+
 {% block block_content %}
+
             <div class="content-wrap">
                 <div class="row">
 
@@ -103,11 +108,19 @@
 				<!-- data -->
                                             <div class="row">
                                                 <div class="col-sm-12">
+                                                    <a class="show_popup btn" rel="tabs_info" href="#popupshadow">Добавить</a>
+                                                    <br/>
+                                                    <br/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
                                                                 <div class="table-wrap">
                                                                     <div class="table-responsive">
                                                                         <table id="edit_datable_1" class="table  table-bordered table-striped m-b-0">
                                                                             <thead>
                                                                                 <tr>
+                                                                                    <th data-title="name">Страховая компания</th>
                                                                                     <th data-title="name">Наименование</th>
                                                                                     <th data-title="cost" data-editable="1">Цена</th>
                                                                                     <th data-title="count" data-editable="1">Кол.</th>
@@ -116,30 +129,35 @@
                                                                             </thead>
                                                                             <tbody>
                                                                                 <tr>
+                                                                                    <td>Страх. компания 1</td>
                                                                                     <td>Car</td>
                                                                                     <td>100</td>
                                                                                     <td>200</td>
                                                                                     <td>0</td>
                                                                                 </tr>
                                                                                 <tr>
+                                                                                    <td>Страх. компания 1</td>
                                                                                     <td>Bike</td>
                                                                                     <td>330</td>
                                                                                     <td>240</td>
                                                                                     <td>1</td>
                                                                                 </tr>
                                                                                 <tr>
+                                                                                    <td>Страх. компания 1</td>
                                                                                     <td>Plane</td>
                                                                                     <td>430</td>
                                                                                     <td>540</td>
                                                                                     <td>3</td>
                                                                                 </tr>
                                                                                 <tr>
+                                                                                    <td>Страх. компания 1</td>
                                                                                     <td>Yacht</td>
                                                                                     <td>100</td>
                                                                                     <td>200</td>
                                                                                     <td>0</td>
                                                                                 </tr>
                                                                                 <tr>
+                                                                                    <td>Страх. компания 1</td>
                                                                                     <td>Segway</td>
                                                                                     <td>330</td>
                                                                                     <td>240</td>
@@ -149,6 +167,7 @@
                                                                             <tfoot>
                                                                                 <tr>
                                                                                     <th><strong>Всего</strong></th>
+                                                                                    <th></th>
                                                                                     <th></th>
                                                                                     <th></th>
                                                                                     <th></th>
