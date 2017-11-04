@@ -40,3 +40,7 @@ services:
     i_key_service:
         class: AppBundle\Services\IKeyService
         arguments: ["@influencer_logger", "@em"]
+
+    nomen_service:
+        class: AppBundle\Services\NomenService
+        arguments: ["@influencer_logger", "@em", "@service_container"]

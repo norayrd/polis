@@ -9,13 +9,8 @@
 {% endblock content_stylesheets %}
     
 {% block content_javascripts %}
-    <script type="text/javascript" src="{{ asset('js/invoice-view.js') }}"></script>
-
+    <script type="text/javascript" src="{{ asset('js/utils/AjaxRequest.class.js') }}"></script>
 {% endblock content_javascripts %}
-
-{% block block_popup %}
-    {% include 'polis/popup_window.html.twig' %}
-{% endblock block_popup %}
 
 {% block block_content %}
 
@@ -108,7 +103,8 @@
 				<!-- data -->
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <a class="show_popup btn" rel="tabs_info" href="#popupshadow">Добавить</a>
+                                                    <a href="#popupshadow" class="show_popup btn" rel="tabs_info" id="popup-prod-btn">Наличие</a> <a class="show_popup btn" rel="tabs_info" href="#popupshadow" id="popup-nomen-btn">Номенклатура</a>
+                                                    <a href="#" class="btn btn-primary" id="popup_nomen_btn">Открыть модальное окно</a>
                                                     <br/>
                                                     <br/>
                                                 </div>
@@ -284,9 +280,12 @@
 
                 </div>
             </div>
-    
+
+    <script type="text/javascript" src="{{ asset('js/invoice-view.js') }}"></script>
+
     <script type="text/javascript" src="{{ asset("assets/js/inputMask/jquery.maskedinput.js") }}"></script>
     
+
     <!-- Data table JavaScript -->
     
     <script src="{{ asset('js/editable-table/mindmup-editabletable.js') }}"></script>
@@ -307,9 +306,13 @@
         
         $('#edit_datable_1').editableTableWidget({editor: $('<input>')}).numericInputExample(); //.find('td:first').focus();
     </script>
-    
-    
+ 
 <!-- -------------------------------------- -->
 	
  
 {% endblock block_content %}
+
+{% block block_popup %}
+    {% include 'popup/popup_window.html.twig' %}
+    {#<script type="text/javascript" src="{{ asset('js/popup-nomen/popup-nomen.js') }}"></script>#}
+{% endblock block_popup %}

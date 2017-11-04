@@ -12,4 +12,26 @@ use Doctrine\ORM\EntityRepository;
  */
 class NomenRepository extends EntityRepository
 {
+
+    public function reverseNomen( $nomenId, $userId) {
+
+        $em = $this->getEntityManager();
+        
+        $nomen = $this ->findOneBy( array( "nomen_id" => $nomenId, "actual_id" => NULL) );
+        
+        if ($nomen !== NULL) {
+        
+            $nomen->setActualId( $nomen->getNomenId() );
+            $nomen->setDateCurr( new DateTime() );
+            $nomen->setUserId( $userId );
+        
+            $nomen = $em->persist($nomen);
+            $em->flush();
+            
+            $nomen = $this ->findOneBy( array( "nomen_id" => $nomenId ) );
+        }
+
+        return $nomen;
+    }
+
 }

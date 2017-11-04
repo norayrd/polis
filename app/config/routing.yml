@@ -95,8 +95,20 @@ send_invitation_sign_up:
 
 popup_prod_list:
     pattern:   /popup-prod-list
-    defaults:  { _controller: AppBundle:Polis:popupProdList }
+    defaults:  { _controller: AppBundle:Nomen:popupProdList }
 
 popup_nomen_list:
     pattern:   /popup-nomen-list
-    defaults:  { _controller: AppBundle:Polis:popupNomenList }
+    defaults:  { _controller: AppBundle:Nomen:popupNomenList }
+
+nomen_list:
+    pattern:   /nomen-list
+    defaults:  { _controller: AppBundle:Nomen:nomenList }
+
+nomen_view:
+    pattern:   /nomen-view/{pnomenid}
+    defaults:  { _controller: AppBundle:Nomen:nomenView }
+
+nomen_edit:
+    pattern:   /nomen-edit/{pnomenid}
+    defaults:  { _controller: AppBundle:Nomen:nomenEdit }

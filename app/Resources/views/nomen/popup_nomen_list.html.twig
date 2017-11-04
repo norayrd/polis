@@ -1,0 +1,84 @@
+                
+   {# <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+    <script type="text/javascript" src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    
+    <link href="{{ asset('assets/js/footable/css/footable.core.css?v=2-0-1') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/js/footable/css/footable.standalone.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/js/footable/css/footable-demos.css') }}" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="{{ asset('assets/js/dataTable/lib/jquery.dataTables/css/DT_bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/js/dataTable/css/datatables.responsive.css') }}" />
+    #}
+
+    <!-- data -->
+                    
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-actions">
+                <button class="btn pull-left btn-primary" id="md_add_btn" onclick="return false;"><span class="entypo-check"></span> Добавить</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+                <div class="table-wrap">
+                    <div class="body-nest" id="Footable">
+
+                        {#<p class="lead well">FooTable is a jQuery plugin that aims to make HTML tables on smaller devices look awesome - No matter how many columns of data you may have in them. And it's responsive i think this better than DataTable in some way</p>#}
+
+                        <table id="prod_list" class="table-striped footable-res footable metro-blue" data-page-size="12">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th data-title="name">Поставщик</th>
+                                    <th data-title="name">Наименование</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for pnomen in pnomenList %}
+                                <tr>
+                                    <td><input type="checkbox" name="sel" value="{{ pnomen.getNomenId() }}"></td>
+                                    <td>{{ pnomen.getCompany().getCompName() }}</td>
+                                    <td>{{ pnomen.getTitle() }}</td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3">
+                                        <div class="pagination pagination-centered"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                    </div>
+                </div>
+        </div>
+    </div>
+    <!-- /data -->
+
+                                            
+    <!-- Data table JavaScript -->
+    
+    {#
+    <script src="{{ asset('js/editable-table/mindmup-editabletable.js') }}"></script>
+    
+    <script type="text/javascript">
+        $('#prod_list').editableTableWidget({editor: $('<input>')}).numericInputExample();
+    </script>
+    #}
+    
+    <script src="{{ asset('assets/js/footable/js/footable.js?v=2-0-1') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/js/footable/js/footable.sort.js?v=2-0-1') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/js/footable/js/footable.paginate.js?v=2-0-1') }}" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+    $(function() {
+        $('.footable-res').footable();
+    });
+    </script>
+

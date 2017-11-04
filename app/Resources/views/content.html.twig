@@ -166,6 +166,11 @@
                                 <i class="entypo-mail"></i><span>Приглашение</span>
                             </a>
                         </li>
+                        <li>
+                            <a class="tooltip-tip ajax-load" href="{{ path("nomen_list") }}" title="Номенклатура">
+                                <i class="entypo-box"></i><span>Номенклатура</span>
+                            </a>
+                        </li>
                         {% endif %}
                     </ul>
                 </div>
@@ -232,9 +237,6 @@
 
             {% endblock block_content %}
 
-        {% block block_popup %}
-
-        {% endblock block_popup %}
 
             <!-- /END OF CONTENT -->
 
@@ -269,5 +271,8 @@
 
     <!-- /MAIN EFFECT -->
 
+        {% block block_popup %}
+
+        {% endblock block_popup %}
 
 {% endblock %}

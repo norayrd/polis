@@ -1,6 +1,13 @@
 $(function () {
-        /*
-	//script for popups
+    //$('#popup-prod-btn').click(function () {
+
+        //AjaxRequest._call('POST','popup-prod-list', '', function (res) {
+        //    console.log('ok');
+        //});
+
+    //});
+
+/*	//script for popups
 	$('a.show_popup').click(function () {
 		$('div.'+$(this).attr("rel")).fadeIn(500);
 		$("body").append("<div id='overlay'></div>");
