@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="form-actions">
-                <button class="btn pull-left btn-primary" id="md_add_btn" onclick="return false;"><span class="entypo-check"></span> Добавить</button>
+                <button class="btn pull-left btn-primary" id="md_add_btn"><span class="entypo-check"></span> Добавить</button>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
 
                         {#<p class="lead well">FooTable is a jQuery plugin that aims to make HTML tables on smaller devices look awesome - No matter how many columns of data you may have in them. And it's responsive i think this better than DataTable in some way</p>#}
 
-                        <table id="prod_list" class="table-striped footable-res footable metro-blue" data-page-size="12">
+                        <table id="nomen_list" class="table-striped footable-res footable metro-blue" data-page-size="12">
                             <thead>
                                 <tr>
                                     <th></th>
@@ -39,9 +39,9 @@
 
                             {% for pnomen in pnomenList %}
                                 <tr>
-                                    <td><input type="checkbox" name="sel" value="{{ pnomen.getNomenId() }}"></td>
-                                    <td>{{ pnomen.getCompany().getCompName() }}</td>
-                                    <td>{{ pnomen.getTitle() }}</td>
+                                    <td data-name="sel"><input type="checkbox" value="{{ pnomen.getNomenId() }}"></td>
+                                    <td data-name="company" data-value="{{ pnomen.getCompany().getCompanyId() }}">{{ pnomen.getCompany().getCompName() }}</td>
+                                    <td data-name="title">{{ pnomen.getTitle() }}</td>
                                 </tr>
                             {% endfor %}
 

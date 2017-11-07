@@ -103,8 +103,8 @@
 				<!-- data -->
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <a href="#popupshadow" class="show_popup btn" rel="tabs_info" id="popup-prod-btn">Наличие</a> <a class="show_popup btn" rel="tabs_info" href="#popupshadow" id="popup-nomen-btn">Номенклатура</a>
-                                                    <a href="#" class="btn btn-primary" id="popup_nomen_btn">Открыть модальное окно</a>
+                                                    <a href="#" class="btn" id="popup_nomen_btn">Номенклатура</a>
+                                                    <a href="#" class="btn btn-primary" id="popup_prod_btn">Наличие</a>
                                                     <br/>
                                                     <br/>
                                                 </div>
@@ -113,56 +113,39 @@
                                                 <div class="col-sm-12">
                                                                 <div class="table-wrap">
                                                                     <div class="table-responsive">
-                                                                        <table id="edit_datable_1" class="table  table-bordered table-striped m-b-0">
+                                                                        <table id="tbl_invoice_data" class="table  table-bordered table-striped m-b-0">
                                                                             <thead>
                                                                                 <tr>
-                                                                                    <th data-title="name">Страховая компания</th>
+                                                                                    <th data-title="invoiceDataId" class="hidden">ID</th>
+                                                                                    <th data-title="company">Страховая компания</th>
                                                                                     <th data-title="name">Наименование</th>
                                                                                     <th data-title="cost" data-editable="1">Цена</th>
                                                                                     <th data-title="count" data-editable="1">Кол.</th>
                                                                                     <th data-title="summ">Сумма</th>
+                                                                                    <th data-title="sel"><a class="btn" id="del_btn" title='Удалить выделенные' href="#">×</a></th>
+                                                                                    
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
+
+                                                                            {% for pinvoiceData in pinvoice.getInvoiceData() %}
                                                                                 <tr>
-                                                                                    <td>Страх. компания 1</td>
-                                                                                    <td>Car</td>
-                                                                                    <td>100</td>
-                                                                                    <td>200</td>
-                                                                                    <td>0</td>
+                                                                                    <td data-name="invoiceDataId" data-value="{{ pinvoiceData.getInvoiceDataId() }}" class="hidden">{{ pinvoiceData.getInvoiceDataId() }}</td>
+                                                                                    <td data-name="company" data-value="{{ pinvoiceData.getCompany().getCompanyId() }}">{{ pinvoiceData.getCompany().getCompName() }}</td>
+                                                                                    <td data-name="title">{{ pinvoiceData.getTitle() }}</td>
+                                                                                    <td data-name="cost">{{ pinvoiceData.getCost() }}</td>
+                                                                                    <td data-name="count">{{ pinvoiceData.getCount() }}</td>
+                                                                                    <td data-name="sum">{{ pinvoiceData.getCost()*pinvoiceData.getCount() }}</td>
+                                                                                    <td data-name="sel" data-delete="0" class="select-data"><input type="checkbox" value=""></td>
                                                                                 </tr>
-                                                                                <tr>
-                                                                                    <td>Страх. компания 1</td>
-                                                                                    <td>Bike</td>
-                                                                                    <td>330</td>
-                                                                                    <td>240</td>
-                                                                                    <td>1</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>Страх. компания 1</td>
-                                                                                    <td>Plane</td>
-                                                                                    <td>430</td>
-                                                                                    <td>540</td>
-                                                                                    <td>3</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>Страх. компания 1</td>
-                                                                                    <td>Yacht</td>
-                                                                                    <td>100</td>
-                                                                                    <td>200</td>
-                                                                                    <td>0</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>Страх. компания 1</td>
-                                                                                    <td>Segway</td>
-                                                                                    <td>330</td>
-                                                                                    <td>240</td>
-                                                                                    <td>1</td>
-                                                                                </tr>
+                                                                            {% endfor %}
+
                                                                             </tbody>
                                                                             <tfoot>
                                                                                 <tr>
+                                                                                    <th class="hidden"></th>
                                                                                     <th><strong>Всего</strong></th>
+                                                                                    <th></th>
                                                                                     <th></th>
                                                                                     <th></th>
                                                                                     <th></th>
@@ -289,7 +272,7 @@
     <!-- Data table JavaScript -->
     
     <script src="{{ asset('js/editable-table/mindmup-editabletable.js') }}"></script>
-    <script src="{{ asset('js/editable-table/numeric-input-example.js') }}"></script>
+    <script src="{{ asset('js/invoice-view-editabletable.js') }}"></script>
     
     <script type="text/javascript">
         // MASKED INPUT
@@ -304,7 +287,7 @@
             }
         });
         
-        $('#edit_datable_1').editableTableWidget({editor: $('<input>')}).numericInputExample(); //.find('td:first').focus();
+        $('#tbl_invoice_data').editableTableWidget({editor: $('<input>')}).numericInputExample(); //.find('td:first').focus();
     </script>
  
 <!-- -------------------------------------- -->

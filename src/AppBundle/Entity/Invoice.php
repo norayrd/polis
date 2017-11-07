@@ -86,6 +86,11 @@ class Invoice
     private $fio_from;
 
     /**
+     * @ORM\OneToMany(targetEntity="InvoiceData", mappedBy="invoice", cascade={"persist"})
+     */
+    private $invoiceData;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $date_curr;
@@ -431,5 +436,45 @@ class Invoice
     public function getFioFrom()
     {
         return $this->fio_from;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->invoiceData = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add invoiceData
+     *
+     * @param \AppBundle\Entity\InvoiceData $invoiceData
+     * @return Invoice
+     */
+    public function addInvoiceDatum(\AppBundle\Entity\InvoiceData $invoiceData)
+    {
+        $this->invoiceData[] = $invoiceData;
+    
+        return $this;
+    }
+
+    /**
+     * Remove invoiceData
+     *
+     * @param \AppBundle\Entity\InvoiceData $invoiceData
+     */
+    public function removeInvoiceDatum(\AppBundle\Entity\InvoiceData $invoiceData)
+    {
+        $this->invoiceData->removeElement($invoiceData);
+    }
+
+    /**
+     * Get invoiceData
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getInvoiceData()
+    {
+        return $this->invoiceData;
     }
 }

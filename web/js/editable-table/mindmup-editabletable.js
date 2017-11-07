@@ -4,7 +4,6 @@ $.fn.editableTableWidget = function (options) {
 	return $(this).each(function () {
 		var buildDefaultOptions = function () {
 				var opts = $.extend({}, $.fn.editableTableWidget.defaultOptions);
-                                console.log(opts);
 				opts.editor = opts.editor.clone();
 				return opts;
 			},
@@ -52,9 +51,9 @@ $.fn.editableTableWidget = function (options) {
 				} else if (keycode === ARROW_LEFT) {
 					return element.prev('td');
 				} else if (keycode === ARROW_UP) {
-					return element.parent().prev().children().eq(element.index());
+					return element.parent().prevAll(':visible:first') .children().eq(element.index());
 				} else if (keycode === ARROW_DOWN) {
-					return element.parent().next().children().eq(element.index());
+					return element.parent().nextAll(':visible:first').children().eq(element.index());
 				}
 				return [];
 			};

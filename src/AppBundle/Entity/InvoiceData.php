@@ -23,6 +23,12 @@ class InvoiceData
     private $invoice_data_id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Invoice", inversedBy="InvoiceData", cascade={"persist"})
+     * @ORM\JoinColumn(name="invoice", referencedColumnName="invoice_id", nullable=false)
+     */
+    private $invoice;
+
+    /**
      * @ORM\ManyToOne(targetEntity="InvoiceDataType", inversedBy="InvoiceData", cascade={"persist"})
      * @ORM\JoinColumn(name="invoice_data_type", referencedColumnName="invoice_data_type_id", nullable=false)
      */
@@ -426,5 +432,28 @@ class InvoiceData
     public function getDateTo()
     {
         return $this->date_to;
+    }
+
+    /**
+     * Set invoice
+     *
+     * @param \AppBundle\Entity\Invoice $invoice
+     * @return InvoiceData
+     */
+    public function setInvoice(\AppBundle\Entity\Invoice $invoice)
+    {
+        $this->invoice = $invoice;
+    
+        return $this;
+    }
+
+    /**
+     * Get invoice
+     *
+     * @return \AppBundle\Entity\Invoice 
+     */
+    public function getInvoice()
+    {
+        return $this->invoice;
     }
 }

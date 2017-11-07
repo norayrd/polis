@@ -48,9 +48,6 @@
                                         <tr>
                                             <th width="33px" data-sort-ignore="true">
                                             </th>
-                                            {#<th width="60px" data-sort-ignore="true">
-                                                ID
-                                            </th>#}
                                             <th width="32px">
                                                 Страховая компания
                                             </th>
@@ -63,7 +60,6 @@
     {% for nomen in nomenList %}
                                         <tr>
                                             <td><a href="{{ path('nomen_view',{'pnomenid': nomen.getNomenId()}) }}"><span class="fontawesome-pencil"></span></a></td>
-                                            {#<td data-value="{{ nomen.getNomenId() }}">{{ nomen.getNomenId() }}</td>#}
                                             <td>{{ nomen.getCompany.getCompName() }}</td>
                                             <td>{{ nomen.getTitle() }}</td>
                                         </tr>

@@ -4,10 +4,10 @@ $.fn.numericInputExample = function () {
     'use strict';
     var element = $(this),
     footer = element.find('tfoot tr'),
-    dataRows = element.find('tbody tr'),
+    dataRows = element.find('tbody tr').not('.hidden'),
     initialTotal = function () {
         var column, total;
-        for (column = 3; column < footer.children().size(); column++) {
+        for (column = 3; column <= 5; column++) {
             total = 0;
             dataRows.each(function () {
                 var row = $(this);
