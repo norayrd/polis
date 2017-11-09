@@ -11,6 +11,7 @@ var InvoiceView = {
         this.init_popup_nomen_btn();
         this.init_popup_prod_btn();
         this.init_del_btn();
+        this.init_submit_btn();
     },
     init_popup_nomen_btn: function () {
 
@@ -97,11 +98,52 @@ var InvoiceView = {
             $('#tbl_invoice_data').editableTableWidget({editor: $('<input>')}).numericInputExample();
         });
 
+    },
+    
+    init_submit_btn: function () {
+
+        $(".submit-btn").on('click', function () {
+            invoiceSignId = $(this).data('sign-id');
+            console.log(invoiceSignId);
+            
+            $('#o_invoicesign').val(invoiceSignId);
+            
+            var actionUrl = $('#pinvoice-form').attr('action');
+            
+            var paramArray = {
+                    'o_invoiceid': $('#o_invoiceid').val(),
+                    'o_companyto': $('#o_companyto').val(),
+                    'o_companyfrom': $('#o_companyfrom').val(),
+                    'o_invoicesign': $('#o_invoicesign').val(),
+                    'o_fioto': $('#o_fioto').val(),
+                    'o_fiofrom': $('#o_fiofrom').val(),
+                    'o_type': $('#o_type').val()
+                };
+            
+            var paramData = 'paramdata=' + JSON.stringify(paramArray);
+            
+            //console.log(paramData);
+            
+            AjaxRequest._call('POST',actionUrl, paramData, 
+                function (res) {
+                    // show success message
+                },
+                function (res) {
+                    // show error message
+                },
+                function () {
+                    document.location.href = window.location.origin+'/invoice-list';
+                }
+            );
+
+            return false;
+        });
+
     }
     
 };
 
-function submitBtn(invoiceSignId) { 
-    $('#o_invoicesign').val(invoiceSignId);
-    $('#pinvoice-form').submit();
-};
+//function submitBtn(invoiceSignId) { 
+//    $('#o_invoicesign').val(invoiceSignId);
+//    $('#pinvoice-form').submit();
+//};

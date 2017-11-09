@@ -500,26 +500,19 @@ class PolisController extends Controller
             
             $gInvoiceId = $request ->get("pinvoiceid"); // GET parameter
 
-            $pInvoiceId = $request ->get("o_invoiceid");
-            $pCompanyTo = $request ->get("o_companyto");
-            $pCompanyFrom = $request ->get("o_companyfrom");
-            $pInvoiceSignId = $request ->get("o_invoicesign");
-            $pFioTo = $request ->get("o_fioto");
-            $pFioFrom = $request ->get("o_fiofrom");
-            $pType = $request ->get("o_type");
+            $paramData = $request ->get("paramdata");
+            $params = json_decode($paramData);
+
+            $pInvoiceId = $params ->o_invoiceid;
+            $pCompanyTo = $params ->o_companyto;
+            $pCompanyFrom = $params ->o_companyfrom;
+            $pInvoiceSignId = $params ->o_invoicesign;
+            $pFioTo = isset($params ->o_fioto) ? $params ->o_fioto : null;
+            $pFioFrom = isset($params ->o_fiofrom) ? $params ->o_fiofrom : null;
+            $pType = $params ->o_type;
             
-            /*
-            var_dump(
-                    '$pInvoiceId = ' . $pInvoiceId,
-                    '$pCompanyTo = ' . $pCompanyTo,
-                    '$pCompanyFrom = ' . $pCompanyFrom,
-                    '$pInvoiceSign = ' . $pInvoiceSign,
-                    '$pType = ' . $pType,
-                    '$pFioTo = ' . $pFioTo,
-                    '$pFioFrom = ' . $pFioFrom
-                    );exit;
-            */
-            
+            //var_dump($params);exit;
+
             $polisService = $this->get("polis_service");
             
             $pInvoice = $polisService->getInvoiceById($this->getUser(),$pInvoiceId);

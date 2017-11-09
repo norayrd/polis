@@ -214,26 +214,26 @@
                                             <div class="form-actions" style="margin:20px 0 0 0;">
                                             
                                                 {% if submitbtn1 != null %}
-                                                    <a href="#" class="btn" style=" background-color: {{ submitbtn1.getColor() }}" id="submitbtn1"
-                                                       onclick="submitBtn({{ submitbtn1.getSetInvoiceSignId() }})"
+                                                    <a href="#" class="btn submit-btn" style=" background-color: {{ submitbtn1.getColor() }}" id="submitbtn1"
+                                                       data-sign-id="{{ submitbtn1.getSetInvoiceSignId() }}"
                                                        >{{ submitbtn1.getBtnName() }}</a>
                                                 {% endif %}
                                             
                                                 {% if submitbtn2 != null %}
-                                                    <a href="#" class="btn" style=" background-color: {{ submitbtn2.getColor() }}" id="submitbtn2"
-                                                       onclick="submitBtn({{ submitbtn2.getSetInvoiceSignId() }})"
+                                                    <a href="#" class="btn submit-btn" style=" background-color: {{ submitbtn2.getColor() }}" id="submitbtn2"
+                                                       data-sign-id="{{ submitbtn2.getSetInvoiceSignId() }}"
                                                         >{{ submitbtn2.getBtnName() }}</a>
                                                 {% endif %}
 
                                                 {% if submitbtn3 != null %}
-                                                    <a href="#" class="btn" style=" background-color: {{ submitbtn3.getColor() }}" id="submitbtn3"
-                                                       onclick="submitBtn({{ submitbtn3.getSetInvoiceSignId() }})"
+                                                    <a href="#" class="btn submit-btn" style=" background-color: {{ submitbtn3.getColor() }}" id="submitbtn3"
+                                                       data-sign-id="{{ submitbtn3.getSetInvoiceSignId() }}"
                                                        >{{ submitbtn3.getBtnName() }}</a>
                                                 {% endif %}
 
                                                 {% if submitbtn4 != null %}
-                                                    <a href="#" class="btn" style=" background-color: {{ submitbtn4.getColor() }}" id="submitbtn4"
-                                                       onclick="submitBtn({{ submitbtn4.getSetInvoiceSignId() }})"
+                                                    <a href="#" class="btn submit-btn" style=" background-color: {{ submitbtn4.getColor() }}" id="submitbtn4"
+                                                       data-sign-id="{{ submitbtn4.getSetInvoiceSignId() }}"
                                                        >{{ submitbtn4.getBtnName() }}</a>
                                                 {% endif %}
                                                 
