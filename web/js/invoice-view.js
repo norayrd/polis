@@ -54,7 +54,7 @@ var InvoiceView = {
                                     '   <td data-name="cost">0</td>'+
                                     '   <td data-name="count">1</td>'+
                                     '   <td data-name="sum">0</td>'+
-                                    '   <td data-name="sel" data-delete="0" class="select-data"><input type="checkbox" value=""></td>'+
+                                    '   <td data-name="sel" data-delete="0" data-nomen="' + id + '" class="select-data"><input type="checkbox" value=""></td>'+
                                     '</tr>'
                             );
                             $('#tbl_invoice_data').editableTableWidget({editor: $('<input>')}).numericInputExample();
@@ -104,26 +104,49 @@ var InvoiceView = {
 
         $(".submit-btn").on('click', function () {
             invoiceSignId = $(this).data('sign-id');
-            console.log(invoiceSignId);
             
             $('#o_invoicesign').val(invoiceSignId);
             
             var actionUrl = $('#pinvoice-form').attr('action');
             
-            var paramArray = {
+            // content of invoice
+            var paramJSONData = {};
+            $('#tbl_invoice_data >tbody >tr').each(function(rIndex) {
+                var trObj = {};
+                $(this).find('td').each(function(){
+                    tdTitle = $(this).data('name');
+                    var tdObj = {
+                        'text': $(this).text()
+                    };
+                    if ($(this).data('value')) {
+                        tdObj['value'] = $(this).data('value');
+                    }
+                    if (tdTitle == 'sel') {
+                        tdObj['deleted'] = $(this).data('delete');
+                        tdObj['nomen'] = $(this).data('nomen');
+                    }
+
+                    trObj[tdTitle] = tdObj;
+                });
+                
+                paramJSONData[rIndex] = trObj;
+
+            });
+            
+            // header of invoice
+            var paramJSON = {
                     'o_invoiceid': $('#o_invoiceid').val(),
                     'o_companyto': $('#o_companyto').val(),
                     'o_companyfrom': $('#o_companyfrom').val(),
                     'o_invoicesign': $('#o_invoicesign').val(),
-                    'o_fioto': $('#o_fioto').val(),
-                    'o_fiofrom': $('#o_fiofrom').val(),
-                    'o_type': $('#o_type').val()
+                    'o_fioto': ($('#o_fioto').val()) ? $('#o_fioto').val() : '',
+                    'o_fiofrom': ($('#o_fiofrom').val()) ? $('#o_fiofrom').val() : '',
+                    'o_type': $('#o_type').val(),
+                    'content': paramJSONData
                 };
-            
-            var paramData = 'paramdata=' + JSON.stringify(paramArray);
-            
-            //console.log(paramData);
-            
+                
+            var paramData = 'paramdata=' + JSON.stringify(paramJSON);
+
             AjaxRequest._call('POST',actionUrl, paramData, 
                 function (res) {
                     // show success message
@@ -132,7 +155,7 @@ var InvoiceView = {
                     // show error message
                 },
                 function () {
-                    document.location.href = window.location.origin+'/invoice-list';
+                    //document.location.href = window.location.origin+'/invoice-list';
                 }
             );
 

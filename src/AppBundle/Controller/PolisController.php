@@ -511,7 +511,7 @@ class PolisController extends Controller
             $pFioFrom = isset($params ->o_fiofrom) ? $params ->o_fiofrom : null;
             $pType = $params ->o_type;
             
-            //var_dump($params);exit;
+            var_dump($params);exit;
 
             $polisService = $this->get("polis_service");
             

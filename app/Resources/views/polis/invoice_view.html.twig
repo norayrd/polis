@@ -136,7 +136,7 @@
                                                                                     <td data-name="cost">{{ pinvoiceData.getCost() }}</td>
                                                                                     <td data-name="count">{{ pinvoiceData.getCount() }}</td>
                                                                                     <td data-name="sum">{{ pinvoiceData.getCost()*pinvoiceData.getCount() }}</td>
-                                                                                    <td data-name="sel" data-delete="0" class="select-data"><input type="checkbox" value=""></td>
+                                                                                    <td data-name="sel" data-delete="0" data-nomen="{{ pinvoiceData.getNomen() }}" class="select-data"><input type="checkbox" value=""></td>
                                                                                 </tr>
                                                                             {% endfor %}
 

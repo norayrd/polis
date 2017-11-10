@@ -41,8 +41,7 @@ class InvoiceData
     private $company;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Nomen", inversedBy="InvoiceData", cascade={"persist"})
-     * @ORM\JoinColumn(name="nomen", referencedColumnName="nomen_id")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $nomen;
 
