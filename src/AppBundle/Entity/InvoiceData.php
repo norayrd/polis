@@ -365,29 +365,6 @@ class InvoiceData
     }
 
     /**
-     * Set nomen
-     *
-     * @param \AppBundle\Entity\Nomen $nomen
-     * @return InvoiceData
-     */
-    public function setNomen(\AppBundle\Entity\Nomen $nomen = null)
-    {
-        $this->nomen = $nomen;
-    
-        return $this;
-    }
-
-    /**
-     * Get nomen
-     *
-     * @return \AppBundle\Entity\Nomen 
-     */
-    public function getNomen()
-    {
-        return $this->nomen;
-    }
-
-    /**
      * Set date_from
      *
      * @param \DateTime $dateFrom
@@ -454,5 +431,28 @@ class InvoiceData
     public function getInvoice()
     {
         return $this->invoice;
+    }
+
+    /**
+     * Set nomen
+     *
+     * @param integer $nomen
+     * @return InvoiceData
+     */
+    public function setNomen($nomen)
+    {
+        $this->nomen = $nomen;
+    
+        return $this;
+    }
+
+    /**
+     * Get nomen
+     *
+     * @return integer 
+     */
+    public function getNomen()
+    {
+        return $this->nomen;
     }
 }

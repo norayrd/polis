@@ -129,15 +129,17 @@
                                                                             <tbody>
 
                                                                             {% for pinvoiceData in pinvoice.getInvoiceData() %}
-                                                                                <tr>
-                                                                                    <td data-name="invoiceDataId" data-value="{{ pinvoiceData.getInvoiceDataId() }}" class="hidden">{{ pinvoiceData.getInvoiceDataId() }}</td>
-                                                                                    <td data-name="company" data-value="{{ pinvoiceData.getCompany().getCompanyId() }}">{{ pinvoiceData.getCompany().getCompName() }}</td>
-                                                                                    <td data-name="title">{{ pinvoiceData.getTitle() }}</td>
-                                                                                    <td data-name="cost">{{ pinvoiceData.getCost() }}</td>
-                                                                                    <td data-name="count">{{ pinvoiceData.getCount() }}</td>
-                                                                                    <td data-name="sum">{{ pinvoiceData.getCost()*pinvoiceData.getCount() }}</td>
-                                                                                    <td data-name="sel" data-delete="0" data-nomen="{{ pinvoiceData.getNomen() }}" class="select-data"><input type="checkbox" value=""></td>
-                                                                                </tr>
+                                                                                {% if pinvoiceData.getActualId() is null %}
+                                                                                    <tr>
+                                                                                        <td data-name="invoiceDataId" data-value="{{ pinvoiceData.getInvoiceDataId() }}" class="hidden">{{ pinvoiceData.getInvoiceDataId() }}</td>
+                                                                                        <td data-name="company" data-value="{{ pinvoiceData.getCompany().getCompanyId() }}">{{ pinvoiceData.getCompany().getCompName() }}</td>
+                                                                                        <td data-name="title">{{ pinvoiceData.getTitle() }}</td>
+                                                                                        <td data-name="cost">{{ pinvoiceData.getCost() }}</td>
+                                                                                        <td data-name="count">{{ pinvoiceData.getCount() }}</td>
+                                                                                        <td data-name="sum">{{ pinvoiceData.getCost()*pinvoiceData.getCount() }}</td>
+                                                                                        <td data-name="sel" data-delete="0" data-nomen="{{ pinvoiceData.getNomen() }}" class="select-data"><input type="checkbox" value=""></td>
+                                                                                    </tr>
+                                                                                {% endif %}
                                                                             {% endfor %}
 
                                                                             </tbody>

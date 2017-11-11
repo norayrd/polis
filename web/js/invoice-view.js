@@ -12,6 +12,7 @@ var InvoiceView = {
         this.init_popup_prod_btn();
         this.init_del_btn();
         this.init_submit_btn();
+        this.select_data_uncheck();
     },
     init_popup_nomen_btn: function () {
 
@@ -162,6 +163,11 @@ var InvoiceView = {
             return false;
         });
 
+    },
+    select_data_uncheck: function(){
+        $('.select-data').find('input').each(function(){
+            $(this).removeAttr('checked');
+        })
     }
     
 };

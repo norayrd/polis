@@ -51,15 +51,15 @@ report:
 
 invoice_list:
     pattern:   /invoice-list
-    defaults:  { _controller: AppBundle:Polis:invoiceList }
+    defaults:  { _controller: AppBundle:Invoice:invoiceList }
 
 invoice_view:
     pattern:   /invoice-view/{pinvoiceid}
-    defaults:  { _controller: AppBundle:Polis:invoiceView }
+    defaults:  { _controller: AppBundle:Invoice:invoiceView }
 
 invoice_edit:
     pattern:   /invoice-edit/{pinvoiceid}
-    defaults:  { _controller: AppBundle:Polis:invoiceEdit }
+    defaults:  { _controller: AppBundle:Invoice:invoiceEdit }
 
 company_list:
     pattern:   /company-list
