@@ -41,10 +41,18 @@ services:
         class: AppBundle\Services\InvoiceService
         arguments: ["@influencer_logger", "@em", "@service_container"]
 
+    company_service:
+        class: AppBundle\Services\CompanyService
+        arguments: ["@influencer_logger", "@em", "@service_container"]
+
     i_key_service:
         class: AppBundle\Services\IKeyService
         arguments: ["@influencer_logger", "@em"]
 
     nomen_service:
         class: AppBundle\Services\NomenService
+        arguments: ["@influencer_logger", "@em", "@service_container"]
+
+    person_service:
+        class: AppBundle\Services\PersonService
         arguments: ["@influencer_logger", "@em", "@service_container"]

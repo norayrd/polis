@@ -63,15 +63,15 @@ invoice_edit:
 
 company_list:
     pattern:   /company-list
-    defaults:  { _controller: AppBundle:Polis:companyList }
+    defaults:  { _controller: AppBundle:Company:companyList }
 
 company_view:
     pattern:   /company-view/{pcompanyid}
-    defaults:  { _controller: AppBundle:Polis:companyView }
+    defaults:  { _controller: AppBundle:Company:companyView }
 
 company_edit:
     pattern:   /company-edit/{pcompanyid}
-    defaults:  { _controller: AppBundle:Polis:companyEdit }
+    defaults:  { _controller: AppBundle:Company:companyEdit }
 
 user_list:
     pattern:   /user-list
@@ -112,3 +112,15 @@ nomen_view:
 nomen_edit:
     pattern:   /nomen-edit/{pnomenid}
     defaults:  { _controller: AppBundle:Nomen:nomenEdit }
+
+person_list:
+    pattern:   /person-list
+    defaults:  { _controller: AppBundle:Person:personList }
+
+person_view:
+    pattern:   /person-view/{ppersonid}
+    defaults:  { _controller: AppBundle:Person:personView }
+
+person_edit:
+    pattern:   /person-edit/{ppersonid}
+    defaults:  { _controller: AppBundle:Person:personEdit }

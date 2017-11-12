@@ -1,0 +1,149 @@
+{% extends 'base.html.twig' %}
+
+{% use 'content.html.twig' %}
+
+{% block title %}{{ page_title }}{% endblock title %}
+
+{% block content_stylesheets %}
+
+{% endblock content_stylesheets %}
+    
+{% block content_javascripts %}
+
+{% endblock content_javascripts %}
+
+{% block block_content %}
+            <div class="content-wrap">
+                <div class="row">
+
+                    <div class="col-sm-12">
+
+                        <div class="nest" id="FootableClose">
+                            {#<div class="title-alt">
+                                <h6>
+                                    Журнал заявок / полисов</h6>
+                                <div class="titleClose">
+                                    <a class="gone" href="#FootableClose">
+                                        <span class="entypo-cancel"></span>
+                                    </a>
+                                </div>
+                                <div class="titleToggle">
+                                    <a class="nav-toggle-alt" href="#Footable">
+                                        <span class="entypo-up-open"></span>
+                                    </a>
+                                </div>
+
+                            </div>#}
+                            {% if (can_create) %}
+                            <div class="body-nest" id="Footable">
+                                <a class="btn" href="{{ path('person_view',{'ppersonid': 'new'}) }}"><span class="fontawesome-asterisk"></span> Создать </a>
+                            </div>
+                            {% endif %}
+                            <div class="body-nest" id="Footable">
+
+                                {#<p class="lead well">FooTable is a jQuery plugin that aims to make HTML tables on smaller devices look awesome - No matter how many columns of data you may have in them. And it's responsive i think this better than DataTable in some way</p>#}
+
+                                <table class="table-striped footable-res footable metro-blue" data-page-size="20">
+                                    <thead>
+                                        <tr>
+                                            <th width="33px" data-sort-ignore="true">
+                                            </th>
+                                            <th width="60px">
+                                                ID
+                                            </th>
+                                            <th width="200px">
+                                                Название
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+    {% for person in personList %}
+                                        <tr>
+                                            <td><a href="{{ path('person_view',{'ppersonid': person.getPersonId()}) }}"><span class="fontawesome-pencil"></span></a></td>
+                                            <td data-value="{{ person.getPersonId() }}">{{ person.getPersonId() }}</td>
+                                            <td>{{ person.getPersonName() }}</td>
+                                        </tr>
+    {% else %}
+        <tr>
+            <td colspan="3">Пусто</td>
+        </tr>
+    {% endfor %}
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10">
+                                                <div class="pagination pagination-centered"></div>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+    
+    <!-- GAGE -->
+    <script type="text/javascript" src="assets/js/toggle_close.js"></script>
+    <script src="assets/js/footable/js/footable.js?v=2-0-1" type="text/javascript"></script>
+    <script src="assets/js/footable/js/footable.sort.js?v=2-0-1" type="text/javascript"></script>
+    <script src="assets/js/footable/js/footable.filter.js?v=2-0-1" type="text/javascript"></script>
+    <script src="assets/js/footable/js/footable.paginate.js?v=2-0-1" type="text/javascript"></script>
+
+
+
+
+    <script type="text/javascript">
+    $(function() {
+        $('.footable-res').footable();
+    });
+    </script>
+    <script type="text/javascript">
+    $(function() {
+        $('#footable-res2').footable().bind('footable_filtering', function(e) {
+            var selected = $('.filter-status').find(':selected').text();
+            if (selected && selected.length > 0) {
+                e.filter += (e.filter && e.filter.length > 0) ? ' ' + selected : selected;
+                e.clear = !e.filter;
+            }
+        });
+
+        $('.clear-filter').click(function(e) {
+            e.preventDefault();
+            $('.filter-status').val('');
+            $('table.demo').trigger('footable_clear_filter');
+        });
+
+        $('.filter-status').change(function(e) {
+            e.preventDefault();
+            $('table.demo').trigger('footable_filter', {
+                filter: $('#filter').val()
+            });
+        });
+
+        $('.filter-api').click(function(e) {
+            e.preventDefault();
+
+            //get the footable filter object
+            var footableFilter = $('table').data('footable-filter');
+
+            alert('about to filter table by "tech"');
+            //filter by 'tech'
+            footableFilter.filter('tech');
+
+            //clear the filter
+            if (confirm('clear filter now?')) {
+                footableFilter.clearFilter();
+            }
+        });
+    });
+    </script>
+
+
+{% endblock block_content %}

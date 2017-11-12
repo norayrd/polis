@@ -77,7 +77,7 @@ class InvoiceController extends Controller
         $pinvoiceId = $request ->get("pinvoiceid");
         $ptype = $request ->get("type");
         
-        $polisService = $this->get("polis_service");
+        $companyService = $this->get("company_service");
         $invoiceService = $this->get("invoice_service");
         
         //--------------------------
@@ -95,8 +95,8 @@ class InvoiceController extends Controller
         }
 
         
-        $agentCompanyList = $polisService ->getAgentCompanyes($this->getUser());
-        $insuranceCompanyList = $polisService ->getInsuranceCompanyes($this->getUser());
+        $agentCompanyList = $companyService ->getAgentCompanyes($this->getUser());
+        $insuranceCompanyList = $companyService ->getInsuranceCompanyes($this->getUser());
 
         if ( is_object($pinvoice) && ($pinvoice->getCompanyCreate()->getCompanyId() !== $this->getUser()->getCompany()->getCompanyId()) ) {
             $fromCompanyList = array($pinvoice ->getCompanyFrom());
@@ -275,7 +275,7 @@ class InvoiceController extends Controller
             
             //var_dump($params);exit;
 
-            $polisService = $this->get("polis_service");
+            $companyService = $this->get("company_service");
             $invoiceService = $this->get("invoice_service");
             
             $pInvoice = $invoiceService->getInvoiceById($this->getUser(),$pInvoiceId);
@@ -297,7 +297,7 @@ class InvoiceController extends Controller
                     $pInvoice->setInvoiceDate(new DateTime());
                     $pInvoice->setInvoiceType( $invoiceService->getInvoiceTypeById($this->getUser(),$pType) );
                     $pInvoice->setInvoiceSign( $invoiceService->getInvoiceSignById($this->getUser(), $pInvoiceSignId ) );
-                    $pInvoice->setCompanyTo( $polisService->getCompanyById($this->getUser(),$pCompanyTo));
+                    $pInvoice->setCompanyTo( $companyService->getCompanyById($this->getUser(),$pCompanyTo));
                     $pInvoice->setCompanyFrom($this->getUser()->getCompany());
                     $pInvoice->setCompanyCreate($this->getUser()->getCompany());
                     $pInvoice->setFioFrom($pFioFrom);
@@ -314,7 +314,7 @@ class InvoiceController extends Controller
                     && $ourInvoice
                     ) {
                 
-                    $pInvoice->setCompanyTo( $polisService->getCompanyById($this->getUser(),$pCompanyTo));
+                    $pInvoice->setCompanyTo( $companyService->getCompanyById($this->getUser(),$pCompanyTo));
                     $pInvoice->setCompanyFrom($this->getUser()->getCompany());
                     $pInvoice->setFioFrom($pFioFrom);
                     $pInvoice->setFioTo($pFioTo);

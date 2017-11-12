@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% use 'content.html.twig' %}
+
+{% block title %}{{ page_title }}{% endblock title %}
+
+{% block content_stylesheets %}
+
+    <link href="{{ asset('assets/js/iCheck/flat/all.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/js/iCheck/line/all.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('assets/js/colorPicker/bootstrap-colorpicker.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/js/switch/bootstrap-switch.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/js/validate/validate.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/js/idealform/css/jquery.idealforms.css') }}" rel="stylesheet">
+
+{% endblock content_stylesheets %}
+    
+{% block content_javascripts %}
+
+{% endblock content_javascripts %}
+
+{% block block_content %}
+
+            <div class="content-wrap">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="nest" id="validationClose">
+                            <div class="title-alt">
+                                <h6>
+                                    Редактирование компании</h6>
+                                {#<div class="titleClose">
+                                    <a class="gone" href="#validationClose">
+                                        <span class="entypo-cancel"></span>
+                                    </a>
+                                </div>
+                                <div class="titleToggle">
+                                    <a class="nav-toggle-alt" href="#validation">
+                                        <span class="entypo-up-open"></span>
+                                    </a>
+                                </div>#}
+
+                            </div>
+
+
+
+                            <div class="body-nest" id="validation">
+                                <div class="form_center">
+                                    
+                                    {% if pperson == null %}
+                                        {% set ppersonid = 'new' %}
+                                    {% else %}
+                                        {% set ppersonid = pperson.getPersonId() %}
+                                    {% endif %}
+
+
+                                    <form action="{{ path('person_edit',{'ppersonid': ppersonid}) }}" id="pperson-form" class="form-horizontal" method="post" >
+                                        <fieldset>
+                                            
+                                            <div class="row">
+                                                <div class="col-sm-12">
+
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="c_personname">Название</label>
+                                                        <div class="controls">
+                                                            <input type="text" class="form-control" name="c_personname" id="c_personname" value="{{ pperson.getPersonName() }}">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-2">
+
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="c_personid">ID</label>
+                                                        <div class="controls">
+                                                            <input type="text" class="form-control" readonly="" name="c_personid" id="c_personid" value="{{ pperson.getPersonId() }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                        
+                                            <div class="form-actions" style="margin:20px 0 0 0;">
+                                            {% if (can_edit) %}
+                                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                                            {% endif %}
+                                                <a href="{{ path('person_list') }}" class="btn">Назад</a>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                            
+    <!-- /MAIN EFFECT -->
+    <script type="text/javascript" src="{{ asset('assets/js/iCheck/jquery.icheck.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/switch/bootstrap-switch.js') }}"></script>
+
+    <!--  PLUGIN -->
+    <script>
+    $(document).ready(function() {
+        //CHECKBOX PRETTYFY
+        $('.skin-flat input').iCheck({
+            checkboxClass: 'icheckbox_flat-red',
+            radioClass: 'iradio_flat-red'
+        });
+        $('.skin-line input').each(function() {
+            var self = $(this),
+                label = self.next(),
+                label_text = label.text();
+
+            label.remove();
+            self.iCheck({
+                checkboxClass: 'icheckbox_line-blue',
+                radioClass: 'iradio_line-blue',
+                insert: '<div class="icheck_line-icon"></div>' + label_text
+            });
+        });
+        //Switch Button
+
+        $('.make-switch').bootstrapSwitch('setSizeClass', 'switch-small');
+    });
+    </script>
+    
+{% endblock block_content %}
