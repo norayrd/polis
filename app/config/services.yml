@@ -56,3 +56,11 @@ services:
     person_service:
         class: AppBundle\Services\PersonService
         arguments: ["@influencer_logger", "@em", "@service_container"]
+
+    order_service:
+        class: AppBundle\Services\OrderService
+        arguments: ["@influencer_logger", "@em", "@service_container"]
+
+    user_service:
+        class: AppBundle\Services\UserService
+        arguments: ["@influencer_logger", "@em", "@service_container"]

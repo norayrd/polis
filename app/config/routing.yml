@@ -25,21 +25,17 @@ check_email:
     pattern:   /sign-up/check-email
     defaults:  { _controller: AppBundle:Security:checkEmail }
 
-user_profile:
-    pattern:   /user-profile
-    defaults:  { _controller: AppBundle:Polis:userProfile }
-
 order_list:
     pattern:   /order-list
-    defaults:  { _controller: AppBundle:Polis:orderList }
+    defaults:  { _controller: AppBundle:Order:orderList }
 
 order_view:
     pattern:   /order-view/{porderid}
-    defaults:  { _controller: AppBundle:Polis:orderView }
+    defaults:  { _controller: AppBundle:Order:orderView }
 
 order_edit:
     pattern:   /order-edit/{porderid}
-    defaults:  { _controller: AppBundle:Polis:orderEdit }
+    defaults:  { _controller: AppBundle:Order:orderEdit }
 
 desktop:
     pattern:   /desktop
@@ -73,17 +69,21 @@ company_edit:
     pattern:   /company-edit/{pcompanyid}
     defaults:  { _controller: AppBundle:Company:companyEdit }
 
+user_profile:
+    pattern:   /user-profile
+    defaults:  { _controller: AppBundle:User:userProfile }
+
 user_list:
     pattern:   /user-list
-    defaults:  { _controller: AppBundle:Polis:userList }
+    defaults:  { _controller: AppBundle:User:userList }
 
 user_view:
     pattern:   /user-view/{puserid}
-    defaults:  { _controller: AppBundle:Polis:userView }
+    defaults:  { _controller: AppBundle:User:userView }
 
 user_edit:
     pattern:   /user-edit/{puserid}
-    defaults:  { _controller: AppBundle:Polis:userEdit }
+    defaults:  { _controller: AppBundle:User:userEdit }
 
 invitation_sign_up:
     pattern:   /invitation-sign-up
