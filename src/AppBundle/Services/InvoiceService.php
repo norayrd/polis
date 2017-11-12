@@ -117,8 +117,29 @@ class InvoiceService {
                         $this -> em->persist($invoiceData);
                     }
                     
-                } else if (false) { //updating
+                } else if (isset($invC ->invoiceDataId->value)) { //updating
                     
+                    $invoiceData = $this->em->getRepository('AppBundle:InvoiceData') -> findOneBy(array('invoice_data_id' => $invC ->invoiceDataId ->value));
+
+                    if (is_object($invoiceData)) {
+                        $oldInvoiceData = $this->cloneEntity($user, $invoiceData);
+                        $oldInvoiceData ->setActualId($invoiceData->getInvoiceDataId());
+                        $this -> em->persist($oldInvoiceData);
+
+                        $invoiceData ->setInvoiceDataType($invoiceDataType1);
+                        $invoiceData ->setTitle( $invC ->title ->text);
+                        $invoiceData ->setNumberFrom(null);
+                        $invoiceData ->setNumberTo(null);
+                        $invoiceData ->setDateFrom(null);
+                        $invoiceData ->setDateTo(null);
+                        $invoiceData ->setCost($invC ->cost ->text);
+                        $invoiceData ->setCount($invC ->count ->text);
+                        $invoiceData ->setDateCurr(new DateTime());
+                        $invoiceData ->setUserId($user->getId());
+
+                        $this->em->persist($invoiceData);
+                    }
+
                 } else if (!isset($invC ->invoiceDataId->value)) {  //inserting
                 
                     $company = $this->em->getRepository('AppBundle:Company') -> findOneBy(array('company_id' => $invC->company->value));
