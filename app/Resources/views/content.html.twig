@@ -146,37 +146,39 @@
                             </a>
                         </li>
                         <li>
-                            <a class="tooltip-tip ajax-load" href="{{ path("company_list") }}" title="Компании">
-                                <i class="entypo-star"></i><span>Компании</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="tooltip-tip ajax-load" href="{{ path("user_list") }}" title="Пользователи">
-                                <i class="entypo-users"></i><span>Пользователи</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="tooltip-tip ajax-load" href="{{ path("report") }}" title="Отчеты">
+                            <a class="tooltip-tip ajax-load" href="#" title="Отчеты">
                                 <i class="entypo-doc"></i><span>Отчеты</span>
                             </a>
-                        </li>
-                        {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_TOPMANAGER')) %}
-                        <li>
-                            <a class="tooltip-tip ajax-load" href="{{ path("invitation_sign_up") }}" title="Приглашение на регистрацию">
-                                <i class="entypo-mail"></i><span>Приглашение</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="tooltip-tip ajax-load" href="{{ path("nomen_list") }}" title="Номенклатура">
-                                <i class="entypo-box"></i><span>Номенклатура</span>
-                            </a>
+                            <ul>
+                                <li>
+                                    <a class="tooltip-tip ajax-load" href="{{ path("report") }}" title="Отчет1"><i class="entypo-doc"></i><span>Отчеты</span></a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a class="tooltip-tip ajax-load" href="{{ path("person_list") }}" title="Физ. лица">
-                                <i class="entypo-vcard"></i><span>Физ. лица</span>
+                            <a class="tooltip-tip ajax-load" href="#" title="Дополнительно">
+                                <i class="fontawesome-asterisk"></i><span>Дополнительно</span>
                             </a>
+                            <ul>
+                                <li>
+                                    <a class="tooltip-tip2 ajax-load" href="{{ path("company_list") }}" title="Компании"><i class="entypo-star"></i><span>Компании</span></a>
+                                </li>
+                                <li>
+                                    <a class="tooltip-tip2 ajax-load" href="{{ path("user_list") }}" title="Пользователи"><i class="entypo-users"></i><span>Пользователи</span></a>
+                                </li>
+                                {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_TOPMANAGER')) %}
+                                <li>
+                                    <a class="tooltip-tip2 ajax-load" href="{{ path("nomen_list") }}" title="Номенклатура"><i class="entypo-box"></i><span>Номенклатура</span></a>
+                                </li>
+                                <li>
+                                    <a class="tooltip-tip2 ajax-load" href="{{ path("invitation_sign_up") }}" title="Приглашение на регистрацию"><i class="entypo-mail"></i><span>Приглашение</span></a>
+                                </li>
+                                <li>
+                                    <a class="tooltip-tip2 ajax-load" href="{{ path("person_list") }}" title="Физ. лица"><i class="entypo-vcard"></i><span>Физ. лица</span></a>
+                                </li>
+                                {% endif %}
+                            </ul>
                         </li>
-                        {% endif %}
                     </ul>
                 </div>
                 

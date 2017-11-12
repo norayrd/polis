@@ -31,8 +31,8 @@ head.js(window.location.origin+"/assets/js/custom/scriptbreaker-multiple-accordi
     $(".topnav").accordionze({
         accordionze: true,
         speed: 500,
-        closedSign: '<img src="assets/img/plus.png">',
-        openedSign: '<img src="assets/img/minus.png">'
+        closedSign: '<img src="' + window.location.origin + '/assets/img/plus.png">',
+        openedSign: '<img src="' + window.location.origin + '/assets/img/minus.png">'
     });
 
 });
