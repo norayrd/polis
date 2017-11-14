@@ -89,6 +89,12 @@ class Invoice
      * @ORM\OneToMany(targetEntity="InvoiceData", mappedBy="invoice", cascade={"persist"})
      */
     private $invoiceData;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Person", inversedBy="Invoice", cascade={"persist"})
+     * @ORM\JoinColumn(name="person", referencedColumnName="person_id")
+     */
+    private $person;
 
     /**
      * @ORM\Column(type="datetime")
@@ -476,5 +482,28 @@ class Invoice
     public function getInvoiceData()
     {
         return $this->invoiceData;
+    }
+
+    /**
+     * Set person
+     *
+     * @param \AppBundle\Entity\Person $person
+     * @return Invoice
+     */
+    public function setPerson(\AppBundle\Entity\Person $person = null)
+    {
+        $this->person = $person;
+    
+        return $this;
+    }
+
+    /**
+     * Get person
+     *
+     * @return \AppBundle\Entity\Person 
+     */
+    public function getPerson()
+    {
+        return $this->person;
     }
 }
