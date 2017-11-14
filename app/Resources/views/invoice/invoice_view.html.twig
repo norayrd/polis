@@ -21,16 +21,15 @@
 
                         <div class="nest" id="FootableClose">
                             <div class="title-alt">
-                                <h6>
+                                <h3>
                                 {% if pinvoice==null %}
-                                    Накладная № - от -
+                                    <small>{{ pInvoiceType.getName() }}</small> № {{ pInvoiceType.getShortName() }}- <small>от</small> -
                                 {% else %}
-                                    Накладная № {{ pinvoice.getInvoiceId() }} от {{ pinvoice.getInvoiceDate()|date('d.m.Y') }}
+                                    <small>{{ pInvoiceType.getName() }}</small> № {{ pInvoiceType.getShortName() }}-{{ pinvoice.getInvoiceId() }} <small>от</small> {{ pinvoice.getInvoiceDate()|date('d.m.Y') }}
                                 {% endif %}
-                                </h6>
+                                </h3>
 
                             </div>
-
 
                             <div class="body-nest" id="validation">
                                 <div class="form_center">
@@ -41,7 +40,6 @@
                                         {% set pinvoiceid = pinvoice.getInvoiceId() %}
                                     {% endif %}
 
-
                                     <form action="{{ path('invoice_edit',{'pinvoiceid': pinvoiceid}) }}" id="pinvoice-form" class="form-horizontal" method="post" >
                                         <fieldset>
                                                         
@@ -50,7 +48,7 @@
                                                     
                                                     <div class="form-group">
 
-                                                        <label class="col-lg-3 col-sm-3 control-label" >От</label>
+                                                        <label class="col-lg-3 col-sm-3 control-label" >От кого</label>
                                                         <div class="col-lg-9">
                                                         {% if fromcompanylist != null %}
                                                             <select class="form-control" name="o_companyfrom" id="o_companyfrom">
@@ -76,7 +74,7 @@
                                                 <div class="col-sm-12">
                                                     
                                                     <div class="form-group">
-                                                        <label class="col-lg-3 col-sm-3 control-label" >Контрагент</label>
+                                                        <label class="col-lg-3 col-sm-3 control-label" >Кому</label>
                                                         <div class="col-lg-9">
                                                         {% if tocompanylist != null %}
                                                             <select class="form-control" name="o_companyto" id="o_companyto">
@@ -98,6 +96,29 @@
                                                 </div>
                                             </div>
                                                         
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 col-sm-3 control-label" >Доступ</label>
+                                                        <div class="col-lg-9">
+
+                                                            <select class="form-control" name="o_person" id="o_person">
+                                                                <option value="" ></option>
+                                                            {% for person in personlist %}
+                                                                <option value="{{ person.getPersonId() }}" 
+                                                                        {% if pinvoice.getPerson().getPersonId()==person.getPersonId() %}
+                                                                            selected
+                                                                        {% endif %}
+                                                                        >{{ person.getPersonName() }}</option>
+                                                            {% endfor %}
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                        
+                                                </div>
+                                            </div>
                                                         
                                                         
 				<!-- data -->
@@ -165,14 +186,49 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     
-                                                    <div class="form-group">
-                                                        <label class="col-lg-3 col-sm-3 control-label" >Создал</label>
-                                                        <div class="col-lg-9">
-                                                        {% if pinvoice==null %}
-                                                            <h4>{{ user.getFio() }}</h4>
-                                                        {% else %}
-                                                            <h4>{{ pinvoice.getUserCreate().getFio() }}</h4>
-                                                        {% endif %}
+                                                    <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group">
+                                                                <label class="col-lg-3 col-sm-3 control-label" ><small>Создал</small></label>
+                                                                <div class="col-lg-9 col-sm-3">
+                                                                {% if pinvoice==null %}
+                                                                    <h4>{{ user.getFio() }}</h4>
+                                                                {% else %}
+                                                                    <h5>{{ pinvoice.getUserCreate().getFio() }}</h5>
+                                                                {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-4">
+                                                        </div>
+
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group">
+                                                                <label class="col-lg-3 col-sm-3 control-label" ><small>Получил</small></label>
+                                                                <div class="col-lg-9 col-sm-3">
+                                                                {% if pinvoice==null %}
+
+                                                                {% else %}
+                                                                    <h5>{{ pinvoice.getUserTo().getFio() }}</h5>
+                                                                {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group">
+                                                                <label class="col-lg-3 col-sm-3 control-label" ><small>Отправил</small></label>
+                                                                <div class="col-lg-9 col-sm-3">
+                                                                {% if pinvoice==null %}
+
+                                                                {% else %}
+                                                                    <h5>{{ pinvoice.getUserFrom().getFio() }}</h5>
+                                                                {% endif %}
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                         
@@ -182,16 +238,6 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     
-                                                    <div class="form-group">
-                                                        <label class="col-lg-3 col-sm-3 control-label" >Отправил</label>
-                                                        <div class="col-lg-9">
-                                                        {% if pinvoice==null %}
-
-                                                        {% else %}
-                                                            <h4>{{ pinvoice.getUserFrom().getFio() }}</h4>
-                                                        {% endif %}
-                                                        </div>
-                                                    </div>
                                                         
                                                 </div>
                                             </div>
@@ -199,16 +245,6 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     
-                                                    <div class="form-group">
-                                                        <label class="col-lg-3 col-sm-3 control-label" >Получил</label>
-                                                        <div class="col-lg-9">
-                                                        {% if pinvoice==null %}
-
-                                                        {% else %}
-                                                            <h4>{{ pinvoice.getUserTo().getFio() }}</h4>
-                                                        {% endif %}
-                                                        </div>
-                                                    </div>
                                                         
                                                 </div>
                                             </div>

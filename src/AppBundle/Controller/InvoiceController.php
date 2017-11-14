@@ -35,7 +35,7 @@ class InvoiceController extends Controller
         
         $breadcrumb = array(
             array('name' => 'home', 'url' => $this->generateUrl('home')),
-            array('name' => 'Приход / Расход', 'url' => null),
+            array('name' => 'АКТы и Отчеты', 'url' => null),
         );
 
         $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
@@ -63,6 +63,7 @@ class InvoiceController extends Controller
         
         $companyService = $this->get("company_service");
         $invoiceService = $this->get("invoice_service");
+        $personService = $this->get("person_service");
         
         //--------------------------
         //access rights
@@ -77,52 +78,63 @@ class InvoiceController extends Controller
         if (is_numeric($pinvoiceId) && is_object($pinvoice)) {
             $ptype = $pinvoice->getInvoiceType()->getInvoiceTypeId();
         }
+        
+        $isCenter = ($this->getUser()->getCompany()->getType() == 1);
+        $isAgent = ($this->getUser()->getCompany()->getType() == 3);
+        $myCompany = $this->getUser()->getCompany();
+        $myParentCompany = $this->getUser()->getCompany()->getParent();
+        
+        $iCreater = is_object($pinvoice) && ($pinvoice->getCompanyCreate()->getCompanyId() == $myCompany->getCompanyId());
 
         
         $agentCompanyList = $companyService ->getAgentCompanyes($this->getUser());
         $insuranceCompanyList = $companyService ->getInsuranceCompanyes($this->getUser());
 
-        if ( is_object($pinvoice) && ($pinvoice->getCompanyCreate()->getCompanyId() !== $this->getUser()->getCompany()->getCompanyId()) ) {
+        if ( is_object($pinvoice) && !$iCreater ) {
             $fromCompanyList = array($pinvoice ->getCompanyFrom());
             $toCompanyList = array($pinvoice ->getCompanyTo());
 
-        } elseif ($this->getUser()->getCompany()->getType() == 1) {
+        } elseif ($isCenter) {
         
             if ($ptype == '10') {
                 $fromCompanyList = $insuranceCompanyList;
-                $toCompanyList = array($this->getUser()->getCompany());
+                $toCompanyList = array($myCompany);
 
             } elseif ($ptype == '20') {
-                $fromCompanyList = array($this->getUser()->getCompany());
+                $fromCompanyList = array($myCompany);
                 $toCompanyList = $insuranceCompanyList;
 
             } elseif ($ptype == '30') {
-                $fromCompanyList = array($this->getUser()->getCompany());
+                $fromCompanyList = array($myCompany);
                 $toCompanyList = $agentCompanyList;
 
             } elseif ($ptype == '40') {
                 $fromCompanyList = $agentCompanyList;
-                $toCompanyList = array($this->getUser()->getCompany());
+                $toCompanyList = array($myCompany);
+
+            } elseif ($ptype == '50') {
+                $fromCompanyList = $agentCompanyList;
+                $toCompanyList = array($myCompany);
+
+            } elseif ($ptype == '60') {
+                $fromCompanyList = array($myCompany);
+                $toCompanyList = $insuranceCompanyList;
 
             }
             
-        } elseif ($this->getUser()->getCompany()->getType() == 3) {
+        } elseif ($isAgent) {
         
-            if ($ptype == '10') {
-                $fromCompanyList = array($this->getUser()->getCompany()->getParent());
-                $toCompanyList = array($this->getUser()->getCompany());
-
-            } elseif ($ptype == '20') {
-                $fromCompanyList = array($this->getUser()->getCompany());
-                $toCompanyList = array($this->getUser()->getCompany()->getParent());
-
-            } elseif ($ptype == '30') {
-                $fromCompanyList = array($this->getUser()->getCompany());
-                $toCompanyList = null;
+            if ($ptype == '30') {
+                $fromCompanyList = array($myParentCompany);
+                $toCompanyList = array($myCompany);
 
             } elseif ($ptype == '40') {
-                $fromCompanyList = null;
-                $toCompanyList = array($this->getUser()->getCompany());
+                $fromCompanyList = array($myCompany);
+                $toCompanyList = array($myParentCompany);
+
+            } elseif ($ptype == '50') {
+                $fromCompanyList = array($myCompany);
+                $toCompanyList = array($myParentCompany);
 
             }
         }
@@ -205,11 +217,14 @@ class InvoiceController extends Controller
             $submitBtn1 = $invoiceService ->getInvoiceSignBtnById($this->getUser(),31);
             
         }
+        
+        $pInvoiceType = $invoiceService ->getInvoiceTypeById( $this->getUser(), $ptype);
+        $personList = $personService ->getPersonList($this->getUser());
 
         $breadcrumb = array(
             array('name' => 'home', 'url' => $this->generateUrl('home')),
-            array('name' => 'Приход / Расход', 'url' => $this->generateUrl('invoice_list')),
-            array('name' => 'Накладная', 'url' => null),
+            array('name' => 'АКТы и Отчеты', 'url' => $this->generateUrl('invoice_list')),
+            array('name' => $pInvoiceType ->getName(), 'url' => null),
         );
 
         $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
@@ -221,8 +236,10 @@ class InvoiceController extends Controller
             'breadcrumb' => $breadcrumb,
             'pinvoice' => $pinvoice,
             'ptype' => $ptype,
+            'pInvoiceType' => $pInvoiceType,
             'fromcompanylist' => $fromCompanyList,
             'tocompanylist' => $toCompanyList,
+            'personlist' => $personList,
             'can_edit' => $can_edit,
             'submitbtn1' => $submitBtn1,
             'submitbtn2' => $submitBtn2,
