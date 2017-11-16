@@ -173,7 +173,6 @@ var InvoiceView = {
             $(this).removeAttr('checked');
         });
         
-        $('#tbl_invoice_data').data('disabled',1);
     }
     
 };
