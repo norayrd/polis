@@ -44,7 +44,7 @@ var InvoiceView = {
                             }
                         });
                         if (isSelected) {
-                            console.log(id,isSelected,company,companyName,title);
+                            //console.log(id,isSelected,company,companyName,title);
                             var targetTblBody = $('#tbl_invoice_data').find('tbody');
                             
                             $(targetTblBody).append(
@@ -59,7 +59,6 @@ var InvoiceView = {
                                     '</tr>'
                             );
                             $('#tbl_invoice_data').editableTableWidget({editor: $('<input>')}).numericInputExample();
-                            
                         }
                         
                     });
@@ -98,6 +97,11 @@ var InvoiceView = {
             });
             $('#tbl_invoice_data').editableTableWidget({editor: $('<input>')}).numericInputExample();
         });
+
+        if ($('#tbl_invoice_data').data('disabled')==1) {
+            $('#del_btn').addClass('disabled');
+        };
+
 
     },
     
@@ -167,7 +171,9 @@ var InvoiceView = {
     select_data_uncheck: function(){
         $('.select-data').find('input').each(function(){
             $(this).removeAttr('checked');
-        })
+        });
+        
+        $('#tbl_invoice_data').data('disabled',1);
     }
     
 };

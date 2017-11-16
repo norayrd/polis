@@ -13,8 +13,10 @@ $.fn.editableTableWidget = function (options) {
 			editor = activeOptions.editor.css('position', 'absolute').hide().appendTo(element.parent()),
 			active,
 			showEditor = function (select) {
+                            
                             active = element.find('td:focus');
-                            var editable = element.find('th').eq(active.index()).data('editable');
+                            var editable = (element.data('disabled')!=1) &&
+                                    (element.find('th').eq(active.index()).data('editable')==1);
                             
                             if (editable=='1') {    
 				if (active.length) {

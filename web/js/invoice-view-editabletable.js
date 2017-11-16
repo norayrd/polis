@@ -5,16 +5,25 @@ $.fn.numericInputExample = function () {
     var element = $(this),
     footer = element.find('tfoot tr'),
     dataRows = element.find('tbody tr').not('.hidden'),
+    headerCols = element.find('thead tr th').not('.hidden'),
     initialTotal = function () {
         var column, total;
-        for (column = 3; column <= 5; column++) {
-            total = 0;
-            dataRows.each(function () {
-                var row = $(this);
-                total += parseFloat(row.children().eq(column).text());
+        headerCols.each(function(column) {
+            if ($(this).data('sum') == 1) {
+                total = 0;
+                dataRows.each(function () {
+                    var row = $(this);
+                    total += parseFloat(row.children().eq(column+1).text());
+                });
+                footer.children().eq(column+1).text(total);
+            };
+        });
+        if (element.data('disabled')==1) {
+            $('.select-data').find('input').each(function(){
+                $(this).prop("disabled", true);
             });
-            footer.children().eq(column).text(total);
         };
+        
     },
     initialSumm = function (row) {
         var costCol, countCol, summCol;
