@@ -177,7 +177,7 @@ var InvoiceView = {
                     // show error message
                 },
                 function () {
-                    //document.location.href = window.location.origin+'/invoice-list';
+                    document.location.href = window.location.origin+'/invoice-list';
                 }
             );
 
