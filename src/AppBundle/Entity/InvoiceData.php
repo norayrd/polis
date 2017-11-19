@@ -35,6 +35,12 @@ class InvoiceData
     private $invoice_data_type;
     
     /**
+     * @ORM\ManyToOne(targetEntity="InvoiceData", inversedBy="InvoiceData", cascade={"persist"})
+     * @ORM\JoinColumn(name="parent", referencedColumnName="invoice_data_id")
+     */
+    private $parent;
+    
+    /**
      * @ORM\ManyToOne(targetEntity="Company", inversedBy="InvoiceData", cascade={"persist"})
      * @ORM\JoinColumn(name="company", referencedColumnName="company_id")
      */
@@ -74,6 +80,11 @@ class InvoiceData
      * @ORM\Column(type="string", nullable=true)
      */
     private $fio;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $date_start;
 
     /**
      * @ORM\Column(type="decimal", precision=14, scale=2)
@@ -454,5 +465,51 @@ class InvoiceData
     public function getNomen()
     {
         return $this->nomen;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \AppBundle\Entity\InvoiceData $parent
+     * @return InvoiceData
+     */
+    public function setParent(\AppBundle\Entity\InvoiceData $parent = null)
+    {
+        $this->parent = $parent;
+    
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \AppBundle\Entity\InvoiceData 
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Set date_start
+     *
+     * @param \DateTime $dateStart
+     * @return InvoiceData
+     */
+    public function setDateStart($dateStart)
+    {
+        $this->date_start = $dateStart;
+    
+        return $this;
+    }
+
+    /**
+     * Get date_start
+     *
+     * @return \DateTime 
+     */
+    public function getDateStart()
+    {
+        return $this->date_start;
     }
 }

@@ -75,7 +75,7 @@ class NomenController extends Controller
 
         $nomenService = $this->get("nomen_service");
         
-        $polisService = $this->get("polis_service");
+        $companyService = $this->get("company_service");
         
         //--------------------------
         //access rights
@@ -105,7 +105,7 @@ class NomenController extends Controller
             $pnomen = null;
         }
         
-        $insuranceCompanyList = $polisService ->getInsuranceCompanyes($this->getUser());
+        $insuranceCompanyList = $companyService ->getInsuranceCompanyes($this->getUser());
         
         $breadcrumb = array(
             array('name' => 'home', 'url' => $this->generateUrl('home')),
@@ -143,7 +143,7 @@ class NomenController extends Controller
             $pcompany = $request ->get("c_company");
             $ptitle = $request ->get("c_title");
             
-            $polisService = $this->get("polis_service");
+            $companyService = $this->get("company_service");
             $nomenService = $this->get("nomen_service");
             
             if ( ($gnomenid == 'new') || ($gnomenid == '') ) {
@@ -159,7 +159,7 @@ class NomenController extends Controller
 
             if (isset($pNomen) && is_object($pNomen)) {
                 
-                $pNomen->setCompany($polisService ->getCompanyById($this->getUser(),$pcompany) );
+                $pNomen->setCompany($companyService ->getCompanyById($this->getUser(),$pcompany) );
                 $pNomen->setTitle($ptitle);
 
                 $nomenService ->saveNomen($this->getUser(),$pNomen, $oldNomen);

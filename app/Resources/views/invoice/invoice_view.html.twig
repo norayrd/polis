@@ -96,6 +96,8 @@
                                                 </div>
                                             </div>
                                                         
+                                            {% if ptype in [10,20] %}
+                                                        
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     
@@ -119,13 +121,18 @@
                                                         
                                                 </div>
                                             </div>
+                                            {% endif %}
                                                         
                                                         
 				<!-- data -->
                                             <div class="row">
                                                 <div class="col-sm-12">
+                                                {% if ptype == 10 %}
                                                     <a href="#" class="btn" id="popup_nomen_btn">Номенклатура</a>
+                                                {% endif %}
+                                                {% if ptype != 10 %}
                                                     <a href="#" class="btn btn-primary" id="popup_prod_btn">Наличие</a>
+                                                {% endif %}
                                                     <br/>
                                                     <br/>
                                                 </div>
@@ -139,10 +146,15 @@
                                                                                 <tr>
                                                                                     <th data-title="invoiceDataId" class="hidden">ID</th>
                                                                                     <th data-title="company">Страховая компания</th>
-                                                                                    <th data-title="name">Наименование</th>
+                                                                                    <th data-title="title">Наименование</th>
+                                                                                    <th data-title="type">Тип</th>
                                                                                     <th data-title="cost" data-editable="1">Цена</th>
                                                                                     <th data-title="count" data-sum="1" data-editable="1">Кол.</th>
                                                                                     <th data-title="summ" data-sum="1">Сумма</th>
+                                                                                    <th data-title="numberFrom" data-editable="1">Номер от</th>
+                                                                                    <th data-title="numberTo" data-editable="1">Номер до</th>
+                                                                                    <th data-title="dateFrom" data-editable="1">Дата от</th>
+                                                                                    <th data-title="dateTo" data-editable="1">Дата до</th>
                                                                                     <th data-title="sel"><a class="btn" id="del_btn" title='Удалить выделенные' href="#"><span class="entypo-trash"></span></a></th>
                                                                                     
                                                                                 </tr>
@@ -155,9 +167,27 @@
                                                                                         <td data-name="invoiceDataId" data-value="{{ pinvoiceData.getInvoiceDataId() }}" class="hidden">{{ pinvoiceData.getInvoiceDataId() }}</td>
                                                                                         <td data-name="company" data-value="{{ pinvoiceData.getCompany().getCompanyId() }}">{{ pinvoiceData.getCompany().getCompName() }}</td>
                                                                                         <td data-name="title">{{ pinvoiceData.getTitle() }}</td>
+                                                                                        <td data-name="type">
+                                                                                            <select>
+                                                                                                <option value='1'
+                                                                                                        {% if pinvoiceData.getInvoiceDataType().getInvoiceDataTypeId()==1 %}
+                                                                                                            selected
+                                                                                                        {% endif %}
+                                                                                                        >розница</option>
+                                                                                                <option value='2'
+                                                                                                        {% if pinvoiceData.getInvoiceDataType().getInvoiceDataTypeId()==2 %}
+                                                                                                            selected
+                                                                                                        {% endif %}
+                                                                                                        >партия</option>
+                                                                                            </select>
+                                                                                        </td>
                                                                                         <td data-name="cost">{{ pinvoiceData.getCost() }}</td>
                                                                                         <td data-name="count">{{ pinvoiceData.getCount() }}</td>
-                                                                                        <td data-name="sum">{{ pinvoiceData.getCost()*pinvoiceData.getCount() }}</td>
+                                                                                        <td data-name="summ">{{ pinvoiceData.getCost()*pinvoiceData.getCount() }}</td>
+                                                                                        <td data-name="numberFrom">{{ pinvoiceData.getNumberFrom() }}</td>
+                                                                                        <td data-name="numberTo">{{ pinvoiceData.getNumberTo() }}</td>
+                                                                                        <td data-name="dateFrom">{{ pinvoiceData.getDateFrom() }}</td>
+                                                                                        <td data-name="dateTo">{{ pinvoiceData.getDateTo() }}</td>
                                                                                         <td data-name="sel" data-delete="0" data-nomen="{{ pinvoiceData.getNomen() }}" class="select-data"><input type="checkbox" value=""></td>
                                                                                     </tr>
                                                                                 {% endif %}
@@ -168,6 +198,11 @@
                                                                                 <tr>
                                                                                     <th class="hidden"></th>
                                                                                     <th><strong>Всего</strong></th>
+                                                                                    <th></th>
+                                                                                    <th></th>
+                                                                                    <th></th>
+                                                                                    <th></th>
+                                                                                    <th></th>
                                                                                     <th></th>
                                                                                     <th></th>
                                                                                     <th></th>
@@ -188,7 +223,7 @@
                                                     
                                                     <div class="row">
                                                         <div class="col-sm-4">
-                                                            <div class="form-group">
+                                                            <div class="form-group" style="border-bottom: 1px solid #ccc;">
                                                                 <label class="col-lg-3 col-sm-3 control-label" ><small>Создал</small></label>
                                                                 <div class="col-lg-9 col-sm-3">
                                                                 {% if pinvoice==null %}
@@ -200,26 +235,11 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-sm-4">
-                                                        </div>
-
-                                                        <div class="col-sm-4">
-                                                            <div class="form-group">
-                                                                <label class="col-lg-3 col-sm-3 control-label" ><small>Получил</small></label>
-                                                                <div class="col-lg-9 col-sm-3">
-                                                                {% if pinvoice==null %}
-
-                                                                {% else %}
-                                                                    <h5>{{ pinvoice.getUserTo().getFio() }}</h5>
-                                                                {% endif %}
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                     </div>
 
                                                     <div class="row">
                                                         <div class="col-sm-4">
-                                                            <div class="form-group">
+                                                            <div class="form-group" style="border-bottom: 1px solid #ccc;">
                                                                 <label class="col-lg-3 col-sm-3 control-label" ><small>Отправил</small></label>
                                                                 <div class="col-lg-9 col-sm-3">
                                                                 {% if pinvoice==null %}
@@ -230,6 +250,23 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        <div class="col-sm-4">
+                                                        </div>
+
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group" style="border-bottom: 1px solid #ccc;">
+                                                                <label class="col-lg-3 col-sm-3 control-label" ><small>Получил</small></label>
+                                                                <div class="col-lg-9 col-sm-3">
+                                                                {% if pinvoice==null %}
+
+                                                                {% else %}
+                                                                    <h5>{{ pinvoice.getUserTo().getFio() }}</h5>
+                                                                {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                                
                                                     </div>
                                                         
                                                 </div>

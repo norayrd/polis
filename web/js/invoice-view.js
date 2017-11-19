@@ -52,9 +52,14 @@ var InvoiceView = {
                                     '   <td data-name="invoiceDataId" data-value="" class="hidden"></td>'+
                                     '   <td data-name="company" data-value="' + company + '">' + companyName + '</td>'+
                                     '   <td data-name="title">' + title + '</td>'+
+                                    '   <td data-name="type"><select><option value="1">розница</option><option value="2" selected>партия</option></select></td>'+
                                     '   <td data-name="cost">0</td>'+
                                     '   <td data-name="count">1</td>'+
                                     '   <td data-name="sum">0</td>'+
+                                    '    <td data-name="numberFrom"></td>'+
+                                    '    <td data-name="numberTo"></td>'+
+                                    '    <td data-name="dateFrom"></td>'+
+                                    '    <td data-name="dateTo"></td>'+
                                     '   <td data-name="sel" data-delete="0" data-nomen="' + id + '" class="select-data"><input type="checkbox" value=""></td>'+
                                     '</tr>'
                             );
@@ -109,7 +114,6 @@ var InvoiceView = {
 
         $(".submit-btn").on('click', function () {
             invoiceSignId = $(this).data('sign-id');
-            
             $('#o_invoicesign').val(invoiceSignId);
             
             var actionUrl = $('#pinvoice-form').attr('action');
@@ -147,6 +151,7 @@ var InvoiceView = {
                     'o_fioto': ($('#o_fioto').val()) ? $('#o_fioto').val() : '',
                     'o_fiofrom': ($('#o_fiofrom').val()) ? $('#o_fiofrom').val() : '',
                     'o_type': $('#o_type').val(),
+                    'o_person': $('#o_person').val(),
                     'content': paramJSONData
                 };
                 

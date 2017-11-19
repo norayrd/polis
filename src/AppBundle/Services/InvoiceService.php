@@ -87,10 +87,8 @@ class InvoiceService {
         return $this->em->getRepository('AppBundle:InvoiceType') -> findOneBy(array('invoice_type_id' => $invoiceTypeId));
     }
     
-    public function saveInvoiceContent( $user,  $pInvoiceId, $invoiceContent) {
+    public function saveInvoiceContent( $user,  $invoice, $invoiceContent) {
         
-        $invoice = $this->em->getRepository('AppBundle:Invoice') -> findOneBy(array('invoice_id' => $pInvoiceId));
-
         //var_dump($invoiceContent);exit;
         
         if (is_object($invoice) && is_object($invoiceContent) && (count($invoiceContent)>0)) {
@@ -157,7 +155,7 @@ class InvoiceService {
                     $invoiceData ->setCount($invC ->count ->text);
                     $invoiceData ->setDateCurr(new DateTime());
                     $invoiceData ->setUserId($user->getId());
-
+                    
                     $this->em->persist($invoiceData);
                 
                 }
@@ -165,7 +163,7 @@ class InvoiceService {
         }
         
         $this->em->flush();
-        exit;
+
         return true;
     }
                     

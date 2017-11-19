@@ -27,13 +27,35 @@ $.fn.numericInputExample = function () {
     },
     initialSumm = function (row) {
         var costCol, countCol, summCol;
-        costCol = 3;
-        countCol = 4;
-        summCol = 5;
         
-        if ( row !== undefined ) {
-            row.children().eq(summCol).text( row.children().eq(costCol).text() * row.children().eq(countCol).text());
-            initialTotal();
+        if ( row != undefined  ) {
+            
+            row.find('td').each(function(){
+                var tdTitle = $(this).data('name');
+
+                if (tdTitle == 'cost') {
+                    costCol = $(this).index();
+                } else if (tdTitle == 'count') {
+                    countCol = $(this).index();
+                } else if (tdTitle == 'summ') {
+                    summCol = $(this).index();
+                }
+                //costCol = 3;
+                //countCol = 4;
+                //summCol = 5;
+                
+            });
+            
+            console.log(costCol, countCol, summCol);
+            
+            if (
+                    costCol != undefined && 
+                    countCol != undefined && 
+                    summCol != undefined
+                    ) {
+                row.children().eq(summCol).text( row.children().eq(costCol).text() * row.children().eq(countCol).text());
+                initialTotal();
+            }
         } else {
             dataRows.each(function(index){
                 $(this).children().eq(summCol).text( $(this).children().eq(costCol).text() * $(this).children().eq(countCol).text());

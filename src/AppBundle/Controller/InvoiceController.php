@@ -272,12 +272,14 @@ class InvoiceController extends Controller
             $pFioTo = isset($params ->o_fioto) ? $params ->o_fioto : null;
             $pFioFrom = isset($params ->o_fiofrom) ? $params ->o_fiofrom : null;
             $pType = $params ->o_type;
+            $pPerson = isset($params ->o_person) ? $params ->o_person : null;
             $invoiceContent = $params ->content;
             
             //var_dump($params);exit;
 
             $companyService = $this->get("company_service");
             $invoiceService = $this->get("invoice_service");
+            $personService = $this->get("person_service");
             
             $pInvoice = $invoiceService->getInvoiceById($this->getUser(),$pInvoiceId);
             
@@ -304,8 +306,17 @@ class InvoiceController extends Controller
                     $pInvoice->setFioFrom($pFioFrom);
                     $pInvoice->setFioTo($pFioTo);
                     $pInvoice->setUserCreate($this->getUser());
+                    
+                    if (($pType ==10) || ($pType == 20)) {
+                        $person = $personService ->getPersonById($this->getUser(), $pPerson);
+                        $pInvoice->setPerson($person);
+                    }
 
                     $invoiceService ->saveInvoice($this->getUser(),$pInvoice);
+                    
+                    if (!is_null($pInvoice->getInvoiceId())) {
+                        $invoiceService ->saveInvoiceContent($this->getUser(), $pInvoice, $invoiceContent);
+                    }
 
             } elseif (
                     ($pInvoiceSignId == '0') 
@@ -320,8 +331,13 @@ class InvoiceController extends Controller
                     $pInvoice->setFioFrom($pFioFrom);
                     $pInvoice->setFioTo($pFioTo);
                 
+                    if (($pType ==10) || ($pType == 20)) {
+                        $person = $personService ->getPersonById($this->getUser(), $pPerson);
+                        $pInvoice->setPerson($person);
+                    }
+
                     $invoiceService ->saveInvoice($this->getUser(),$pInvoice, $oldInvoice);
-                    $invoiceService ->saveInvoiceContent($this->getUser(), $pInvoiceId, $invoiceContent);
+                    $invoiceService ->saveInvoiceContent($this->getUser(), $pInvoice, $invoiceContent);
 
             } elseif (
                     ($pInvoiceSignId == '-10') 
