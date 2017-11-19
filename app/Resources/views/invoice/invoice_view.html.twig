@@ -5,7 +5,7 @@
 {% block title %}{{ page_title }}{% endblock title %}
 
 {% block content_stylesheets %}
-
+    <link rel="stylesheet" href="{{ asset('css/invoice-view.css') }}" />
 {% endblock content_stylesheets %}
     
 {% block content_javascripts %}
@@ -20,7 +20,7 @@
                     <div class="col-sm-12">
 
                         <div class="nest" id="FootableClose">
-                            <div class="title-alt">
+                            {#<div class="title-alt">
                                 <h3>
                                 {% if pinvoice==null %}
                                     <small>{{ pInvoiceType.getName() }}</small> № {{ pInvoiceType.getShortName() }}- <small>от</small> -
@@ -29,7 +29,7 @@
                                 {% endif %}
                                 </h3>
 
-                            </div>
+                            </div>#}
 
                             <div class="body-nest" id="validation">
                                 <div class="form_center">
@@ -42,6 +42,20 @@
 
                                     <form action="{{ path('invoice_edit',{'pinvoiceid': pinvoiceid}) }}" id="pinvoice-form" class="form-horizontal" method="post" >
                                         <fieldset>
+                                            
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <center>
+                                                    <h3 style="border-bottom: 1px solid #ccc;">
+                                                    {% if pinvoice==null %}
+                                                        <small>{{ pInvoiceType.getName() }}</small> № {{ pInvoiceType.getShortName() }}- <small>от</small> -
+                                                    {% else %}
+                                                        <small>{{ pInvoiceType.getName() }}</small> № {{ pInvoiceType.getShortName() }}-{{ pinvoice.getInvoiceId() }} <small>от</small> {{ pinvoice.getInvoiceDate()|date('d.m.Y') }}
+                                                    {% endif %}
+                                                    </h3>
+                                                    </center>
+                                                </div>
+                                            </div>
                                                         
                                             <div class="row">
                                                 <div class="col-sm-12">
@@ -148,13 +162,13 @@
                                                                                     <th data-title="company">Страховая компания</th>
                                                                                     <th data-title="title">Наименование</th>
                                                                                     <th data-title="type">Тип</th>
+                                                                                    <th data-title="numberFrom" data-editable="1">Номер от</th>
+                                                                                    <th data-title="numberTo" data-editable="1">Номер до</th>
+                                                                                    <th data-title="dateFrom">Дата от</th>
+                                                                                    <th data-title="dateTo">Дата до</th>
                                                                                     <th data-title="cost" data-editable="1">Цена</th>
                                                                                     <th data-title="count" data-sum="1" data-editable="1">Кол.</th>
                                                                                     <th data-title="summ" data-sum="1">Сумма</th>
-                                                                                    <th data-title="numberFrom" data-editable="1">Номер от</th>
-                                                                                    <th data-title="numberTo" data-editable="1">Номер до</th>
-                                                                                    <th data-title="dateFrom" data-editable="1">Дата от</th>
-                                                                                    <th data-title="dateTo" data-editable="1">Дата до</th>
                                                                                     <th data-title="sel"><a class="btn" id="del_btn" title='Удалить выделенные' href="#"><span class="entypo-trash"></span></a></th>
                                                                                     
                                                                                 </tr>
@@ -181,13 +195,13 @@
                                                                                                         >партия</option>
                                                                                             </select>
                                                                                         </td>
+                                                                                        <td data-name="numberFrom"><input type="text" class="form-control number-from" value="{{ pinvoiceData.getNumberFrom() }}"></td>
+                                                                                        <td data-name="numberTo"><input type="text" class="form-control number-to" value="{{ pinvoiceData.getNumberTo() }}"></td>
+                                                                                        <td data-name="dateFrom"><input type="text" class="form-control date-from" value="{{ pinvoiceData.getDateFrom() }}"></td>
+                                                                                        <td data-name="dateTo"><input type="text" class="form-control date-to" value="{{ pinvoiceData.getDateTo() }}"></td>
                                                                                         <td data-name="cost">{{ pinvoiceData.getCost() }}</td>
                                                                                         <td data-name="count">{{ pinvoiceData.getCount() }}</td>
                                                                                         <td data-name="summ">{{ pinvoiceData.getCost()*pinvoiceData.getCount() }}</td>
-                                                                                        <td data-name="numberFrom">{{ pinvoiceData.getNumberFrom() }}</td>
-                                                                                        <td data-name="numberTo">{{ pinvoiceData.getNumberTo() }}</td>
-                                                                                        <td data-name="dateFrom">{{ pinvoiceData.getDateFrom() }}</td>
-                                                                                        <td data-name="dateTo">{{ pinvoiceData.getDateTo() }}</td>
                                                                                         <td data-name="sel" data-delete="0" data-nomen="{{ pinvoiceData.getNomen() }}" class="select-data"><input type="checkbox" value=""></td>
                                                                                     </tr>
                                                                                 {% endif %}
@@ -349,19 +363,35 @@
     <script src="{{ asset('js/editable-table/mindmup-editabletable.js') }}"></script>
     <script src="{{ asset('js/invoice-view-editabletable.js') }}"></script>
     
+    {#
+    <script type="text/javascript" src="{{ asset('assets/js/datepicker/bootstrap-datepicker.js') }}"></script>
+    #}
+    <script type="text/javascript" src="{{ asset('assets/js/inputMask/jquery.maskedinput.js') }}"></script>
+
+
+    
     <script type="text/javascript">
         // MASKED INPUT
-        $("#o_dateend").mask("99/99/9999", {
+        $(".date-from").mask("99.99.9999", {
             completed: function() {
                 //alert("Your birthday was: " + this.val());
             }
         });
-        $("#o_datebegin").mask("99/99/9999", {
+        $(".date-to").mask("99.99.9999", {
             completed: function() {
                 //alert("Your birthday was: " + this.val());
             }
         });
         
+        {#
+        $('.date-from').datepicker({format: 'dd.mm.yyyy'});
+        $('.date-to').datepicker({format: 'dd.mm.yyyy'});
+        #}
+    </script>
+        
+    <script type="text/javascript">
+        
+
         $('#tbl_invoice_data').editableTableWidget({editor: $('<input>')}).numericInputExample(); //.find('td:first').focus();
     </script>
  

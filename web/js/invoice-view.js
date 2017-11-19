@@ -53,17 +53,19 @@ var InvoiceView = {
                                     '   <td data-name="company" data-value="' + company + '">' + companyName + '</td>'+
                                     '   <td data-name="title">' + title + '</td>'+
                                     '   <td data-name="type"><select><option value="1">розница</option><option value="2" selected>партия</option></select></td>'+
+                                    '    <td data-name="numberFrom"><input type="text" class="form-control number-from" value=""></td>'+
+                                    '    <td data-name="numberTo"><input type="text" class="form-control number-to" value=""></td>'+
+                                    '    <td data-name="dateFrom"><input type="text" class="form-control date-from" value=""></td>'+
+                                    '    <td data-name="dateTo"><input type="text" class="form-control date-to" value=""></td>'+
                                     '   <td data-name="cost">0</td>'+
                                     '   <td data-name="count">1</td>'+
                                     '   <td data-name="sum">0</td>'+
-                                    '    <td data-name="numberFrom"></td>'+
-                                    '    <td data-name="numberTo"></td>'+
-                                    '    <td data-name="dateFrom"></td>'+
-                                    '    <td data-name="dateTo"></td>'+
                                     '   <td data-name="sel" data-delete="0" data-nomen="' + id + '" class="select-data"><input type="checkbox" value=""></td>'+
                                     '</tr>'
                             );
                             $('#tbl_invoice_data').editableTableWidget({editor: $('<input>')}).numericInputExample();
+                            $(".date-from").mask("99.99.9999");
+                            $(".date-to").mask("99.99.9999");
                         }
                         
                     });
@@ -124,12 +126,22 @@ var InvoiceView = {
                 var trObj = {};
                 $(this).find('td').each(function(){
                     tdTitle = $(this).data('name');
-                    var tdObj = {
-                        'text': $(this).text()
-                    };
+                    var tdObj = {};
+                    
+                    if ((tdTitle != 'sel') && ($(this).find('input').length > 0) ) {
+                        tdObj['text'] = $(this).find('input').val();
+                        tdObj['value'] = $(this).find('input').val();
+                    } else if ((tdTitle != 'sel') && ($(this).find('select').length > 0) ) {
+                        //tdObj['text'] = $(this).find('select').text();
+                        tdObj['value'] = $(this).find('select').val();
+                    } else {
+                        tdObj['text'] = $(this).text();
+                    }
+                    
                     if ($(this).data('value')) {
                         tdObj['value'] = $(this).data('value');
                     }
+                    
                     if (tdTitle == 'sel') {
                         tdObj['deleted'] = $(this).data('delete');
                         tdObj['nomen'] = $(this).data('nomen');
@@ -165,7 +177,7 @@ var InvoiceView = {
                     // show error message
                 },
                 function () {
-                    document.location.href = window.location.origin+'/invoice-list';
+                    //document.location.href = window.location.origin+'/invoice-list';
                 }
             );
 
