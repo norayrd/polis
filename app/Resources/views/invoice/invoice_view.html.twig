@@ -223,8 +223,8 @@
                                                                                         </td>
                                                                                         <td data-name="numberFrom"><input type="text" class="form-control number-from" value="{{ pinvoiceData.getNumberFrom() }}"></td>
                                                                                         <td data-name="numberTo"><input type="text" class="form-control number-to" value="{{ pinvoiceData.getNumberTo() }}"></td>
-                                                                                        <td data-name="dateFrom"><input type="text" class="form-control date-from" value="{{ pinvoiceData.getDateFrom() }}"></td>
-                                                                                        <td data-name="dateTo"><input type="text" class="form-control date-to" value="{{ pinvoiceData.getDateTo() }}"></td>
+                                                                                        <td data-name="dateFrom"><input type="text" class="form-control date-from" value="{{ pinvoiceData.getDateFrom()|date('d.m.Y') }}"></td>
+                                                                                        <td data-name="dateTo"><input type="text" class="form-control date-to" value="{{ pinvoiceData.getDateTo()|date('d.m.Y') }}"></td>
                                                                                         <td data-name="cost">{{ pinvoiceData.getCost() }}</td>
                                                                                         <td data-name="count">{{ pinvoiceData.getCount() }}</td>
                                                                                         <td data-name="summ">{{ pinvoiceData.getCost()*pinvoiceData.getCount() }}</td>

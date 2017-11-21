@@ -86,7 +86,7 @@
     {% for pinvoice in pinvoicelist %}
                                         <tr>
                                             <td data-value="{{ pinvoice.getInvoiceId() }}"><a href="{{ path('invoice_view',{'pinvoiceid': pinvoice.getInvoiceId()}) }}">{{ pinvoice.getInvoiceType().getShortName() }}-{{ pinvoice.getInvoiceId() }}</a></td>
-                                            <td>{{ pinvoice.getInvoiceDate()|date("d/m/Y") }}</td>
+                                            <td>{{ pinvoice.getInvoiceDate()|date("d.m.Y") }}</td>
                                             <td>{{ pinvoice.getCompanyFrom().getCompName() }}</td>
                                             <td>{{ pinvoice.getCompanyTo().getCompName() }}</td>
                                             <td data-value="1">
