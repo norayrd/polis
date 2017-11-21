@@ -97,6 +97,12 @@ class Invoice
     private $person;
 
     /**
+     * @ORM\ManyToOne(targetEntity="BackReason", inversedBy="Invoice", cascade={"persist"})
+     * @ORM\JoinColumn(name="back_reason", referencedColumnName="back_reason_id")
+     */
+    private $back_reason;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $date_curr;
@@ -505,5 +511,28 @@ class Invoice
     public function getPerson()
     {
         return $this->person;
+    }
+
+    /**
+     * Set back_reason
+     *
+     * @param \AppBundle\Entity\BackReason $backReason
+     * @return Invoice
+     */
+    public function setBackReason(\AppBundle\Entity\BackReason $backReason = null)
+    {
+        $this->back_reason = $backReason;
+    
+        return $this;
+    }
+
+    /**
+     * Get back_reason
+     *
+     * @return \AppBundle\Entity\BackReason 
+     */
+    public function getBackReason()
+    {
+        return $this->back_reason;
     }
 }

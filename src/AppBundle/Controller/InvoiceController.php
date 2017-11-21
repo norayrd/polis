@@ -220,6 +220,9 @@ class InvoiceController extends Controller
         
         $pInvoiceType = $invoiceService ->getInvoiceTypeById( $this->getUser(), $ptype);
         $personList = $personService ->getPersonList($this->getUser());
+        
+        $backReasonlist = $invoiceService ->getBackReasonList($this->getUser());
+
 
         $breadcrumb = array(
             array('name' => 'home', 'url' => $this->generateUrl('home')),
@@ -240,6 +243,7 @@ class InvoiceController extends Controller
             'fromcompanylist' => $fromCompanyList,
             'tocompanylist' => $toCompanyList,
             'personlist' => $personList,
+            'backReasonlist' => $backReasonlist,
             'can_edit' => $can_edit,
             'submitbtn1' => $submitBtn1,
             'submitbtn2' => $submitBtn2,
@@ -273,6 +277,7 @@ class InvoiceController extends Controller
             $pFioFrom = isset($params ->o_fiofrom) ? $params ->o_fiofrom : null;
             $pType = $params ->o_type;
             $pPerson = isset($params ->o_person) ? $params ->o_person : null;
+            $pBackReason = $params ->o_backreason;
             $invoiceContent = $params ->content;
             
             //var_dump($params);exit;
@@ -307,9 +312,14 @@ class InvoiceController extends Controller
                     $pInvoice->setFioTo($pFioTo);
                     $pInvoice->setUserCreate($this->getUser());
                     
-                    if (($pType ==10) || ($pType == 20)) {
+                    if (in_array( $pType, array(10,20) ) ) {
                         $person = $personService ->getPersonById($this->getUser(), $pPerson);
                         $pInvoice->setPerson($person);
+                    }
+
+                    if ( in_array( $pType, array(20,40) ) ) {
+                        $backReason = $invoiceService ->getBackReasonById($this->getUser(), $pBackReason);
+                        $pInvoice->setBackReason($backReason);
                     }
 
                     $invoiceService ->saveInvoice($this->getUser(),$pInvoice);
@@ -334,6 +344,11 @@ class InvoiceController extends Controller
                     if (($pType ==10) || ($pType == 20)) {
                         $person = $personService ->getPersonById($this->getUser(), $pPerson);
                         $pInvoice->setPerson($person);
+                    }
+
+                    if ( in_array( $pType, array(20,40) ) ) {
+                        $backReason = $invoiceService ->getBackReasonById($this->getUser(), $pBackReason);
+                        $pInvoice->setBackReason($backReason);
                     }
 
                     $invoiceService ->saveInvoice($this->getUser(),$pInvoice, $oldInvoice);

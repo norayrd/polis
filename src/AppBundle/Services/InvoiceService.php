@@ -118,7 +118,7 @@ class InvoiceService {
                 } else if (isset($invC ->invoiceDataId->value)) { //updating
                     
                     $invoiceData = $this->em->getRepository('AppBundle:InvoiceData') -> findOneBy(array('invoice_data_id' => $invC ->invoiceDataId ->value));
-
+                    
                     if (is_object($invoiceData)) {
                         $oldInvoiceData = $this->cloneEntity($user, $invoiceData);
                         $oldInvoiceData ->setActualId($invoiceData->getInvoiceDataId());
@@ -126,12 +126,37 @@ class InvoiceService {
 
                         $invoiceData ->setInvoiceDataType($invoiceDataType1);
                         $invoiceData ->setTitle( $invC ->title ->text);
-                        $invoiceData ->setNumberFrom(null);
-                        $invoiceData ->setNumberTo(null);
-                        $invoiceData ->setDateFrom(null);
-                        $invoiceData ->setDateTo(null);
+
+                        if (isset($invC ->fio ->text)) {
+                            $invoiceData ->setFio( $invC ->fio ->text);
+                        }
+                        
+                        $invoiceData ->setNumberFrom($invC ->numberFrom ->value);
+                        $invoiceData ->setNumberTo($invC ->numberTo ->value);
+
+                        if ($invC ->dateFrom ->value !== '') {
+                            $invoiceData ->setDateFrom(new DateTime( $invC ->dateFrom ->value ) );
+                        } else {
+                            $invoiceData ->setDateFrom(null);
+                        }
+                        
+                        if ($invC ->dateTo ->value !== '') {
+                            $invoiceData ->setDateTo(new DateTime( $invC ->dateTo ->value ));
+                        } else {
+                            $invoiceData ->setDateTo(null);
+                        }
+                        
                         $invoiceData ->setCost($invC ->cost ->text);
                         $invoiceData ->setCount($invC ->count ->text);
+
+                        if ($invC ->type ->value == 1) {
+                            $invoiceData ->setInvoiceDataType($invoiceDataType1);
+                        } else if ($invC ->type ->value == 2) {
+                            $invoiceData ->setInvoiceDataType($invoiceDataType2);
+                        } else {
+                            $invoiceData ->setInvoiceDataType(null);
+                        }
+
                         $invoiceData ->setDateCurr(new DateTime());
                         $invoiceData ->setUserId($user->getId());
 
@@ -147,12 +172,37 @@ class InvoiceService {
                     $invoiceData ->setCompany($company);
                     $invoiceData ->setNomen( $invC ->sel ->nomen);
                     $invoiceData ->setTitle( $invC ->title ->text);
-                    $invoiceData ->setNumberFrom(null);
-                    $invoiceData ->setNumberTo(null);
-                    $invoiceData ->setDateFrom(null);
-                    $invoiceData ->setDateTo(null);
+
+                    if (isset($invC ->fio ->text)) {
+                        $invoiceData ->setFio( $invC ->fio ->text);
+                    }
+
+                    $invoiceData ->setNumberFrom($invC ->numberFrom ->value);
+                    $invoiceData ->setNumberTo($invC ->numberTo ->value);
+                    
+                    if ($invC ->dateFrom ->value !== '') {
+                        $invoiceData ->setDateFrom(new DateTime( $invC ->dateFrom ->value ) );
+                    } else {
+                        $invoiceData ->setDateFrom(null);
+                    }
+
+                    if ($invC ->dateTo ->value !== '') {
+                        $invoiceData ->setDateTo(new DateTime( $invC ->dateTo ->value ));
+                    } else {
+                        $invoiceData ->setDateTo(null);
+                    }
+
                     $invoiceData ->setCost($invC ->cost ->text);
                     $invoiceData ->setCount($invC ->count ->text);
+                    
+                    if ($invC ->type ->value == 1) {
+                        $invoiceData ->setInvoiceDataType($invoiceDataType1);
+                    } else if ($invC ->type ->value == 2) {
+                        $invoiceData ->setInvoiceDataType($invoiceDataType2);
+                    } else {
+                        $invoiceData ->setInvoiceDataType(null);
+                    }
+                    
                     $invoiceData ->setDateCurr(new DateTime());
                     $invoiceData ->setUserId($user->getId());
                     
@@ -167,6 +217,14 @@ class InvoiceService {
         return true;
     }
                     
+    public function getBackReasonById( $user, $backReasonId) {
+
+        return $this->em->getRepository('AppBundle:BackReason') -> findOneBy(array('back_reason_id' => $backReasonId));
+    }
     
+    public function getBackReasonList( $user) {
+
+        return $this->em->getRepository('AppBundle:BackReason') -> findBy(array());
+    }
 
 }

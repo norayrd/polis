@@ -137,6 +137,32 @@
                                             </div>
                                             {% endif %}
                                                         
+                                            {% if ptype in [20,40] %}
+                                                        
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 col-sm-3 control-label" >Причина возврата</label>
+                                                        <div class="col-lg-9">
+
+                                                            <select class="form-control" name="o_backreason" id="o_backreason">
+                                                                <option value="" ></option>
+                                                            {% for backReason in backReasonlist %}
+                                                                <option value="{{ backReason.getBackReasonId() }}" 
+                                                                        {% if pinvoice.getBackReason().getBackReasonId()==backReason.getBackReasonId() %}
+                                                                            selected
+                                                                        {% endif %}
+                                                                        >{{ backReason.getName() }}</option>
+                                                            {% endfor %}
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                        
+                                                </div>
+                                            </div>
+                                            {% endif %}
                                                         
 				<!-- data -->
                                             <div class="row">

@@ -164,6 +164,7 @@ var InvoiceView = {
                     'o_fiofrom': ($('#o_fiofrom').val()) ? $('#o_fiofrom').val() : '',
                     'o_type': $('#o_type').val(),
                     'o_person': $('#o_person').val(),
+                    'o_backreason': $('#o_backreason').val(),
                     'content': paramJSONData
                 };
                 
