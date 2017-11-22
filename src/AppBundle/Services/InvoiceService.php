@@ -101,18 +101,21 @@ class InvoiceService {
                 
                 //var_dump($invC->sel);
                 
-                if ( isset($invC->sel->deleted) && ($invC->sel->deleted==1) && isset($invC ->invoiceDataId->value)) { //deleting
+                if ( isset($invC->sel->deleted) && ($invC->sel->deleted==1) ) { //deleting
                     
-                    $invoiceData = $this->em->getRepository('AppBundle:InvoiceData') -> findOneBy(array('invoice_data_id' => $invC ->invoiceDataId ->value));
-                    if (is_object($invoiceData)) {
-                        $oldInvoiceData = $this->cloneEntity($user, $invoiceData);
-                        $oldInvoiceData ->setActualId($invoiceData->getInvoiceDataId());
-                        $this -> em->persist($oldInvoiceData);
-                        
-                        $invoiceData ->setActualId($invoiceData->getInvoiceDataId());
-                        $invoiceData ->setDateCurr(new DateTime());
-                        $invoiceData ->setUserId($user->getId());
-                        $this -> em->persist($invoiceData);
+                    if (isset($invC ->invoiceDataId->value)) {
+                    
+                        $invoiceData = $this->em->getRepository('AppBundle:InvoiceData') -> findOneBy(array('invoice_data_id' => $invC ->invoiceDataId ->value));
+                        if (is_object($invoiceData)) {
+                            $oldInvoiceData = $this->cloneEntity($user, $invoiceData);
+                            $oldInvoiceData ->setActualId($invoiceData->getInvoiceDataId());
+                            $this -> em->persist($oldInvoiceData);
+
+                            $invoiceData ->setActualId($invoiceData->getInvoiceDataId());
+                            $invoiceData ->setDateCurr(new DateTime());
+                            $invoiceData ->setUserId($user->getId());
+                            $this -> em->persist($invoiceData);
+                        }
                     }
                     
                 } else if (isset($invC ->invoiceDataId->value)) { //updating
@@ -122,7 +125,6 @@ class InvoiceService {
                     if (is_object($invoiceData)) {
                         $oldInvoiceData = $this->cloneEntity($user, $invoiceData);
                         $oldInvoiceData ->setActualId($invoiceData->getInvoiceDataId());
-                        $this -> em->persist($oldInvoiceData);
 
                         $invoiceData ->setInvoiceDataType($invoiceDataType1);
                         $invoiceData ->setTitle( $invC ->title ->text);
@@ -159,8 +161,12 @@ class InvoiceService {
 
                         $invoiceData ->setDateCurr(new DateTime());
                         $invoiceData ->setUserId($user->getId());
+                        
+                        //if ($oldInvoiceData != $invoiceData) {
+                            $this -> em->persist($oldInvoiceData);
+                            $this->em->persist($invoiceData);
+                        //}
 
-                        $this->em->persist($invoiceData);
                     }
 
                 } else if (!isset($invC ->invoiceDataId->value)) {  //inserting

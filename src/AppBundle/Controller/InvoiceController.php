@@ -195,6 +195,20 @@ class InvoiceController extends Controller
                 ) {
             
             $submitBtn1 = $invoiceService ->getInvoiceSignBtnById($this->getUser(),21);
+            if ($ptype == 10) {
+                $submitBtn2 = $invoiceService ->getInvoiceSignBtnById($this->getUser(),30);
+            }
+            
+        } else if (
+                ($pinvoiceId > 0) && 
+                is_object($pinvoice) &&
+                ($invoiceSignId == 30) && 
+                $ourInvoice
+                ) {
+            
+            if ($ptype == 10) {
+                $submitBtn2 = $invoiceService ->getInvoiceSignBtnById($this->getUser(),31);
+            }
             
         }
         //---------------------
@@ -306,7 +320,8 @@ class InvoiceController extends Controller
                     $pInvoice->setInvoiceType( $invoiceService->getInvoiceTypeById($this->getUser(),$pType) );
                     $pInvoice->setInvoiceSign( $invoiceService->getInvoiceSignById($this->getUser(), $pInvoiceSignId ) );
                     $pInvoice->setCompanyTo( $companyService->getCompanyById($this->getUser(),$pCompanyTo));
-                    $pInvoice->setCompanyFrom($this->getUser()->getCompany());
+                    //$pInvoice->setCompanyFrom($this->getUser()->getCompany());
+                    $pInvoice->setCompanyFrom($companyService->getCompanyById($this->getUser(),$pCompanyFrom));
                     $pInvoice->setCompanyCreate($this->getUser()->getCompany());
                     $pInvoice->setFioFrom($pFioFrom);
                     $pInvoice->setFioTo($pFioTo);
@@ -337,7 +352,8 @@ class InvoiceController extends Controller
                     ) {
                 
                     $pInvoice->setCompanyTo( $companyService->getCompanyById($this->getUser(),$pCompanyTo));
-                    $pInvoice->setCompanyFrom($this->getUser()->getCompany());
+                    //$pInvoice->setCompanyFrom($this->getUser()->getCompany());
+                    $pInvoice->setCompanyFrom($companyService->getCompanyById($this->getUser(),$pCompanyFrom));
                     $pInvoice->setFioFrom($pFioFrom);
                     $pInvoice->setFioTo($pFioTo);
                 
@@ -350,8 +366,11 @@ class InvoiceController extends Controller
                         $backReason = $invoiceService ->getBackReasonById($this->getUser(), $pBackReason);
                         $pInvoice->setBackReason($backReason);
                     }
-
-                    $invoiceService ->saveInvoice($this->getUser(),$pInvoice, $oldInvoice);
+                    
+                    if ($pInvoice != $oldInvoice) {
+                        $invoiceService ->saveInvoice($this->getUser(),$pInvoice, $oldInvoice);
+                    }
+                    
                     $invoiceService ->saveInvoiceContent($this->getUser(), $pInvoice, $invoiceContent);
 
             } elseif (
@@ -419,7 +438,33 @@ class InvoiceController extends Controller
                     
                     $invoiceService ->saveInvoice($this->getUser(),$pInvoice, $oldInvoice);
 
-            } 
+            } elseif (
+                    ($pInvoiceSignId == '30') 
+                    && ($gInvoiceId == $pInvoiceId) 
+                    && is_object($pInvoice) 
+                    && ($oldInvoiceSignId == 20)
+                    && $ourInvoice
+                    && $pType== 10
+                    ) {
+
+                    $pInvoice->setInvoiceSign( $invoiceService->getInvoiceSignById($this->getUser(),30) );
+                    $pInvoice->setUserTo($this->getUser());
+                    
+                    $invoiceService ->saveInvoice($this->getUser(),$pInvoice, $oldInvoice);
+            } elseif (
+                    ($pInvoiceSignId == '20') 
+                    && ($gInvoiceId == $pInvoiceId) 
+                    && is_object($pInvoice) 
+                    && ($oldInvoiceSignId == 30)
+                    && $ourInvoice
+                    && $pType== 10
+                    ) {
+
+                    $pInvoice->setInvoiceSign( $invoiceService->getInvoiceSignById($this->getUser(),20) );
+                    $pInvoice->setUserTo(null);
+                    
+                    $invoiceService ->saveInvoice($this->getUser(),$pInvoice, $oldInvoice);
+            }
             //-------------------------------
             elseif (
                     ($pInvoiceSignId == '30') 
