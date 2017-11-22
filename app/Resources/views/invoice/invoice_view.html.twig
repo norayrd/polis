@@ -147,7 +147,7 @@
                                                         <div class="col-lg-9">
 
                                                             <select class="form-control" name="o_backreason" id="o_backreason">
-                                                                <option value="" ></option>
+                                                                <option disabled selected>ВЫБЕРИТЕ ПРИЧИНУ ВОЗВРАТА</option>
                                                             {% for backReason in backReasonlist %}
                                                                 <option value="{{ backReason.getBackReasonId() }}" 
                                                                         {% if pinvoice.getBackReason().getBackReasonId()==backReason.getBackReasonId() %}
