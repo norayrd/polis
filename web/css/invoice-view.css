@@ -18,3 +18,6 @@
     padding: 4px;
 }
 
+.table-striped th {
+    vertical-align: top;
+}

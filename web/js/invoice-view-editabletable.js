@@ -46,7 +46,7 @@ $.fn.numericInputExample = function () {
                 
             });
             
-            console.log(costCol, countCol, summCol);
+            //console.log(costCol, countCol, summCol);
             
             if (
                     costCol != undefined && 

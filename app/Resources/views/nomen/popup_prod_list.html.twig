@@ -25,131 +25,57 @@
                     <div class="body-nest" id="Footable">
 
                         {#<p class="lead well">FooTable is a jQuery plugin that aims to make HTML tables on smaller devices look awesome - No matter how many columns of data you may have in them. And it's responsive i think this better than DataTable in some way</p>#}
+                        <div id="blank_row" style="display: none; ">
+                            <tr>
+                                <td data-name="sel"><input type="checkbox" value=""></td>
+                                <td data-name="company" data-value=""></td>
+                                <td data-name="party"></td>
+                                <td data-name="date-from"></td>
+                                <td data-name="date-to"></td>
+                                <td data-name="person"></td>
+                                <td data-name="title"></td>
+                                <td data-name="count"></td>
+                            </tr>
+                        </div>
 
                         <table id="prod_list" class="table-striped footable-res footable metro-blue" data-page-size="12">
                             <thead>
                                 <tr>
-                                    <th></th>
-                                    <th data-title="name">Поставщик</th>
-                                    <th data-title="name">Наименование</th>
-                                    <th data-title="cost" data-editable="1">Цена</th>
+                                    <th ></th>
+                                    <th data-title="company">Поставщик</th>
+                                    <th data-title="party">Партия</th>
+                                    <th data-title="date-from">Дата от</th>
+                                    <th data-title="date-to">Дата до</th>
+                                    <th data-title="person">Доступ</th>
+                                    <th data-title="title">Наименование</th>
+                                    <th data-title="cnt">На складе</th>
+                                    <th data-title="cnt_a">У агента</th>
+                                    <th data-title="cnt_alost">Утеряно</th>
+                                    <th data-title="cnt_abad">Испорчено</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                <tr>
-                                    <td><input type="checkbox" name="sel" value="1"></td>
-                                    <td>Страх компания 1</td>
-                                    <td>Товар 1</td>
-                                    <td>100</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="sel" value="2"></td>
-                                    <td>Страх компания 1</td>
-                                    <td>Товар 2</td>
-                                    <td>543</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="sel" value="3"></td>
-                                    <td>Страх компания 1</td>
-                                    <td>Товар 3</td>
-                                    <td>333</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="sel" value="4"></td>
-                                    <td>Страх компания 1</td>
-                                    <td>Товар 4</td>
-                                    <td>432</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="sel" value="5"></td>
-                                    <td>Страх компания 1</td>
-                                    <td>Товар 5</td>
-                                    <td>444</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="sel" value="6"></td>
-                                    <td>Страх компания 1</td>
-                                    <td>Товар 6</td>
-                                    <td>234</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="sel" value="1"></td>
-                                    <td>Страх компания 1</td>
-                                    <td>Товар 1</td>
-                                    <td>100</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="sel" value="2"></td>
-                                    <td>Страх компания 1</td>
-                                    <td>Товар 2</td>
-                                    <td>543</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="sel" value="3"></td>
-                                    <td>Страх компания 1</td>
-                                    <td>Товар 3</td>
-                                    <td>333</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="sel" value="4"></td>
-                                    <td>Страх компания 1</td>
-                                    <td>Товар 4</td>
-                                    <td>432</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="sel" value="5"></td>
-                                    <td>Страх компания 1</td>
-                                    <td>Товар 5</td>
-                                    <td>444</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="sel" value="6"></td>
-                                    <td>Страх компания 1</td>
-                                    <td>Товар 6</td>
-                                    <td>234</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="sel" value="1"></td>
-                                    <td>Страх компания 1</td>
-                                    <td>Товар 1</td>
-                                    <td>100</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="sel" value="2"></td>
-                                    <td>Страх компания 1</td>
-                                    <td>Товар 2</td>
-                                    <td>543</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="sel" value="3"></td>
-                                    <td>Страх компания 1</td>
-                                    <td>Товар 3</td>
-                                    <td>333</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="sel" value="4"></td>
-                                    <td>Страх компания 1</td>
-                                    <td>Товар 4</td>
-                                    <td>432</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="sel" value="5"></td>
-                                    <td>Страх компания 1</td>
-                                    <td>Товар 5</td>
-                                    <td>444</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="sel" value="6"></td>
-                                    <td>Страх компания 1</td>
-                                    <td>Товар 6</td>
-                                    <td>234</td>
-                                </tr>
+                            {% for pprod in pprodList %}
+                            <tr>
+                                <td data-name="sel"><input type="checkbox" value="{{ pprod['parent'] }}"></td>
+                                <td data-name="company" data-value="{{ pprod['company_id'] }}">{{ pprod['comp_name'] }}</td>
+                                <td data-name="party">{{ pprod['party'] }}</td>
+                                <td data-name="date-from">{{ pprod['date_from']|date('d.m.Y') }}</td>
+                                <td data-name="date-to">{{ pprod['date_to']|date('d.m.Y') }}</td>
+                                <td data-name="person">{{ pprod['person_name'] }}</td>
+                                <td data-name="title">{{ pprod['title'] }}</td>
+                                <td data-name="cnt">{{ pprod['cnt'] }}</td>
+                                <td data-name="cnt_a">{{ pprod['cnt_a'] }}</td>
+                                <td data-name="cnt_alost">{{ pprod['cnt_alost'] }}</td>
+                                <td data-name="cnt_abad" >{{ pprod['cnt_abad'] }}</td>
+                            </tr>
+                            {% endfor %}
 
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="10">
+                                    <td colspan="11">
                                         <div class="pagination pagination-centered"></div>
                                     </td>
                                 </tr>

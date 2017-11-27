@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -13,7 +14,7 @@ use Doctrine\ORM\EntityRepository;
 class NomenRepository extends EntityRepository
 {
 
-    public function reverseNomen( $nomenId, $userId) {
+    /*public function reverseNomen( $nomenId, $userId) {
 
         $em = $this->getEntityManager();
         
@@ -32,6 +33,104 @@ class NomenRepository extends EntityRepository
         }
 
         return $nomen;
-    }
+    }*/
 
+    public function getProdList(User $user) {
+
+        $em = $this->getEntityManager();
+        $db = $em->getConnection();
+        $count = 0;
+
+        $query = "
+                drop TABLE if exists tmp_cnt;
+                drop TABLE if exists tmp_cnt1;
+
+                create TEMPORARY TABLE tmp_cnt1
+                select ifnull(d.parent,d.invoice_data_id) parent, 
+                    d.invoice_data_id,
+                    d.nomen,
+                    i.invoice_type,
+                    d.count,
+
+                    case when i.invoice_type=60 and i.invoice_sign>=20 then d.count else 0 end cnt_report,
+                    case when i.invoice_type=10 and i.invoice_sign in (10,20) then d.count else 0 end cnt_wait,
+
+                    case when i.invoice_type=10 and i.invoice_sign=30 then d.count else 0 end 
+                    +case when i.invoice_type=40 and i.invoice_sign=30 and i.back_reason=10 then d.count else 0 end 
+                    -case when i.invoice_type=20 and i.invoice_sign>=20 then d.count else 0 end 
+                    -case when i.invoice_type=60 and i.invoice_sign>=20 then d.count else 0 end
+                    -case when i.invoice_type=30 and i.invoice_sign>=10 then d.count else 0 end 
+                    -case when i.invoice_type=30 and i.invoice_sign=30 then d.count else 0 end cnt,
+
+                    case when i.invoice_type=30 and i.invoice_sign>=10 then d.count else 0 end cnt_areserv,
+
+                    case when i.invoice_type=30 and i.invoice_sign=30 then d.count else 0 end 
+                    -case when i.invoice_type=40 and i.invoice_sign=30 and i.back_reason in (10,20,30) then d.count else 0 end 
+                    -case when i.invoice_type=50 and i.invoice_sign=30 then d.count else 0 end cnt_a,
+
+                    case when i.invoice_type=40 and i.invoice_sign=30 and i.back_reason=30 then d.count else 0 end cnt_alost,
+                    case when i.invoice_type=40 and i.invoice_sign=30 and i.back_reason=20 then d.count else 0 end cnt_abad,
+                    case when i.invoice_type=50 and i.invoice_sign=30 then d.count else 0 end cnt_areport
+						
+                from invoice_data d 
+                    left join invoice i on i.invoice_id=d.invoice
+
+                where d.actual_id is null
+                    and i.invoice_sign>=10
+                    and (  (i.invoice_type in (10,40,50) and i.company_to=:mycompany)
+                        or(i.invoice_type in (20,30,60) and i.company_from=:mycompany) );
+        
+                create TEMPORARY TABLE tmp_cnt
+                select parent, 
+                    nomen,
+                    sum(cnt_report) cnt_report,
+                    sum(cnt_wait) cnt_wait,
+                    sum(cnt) cnt,
+                    sum(cnt_areserv) cnt_areserv,
+                    sum(cnt_a) cnt_a,
+                    sum(cnt_alost) cnt_alost,
+                    sum(cnt_abad) cnt_abad,
+                    sum(cnt_areport) cnt_areport
+                from tmp_cnt1
+                group by 1,2;
+        ";
+        
+        $stmt = $db->prepare($query);
+        $stmt->bindValue("mycompany", $user->getCompany()->getCompanyId());
+        $stmt->execute();
+
+        $query = "
+                select t.parent parent_id, 
+                    t.nomen nomen_id,
+                    c.company_id,
+                    c.comp_name,
+                    concat(b.short_name,'-',i.invoice_id) party,
+                    d.date_from,
+                    d.date_to,
+                    p.person_name,
+                    d.title,
+                    cnt_report,
+                    cnt_wait,
+                    cnt,
+                    cnt_areserv,
+                    cnt_a,
+                    cnt_alost,
+                    cnt_abad,
+                    cnt_areport
+                from tmp_cnt t
+                    left join invoice_data d on t.parent=d.invoice_data_id
+                    left join invoice i on d.invoice=i.invoice_id
+                    left join invoice_type b on i.invoice_type=b.invoice_type_id
+                    left join person p on p.person_id=i.person
+                    left join company c on c.company_id=i.company_from
+                ";
+            
+        $stmt = $db->prepare($query);
+
+        if ( $stmt->execute() ) {
+            $result = $stmt->fetchAll();
+        }
+
+        return $result;
+    }
 }

@@ -65,7 +65,7 @@ class NomenService {
 
     public function getProdList($user) {
 
-        return array();
+        return $this->em->getRepository('AppBundle:Nomen') ->getProdList($user);
     }
     
 }

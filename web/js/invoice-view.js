@@ -13,6 +13,7 @@ var InvoiceView = {
         this.init_del_btn();
         this.init_submit_btn();
         this.select_data_uncheck();
+        this.initNumberOnChange($('#tbl_invoice_data'));
     },
     init_popup_nomen_btn: function () {
 
@@ -26,7 +27,7 @@ var InvoiceView = {
                 $(".modal-title").text('Номенклатура');
                 $("#popup_window").modal('show');
                 
-                $("#md_add_btn").on('click', function() {
+                $("#md_add_btn").unbind('click').on('click', function() {
                     $('#nomen_list >tbody >tr').each(function(rIndex){
                         var id, company, title;
 
@@ -66,6 +67,7 @@ var InvoiceView = {
                             $('#tbl_invoice_data').editableTableWidget({editor: $('<input>')}).numericInputExample();
                             $(".date-from").mask("99.99.9999");
                             $(".date-to").mask("99.99.9999");
+                            InvoiceView.initNumberOnChange($('#tbl_invoice_data'));
                         }
                         
                     });
@@ -84,11 +86,17 @@ var InvoiceView = {
             var prodUrl = window.location.origin+'/popup-prod-list';
             
             AjaxRequest._call('POST',prodUrl, '', function (res) {
+                $(".modal-content").width(1000);
                 $(".modal-body").html(res);
                 $('#prod_list').editableTableWidget({editor: $('<input>')}).numericInputExample();
                 $(".modal-footer").hide();
                 $(".modal-title").text('Наличие');
                 $("#popup_window").modal('show');
+
+                $("#md_add_btn").unbind('click').on('click', function() {
+                    
+                });
+
             });
 
         });
@@ -191,11 +199,55 @@ var InvoiceView = {
             $(this).removeAttr('checked');
         });
         
+    },
+    initNumberOnChange: function(obj) {
+        if ($(obj).is('table') ) {
+            $(obj).find('tbody >tr').each( function() {
+                //console.log($(this).find('.number-from').val());
+                $(this).find('.number-from').unbind('keyup').on('keyup', InvoiceView.numberOnChange);
+                $(this).find('.number-to').unbind('keyup').on('keyup',InvoiceView.numberOnChange);
+            });
+        } else if ($(obj).is('tr') ) {
+            console.log('2');
+        }
+
+    },
+    numberOnChange: function() {
+        var row = $(this).parent().parent();
+        var numberFrom = $(row).find('.number-from').val();
+        var numberTo = $(row).find('.number-to').val();
+        var nfrom = 0;
+        var nto = 0;
+        var prefix = '';
+        
+        if (numberFrom.length == numberTo.length) {
+            
+            for(i=0; i<numberFrom.length; i++) {
+                if (numberFrom[i] == numberTo[i]) {
+                    prefix = prefix + numberFrom[i];
+                } else {
+                    break;
+                }
+            }
+            
+            nfrom = numberFrom.substring(prefix.length,numberFrom.length);
+            nto = numberTo.substring(prefix.length, numberTo.length);
+            
+            ncount = nto - nfrom + 1;
+            
+            if (!isNaN(ncount) && (ncount > 0)) {
+                $(row).find("td[data-name='count']").html(ncount);
+            } else {
+                $(row).find("td[data-name='count']").html(0);
+            }
+            
+        } else {
+            $(row).find("td[data-name='count']").html(0);
+        }
+        
+        InvoiceView.initNumberOnChange($('#tbl_invoice_data'));
+        
     }
     
 };
 
-//function submitBtn(invoiceSignId) { 
-//    $('#o_invoicesign').val(invoiceSignId);
-//    $('#pinvoice-form').submit();
-//};

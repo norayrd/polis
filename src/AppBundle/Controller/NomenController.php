@@ -3,10 +3,10 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Nomen;
-use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class NomenController extends Controller
 {
@@ -180,18 +180,9 @@ class NomenController extends Controller
         
         $nomenList = $nomenService ->getNomenList($this->getUser());
 
-        $breadcrumb = array(
-            array('name' => 'home', 'url' => $this->generateUrl('home')),
-            array('name' => 'Номенклатура', 'url' => null),
-        );
-
-        $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
-
         return $this->render('nomen/popup_nomen_list.html.twig', array(
             'user' => $this->getUser(),
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'page_title' => $page_title,
-            'breadcrumb' => $breadcrumb,
             'pnomenList' => $nomenList,
         ));
 
@@ -207,19 +198,19 @@ class NomenController extends Controller
         $nomenService = $this->get("nomen_service");
         
         $prodList = $nomenService ->getProdList($this->getUser());
+        
+        //var_dump($prodList);exit;
 
-        $breadcrumb = array(
-            array('name' => 'home', 'url' => $this->generateUrl('home')),
-            array('name' => 'Номенклатура', 'url' => null),
-        );
-
-        $page_title = $this->container->getParameter('default_title') . ' - ' . $breadcrumb[count($breadcrumb)-1]['name'];
+        /*
+        $response = new Response();
+        $response->setContent(json_encode(array('prodList' => $prodList)));
+        $response->headers->set('Content-Type', 'application/json');        
+        return $response;exit;
+        */
 
         return $this->render('nomen/popup_prod_list.html.twig', array(
             'user' => $this->getUser(),
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'page_title' => $page_title,
-            'breadcrumb' => $breadcrumb,
             'pprodList' => $prodList,
         ));
 
