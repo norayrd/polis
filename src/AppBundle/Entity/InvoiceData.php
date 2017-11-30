@@ -35,10 +35,9 @@ class InvoiceData
     private $invoice_data_type;
     
     /**
-     * @ORM\ManyToOne(targetEntity="InvoiceData", inversedBy="InvoiceData", cascade={"persist"})
-     * @ORM\JoinColumn(name="parent", referencedColumnName="invoice_data_id")
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $parent;
+    private $parent_id;
     
     /**
      * @ORM\ManyToOne(targetEntity="Company", inversedBy="InvoiceData", cascade={"persist"})
@@ -49,7 +48,7 @@ class InvoiceData
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $nomen;
+    private $nomen_id;
 
     /**
      * @ORM\Column(type="string")
@@ -85,6 +84,32 @@ class InvoiceData
      * @ORM\Column(type="date", nullable=true)
      */
     private $date_start;
+    
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $number_kvit;
+    
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $parent_kvit_id;
+    
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $number_pay;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $date_pay;
+    
+    /**
+     * 1 - Head company; 2 - Insurance company; 3 - Agent Company
+     * @ORM\Column(type="string", columnDefinition="ENUM('Т', 'Б', 'Н')" )
+     */
+    private $type_pay;
 
     /**
      * @ORM\Column(type="decimal", precision=14, scale=2)
@@ -445,52 +470,6 @@ class InvoiceData
     }
 
     /**
-     * Set nomen
-     *
-     * @param integer $nomen
-     * @return InvoiceData
-     */
-    public function setNomen($nomen)
-    {
-        $this->nomen = $nomen;
-    
-        return $this;
-    }
-
-    /**
-     * Get nomen
-     *
-     * @return integer 
-     */
-    public function getNomen()
-    {
-        return $this->nomen;
-    }
-
-    /**
-     * Set parent
-     *
-     * @param \AppBundle\Entity\InvoiceData $parent
-     * @return InvoiceData
-     */
-    public function setParent(\AppBundle\Entity\InvoiceData $parent = null)
-    {
-        $this->parent = $parent;
-    
-        return $this;
-    }
-
-    /**
-     * Get parent
-     *
-     * @return \AppBundle\Entity\InvoiceData 
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
      * Set date_start
      *
      * @param \DateTime $dateStart
@@ -511,5 +490,166 @@ class InvoiceData
     public function getDateStart()
     {
         return $this->date_start;
+    }
+
+    /**
+     * Set parent_id
+     *
+     * @param integer $parentId
+     * @return InvoiceData
+     */
+    public function setParentId($parentId)
+    {
+        $this->parent_id = $parentId;
+    
+        return $this;
+    }
+
+    /**
+     * Get parent_id
+     *
+     * @return integer 
+     */
+    public function getParentId()
+    {
+        return $this->parent_id;
+    }
+
+    /**
+     * Set nomen_id
+     *
+     * @param integer $nomenId
+     * @return InvoiceData
+     */
+    public function setNomenId($nomenId)
+    {
+        $this->nomen_id = $nomenId;
+    
+        return $this;
+    }
+
+    /**
+     * Get nomen_id
+     *
+     * @return integer 
+     */
+    public function getNomenId()
+    {
+        return $this->nomen_id;
+    }
+
+    /**
+     * Set number_kvit
+     *
+     * @param string $numberKvit
+     * @return InvoiceData
+     */
+    public function setNumberKvit($numberKvit)
+    {
+        $this->number_kvit = $numberKvit;
+    
+        return $this;
+    }
+
+    /**
+     * Get number_kvit
+     *
+     * @return string 
+     */
+    public function getNumberKvit()
+    {
+        return $this->number_kvit;
+    }
+
+    /**
+     * Set parent_kvit_id
+     *
+     * @param integer $parentKvitId
+     * @return InvoiceData
+     */
+    public function setParentKvitId($parentKvitId)
+    {
+        $this->parent_kvit_id = $parentKvitId;
+    
+        return $this;
+    }
+
+    /**
+     * Get parent_kvit_id
+     *
+     * @return integer 
+     */
+    public function getParentKvitId()
+    {
+        return $this->parent_kvit_id;
+    }
+
+    /**
+     * Set number_pay
+     *
+     * @param string $numberPay
+     * @return InvoiceData
+     */
+    public function setNumberPay($numberPay)
+    {
+        $this->number_pay = $numberPay;
+    
+        return $this;
+    }
+
+    /**
+     * Get number_pay
+     *
+     * @return string 
+     */
+    public function getNumberPay()
+    {
+        return $this->number_pay;
+    }
+
+    /**
+     * Set date_pay
+     *
+     * @param \DateTime $datePay
+     * @return InvoiceData
+     */
+    public function setDatePay($datePay)
+    {
+        $this->date_pay = $datePay;
+    
+        return $this;
+    }
+
+    /**
+     * Get date_pay
+     *
+     * @return \DateTime 
+     */
+    public function getDatePay()
+    {
+        return $this->date_pay;
+    }
+
+    /**
+     * Set type_pay
+     *
+     * @param string $typePay
+     * @return InvoiceData
+     */
+    public function setTypePay($typePay)
+    {
+        $this->type_pay = $typePay;
+    
+        return $this;
+    }
+
+    /**
+     * Get type_pay
+     *
+     * @return string 
+     */
+    public function getTypePay()
+    {
+        return $this->type_pay;
     }
 }

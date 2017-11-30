@@ -14,6 +14,7 @@ var InvoiceView = {
         this.init_submit_btn();
         this.select_data_uncheck();
         this.initNumberOnChange($('#tbl_invoice_data'));
+        this.initTypeOnChange($('#tbl_invoice_data'));
     },
     init_popup_nomen_btn: function () {
 
@@ -247,7 +248,25 @@ var InvoiceView = {
         
         InvoiceView.initNumberOnChange($('#tbl_invoice_data'));
         
-    }
-    
+    },
+    initTypeOnChange: function(obj) {
+        if ($(obj).is('table') ) {
+            $(obj).find('tbody >tr').each( function() {
+                $(this).find("td[data-name='type'] >select").unbind('change').on('change', function() {
+                    if ($(this).val() == 1) {
+                        $(this).closest('tr').find("td[data-name='count']").html(1);
+                        $(this).closest('tr').find(".number-to").prop("disabled", true);
+                        $(this).closest('tr').find(".number-to").addClass("hidden");
+                    } else {
+                        $(this).closest('tr').find('.number-from').keyup();
+                        $(this).closest('tr').find(".number-to").prop("disabled", false);
+                        $(this).closest('tr').find(".number-to").removeClass("hidden");
+                    };
+                });
+            });
+        }
+
+    },
+
 };
 

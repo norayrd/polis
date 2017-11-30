@@ -46,9 +46,9 @@ class NomenRepository extends EntityRepository
                 drop TABLE if exists tmp_cnt1;
 
                 create TEMPORARY TABLE tmp_cnt1
-                select ifnull(d.parent,d.invoice_data_id) parent, 
+                select ifnull(d.parent_id,d.invoice_data_id) parent_id, 
                     d.invoice_data_id,
-                    d.nomen,
+                    d.nomen_id,
                     i.invoice_type,
                     d.count,
 
@@ -81,8 +81,8 @@ class NomenRepository extends EntityRepository
                         or(i.invoice_type in (20,30,60) and i.company_from=:mycompany) );
         
                 create TEMPORARY TABLE tmp_cnt
-                select parent, 
-                    nomen,
+                select parent_id, 
+                    nomen_id,
                     sum(cnt_report) cnt_report,
                     sum(cnt_wait) cnt_wait,
                     sum(cnt) cnt,
@@ -100,8 +100,8 @@ class NomenRepository extends EntityRepository
         $stmt->execute();
 
         $query = "
-                select t.parent parent_id, 
-                    t.nomen nomen_id,
+                select t.parent_id, 
+                    t.nomen_id,
                     c.company_id,
                     c.comp_name,
                     concat(b.short_name,'-',i.invoice_id) party,
@@ -118,7 +118,7 @@ class NomenRepository extends EntityRepository
                     cnt_abad,
                     cnt_areport
                 from tmp_cnt t
-                    left join invoice_data d on t.parent=d.invoice_data_id
+                    left join invoice_data d on t.parent_id=d.invoice_data_id
                     left join invoice i on d.invoice=i.invoice_id
                     left join invoice_type b on i.invoice_type=b.invoice_type_id
                     left join person p on p.person_id=i.person

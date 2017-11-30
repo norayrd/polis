@@ -193,7 +193,7 @@
                                                                                     <th data-title="dateFrom">Дата от</th>
                                                                                     <th data-title="dateTo">Дата до</th>
                                                                                     <th data-title="cost" data-editable="1">Цена</th>
-                                                                                    <th data-title="count" data-sum="1" data-editable="1">Кол.</th>
+                                                                                    <th data-title="count" data-sum="1">Кол.</th>
                                                                                     <th data-title="summ" data-sum="1">Сумма</th>
                                                                                     <th data-title="sel"><a class="btn" id="del_btn" title='Удалить выделенные' href="#"><span class="entypo-trash"></span></a></th>
                                                                                     
@@ -203,6 +203,7 @@
 
                                                                             {% for pinvoiceData in pinvoice.getInvoiceData() %}
                                                                                 {% if pinvoiceData.getActualId() is null %}
+                                                                                    {% set pdatatype = pinvoiceData.getInvoiceDataType().getInvoiceDataTypeId() %}
                                                                                     <tr>
                                                                                         <td data-name="invoiceDataId" data-value="{{ pinvoiceData.getInvoiceDataId() }}" class="hidden">{{ pinvoiceData.getInvoiceDataId() }}</td>
                                                                                         <td data-name="company" data-value="{{ pinvoiceData.getCompany().getCompanyId() }}">{{ pinvoiceData.getCompany().getCompName() }}</td>
@@ -210,25 +211,31 @@
                                                                                         <td data-name="type">
                                                                                             <select>
                                                                                                 <option value='1'
-                                                                                                        {% if pinvoiceData.getInvoiceDataType().getInvoiceDataTypeId()==1 %}
+                                                                                                        {% if pdatatype==1 %}
                                                                                                             selected
                                                                                                         {% endif %}
                                                                                                         >розница</option>
                                                                                                 <option value='2'
-                                                                                                        {% if pinvoiceData.getInvoiceDataType().getInvoiceDataTypeId()==2 %}
+                                                                                                        {% if pdatatype==2 %}
                                                                                                             selected
                                                                                                         {% endif %}
                                                                                                         >партия</option>
                                                                                             </select>
                                                                                         </td>
                                                                                         <td data-name="numberFrom"><input type="text" class="form-control number-from" value="{{ pinvoiceData.getNumberFrom() }}"></td>
-                                                                                        <td data-name="numberTo"><input type="text" class="form-control number-to" value="{{ pinvoiceData.getNumberTo() }}"></td>
+                                                                                        <td data-name="numberTo">
+                                                                                            <input type="text" class="form-control number-to {% if pdatatype==1 %} hidden{% endif %}" 
+                                                                                                {% if pdatatype==1 %}
+                                                                                                    disabled
+                                                                                                {% endif %}
+                                                                                                value="{{ pinvoiceData.getNumberTo() }}">
+                                                                                        </td>
                                                                                         <td data-name="dateFrom"><input type="text" class="form-control date-from" value="{{ pinvoiceData.getDateFrom()|date('d.m.Y') }}"></td>
                                                                                         <td data-name="dateTo"><input type="text" class="form-control date-to" value="{{ pinvoiceData.getDateTo()|date('d.m.Y') }}"></td>
                                                                                         <td data-name="cost">{{ pinvoiceData.getCost() }}</td>
                                                                                         <td data-name="count">{{ pinvoiceData.getCount() }}</td>
                                                                                         <td data-name="summ">{{ pinvoiceData.getCost()*pinvoiceData.getCount() }}</td>
-                                                                                        <td data-name="sel" data-delete="0" data-nomen="{{ pinvoiceData.getNomen() }}" class="select-data"><input type="checkbox" value=""></td>
+                                                                                        <td data-name="sel" data-delete="0" data-nomen="{{ pinvoiceData.getNomenId() }}"  data-parent="{{ pinvoiceData.getParentId() }}" class="select-data"><input type="checkbox" value=""></td>
                                                                                     </tr>
                                                                                 {% endif %}
                                                                             {% endfor %}

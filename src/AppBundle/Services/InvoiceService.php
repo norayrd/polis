@@ -176,7 +176,7 @@ class InvoiceService {
                     $invoiceData ->setInvoice($invoice);
                     $invoiceData ->setInvoiceDataType($invoiceDataType1);
                     $invoiceData ->setCompany($company);
-                    $invoiceData ->setNomen( $invC ->sel ->nomen);
+                    $invoiceData ->setNomenId( $invC ->sel ->nomen);
                     $invoiceData ->setTitle( $invC ->title ->text);
 
                     if (isset($invC ->fio ->text)) {
