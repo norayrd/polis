@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="form-actions">
-                <button class="btn pull-left btn-primary" id="bt_add" onclick="return false;"><span class="entypo-check"></span> Добавить</button>
+                <button class="btn pull-left btn-primary" id="md_add_btn"><span class="entypo-check"></span> Добавить</button>
             </div>
         </div>
     </div>
@@ -58,9 +58,9 @@
 
                             {% for pprod in pprodList %}
                             <tr>
-                                <td data-name="sel"><input type="checkbox" value="{{ pprod['parent_id'] }}"></td>
+                                <td data-name="sel"><input type="checkbox" value="{{ pprod['nomen_id'] }}"></td>
                                 <td data-name="company" data-value="{{ pprod['company_id'] }}">{{ pprod['comp_name'] }}</td>
-                                <td data-name="party">{{ pprod['party'] }}</td>
+                                <td data-name="party" data-value="{{ pprod['parent_id'] }}">{{ pprod['party'] }}</td>
                                 <td data-name="date-from">{{ pprod['date_from']|date('d.m.Y') }}</td>
                                 <td data-name="date-to">{{ pprod['date_to']|date('d.m.Y') }}</td>
                                 <td data-name="person">{{ pprod['person_name'] }}</td>

@@ -95,9 +95,50 @@ var InvoiceView = {
                 $("#popup_window").modal('show');
 
                 $("#md_add_btn").unbind('click').on('click', function() {
+                    $('#prod_list >tbody >tr').each(function(rIndex){
+                        var id, company, companyName, title, parent, dateFrom, dateTo, isSelected;
+                        
+                        id= $(this).find("td[data-name='sel'] >input").val();
+                        isSelected = $(this).find("td[data-name='sel'] >input").is(':checked');
+                        company = $(this).find("td[data-name='company']").data('value');
+                        companyName = $(this).find("td[data-name='company']").text();
+                        title = $(this).find("td[data-name='title']").text();
+                        dateFrom = $(this).find("td[data-name='date-from']").text();
+                        dateTo = $(this).find("td[data-name='date-to']").text();
+                        parent = $(this).find("td[data-name='party']").data('value');
+                        
+                                                
+                        if (isSelected) {
+                            console.log(id, company, companyName, title, parent, dateFrom, dateTo, isSelected);
+                            
+                            var targetTblBody = $('#tbl_invoice_data').find('tbody');
+                            
+                            $(targetTblBody).append(
+                                    '<tr> '+
+                                    '   <td data-name="invoiceDataId" data-value="" class="hidden"></td>'+
+                                    '   <td data-name="company" data-value="' + company + '">' + companyName + '</td>'+
+                                    '   <td data-name="title">' + title + '</td>'+
+                                    '   <td data-name="type"><select><option value="1" selected>розница</option><option value="2">партия</option></select></td>'+
+                                    '   <td data-name="numberFrom"><input type="text" class="form-control number-from" value=""></td>'+
+                                    '   <td data-name="numberTo"><input type="text" class="form-control number-to hidden" disabled value=""></td>'+
+                                    '   <td data-name="dateFrom"><input type="text" class="form-control date-from" value="' + dateFrom + '"></td>'+
+                                    '   <td data-name="dateTo"><input type="text" class="form-control date-to" value="' + dateTo + '"></td>'+
+                                    '   <td data-name="cost">0</td>'+
+                                    '   <td data-name="count">1</td>'+
+                                    '   <td data-name="sum">0</td>'+
+                                    '   <td data-name="sel" data-delete="0" data-nomen="' + id + '"  data-parent="' + parent + '" class="select-data"><input type="checkbox" value=""></td>'+
+                                    '</tr>'
+                            );
+                            $('#tbl_invoice_data').editableTableWidget({editor: $('<input>')}).numericInputExample();
+                            $(".date-from").mask("99.99.9999");
+                            $(".date-to").mask("99.99.9999");
+                            InvoiceView.initNumberOnChange($('#tbl_invoice_data'));
+                            
+                        }
+                    });
+                    $("#popup_window").modal('hide');
                     
                 });
-
             });
 
         });
@@ -217,11 +258,14 @@ var InvoiceView = {
         var row = $(this).parent().parent();
         var numberFrom = $(row).find('.number-from').val();
         var numberTo = $(row).find('.number-to').val();
+        var dataType = $(row).find('td[data-name="type"] >select').val();
         var nfrom = 0;
         var nto = 0;
         var prefix = '';
         
-        if (numberFrom.length == numberTo.length) {
+        if (dataType == 1) {
+            $(row).find("td[data-name='count']").html(1);
+        } else if (numberFrom.length == numberTo.length) {
             
             for(i=0; i<numberFrom.length; i++) {
                 if (numberFrom[i] == numberTo[i]) {
