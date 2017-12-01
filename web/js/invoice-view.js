@@ -195,6 +195,7 @@ var InvoiceView = {
                     if (tdTitle == 'sel') {
                         tdObj['deleted'] = $(this).data('delete');
                         tdObj['nomen'] = $(this).data('nomen');
+                        tdObj['parent'] = $(this).data('parent');
                     }
 
                     trObj[tdTitle] = tdObj;

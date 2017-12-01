@@ -178,6 +178,10 @@ class InvoiceService {
                     $invoiceData ->setCompany($company);
                     $invoiceData ->setNomenId( $invC ->sel ->nomen);
                     $invoiceData ->setTitle( $invC ->title ->text);
+                    
+                    if (isset($invC ->sel ->parent)) {
+                        $invoiceData ->setParentId( $invC ->sel ->parent);
+                    }
 
                     if (isset($invC ->fio ->text)) {
                         $invoiceData ->setFio( $invC ->fio ->text);
